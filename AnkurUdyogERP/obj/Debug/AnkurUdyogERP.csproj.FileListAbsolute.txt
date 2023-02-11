@@ -49,6 +49,5 @@ E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\Newtonsoft.Json.xml
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Net.Http.Formatting.xml
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.xml
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.xml
-E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb

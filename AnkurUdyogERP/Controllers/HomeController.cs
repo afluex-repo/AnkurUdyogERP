@@ -13,5 +13,15 @@ namespace AnkurUdyogERP.Controllers
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LoginAction()
+        {
+            return View();
+        }
     }
 }
