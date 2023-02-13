@@ -25,11 +25,9 @@ namespace AnkurUdyogERP.Controllers
         [HttpPost]
         public ActionResult LoginAction(Home model)
         {
-            string FormName = "";
-            string Controller = "";
             try
             {
-               //DataSet ds=model.
+              
             }
             catch(Exception ex)
             {
