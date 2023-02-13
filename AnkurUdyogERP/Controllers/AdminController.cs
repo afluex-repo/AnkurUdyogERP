@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace AnkurUdyogERP.Controllers
 {
-    public class AdminController : AdminBaseController
+    public class AdminController : Controller
     {
         // GET: Admin
         public ActionResult AdminDashboard()

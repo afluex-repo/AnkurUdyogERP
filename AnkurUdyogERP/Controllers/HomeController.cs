@@ -29,7 +29,7 @@ namespace AnkurUdyogERP.Controllers
             string Controller = "";
             try
             {
-               DataSet ds=model.
+               //DataSet ds=model.
             }
             catch(Exception ex)
             {

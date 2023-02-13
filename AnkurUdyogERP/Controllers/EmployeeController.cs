@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace AnkurUdyogERP.Controllers
 {
-    public class EmployeeController : AdminBaseController
+    public class EmployeeController : Controller
     {
         // GET: Employee
         public ActionResult EmployeeRegistration()
