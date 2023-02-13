@@ -4,5 +4,88 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>EmployeeRegistration</h2>
-
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Employee Registration</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"> Role Master</li>
+                        <li class="breadcrumb-item active">Employee Registration</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h3>Custom styles</h3>
+                    </div>
+                    <div class="card-body">
+                        <form class="needs-validation">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom01">Enter Your Name</label>
+                                    <input class="form-control" id="validationCustom01" type="text" value="Mark" required="">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom02">Enter Your Father Name</label>
+                                    <input class="form-control" id="validationCustom02" type="text" value="Otto" required="">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustomUsername">Enter Your Mobile No.</label>
+                                    <input class="form-control" id="validationCustom05" type="text" placeholder="Mobile No." required="">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom03">Enter Your Email Address</label>
+                                    <input class="form-control" id="validationCustom03" type="text" placeholder="Email Address" required="">
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">Enter Your Pincode</label>
+                                    <input class="form-control" id="validationCustom05" type="text" placeholder="Pincode" required="">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">Enter Your City</label>
+                                    <input class="form-control" id="validationCustom05" type="text" placeholder="City" required="">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">Select State</label>
+                                    <select class="form-select" id="validationCustom04" required="">
+                                        <option selected="" disabled="" value="">Choose...</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                               
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">Select Gender</label>
+                                    <select class="form-select" id="validationCustom04" required="">
+                                        <option selected="" disabled="" value="">Choose...</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="validationCustom04">Enter Your Address</label>
+                                    <textarea class="form-control btn-square" id="exampleFormControlTextarea14" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mt-4" type="submit">Submit form</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
