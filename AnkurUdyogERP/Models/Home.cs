@@ -9,15 +9,16 @@ namespace AnkurUdyogERP.Models
 {
     public class Home
     {
-
+        public string LoginId { get; set; }
+        public string Password { get; set; }
         public DataSet Login()
         {
             SqlParameter[] para =
             {
-                //new SqlParameter("@DistributerId",DistributerId),
-                // new SqlParameter("@DistributerId",DistributerId)
+                new SqlParameter("@LoginId",LoginId),
+                 new SqlParameter("@Password",Password)
             };
-            DataSet ds = Connection.ExecuteQuery("GetDistributerList", para);
+            DataSet ds = Connection.ExecuteQuery("Login", para);
             return ds;
         }
 

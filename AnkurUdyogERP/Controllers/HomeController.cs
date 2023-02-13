@@ -20,18 +20,14 @@ namespace AnkurUdyogERP.Controllers
             Session.Abandon();
             return View();
         }
-
-
         [HttpPost]
         public ActionResult LoginAction(Home model)
         {
             try
             {
-              
             }
             catch(Exception ex)
             {
-
             }
             return View();
         }
