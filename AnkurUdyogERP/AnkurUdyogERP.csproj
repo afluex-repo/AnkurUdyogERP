@@ -150,6 +150,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminReportController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OnActionAttribute.cs" />
@@ -157,6 +158,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AdminReport.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Dashboard.cs" />
@@ -193,6 +195,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AdminBase\" />
+    <Folder Include="Views\AdminReport\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

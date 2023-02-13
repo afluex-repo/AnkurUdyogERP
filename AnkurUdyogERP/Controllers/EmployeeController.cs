@@ -1,6 +1,7 @@
 ﻿using AnkurUdyogERP.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,7 +11,6 @@ namespace AnkurUdyogERP.Controllers
     public class EmployeeController : AdminBaseController
     {
         // GET: Employee
-        
         public ActionResult EmployeeRegistration()
         {
             return View();
@@ -20,19 +20,64 @@ namespace AnkurUdyogERP.Controllers
         [ActionName("EmployeeRegistration")]
         public ActionResult EmployeeRegistration(Employee model)
         {
-            return View();
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveEmployeeRegistration();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["EmployeeRegistration"] = "Employee Registration  Successfully";
+                    }
+                    else
+                    {
+                        TempData["EmployeeRegistration"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["EmployeeRegistration"] = ex.Message;
+            }
+            return RedirectToAction("EmployeeRegistration", "Employee");
         }
-
+        
         public ActionResult EmployeeList()
         {
-            return View();
+            Employee model = new Employee();
+            List<Employee> lst = new List<Employee>();
+            DataSet ds = model.GetEmployeeList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Employee obj = new Employee();
+                    obj.DistributerId = dr["DistributerId"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDistributer = lst;
+            }
+            return View(model);
         }
         [HttpPost]
         [OnAction(ButtonName = "btnSearch")]
         [ActionName("EmployeeList")]
         public ActionResult EmployeeList(Employee model)
         {
-            return View();
+            List<Employee> lst = new List<Employee>();
+            DataSet ds = model.GetEmployeeList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Employee obj = new Employee();
+                    obj.DistributerId = dr["DistributerId"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDistributer = lst;
+            }
+            return View(model);
         }
 
     }
