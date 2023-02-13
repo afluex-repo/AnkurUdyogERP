@@ -4,5 +4,94 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>EmployeeList</h2>
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Employee List</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Role Master</li>
+                        <li class="breadcrumb-item active">Employee List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HTML (DOM) sourced data  Starts-->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 d-flex justify-content-between">
+                        <h3 class="mb-3">Employee List</h3>
+                        <a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Name</th>
+                                        <th>Father's Name</th>
+                                        <th>Mobile No.</th>
+                                        <th>Email address</th>
+                                        <th>Pincode</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Gender</th>
+                                        <th>Address</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>1398242800</td>
+                                        <td>t.nixon@datatables.net</td>
+                                        <td>79866</td>
+                                        <td>Lucknow</td>
+                                        <td>UP</td>
+                                        <td>Male</td>
+                                       <td>Lucknkow</td>
+                                        <td>
+                                            <ul class="action">
+                                                <li class="edit"> <a href="#"><i class="icon-pencil-alt"></i></a></li>
+                                                <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Name</th>
+                                        <th>Father's Name</th>
+                                        <th>Mobile No.</th>
+                                        <th>Email address</th>
+                                        <th>Pincode</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Gender</th>
+                                        <th>Address</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- HTML (DOM) sourced data  Ends-->
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
 
