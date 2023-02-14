@@ -1,0 +1,283 @@
+﻿
+@{
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Ecommerce Dashboard</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="home-item" href="index.html"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item active">Ecommerce</li>
+                    </ol>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid ecommerce-page">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card sale-chart">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="sale-detail">
+                                    <div class="icon"><i data-feather="shopping-bag"></i></div>
+                                    <div class="sale-content">
+                                        <h3>Total Sales</h3>
+                                        <p>54,750  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-chart-view sales-chart" id="sales-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card sale-chart">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="sale-detail">
+                                    <div class="icon"><i data-feather="dollar-sign"></i></div>
+                                    <div class="sale-content">
+                                        <h3>Total Income</h3>
+                                        <p>$35,532</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-chart-view income-chart" id="income-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card sale-chart">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="sale-detail">
+                                    <div class="icon"><i data-feather="file-text"></i></div>
+                                    <div class="sale-content">
+                                        <h3>Orders Paid</h3>
+                                        <p>55,900  </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-chart-view order-chart" id="order-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card sale-chart">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="sale-detail">
+                                    <div class="icon"><i data-feather="users"></i></div>
+                                    <div class="sale-content">
+                                        <h3>Total Visitor</h3>
+                                        <p>67,900</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-chart-view visitor-chart" id="visitor-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-5 col-xl-4 col-sm-6 box-col-40">
+                <div class="card recent-order">
+                    <div class="card-header pb-0">
+                        <h3>Recent Orders</h3>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li>
+                                    <div><i class="icon-settings"></i></div>
+                                </li>
+                                <li><i class="view-html fa fa-code"></i></li>
+                                <li><i class="icofont icofont-maximize full-card"></i></li>
+                                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                <li><i class="icofont icofont-error close-card"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="medium-chart">
+                            <div class="recent-chart" id="recent-chart"></div>
+                        </div>
+                        <div class="code-box-copy">
+                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#recentchart" title="" data-bs-original-title="Copy" aria-label="Copy"><i class="icofont icofont-copy-alt"></i></button>
+                            <pre><code class="language-html" id="recentchart"></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-sm-6 box-col-30">
+                <div class="card top-products">
+                    <div class="card-header pb-0">
+                        <h3>Top Products</h3>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li>
+                                    <div><i class="icon-settings"></i></div>
+                                </li>
+                                <li><i class="view-html fa fa-code"></i></li>
+                                <li><i class="icofont icofont-maximize full-card"></i></li>
+                                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                <li><i class="icofont icofont-error close-card">             </i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordernone">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0">
+                                                    <div class="icon"><img class="img-fluid" src="../assets/images/dashboard-2/chair.png" alt="chair"></div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <a href="product-page.html">
+                                                        <h5>Wood Chair Dark</h5>
+                                                    </a>
+                                                    <p>100 Items</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h5>Coupon Code</h5>
+                                            <p>PIX001</p>
+                                        </td>
+                                        <td class="text-center"> <i class="flag-icon flag-icon-gb"></i></td>
+                                        <td>
+                                            <h5>-51%</h5>
+                                            <p>$99.00  </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0">
+                                                    <div class="icon"><img class="img-fluid" src="../assets/images/dashboard-2/shoes.png" alt="chair"></div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <a href="product-page.html">
+                                                        <h5>Sneaker For Men</h5>
+                                                    </a>
+                                                    <p>150 Items</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h5>Coupon Code</h5>
+                                            <p>PIX002</p>
+                                        </td>
+                                        <td class="text-center"> <i class="flag-icon flag-icon-us"></i></td>
+                                        <td>
+                                            <h5>-78% </h5>
+                                            <p>$66.00  </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0">
+                                                    <div class="icon"><img class="img-fluid" src="../assets/images/dashboard-2/pot.png" alt="pot"></div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <a href="product-page.html">
+                                                        <h5>Tree Stylish Pot </h5>
+                                                    </a>
+                                                    <p>105 Items                            </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h5>Coupon Code</h5>
+                                            <p>PIX003</p>
+                                        </td>
+                                        <td class="text-center"> <i class="flag-icon flag-icon-za"></i></td>
+                                        <td>
+                                            <h5>-04%</h5>
+                                            <p>$116.00  </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0">
+                                                    <div class="icon"><img class="img-fluid" src="../assets/images/dashboard-2/purse.png" alt="purse"></div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <a href="product-page.html">
+                                                        <h5>Ulrich Duffel Bag</h5>
+                                                    </a>
+                                                    <p>600 Items                            </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h5>Coupon Code</h5>
+                                            <p>PIX004</p>
+                                        </td>
+                                        <td class="text-center"> <i class="flag-icon flag-icon-at"></i></td>
+                                        <td>
+                                            <h5>-60%</h5>
+                                            <p>$99.00  </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0">
+                                                    <div class="icon"><img class="img-fluid" src="../assets/images/dashboard-2/watch.png" alt="watch"></div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <a href="product-page.html">
+                                                        <h5>Mi Watch Revolve</h5>
+                                                    </a>
+                                                    <p>541 Item                            </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h5>Coupon Code</h5>
+                                            <p>PIX005</p>
+                                        </td>
+                                        <td class="text-center"> <i class="flag-icon flag-icon-br"></i></td>
+                                        <td>
+                                            <h5>-50%</h5>
+                                            <p>$58.00  </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="code-box-copy">
+                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#topproduct" title="" data-bs-original-title="Copy" aria-label="Copy"><i class="icofont icofont-copy-alt"></i></button>
+                            <pre><code class="language-html" id="topproduct"></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
