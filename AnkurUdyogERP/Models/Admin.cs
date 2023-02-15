@@ -22,7 +22,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDistributerList", para);
             return ds;
         }
-
         public DataSet SaveDistributerRegistration()
         {
             SqlParameter[] para =
@@ -32,18 +31,5 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("SaveDistributerRegistration", para);
             return ds;
         }
-
-
-        
-
-
-
-
-
-
-
-
-
-
     }
 }

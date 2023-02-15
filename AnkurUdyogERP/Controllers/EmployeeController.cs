@@ -53,7 +53,7 @@ namespace AnkurUdyogERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Employee obj = new Employee();
-                    obj.DistributerId = dr["DistributerId"].ToString();
+                    obj.PK_AdminId = dr["PK_AdminId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstDistributer = lst;
@@ -72,7 +72,7 @@ namespace AnkurUdyogERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Employee obj = new Employee();
-                    obj.DistributerId = dr["DistributerId"].ToString();
+                    obj.PK_AdminId = dr["PK_AdminId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstDistributer = lst;
