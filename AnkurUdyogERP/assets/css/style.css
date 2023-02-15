@@ -2605,7 +2605,7 @@ button:focus {
 body {
   font-size: 14px;
   overflow-x: hidden;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto Slab', serif;
   color: #2B2B2B;
   background-color: #ffffff;
 }
@@ -25096,7 +25096,7 @@ footer {
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a span {
   letter-spacing: 0.7px;
-  font-family: "Roboto", sans-serif;
+ font-family: 'Roboto Slab', serif;
   text-transform: capitalize;
   color: #2c323f;
 }
@@ -25241,7 +25241,7 @@ footer {
   position: relative;
   letter-spacing: 0.06em;
   font-weight: 500;
-  font-family: Roboto;
+  font-family: 'Roboto Slab', serif;
   transition: all 0.3s ease;
   white-space: nowrap;
   overflow: hidden;
@@ -26180,7 +26180,7 @@ footer {
   }
   .page-wrapper .sidebar-wrapper .sidebar-main #sidebar-menu .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper {
     max-height: unset;
-    height: 240px !important;
+    /*height: 340px !important;*/
     padding-bottom: unset !important;
   }
   .page-wrapper .sidebar-wrapper .sidebar-main #sidebar-menu .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content {
