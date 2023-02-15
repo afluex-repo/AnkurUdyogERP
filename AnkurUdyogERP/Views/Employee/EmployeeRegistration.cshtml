@@ -1,4 +1,5 @@
-﻿
+﻿@model AnkurUdyogERP.Models.Employee
+
 @{
     ViewBag.Title = "EmployeeRegistration";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -30,58 +31,55 @@
                         <h3>Custom styles</h3>
                     </div>
                     <div class="card-body">
-                        <form class="needs-validation">
+                        @using (Html.BeginForm("EmployeeRegistration", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                        {
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom01">Enter Your Name</label>
-                                    <input class="form-control" id="validationCustom01" type="text" value="Mark" required="">
+                                    <label>Name <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Enter Your Father Name</label>
-                                    <input class="form-control" id="validationCustom02" type="text" value="Otto" required="">
+                                    <label>Father Name <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @placeholder = "Father Name" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustomUsername">Enter Your Mobile No.</label>
-                                    <input class="form-control" id="validationCustom05" type="text" placeholder="Mobile No." required="">
+                                    <label>Mobile Number <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile Number" })
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom03">Enter Your Email Address</label>
-                                    <input class="form-control" id="validationCustom03" type="text" placeholder="Email Address" required="">
+                                    <label>Email Id <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email Id" })
                                 </div>
                             </div>
                             <div class="row g-3">
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">Enter Your Pincode</label>
-                                    <input class="form-control" id="validationCustom05" type="text" placeholder="Pincode" required="">
+                                    <label>PinCode <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">Enter Your City</label>
-                                    <input class="form-control" id="validationCustom05" type="text" placeholder="City" required="">
+                                    <label>State <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">Select State</label>
-                                    <select class="form-select" id="validationCustom04" required="">
-                                        <option selected="" disabled="" value="">Choose...</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </select>
+                                    <label>City <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
                                 </div>
-                               
+
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">Select Gender</label>
-                                    <select class="form-select" id="validationCustom04" required="">
-                                        <option selected="" disabled="" value="">Choose...</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                    <label>Gender <span style="color:red;">*</span></label>
+                                    <select class="form-select" id="Gender" name="Gender">
+                                        <option value="0">-Select-</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label" for="validationCustom04">Enter Your Address</label>
-                                    <textarea class="form-control btn-square" id="exampleFormControlTextarea14" rows="3"></textarea>
+                                    <label>Address <span style="color:red;">*</span></label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
                                 </div>
                             </div>
-                            <button class="btn btn-primary mt-4" type="submit">Submit form</button>
-                        </form>
+                            <input type="submit" class="btn btn-primary mt-4" value="Submit" id="btnSave" name="btnSave" onclick="return ValidateForm();" />
+                        }
                     </div>
                 </div>
             </div>
@@ -89,3 +87,45 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
+
+<script>
+    function ValidateForm() {
+        if ($('#Name').val() == '') {
+            $("#Name").addClass('errortext');
+            $('#Name').focus();
+            return false;
+        }
+        if ($('#FatherName').val() == '') {
+            $("#FatherName").addClass('errortext');
+            $('#FatherName').focus();
+            return false;
+        }
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+        if ($('#PinCode').val() == '') {
+            $("#PinCode").addClass('errortext');
+            $('#PinCode').focus();
+            return false;
+        }
+        if ($('#Gender').val() == '0') {
+            $("#Gender").addClass('errortext');
+            $('#Gender').focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

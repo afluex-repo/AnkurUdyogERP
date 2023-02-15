@@ -21,15 +21,42 @@ namespace AnkurUdyogERP.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult LoginAction(Home model)
+        public ActionResult Login(Home model)
         {
+            string FormName = "";
+            string Controller = "";
             try
             {
+                DataSet ds = model.Login();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if(ds.Tables[0].Rows[0]["UserType"].ToString()== "Admin")
+                    {
+                        FormName = "AdminDashboard";
+                        Controller = "Admin";
+                    }
+                    else
+                    {
+                        TempData["msg"] = "Incorrect LoginId Or Password";
+                        FormName = "Login";
+                        Controller = "Home";
+                    }
+                      
+                }
+                else
+                {
+                    TempData["msg"] = "Incorrect LoginId Or Password";
+                    FormName = "Login";
+                    Controller = "Home";
+                }
             }
             catch(Exception ex)
             {
+                TempData["msg"] = ex.Message;
+                FormName = "Login";
+                Controller = "Home";
             }
-            return View();
+            return RedirectToAction(FormName, Controller);
         }
     }
 }
