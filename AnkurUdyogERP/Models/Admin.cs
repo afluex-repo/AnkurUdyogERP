@@ -19,7 +19,7 @@ namespace AnkurUdyogERP.Models
             {
                 new SqlParameter("@DistributerId",DistributerId)
             };
-            DataSet ds = Connection.ExecuteQuery("GetDistributerList", para);
+            DataSet ds = Connection.ExecuteQuery("GetDistributerDetails", para);
             return ds;
         }
         public DataSet SaveDistributerRegistration()

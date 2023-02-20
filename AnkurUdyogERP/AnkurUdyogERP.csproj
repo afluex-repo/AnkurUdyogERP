@@ -725,9 +725,11 @@
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminReportController.cs" />
+    <Compile Include="Controllers\DistributerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OnActionAttribute.cs" />
+    <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -736,6 +738,7 @@
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\Distributer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -759,6 +762,10 @@
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Admin\DistributerRegistration.cshtml" />
     <Content Include="Views\Admin\DistributerList.cshtml" />
+    <Content Include="Views\Shared\_DistributerLayout.cshtml" />
+    <Content Include="Views\Distributer\DistributerDashboard.cshtml" />
+    <Content Include="Views\Home\LoginDistributer.cshtml" />
+    <Content Include="Views\Distributer\DistributerRegistration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
