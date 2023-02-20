@@ -1,4 +1,5 @@
-﻿
+﻿@model AnkurUdyogERP.Models.Home
+
 @{
     Layout = null;
 }
@@ -14,8 +15,6 @@
     <meta name="author" content="">
     <link rel="icon" href="../assets/images/favicon/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/images/favicon/favicon.png" type="image/x-icon">
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/font-awesome.css">
     <!-- Themify icon-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
@@ -25,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Loader starts-->
@@ -41,27 +41,33 @@
                     <div>
                         <div><a class="logo" href="/Home/Login"><img class="img-fluid for-light" src="../assets/images/logo/logo.png" alt="logo Image"></a></div>
                         <div class="login-main">
-                            <form class="theme-form">
+                            <form method="post" action="/Home/Login" class="theme-form">
                                 <h2 class="text-center">Sign in to account</h2>
                                 <p class="text-center">Enter your email & password to login</p>
+                                <center>
+                                    <span class="text-center" style="color:red;">@TempData["msg"]</span>
+                                </center>
+
                                 <div class="form-group">
                                     <label class="col-form-label">Email Address</label>
-                                    <input class="form-control" type="email" required="" placeholder="Test@gmail.com">
+                                    <input class="form-control" type="text" id="LoginId" name="LoginId" required="" placeholder="LoginId">
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Password</label>
                                     <div class="form-input position-relative">
-                                        <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
+                                        <input class="form-control" type="password" name="Password" id="Password" required="" placeholder="*********">
                                         <div class="show-hide"><span class="show"></span></div>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">
                                     <div class="checkbox p-0">
-                                        <input id="checkbox1" type="checkbox">
-                                        <label class="text-muted" for="checkbox1">Remember password</label>
+                                        @*<input id="checkbox1" type="checkbox">*@
+                                        @*<label class="text-muted" for="checkbox1">Remember password</label>*@
                                     </div><a class="link" href="#">Forgot password?</a>
                                     <div class="text-end mt-3">
-                                        <a href="/Admin/AdminDashboard" class="btn btn-primary btn-block w-100">Sign in</a>
+                                        <input type="submit" class="btn btn-primary btn-block w-100" id="btnLogin" name="btnLogin" value="Sign in" onclick="return ValidateForm();"/>
+
+                                        @*<a href="/Admin/AdminDashboard" class="btn btn-primary btn-block w-100">Sign in</a>*@
                                     </div>
                                 </div>
                                 <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2" href="#">Create Account</a></p>
@@ -77,3 +83,29 @@
         <script src="../assets/js/script.js"></script>
 </body>
 </html>
+
+
+<script>
+
+    function ValidateForm() {
+        debugger;
+        if ($("#LoginId").val() == "") {
+            $("#LoginId").addClass('errortext');
+            $("#LoginId").focus();
+            return false;
+        }
+        else if ($("#Password").val() == "") {
+            $("#Password").addClass('errortext');
+            $("#Password").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

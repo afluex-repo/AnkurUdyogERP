@@ -159,6 +159,7 @@ D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogER
 D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
+E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\csc.exe
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
