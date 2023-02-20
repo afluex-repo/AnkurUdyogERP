@@ -1,0 +1,256 @@
+﻿@model AnkurUdyogERP.Models.Distributer
+
+@{
+    ViewBag.Title = "DistributerRegistration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("DistributerRegistration", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Dealer Registration</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"> Distributer</li>
+                        <li class="breadcrumb-item active">Dealer Registration</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom01">Firm Name</label>
+                                    @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom01">Dealer's First Name</label>
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom01">Middle Name</label>
+                                    @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control", @Placeholder = "Middle Name " })
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom01">Last Name</label>
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom02">Contact No</label>
+                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Contact Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
+                                </div>
+                               
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom03">Email</label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">Pincode</label>
+                                    @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">State</label>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">City</label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">PanNo</label>
+                                    @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">GSTNo</label>
+                                    @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", @Placeholder = "GST Number", @maxlength = "10", @onchange = "return validatePan();" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label" for="validationCustom05">Limit (MT)</label>
+                                    @Html.TextBoxFor(m => m.Limit, new { @class = "form-control", @Placeholder = "Limit (MT)"})
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label" for="validationCustom04">Full Address</label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control btn-square", @Placeholder = "Address", @rows = "3" })
+                                </div>
+                            </div>
+
+                           <div class="row g-3">
+                               <div class="col-md-3 mb-3">
+                                @*@if (Model.UserID == null)
+                                {*@
+                                   <input class="btn btn-primary mt-4" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Registration" />
+                                @*}
+                                else
+                                {
+                                  @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
+                                  <input class="btn btn-primary mt-4" type="submit" value="Update" id="btnUpdate" name="Update" />
+                                }*@
+                                <a class="btn btn-info mt-4" href="/Distributer/DistributerList" style="margin-left:5px;">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+}
+
+
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    function validatePan() {
+        var panVal = $('#PanNo').val();
+        var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+
+        if (regpan.test(panVal)) {
+            $("#PanNo").removeClass('errortext');
+        } else {
+            alert("Invalid PAN Number");
+            $("#PanNo").val('');
+            $("#PanNo").addClass('errortext');
+        }
+    }
+
+    function getStateCity() {
+
+        var pincode = $('#Pincode').val();
+        $.ajax({
+            url: '/Distributer/GetStateCity', type: 'post', dataType: 'json',
+            data: { 'Pincode': pincode },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                    $("#State").removeClass('errortext');
+                    $("#City").removeClass('errortext');
+                    $("#Pincode").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    alert("Invalid Pincode");
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#State").addClass('errortext');
+                    $("#City").addClass('errortext');
+                    $("#Pincode").addClass('errortext');
+                    $('#Pincode').focus();
+                    $('#Pincode').val('');
+
+                }
+            }
+
+        });
+    }
+
+    function validateform() {
+        $("#divload").css({ 'display': 'none' });
+        $(".errortext").removeClass("errortext");
+        if ($('#FirmName').val() == '') {
+            $("#FirmName").addClass('errortext');
+            $('#FirmName').focus();
+            return false;
+        }
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+        if ($('#Pincode').val() == '') {
+            $("#Pincode").addClass('errortext');
+            $('#Pincode').focus();
+            return false;
+        }
+
+        if ($('#PanNo').val() == '') {
+            $("#PanNo").addClass('errortext');
+            $('#PanNo').focus();
+            return false;
+        }
+        if ($('#GSTNo').val() == '') {
+            $("#GSTNo").addClass('errortext');
+            $('#GSTNo').focus();
+            return false;
+        }
+        if ($('#Limit').val() == '') {
+            $("#Limit").addClass('errortext');
+            $('#Limit').focus();
+            return false;
+        }
+        if ($('#Address').val() == '') {
+            $("#Address").addClass('errortext');
+            $('#Address').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

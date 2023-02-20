@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AnkurUdyogERP.Models
 {
@@ -22,6 +25,13 @@ namespace AnkurUdyogERP.Models
             return finalString;
         }
         
+        public string Pincode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string Result { get; set; }
+        public string Address { get; set; }
+        public string PanNo { get; set; }
+
         public static string ConvertToSystemDate(string InputDate, string InputFormat)
         {
             string DateString = "";
@@ -60,6 +70,20 @@ namespace AnkurUdyogERP.Models
                 throw new Exception("Invalid Date");
             }
 
+        }
+
+        public DataSet GetStateCity()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pincode", Pincode) };
+            DataSet ds = Connection.ExecuteQuery("GetStateCity", para);
+            return ds;
+        }
+        public static List<SelectListItem> BindGender()
+        {
+            List<SelectListItem> Gender = new List<SelectListItem>();
+            Gender.Add(new SelectListItem { Text = "Male", Value = "M" });
+            Gender.Add(new SelectListItem { Text = "Female", Value = "F" });
+            return Gender;
         }
     }
 }

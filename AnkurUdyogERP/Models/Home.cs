@@ -22,5 +22,16 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
+        public DataSet LoginDistributer()
+        {
+            SqlParameter[] para =
+                {
+                new SqlParameter ("@LoginId",LoginId),
+                new SqlParameter("@Password",Password)
+            };
+            DataSet ds = Connection.ExecuteQuery("LoginAsDistributer", para);
+            return ds;
+        }
+
     }
 }
