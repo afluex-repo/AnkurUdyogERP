@@ -30,10 +30,23 @@ namespace AnkurUdyogERP.Controllers
                 DataSet ds = model.Login();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if(ds.Tables[0].Rows[0]["UserType"].ToString()== "Admin")
+                    if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                     {
+                        Session["Pk_adminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                        Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                        Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
                         FormName = "AdminDashboard";
                         Controller = "Admin";
+                    }
+                    else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Employee")
+                    {
+                        Session["Pk_adminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                        Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                        Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                        FormName = "EmployeeDashboard";
+                        Controller = "Employee";
                     }
                     else
                     {
@@ -41,7 +54,6 @@ namespace AnkurUdyogERP.Controllers
                         FormName = "Login";
                         Controller = "Home";
                     }
-                      
                 }
                 else
                 {
@@ -50,7 +62,7 @@ namespace AnkurUdyogERP.Controllers
                     Controller = "Home";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
                 FormName = "Login";
