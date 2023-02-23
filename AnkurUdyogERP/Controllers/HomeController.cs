@@ -48,6 +48,15 @@ namespace AnkurUdyogERP.Controllers
                         FormName = "EmployeeDashboard";
                         Controller = "Employee";
                     }
+                    else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Distributer")
+                    {
+                        Session["Pk_adminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                        Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                        Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                        FormName = "DistributerDashboard";
+                        Controller = "Master";
+                    }
                     else
                     {
                         TempData["msg"] = "Incorrect LoginId Or Password";

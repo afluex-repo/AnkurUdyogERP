@@ -11,14 +11,46 @@ namespace AnkurUdyogERP.Controllers
     public class EmployeeController : AdminBaseController
     {
         // GET: Employee
-        
+
         public ActionResult EmployeeDashboard()
         {
             return View();
         }
-        public ActionResult EmployeeRegistration()
+        public ActionResult EmployeeRegistration(Employee model, string Id)
         {
-            return View();
+            
+            if (Id != null)
+            {
+                model.PK_AdminId = Id;
+                DataSet ds = model.GetEmployeeList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                    model.MobileNo = ds.Tables[0].Rows[0]["Contact"].ToString();
+                    model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    model.FatherName = ds.Tables[0].Rows[0]["FatherName"].ToString();
+                    model.Gender = ds.Tables[0].Rows[0]["Gender"].ToString();
+                    model.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+
+                    ViewBag.Gender = new List<SelectListItem> {
+
+                     new SelectListItem { Value="M", Text="Male"},
+                     new SelectListItem { Value="F", Text="FeMale"}
+                    };
+                    model.Gender = "F";  //Set the selected option here
+                    
+                }
+            }
+            else
+            {
+                List<SelectListItem> Gender = Common.BindGender();
+                ViewBag.Gender = Gender;
+            }
+         
+            return View(model);
         }
         [HttpPost]
         [OnAction(ButtonName = "btnSave")]
@@ -49,11 +81,44 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("EmployeeRegistration", "Employee");
         }
-        
+        [HttpPost]
+        [OnAction(ButtonName = "btnUpdate")]
+        [ActionName("EmployeeRegistration")]
+        public ActionResult UpdateEmployee(Employee model)
+        {
+            try
+            {
+                if (model.PK_AdminId != null)
+                {
+                    model.AddedBy = Session["Pk_adminId"].ToString();
+                    DataSet ds = model.UpdateEmployee();
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["EmployeeRegistration"] = "Employee Updated  Successfully";
+                        }
+                        else
+                        {
+                            TempData["EmployeeRegistration"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["EmployeeRegistration"] = ex.Message;
+            }
+            return RedirectToAction("EmployeeRegistration", "Employee");
+        }
+        public ActionResult EmployeeConfirmationPage()
+        {
+            return View();
+        }
         public ActionResult GetStateCity(string PinCode)
         {
-           Employee model = new Employee();
-            model.PinCode = PinCode;
+            Common model = new Common();
+            model.Pincode = PinCode;
             DataSet ds = model.GetStateCity();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -64,14 +129,13 @@ namespace AnkurUdyogERP.Controllers
             else
             {
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
         public ActionResult EmployeeList()
         {
             Employee model = new Employee();
             List<Employee> lst = new List<Employee>();
-            model.AddedBy = Session["Pk_adminId"].ToString();
+            model.PK_AdminId = Session["Pk_adminId"].ToString();
             DataSet ds = model.GetEmployeeList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -87,7 +151,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.Email = dr["Email"].ToString();
                     obj.FatherName = dr["FatherName"].ToString();
                     obj.Gender = dr["Gender"].ToString();
-                    obj.PinCode = dr["PinCode"].ToString();
+                    obj.Pincode = dr["PinCode"].ToString();
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
@@ -103,7 +167,7 @@ namespace AnkurUdyogERP.Controllers
         public ActionResult EmployeeList(Employee model)
         {
             List<Employee> lst = new List<Employee>();
-            model.AddedBy = Session["Pk_adminId"].ToString();
+            model.PK_AdminId = Session["Pk_adminId"].ToString();
             DataSet ds = model.GetEmployeeList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -119,7 +183,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.Email = dr["Email"].ToString();
                     obj.FatherName = dr["FatherName"].ToString();
                     obj.Gender = dr["Gender"].ToString();
-                    obj.PinCode = dr["PinCode"].ToString();
+                    obj.Pincode = dr["PinCode"].ToString();
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
@@ -129,6 +193,5 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
     }
 }
