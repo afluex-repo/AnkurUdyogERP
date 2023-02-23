@@ -18428,11 +18428,11 @@ ul.pro-services li:nth-child(n+2) {
 }
 
 .select2-container .select2-selection--single {
-  border-radius: 0.25rem !important;
-  border-color: rgba(83, 70, 134, 0.1019607843) !important;
-  height: 40px !important;
-  padding: 5px;
-}
+  border-radius: 8px !important;
+  border-color: #5346867a !important;
+  height: 48px !important;
+  padding: 12px 15px;
+} 
 
 .job-pagination {
   margin-bottom: 30px;

@@ -52,26 +52,31 @@
                                 </div>
                             </div>
                             <div class="row g-3">
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-3">
                                     <label>PinCode <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode" })
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-3">
                                     <label>State <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State" })
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-3">
                                     <label>City <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
                                 </div>
 
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-3">
                                     <label>Gender <span style="color:red;">*</span></label>
-                                    <select class="form-select" id="Gender" name="Gender">
+                                    <select class="js-example-basic-single col-sm-12" id="Gender" name="Gender">
                                         <option value="0">-Select-</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
+                                    @*<select class="form-select" id="Gender" name="Gender">
+                                        <option value="0">-Select-</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>*@
                                 </div>
                                 <div class="col-md-12">
                                     <label>Address <span style="color:red;">*</span></label>
