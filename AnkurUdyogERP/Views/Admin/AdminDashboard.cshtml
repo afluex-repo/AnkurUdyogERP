@@ -31,10 +31,10 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0">
                                 <div class="sale-detail">
-                                    <div class="icon"><i data-feather="shopping-bag"></i></div>
+                                    <div class="icon"><i data-feather="users"></i></div>
                                     <div class="sale-content">
-                                        <h3>Total Sales</h3>
-                                        <p>54,750  </p>
+                                        <h3>Total Users</h3>
+                                        <p>@ViewBag.TotalUsers</p>
                                     </div>
                                 </div>
                             </div>
@@ -49,10 +49,10 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0">
                                 <div class="sale-detail">
-                                    <div class="icon"><i data-feather="dollar-sign"></i></div>
+                                    <div class="icon"><i data-feather="users"></i></div>
                                     <div class="sale-content">
-                                        <h3>Total Income</h3>
-                                        <p>$35,532</p>
+                                        <h3>Active Users</h3>
+                                        <p>@ViewBag.ActiveUsers</p>
                                     </div>
                                 </div>
                             </div>
@@ -67,10 +67,10 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0">
                                 <div class="sale-detail">
-                                    <div class="icon"><i data-feather="file-text"></i></div>
+                                    <div class="icon"><i data-feather="users"></i></div>
                                     <div class="sale-content">
-                                        <h3>Orders Paid</h3>
-                                        <p>55,900  </p>
+                                        <h3>InActive Users</h3>
+                                        <p>@ViewBag.InactiveUsers</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +87,8 @@
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="users"></i></div>
                                     <div class="sale-content">
-                                        <h3>Total Visitor</h3>
-                                        <p>67,900</p>
+                                        <h3>Blocked Users</h3>
+                                        <p>@ViewBag.BlockedUsers</p>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-5 col-xl-4 col-sm-6 box-col-40">
+
+            @*<div class="col-xxl-5 col-xl-4 col-sm-6 box-col-40">
                 <div class="card recent-order">
                     <div class="card-header pb-0">
                         <h3>Recent Orders</h3>
@@ -275,7 +276,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
     <!-- Container-fluid Ends-->

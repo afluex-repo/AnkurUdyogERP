@@ -10,6 +10,26 @@ namespace AnkurUdyogERP.Models
 {
     public class Common
     {
+        public string Pincode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string Result { get; set; }
+        public string Address { get; set; }
+        public string PanNo { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+        public string FatherName { get; set; }
+        public string MobileNo { get; set; }
+        public string Email { get; set; }
+        public string Gender { get; set; }
+        public string Password { get; set; }
+        public string JoiningDate { get; set; }
+        public string AddedBy { get; set; }
+
+
+
         public static string GenerateAlphaNumericNumber()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -24,14 +44,6 @@ namespace AnkurUdyogERP.Models
             var finalString = new String(stringChars);
             return finalString;
         }
-        
-        public string Pincode { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
-        public string Result { get; set; }
-        public string Address { get; set; }
-        public string PanNo { get; set; }
-
         public static string ConvertToSystemDate(string InputDate, string InputFormat)
         {
             string DateString = "";
@@ -81,9 +93,12 @@ namespace AnkurUdyogERP.Models
         public static List<SelectListItem> BindGender()
         {
             List<SelectListItem> Gender = new List<SelectListItem>();
+            Gender.Add(new SelectListItem { Text = "-Select-", Value = "" });
             Gender.Add(new SelectListItem { Text = "Male", Value = "M" });
             Gender.Add(new SelectListItem { Text = "Female", Value = "F" });
             return Gender;
         }
+
+
     }
 }
