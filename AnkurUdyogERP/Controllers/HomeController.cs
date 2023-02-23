@@ -117,12 +117,12 @@ namespace AnkurUdyogERP.Controllers
                         {
                             if (ds.Tables[0].Rows[0]["UserTypeName"].ToString() == "Distributer")
                             {
-                                Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                                 Session["PK_UserId"] = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                                Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                                Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                                 Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
                                 Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
                                 Session["Name"] = ds.Tables[0].Rows[0]["FullName"].ToString();
-                                
                                 FormName = "DistributerDashboard";
                                 Controller = "Distributer";
                             }
@@ -142,14 +142,12 @@ namespace AnkurUdyogERP.Controllers
                     Controller = "Home";
                 }
             }
-
             catch (Exception ex)
             {
                 TempData["Login"] = ex.Message;
                 FormName = "LoginDistributer";
                 Controller = "Home";
             }
-
             return RedirectToAction(FormName, Controller);
         }
     }
