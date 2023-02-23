@@ -765,7 +765,8 @@
     <Content Include="Views\Shared\_DistributerLayout.cshtml" />
     <Content Include="Views\Distributer\DistributerDashboard.cshtml" />
     <Content Include="Views\Home\LoginDistributer.cshtml" />
-    <Content Include="Views\Distributer\DistributerRegistration.cshtml" />
+    <Content Include="Views\Distributer\DealerRegistration.cshtml" />
+    <Content Include="Views\Distributer\DealerList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

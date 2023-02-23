@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="/Employee/EmployeeRegistration"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item"> Role Master</li>
                         <li class="breadcrumb-item active">Employee Registration</li>
                     </ol>
@@ -28,7 +28,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h3>Custom styles</h3>
+                        <span style="color:red;">@TempData["EmployeeRegistration"]</span>
                     </div>
                     <div class="card-body">
                         @using (Html.BeginForm("EmployeeRegistration", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
@@ -54,15 +54,15 @@
                             <div class="row g-3">
                                 <div class="col-md-3 mb-3">
                                     <label>PinCode <span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode" })
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange = "return GetStateCity();" })
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label>State <span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State" })
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @readonly = true })
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label>City <span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City",@readonly=true })
                                 </div>
 
                                 <div class="col-md-3 mb-3">
@@ -122,6 +122,31 @@
         }
         return true;
     }
+
+
+    function GetStateCity() {
+        var PinCode = $("#PinCode").val();
+        debugger;
+        $.ajax({
+            url: '/Employee/GetStateCity', type: 'Post', dataType: 'json',
+            data: { PinCode: PinCode },
+            success: function (result) {
+                if (result.Result == "True") {
+                    $("#State").val(result.State);
+                    $("#City").val(result.City);
+                }
+                else {
+                    alert("Invailid Pincode");
+                    $("#PinCode").addClass('errortext');
+                    $("#PinCode").val('');
+                    $("#PinCode").focus();
+                }
+            }
+        });
+    }
+
+
+
 </script>
 <style>
     .errortext {

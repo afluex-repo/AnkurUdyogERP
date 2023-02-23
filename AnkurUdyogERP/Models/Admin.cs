@@ -9,27 +9,6 @@ namespace AnkurUdyogERP.Models
 {
     public class Admin
     {
-        public string DistributerId { get; set; }
-        public string AddedBy { get; set; }
-        public List<Admin> lstDistributer { get; set; }
-
-        public DataSet GetDistributerList()
-        {
-            SqlParameter[] para =
-            {
-                new SqlParameter("@DistributerId",DistributerId)
-            };
-            DataSet ds = Connection.ExecuteQuery("GetDistributerDetails", para);
-            return ds;
-        }
-        public DataSet SaveDistributerRegistration()
-        {
-            SqlParameter[] para =
-            {
-                new SqlParameter("@DistributerId",DistributerId)
-            };
-            DataSet ds = Connection.ExecuteQuery("SaveDistributerRegistration", para);
-            return ds;
-        }
+    
     }
 }

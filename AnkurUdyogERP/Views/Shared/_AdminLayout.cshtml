@@ -71,7 +71,7 @@
                             <div class="d-flex profile-media">
                                 <img class="b-r-50" src="../assets/images/dashboard/profile.png" alt="">
                                 <div class="flex-grow-1">
-                                    <span>Helen Walter</span>
+                                    <span>@Session["LoginId"]</span>
                                     @*<p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>*@
                                 </div>
                             </div>
@@ -114,6 +114,15 @@
                                         <li><a href="/Employee/EmployeeList">Employee List</a></li>
                                     </ul>
                                 </li>
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Dealer</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Distributer/DealerRegistration">Dealer Registration</a></li>
+                                        <li><a href="/Distributer/DealerList">Dealer List</a></li>
+                                    </ul>
+                                </li>
+
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layout"></i><span class="lan-7">Page layout</span></a>
                                     <ul class="sidebar-submenu">

@@ -1,22 +1,25 @@
-﻿@model AnkurUdyogERP.Models.Employee
+﻿@model AnkurUdyogERP.Models.Distributer
 
 @{
-    ViewBag.Title = "EmployeeList";
+    ViewBag.Title = "DealerList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
+@using (Html.BeginForm("DealerList", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    @*<h3>Employee List</h3>*@
+                    @*<h3>Dealer List</h3>*@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/Employee/EmployeeList"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Role Master</li>
-                        <li class="breadcrumb-item active">Employee List</li>
+                        <li class="breadcrumb-item">Distributer</li>
+                        <li class="breadcrumb-item active">Dealer  List</li>
                     </ol>
                 </div>
             </div>
@@ -29,12 +32,10 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
-                        <h3 class="mb-3">Employee List</h3>
-                        <a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>
+                        <h3 class="mb-3">Dealer List</h3>
+                        <a href="/Distributer/DealerRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Dealer </a>
                     </div>
                     <div class="card-body">
-                        @using (Html.BeginForm("EmployeeList", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
-                        {
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label>LoginId <span style="color:red;"></span></label>
@@ -44,24 +45,16 @@
                                     <label>Name <span style="color:red;"></span></label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
                                 </div>
+                                <div class="col-md-3">
+                                    Joining From Date
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "true" })
+                                </div>
+                                <div class="col-md-3">
+                                    Joining To Date
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "true" })
+                                </div>
                             </div>
-                            <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch"/>
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch" />
                         <div class="table-responsive">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
@@ -70,35 +63,32 @@
                                         <th>LoginId</th>
                                         <th>Password</th>
                                         <th>Name</th>
-                                        <th>Mobile No</th>
+                                        <th>Mobile</th>
                                         <th>Email</th>
-                                        <th>Father Name</th>
-                                        <th>Gender</th>
                                         <th>PinCode</th>
                                         <th>State</th>
                                         <th>City</th>
                                         <th>Address</th>
-                                        <th>Joining Date</th>
-                                    </tr>  
-                                </thead>   
+                                        <th>JoiningDate</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lstEmployee != null)
+                                        if (Model.lstDealer != null)
                                         {
                                             int i = 1;
-                                            foreach (var Item in Model.lstEmployee)
+                                            foreach (var Item in Model.lstDealer)
                                             {
                                                 <tr>
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Password</td>
                                                     <td>@Item.Name</td>
-                                                    <td>@Item.MobileNo</td>
+                                                    <td>@Item.Mobile</td>
                                                     <td>@Item.Email</td>
-                                                    <td>@Item.FatherName</td>
-                                                    <td>@Item.Gender</td>
-                                                    <td>@Item.PinCode</td>
+                                                    <td>@Item.Pincode</td>
                                                     <td>@Item.State</td>
                                                     <td>@Item.City</td>
                                                     <td>@Item.Address</td>
@@ -106,7 +96,7 @@
                                                     <td>
                                                         <ul class="action">
                                                             <li class="edit"> <a href="#"><i class="icon-pencil-alt"></i></a></li>
-                                                            <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
+                                                            <li class="delete" comfirm='Are You sure you want to delete this dealer details ?'><a href="#"><i class="icon-trash"></i></a></li>
                                                         </ul>
                                                     </td>
                                                 </tr>
@@ -117,19 +107,18 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>S.No.</th>
-                                        <th>LoginId</th>
-                                        <th>Password</th>
-                                        <th>Name</th>
-                                        <th>Mobile No</th>
-                                        <th>Email</th>
-                                        <th>Father Name</th>
-                                        <th>Gender</th>
-                                        <th>PinCode</th>
-                                        <th>State</th>
-                                        <th>City</th>
-                                        <th>Address</th>
-                                        <th>Joining Date</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th> </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -142,3 +131,18 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
+}
+<script>
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+</script>
