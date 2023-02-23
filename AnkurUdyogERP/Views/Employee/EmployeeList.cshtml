@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "EmployeeList";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
 }
 
 <div class="page-body">
@@ -10,7 +10,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    @*<h3>Employee List</h3>*@
+                    <h3>Employee List</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -29,8 +29,8 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
-                        <h3 class="mb-3">Employee List</h3>
-                        <a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>
+                        @*<h3 class="mb-3">Employee List</h3>*@
+                        <span style="color:red;">@TempData["EmployeeRegistration"]</span>
                     </div>
                     <div class="card-body">
                         @using (Html.BeginForm("EmployeeList", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
@@ -47,21 +47,6 @@
                             </div>
                             <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch"/>
                         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <div class="table-responsive">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
@@ -98,17 +83,11 @@
                                                     <td>@Item.Email</td>
                                                     <td>@Item.FatherName</td>
                                                     <td>@Item.Gender</td>
-                                                    <td>@Item.PinCode</td>
+                                                    <td>@Item.Pincode</td>
                                                     <td>@Item.State</td>
                                                     <td>@Item.City</td>
                                                     <td>@Item.Address</td>
                                                     <td>@Item.JoiningDate</td>
-                                                    <td>
-                                                        <ul class="action">
-                                                            <li class="edit"> <a href="#"><i class="icon-pencil-alt"></i></a></li>
-                                                            <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
-                                                        </ul>
-                                                    </td>
                                                 </tr>
                                                 i++;
                                             }
