@@ -11,9 +11,6 @@ namespace AnkurUdyogERP.Models
     {
         public List<Distributer> lstDealer { get; set; }
         public string FirmName { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
         public string FatherName { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
@@ -29,14 +26,19 @@ namespace AnkurUdyogERP.Models
         public string FromDate { get; set; }
         public string ToDate { get; set; }
 
+
+        public DataSet GetDetails()
+        {
+            DataSet ds = Connection.ExecuteQuery("BindDataForDashboard");
+            return ds;
+        }
+
         public DataSet SaveDealerRegistration()
         {
             SqlParameter[] para =
             {
                 new SqlParameter("@FirmName",FirmName),
-                 new SqlParameter("@FirstName",FirstName),
-                  new SqlParameter("@MiddleName",MiddleName),
-                   new SqlParameter("@LastName",LastName),
+                 new SqlParameter("@Name",Name),
                     new SqlParameter("@Mobile",Mobile),
                      new SqlParameter("@Email",Email),
                       new SqlParameter("@Pincode",Pincode),
@@ -84,9 +86,7 @@ namespace AnkurUdyogERP.Models
             {
                new SqlParameter("@PK_UserId",UserID),
                 new SqlParameter("@FirmName",FirmName),
-                 new SqlParameter("@FirstName",FirstName),
-                  new SqlParameter("@MiddleName",MiddleName),
-                   new SqlParameter("@LastName",LastName),
+                 new SqlParameter("@Name",Name),
                     new SqlParameter("@Mobile",Mobile),
                      new SqlParameter("@Email",Email),
                       new SqlParameter("@Pincode",Pincode),

@@ -119,7 +119,7 @@ namespace AnkurUdyogERP.Controllers
                                 Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                                 Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
                                 Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
-                                Session["Name"] = ds.Tables[0].Rows[0]["FullName"].ToString();
+                                Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
                                 FormName = "DistributerDashboard";
                                 Controller = "Distributer";
                             }
