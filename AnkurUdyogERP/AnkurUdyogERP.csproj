@@ -782,7 +782,12 @@
     <Content Include="Views\Master\DistributerDashboard.cshtml" />
     <Content Include="Views\Admin\DistributerListForAdmin.cshtml" />
     <Content Include="Views\Shared\_GetMenu.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Permission\SetPermission.cshtml" />
+=======
+    <Content Include="Views\Distributer\DealerRegistration.cshtml" />
+    <Content Include="Views\Distributer\DealerList.cshtml" />
+>>>>>>> f8d0f7300c52e9ea734ae38fe162368505fc0cbb
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
