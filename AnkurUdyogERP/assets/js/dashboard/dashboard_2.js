@@ -534,6 +534,91 @@ var options = {
 var chart = new ApexCharts(document.querySelector("#recent-chart"), options);
 chart.render();
 
+// Country Sales Chart
+var options1 = {
+  chart: {
+    height: 335,
+    type: "radar",
+    toolbar: {
+      show: false,
+    },
+  },
+  series: [
+    {
+      data: [20, 100, 40, 30, 50, 80, 33],
+    },
+  ],
+  stroke: {
+    width: 2,
+    curve: "smooth",
+  },
+  legend: {
+    show: false,
+  },
+  labels: [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ],
+  grid: {
+    borderColor: "#d3dbf4",
+  },
+  colors: [KohoAdminConfig.secondary],
+  markers: {
+    size: [5, 0],
+    colors: ["#00000000"],
+    strokeColor: KohoAdminConfig.secondary,
+    strokeWidth: [3, 0],
+    hover: {
+      size: 5,
+      sizeOffset: 3,
+    },
+  },
+  tooltip: {
+    marker: {
+      show: false,
+    },
+    fixed: {
+      enabled: false,
+      position: "bottomRight",
+      offsetX: 0,
+      offsetY: 0,
+    },
+  },
+  yaxis: {
+    tickAmount: 6,
+    show: false,
+  },
+  responsive: [
+    {
+      breakpoint: 1661,
+      options: {
+        chart: {
+          height: 320,
+        },
+      },
+    },
+    {
+      breakpoint: 420,
+      options: {
+        chart: {
+          height: 260,
+        },
+      },
+    },
+  ],
+};
+
+var chart1 = new ApexCharts(
+  document.querySelector("#country-sales-chart"),
+  options1
+);
+
+chart1.render();
 
 // Items-Slider Slick Slider
 
