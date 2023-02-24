@@ -36,12 +36,10 @@ namespace AnkurUdyogERP.Controllers
                     model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
 
                     ViewBag.Gender = new List<SelectListItem> {
-
                      new SelectListItem { Value="M", Text="Male"},
                      new SelectListItem { Value="F", Text="FeMale"}
                     };
                     model.Gender = "F";  //Set the selected option here
-                    
                 }
             }
             else
