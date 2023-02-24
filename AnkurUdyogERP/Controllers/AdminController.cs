@@ -200,5 +200,10 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DistributerListForAdmin", "Admin");
         }
+
+        public ActionResult Profile()
+        {
+            return View();
+        }
     }
 }

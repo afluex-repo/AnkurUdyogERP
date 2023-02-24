@@ -80,9 +80,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-
-
-
         public ActionResult LoginDistributer()
         {
             Session.Abandon();

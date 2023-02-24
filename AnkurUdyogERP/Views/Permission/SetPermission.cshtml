@@ -1,0 +1,141 @@
+﻿@model AnkurUdyogERP.Models.Permisssions
+
+@{
+    ViewBag.Title = "SetPermission";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Permission</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Permission/SetPermission"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Role Master</li>
+                        <li class="breadcrumb-item active">Permission</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HTML (DOM) sourced data  Starts-->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 d-flex justify-content-between">
+                        @*<h3 class="mb-3"></h3>*@
+                        <span style="color:red;">@TempData["Permission"]</span>
+                        @*<a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>*@
+                    </div>
+                    @using (Html.BeginForm("SetPermission", "Permission", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                    {
+                        <div class="date-picker">
+                            <div class="card-body">
+
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label>User Name <span style="color:red;">*</span></label>
+                                        @Html.DropDownListFor(m => m.Fk_UserId, new SelectList(ViewBag.ddluser, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Main Menu <span style="color:red;">*</span></label>
+                                        @Html.DropDownListFor(m => m.Fk_FormTypeId, new SelectList(ViewBag.ddlformtype, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="submit" id="GetDetails" name="GetDetails" class="btn btn-primary mt-4" value="Get Details" onclick="return load();" />
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="display" id="data-source-1" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Form</th>
+                                                <th>Form View</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstpermission != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var item in Model.lstpermission)
+                                                    {
+                                                        <tr>
+                                                            <td>@i</td>
+                                                            <td>
+                                                                @Html.DisplayFor(m => item.FormName)
+                                                            </td>
+                                                            <td>
+                                                                <input type="hidden" name="hdFormtypeId_ @i" id="hdFormtypeId_ @i" value="@item.Fk_FormTypeId" />
+                                                                <input type="hidden" name="hdFormId_ @i" id="hdFormId_ @i" value="@item.Fk_FormId" />
+                                                                <input type="hidden" name="hdLoginid_ @i" id="hdLoginid_ @i" value="@item.Fk_UserId" />
+                                                                <input type="checkbox" name="chkSelect_ @i" id="chkSelect_ @i" @item.SelectedValue />
+                                                            </td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                    <input type="text" id="hdRows" name="hdRows" value="@i" />
+                                                }
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Form</th>
+                                                <th>Form View</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Update" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- HTML (DOM) sourced data  Ends-->
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function load() {
+        // alert("d")
+        $(".errortext").removeClass("errortext");
+        if ($('#Fk_UserId').val() == '0') {
+            $("#Fk_UserId").addClass('errortext');
+            $('#Fk_UserId').focus();
+            return false;
+        }
+        if ($('#Fk_FormTypeId').val() == '0') {
+            $("#Fk_FormTypeId").addClass('errortext');
+            $('#Fk_FormTypeId').focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "DealerRegistration";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
 }
 
 
@@ -36,11 +36,19 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom01">Firm Name</label>
-                                    @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name" })
+                                     @*@if (Model.PK_UserId == null)
+                                     {*@
+                                        <label class="form-label" for="validationCustom01">Firm Name <span style="color:red;">*</span></label>
+                                        @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name" })
+                                     @*}
+                                     else
+                                     {*@
+                                        @*<label class="form-label" for="validationCustom01">Firm Name</label>
+                                        @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name",@disabled= "disabled" })
+                                     }*@
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom01">Dealer's First Name</label>
+                                    <label class="form-label" for="validationCustom01">Dealer's First Name <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
                                 </div>
 
@@ -56,17 +64,25 @@
 
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom02">Contact No</label>
+                                    <label class="form-label" for="validationCustom02">Contact No <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Contact Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom03">Email</label>
+                                    <label class="form-label" for="validationCustom03">Email <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">Pincode</label>
-                                    @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
+                                      @*@if (Model.PK_UserId == null)
+                                      {*@
+                                        <label class="form-label" for="validationCustom05">Pincode <span style="color:red;">*</span></label>
+                                        @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
+                                      @*}
+                                      else
+                                      {
+                                        <label class="form-label" for="validationCustom05">Pincode</label>
+                                        @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6", @disabled = "disabled" })
+                                      }*@     
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label" for="validationCustom05">State</label>
@@ -80,35 +96,35 @@
                                     @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">PanNo</label>
+                                    <label class="form-label" for="validationCustom05">PanNo <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">GSTNo</label>
+                                    <label class="form-label" for="validationCustom05">GSTNo <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", @Placeholder = "GST Number", @maxlength = "10", @onchange = "return validatePan();" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="validationCustom05">Limit (MT)</label>
+                                    <label class="form-label" for="validationCustom05">Limit (MT) <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Limit, new { @class = "form-control", @Placeholder = "Limit (MT)" })
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label class="form-label" for="validationCustom04">Full Address</label>
+                                    <label class="form-label" for="validationCustom04">Address <span style="color:red;">*</span></label>
                                     @Html.TextAreaFor(m => m.Address, new { @class = "form-control btn-square", @Placeholder = "Address", @rows = "3" })
                                 </div>
                             </div>
 
                             <div class="row g-3">
                                 <div class="col-md-3 mb-3">
-                                    @*@if (Model.UserID == null)
-                                        {*@
-                                    <input class="btn btn-primary mt-4" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
-                                    @*}
-                                     else
-                                     {
-                                       @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
-                                       <input class="btn btn-primary mt-4" type="submit" value="Update" id="btnUpdate"   n am e=" btnUpdate" />
-                                     }*@
+                                    @Html.HiddenFor(m => m.PK_UserId)
+                                    @if (Model.PK_UserId == null)
+                                    {
+                                    <input class="btn btn-primary mt-4" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave",onclick="return validateform();" />
+                                    }
+                                    else
+                                    {
+                                       <input class="btn btn-primary mt-4" type="submit" value="Update" id="btnUpdate" name="btnUpdate",onclick="return validateform();" />
+                                     }
                                     <a class="btn btn-info mt-4" href="/Distributer/DealerList" style="margin-left:5px;">Back To List</a>
                                 </div>
                             </div>

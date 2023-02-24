@@ -160,5 +160,41 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-}
+
+
+
+        public ActionResult GetMenu()
+        {
+            Menu model = new Menu();
+            List<Menu> lst = new List<Menu>();
+            List<Menu> lstsubmenu = new List<Menu>();
+            DataSet ds = model.GetMenu();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Menu obj = new Menu();
+                    obj.PK_MenuId = r["PK_FormTypeId"].ToString();
+                    obj.MenuName = r["FormType"].ToString();
+                    obj.Sequence = r["Sequence"].ToString();
+                    obj.Url = r["Url"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstMenu = lst;
+
+                foreach (DataRow dr in ds.Tables[1].Rows)
+                {
+                    Menu obj1 = new Menu();
+                    obj1.PK_SubMenuId = dr["PK_FormId"].ToString();
+                    obj1.SubMenuName = dr["FormName"].ToString();
+                    obj1.Sequence = dr["Sequence"].ToString();
+                    obj1.PK_MenuId = dr["PK_FormTypeId"].ToString();
+                    obj1.Url = dr["Url"].ToString();
+                    lstsubmenu.Add(obj1);
+                }
+                model.lstSubMenu = lstsubmenu;
+            }
+            return PartialView("_GetMenu", model);
+        }
+    }
 }

@@ -15,12 +15,10 @@ namespace AnkurUdyogERP.Controllers
         {
             return View();
         }
-
         public ActionResult DistributerDashboard()
         {
             return View();
         }
-
         public ActionResult GetStateCity(string Pincode)
         {
             try
@@ -49,12 +47,32 @@ namespace AnkurUdyogERP.Controllers
                 return View(ex.Message);
             }
         }
-
-        public ActionResult DealerRegistration()
+        public ActionResult DealerRegistration(Distributer model, string Id)
         {
-            return View();
+            if (Id != null)
+            {
+                model.PK_UserId = Id;
+                DataSet ds = model.GetDealerList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    model.MiddleName = ds.Tables[0].Rows[0]["MiddleName"].ToString();
+                    model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    model.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    model.JoiningDate = ds.Tables[0].Rows[0]["JoiningDate"].ToString();
+                    model.FirmName = ds.Tables[0].Rows[0]["FirmName"].ToString();
+                    model.GSTNo = ds.Tables[0].Rows[0]["GSTNo"].ToString();
+                    model.Limit = ds.Tables[0].Rows[0]["Limit_MT"].ToString();
+                    model.PanNo = ds.Tables[0].Rows[0]["PancardNo"].ToString();
+                }
+            }
+            return View(model);
         }
-
         [HttpPost]
         [ActionName("DealerRegistration")]
         [OnAction(ButtonName = "btnSave")]
@@ -84,12 +102,77 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DealerRegistration", "Distributer");
         }
-
+        [HttpPost]
+        [ActionName("DealerRegistration")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateDealer(Distributer model, string PK_UserId)
+        {
+            try
+            {
+                model.UserID = PK_UserId;
+                if (model.UserID != null)
+                {
+                    model.AddedBy = Session["PK_UserId"].ToString();
+                    DataSet ds = model.UpdateDealer();
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["msg"] = "Dealer Details Updated  Successfully !!";
+                        }
+                        else
+                        {
+                            TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("DealerRegistration", "Distributer");
+        }
         public ActionResult DealerList()
         {
             Distributer model = new Distributer();
             List<Distributer> lst = new List<Distributer>();
-            model.AddedBy = Session["PK_UserId"].ToString();
+            //model.AddedBy = Session["PK_UserId"].ToString();
+            DataSet ds = model.GetDealerList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.PK_UserId = dr["PK_UserId"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Password = dr["Password"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    obj.Mobile = dr["Mobile"].ToString();
+                    obj.Email = dr["Email"].ToString();
+                    obj.Pincode = dr["PinCode"].ToString();
+                    obj.State = dr["State"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.Address = dr["Address"].ToString();
+                    obj.JoiningDate = dr["JoiningDate"].ToString();
+                    obj.FirmName = dr["FirmName"].ToString();
+                    obj.GSTNo = dr["GSTNo"].ToString();
+                    obj.Limit = dr["Limit_MT"].ToString();
+                    obj.PanNo = dr["PancardNo"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDealer = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnSearch")]
+        [ActionName("DealerList")]
+        public ActionResult DealerList(Distributer model)
+        {
+            List<Distributer> lst = new List<Distributer>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.GetDealerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -113,35 +196,31 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-        [HttpPost]
-        [OnAction(ButtonName = "btnSearch")]
-        [ActionName("DealerList")]
-        public ActionResult DealerList(Distributer model)
+
+        public ActionResult DeleteDealer(Distributer model, string Id)
         {
-            List<Distributer> lst = new List<Distributer>();
-            model.AddedBy = Session["PK_UserId"].ToString();
-            DataSet ds = model.GetDealerList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            try
             {
-                foreach (DataRow dr in ds.Tables[0].Rows)
+                model.AddedBy = Session["PK_UserId"].ToString();
+                model.PK_UserId = Id;
+                DataSet ds = model.DeleteDealer();
+                if (ds != null && ds.Tables.Count > 0)
                 {
-                    Distributer obj = new Distributer();
-                    obj.PK_UserId = dr["PK_UserId"].ToString();
-                    obj.LoginId = dr["LoginId"].ToString();
-                    obj.Password = dr["Password"].ToString();
-                    obj.Name = dr["Name"].ToString();
-                    obj.Mobile = dr["Mobile"].ToString();
-                    obj.Email = dr["Email"].ToString();
-                    obj.Pincode = dr["PinCode"].ToString();
-                    obj.State = dr["State"].ToString();
-                    obj.City = dr["City"].ToString();
-                    obj.Address = dr["Address"].ToString();
-                    obj.JoiningDate = dr["JoiningDate"].ToString();
-                    lst.Add(obj);
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Dealer"] = "Dealer Details Deleted  Successfully !!";
+                    }
+                    else
+                    {
+                        TempData["Dealer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
                 }
-                model.lstDealer = lst;
             }
-            return View(model);
+            catch (Exception ex)
+            {
+                TempData["Dealer"] = ex.Message;
+            }
+            return RedirectToAction("DealerList", "Distributer");
         }
     }
 }
