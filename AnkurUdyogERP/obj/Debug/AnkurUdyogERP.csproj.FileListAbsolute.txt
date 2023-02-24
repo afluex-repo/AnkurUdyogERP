@@ -212,3 +212,4 @@ E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.xml
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.xml
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache

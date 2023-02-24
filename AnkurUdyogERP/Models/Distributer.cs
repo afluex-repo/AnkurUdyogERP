@@ -57,13 +57,48 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
               {
-                new SqlParameter("@PK_UserId",UserID),
+                new SqlParameter("@PK_UserId",PK_UserId),
                 new SqlParameter("@LoginId",LoginId),
                 new SqlParameter("@Name",Name),
-                new SqlParameter("@FromDate ", FromDate),
-                new SqlParameter("@ToDate ", ToDate),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
             };
             DataSet ds = Connection.ExecuteQuery("GetDealerList", para);
+            return ds;
+        }
+
+        public DataSet DeleteDealer()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@PK_UserId",PK_UserId),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteDealer", para);
+            return ds;
+        }
+
+        public DataSet UpdateDealer()
+        {
+            SqlParameter[] para =
+            {
+               new SqlParameter("@PK_UserId",UserID),
+                new SqlParameter("@FirmName",FirmName),
+                 new SqlParameter("@FirstName",FirstName),
+                  new SqlParameter("@MiddleName",MiddleName),
+                   new SqlParameter("@LastName",LastName),
+                    new SqlParameter("@Mobile",Mobile),
+                     new SqlParameter("@Email",Email),
+                      new SqlParameter("@Pincode",Pincode),
+                       new SqlParameter("@State",State),
+                        new SqlParameter("@City",City),
+                         new SqlParameter("@PanNo",PanNo),
+                          new SqlParameter("@GSTNo",GSTNo),
+                           new SqlParameter("@Limit_MT",Limit),
+                            new SqlParameter("@Address",Address),
+                              new SqlParameter("@UpdatedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateDealer", para);
             return ds;
         }
     }
