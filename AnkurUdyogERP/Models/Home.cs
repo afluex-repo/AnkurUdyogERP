@@ -21,7 +21,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("Login", para);
             return ds;
         }
-
         public DataSet LoginDistributer()
         {
             SqlParameter[] para =

@@ -15,12 +15,10 @@ namespace AnkurUdyogERP.Controllers
         {
             return View();
         }
-
         public ActionResult DistributerDashboard()
         {
             return View();
         }
-
         public ActionResult GetStateCity(string Pincode)
         {
             try
@@ -49,7 +47,6 @@ namespace AnkurUdyogERP.Controllers
                 return View(ex.Message);
             }
         }
-
         public ActionResult DealerRegistration(Distributer model, string Id)
         {
             if (Id != null)
@@ -76,7 +73,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("DealerRegistration")]
         [OnAction(ButtonName = "btnSave")]
@@ -106,7 +102,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DealerRegistration", "Distributer");
         }
-
         [HttpPost]
         [ActionName("DealerRegistration")]
         [OnAction(ButtonName = "btnUpdate")]
@@ -138,7 +133,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DealerRegistration", "Distributer");
         }
-        
         public ActionResult DealerList()
         {
             Distributer model = new Distributer();
