@@ -780,6 +780,8 @@
     <Content Include="Views\Master\DistributerDashboard.cshtml" />
     <Content Include="Views\Admin\DistributerListForAdmin.cshtml" />
     <Content Include="Views\Shared\_GetMenu.cshtml" />
+    <Content Include="Views\Distributer\DealerRegistration.cshtml" />
+    <Content Include="Views\Distributer\DealerList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
