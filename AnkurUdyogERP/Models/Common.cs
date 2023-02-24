@@ -100,5 +100,15 @@ namespace AnkurUdyogERP.Models
         }
 
 
+        public DataSet BindFormTypeMaster()
+        {
+            SqlParameter[] para = { new SqlParameter("@Parameter", 4) };
+            DataSet ds = Connection.ExecuteQuery("FormTypeMasterManage", para);
+
+            return ds;
+
+        }
+
+
     }
 }
