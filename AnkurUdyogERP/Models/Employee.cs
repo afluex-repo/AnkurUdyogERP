@@ -74,6 +74,16 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
+        public DataSet GetEmployeeData()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_AdminId", PK_AdminId),
+                                    new SqlParameter("@Name", Name),
+                                    new SqlParameter("@LoginId", LoginId) };
+
+            DataSet ds = Connection.ExecuteQuery("GetEmployeeDetails", para);
+            return ds;
+        }
+
         public DataSet DeleteEmployee()
         {
             SqlParameter[] para =

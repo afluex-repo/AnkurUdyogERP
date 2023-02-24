@@ -731,6 +731,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\OnActionAttribute.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -747,6 +748,7 @@
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\Master.cs" />
     <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Permisssions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -780,6 +782,7 @@
     <Content Include="Views\Master\DistributerDashboard.cshtml" />
     <Content Include="Views\Admin\DistributerListForAdmin.cshtml" />
     <Content Include="Views\Shared\_GetMenu.cshtml" />
+    <Content Include="Views\Permission\SetPermission.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
