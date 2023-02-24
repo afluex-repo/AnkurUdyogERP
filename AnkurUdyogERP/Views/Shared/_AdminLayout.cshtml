@@ -101,7 +101,19 @@
                                 </li>
 
 
-                                @*@{Html.RenderAction("GetMenu", "Master");}*@
+                                @{Html.RenderAction("GetMenu", "Master");}
+
+
+
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Permission</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Permission/SetPermission">Set Permission</a></li>
+                                    </ul>
+
+                                </li>
+
 
                                 @*<li class="sidebar-list">
                                         <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layout"></i><span class="lan-7">Page layout</span></a>
@@ -116,7 +128,7 @@
                                         </ul>
                                     </li>*@
 
-                                <li class="sidebar-list">
+                                @*<li class="sidebar-list">
                                         <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Role Master</span></a>
                                         <ul class="sidebar-submenu">
                                             <li><a href="/Employee/EmployeeRegistration">Employee Registration</a></li>
@@ -125,7 +137,7 @@
                                             <li><a href="/Admin/DistributerListForAdmin">Distributer List</a></li>
                                         </ul>
 
-                                    </li>
+                                    </li>*@
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
