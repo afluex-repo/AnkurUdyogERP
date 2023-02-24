@@ -17,8 +17,20 @@ namespace AnkurUdyogERP.Controllers
         }
         public ActionResult DistributerDashboard()
         {
-            return View();
+            Distributer newdata = new Distributer();
+            try
+            {
+                DataSet Ds = newdata.GetDetails();
+                ViewBag.Dealer = Ds.Tables[0].Rows[0]["Dealer"].ToString();
+                ViewBag.OrderLimit = Ds.Tables[0].Rows[0]["OrderLimit"].ToString();
+            }
+            catch (Exception ex)
+            {
+                TempData["Dashboard"] = ex.Message;
+            }
+            return View(newdata);
         }
+        
         public ActionResult GetStateCity(string Pincode)
         {
             try
@@ -55,9 +67,7 @@ namespace AnkurUdyogERP.Controllers
                 DataSet ds = model.GetDealerList();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
-                    model.MiddleName = ds.Tables[0].Rows[0]["MiddleName"].ToString();
-                    model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                     model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                     model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                     model.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
