@@ -36,16 +36,16 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                     @if (Model.PK_UserId == null)
-                                     {
+                                     @*@if (Model.PK_UserId == null)
+                                     {*@
                                         <label class="form-label" for="validationCustom01">Firm Name <span style="color:red;">*</span></label>
                                         @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name" })
-                                     }
+                                     @*}
                                      else
-                                     {
-                                        <label class="form-label" for="validationCustom01">Firm Name</label>
+                                     {*@
+                                        @*<label class="form-label" for="validationCustom01">Firm Name</label>
                                         @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name",@disabled= "disabled" })
-                                     }
+                                     }*@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="validationCustom01">Dealer's First Name <span style="color:red;">*</span></label>
@@ -73,16 +73,16 @@
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                      @if (Model.PK_UserId == null)
-                                      {
+                                      @*@if (Model.PK_UserId == null)
+                                      {*@
                                         <label class="form-label" for="validationCustom05">Pincode <span style="color:red;">*</span></label>
                                         @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
-                                      }
+                                      @*}
                                       else
                                       {
                                         <label class="form-label" for="validationCustom05">Pincode</label>
                                         @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6", @disabled = "disabled" })
-                                      }     
+                                      }*@     
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label" for="validationCustom05">State</label>
