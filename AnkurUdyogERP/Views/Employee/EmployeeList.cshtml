@@ -1,7 +1,8 @@
-﻿
+﻿@model AnkurUdyogERP.Models.Employee
+
 @{
     ViewBag.Title = "EmployeeList";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
 }
 
 <div class="page-body">
@@ -13,7 +14,7 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="/Employee/EmployeeList"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Role Master</li>
                         <li class="breadcrumb-item active">Employee List</li>
                     </ol>
@@ -28,60 +29,86 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
-                        <h3 class="mb-3">Employee List</h3>
-                        <a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>
+                        @*<h3 class="mb-3">Employee List</h3>*@
+                        <span style="color:red;">@TempData["EmployeeRegistration"]</span>
                     </div>
                     <div class="card-body">
+                        @using (Html.BeginForm("EmployeeList", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label>LoginId <span style="color:red;"></span></label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "LoginId" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Name <span style="color:red;"></span></label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch"/>
+                        }
                         <div class="table-responsive">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
+                                        <th>LoginId</th>
+                                        <th>Password</th>
                                         <th>Name</th>
-                                        <th>Father's Name</th>
-                                        <th>Mobile No.</th>
-                                        <th>Email address</th>
-                                        <th>Pincode</th>
-                                        <th>City</th>
-                                        <th>State</th>
+                                        <th>Mobile No</th>
+                                        <th>Email</th>
+                                        <th>Father Name</th>
                                         <th>Gender</th>
+                                        <th>PinCode</th>
+                                        <th>State</th>
+                                        <th>City</th>
                                         <th>Address</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
+                                        <th>Joining Date</th>
+                                    </tr>  
+                                </thead>   
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>1398242800</td>
-                                        <td>t.nixon@datatables.net</td>
-                                        <td>79866</td>
-                                        <td>Lucknow</td>
-                                        <td>UP</td>
-                                        <td>Male</td>
-                                       <td>Lucknkow</td>
-                                        <td>
-                                            <ul class="action">
-                                                <li class="edit"> <a href="#"><i class="icon-pencil-alt"></i></a></li>
-                                                <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstEmployee != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstEmployee)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Password</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.MobileNo</td>
+                                                    <td>@Item.Email</td>
+                                                    <td>@Item.FatherName</td>
+                                                    <td>@Item.Gender</td>
+                                                    <td>@Item.Pincode</td>
+                                                    <td>@Item.State</td>
+                                                    <td>@Item.City</td>
+                                                    <td>@Item.Address</td>
+                                                    <td>@Item.JoiningDate</td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>S.No.</th>
+                                        <th>LoginId</th>
+                                        <th>Password</th>
                                         <th>Name</th>
-                                        <th>Father's Name</th>
-                                        <th>Mobile No.</th>
-                                        <th>Email address</th>
-                                        <th>Pincode</th>
-                                        <th>City</th>
-                                        <th>State</th>
+                                        <th>Mobile No</th>
+                                        <th>Email</th>
+                                        <th>Father Name</th>
                                         <th>Gender</th>
+                                        <th>PinCode</th>
+                                        <th>State</th>
+                                        <th>City</th>
                                         <th>Address</th>
-                                        <th>Action</th>
+                                        <th>Joining Date</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -94,4 +121,3 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-

@@ -7,22 +7,14 @@ using System.Web;
 
 namespace AnkurUdyogERP.Models
 {
-    public class Employee
+    public class Employee:Common
     {
         public string PK_AdminId { get; set; }
-        public string AddedBy { get; set; }
-        public string Name { get; set; }
-        public string FatherName { get; set; }
-        public string MobileNo { get; set; }
-        public string Email { get; set; }
-        public string PinCode { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
-        public string Gender { get; set; }
-        public string Address { get; set; }
+        public string Gender1 { get; set; }
+        
 
 
-        public List<Employee> lstDistributer { get; set; }
+        public List<Employee> lstEmployee { get; set; }
 
         public DataSet SaveEmployeeRegistration()
         {
@@ -32,23 +24,77 @@ namespace AnkurUdyogERP.Models
                  new SqlParameter("@FatherName",FatherName),
                   new SqlParameter("@MobileNo",MobileNo),
                    new SqlParameter("@Email",Email),
-                    new SqlParameter("@PinCode",PinCode),
+                    new SqlParameter("@PinCode",Pincode),
                      new SqlParameter("@State",State),
                       new SqlParameter("@City",City),
                        new SqlParameter("@Gender",Gender),
                         new SqlParameter("@Address",Address),
-                         new SqlParameter("@AddedBy",AddedBy)
+                         new SqlParameter("@Password",Password),
+                          new SqlParameter("@Fk_UserTypeId","2"),
+                           new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("SaveEmployeeRegistration", para);
             return ds;
         }
 
-        public DataSet GetEmployeeList()
+
+        public DataSet UpdateEmployee()
         {
-            DataSet ds = Connection.ExecuteQuery("GetEmployeeList");
+            SqlParameter[] para =
+            {
+               new SqlParameter("@PK_AdminId",PK_AdminId),
+                new SqlParameter("@Name",Name),
+                 new SqlParameter("@FatherName",FatherName),
+                  new SqlParameter("@MobileNo",MobileNo),
+                   new SqlParameter("@Email",Email),
+                    new SqlParameter("@PinCode",Pincode),
+                     new SqlParameter("@State",State),
+                      new SqlParameter("@City",City),
+                       new SqlParameter("@Gender",Gender),
+                        new SqlParameter("@Address",Address),
+                           new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateEmployee", para);
             return ds;
         }
 
+
+
+        public DataSet GetEmployeeList()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Pk_AdminId",PK_AdminId),
+                new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@Name",Name),
+                 new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetEmployeeList",para);
+            return ds;
+        }
+
+        public DataSet DeleteEmployee()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Pk_AdminId",PK_AdminId),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteEmployee", para);
+            return ds;
+        }
+
+        public DataSet DeleteDistributer()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Pk_AdminId",PK_AdminId),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteDistributer", para);
+            return ds;
+        }
         
 
     }
