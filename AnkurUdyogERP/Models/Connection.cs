@@ -9,9 +9,6 @@ namespace AnkurUdyogERP.Models
 {
     public class Connection
     {
-
-
-       
             public static string connectionString = string.Empty;
             static Connection()
             {

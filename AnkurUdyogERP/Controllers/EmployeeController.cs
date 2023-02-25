@@ -18,7 +18,27 @@ namespace AnkurUdyogERP.Controllers
         }
         public ActionResult EmployeeRegistration(Employee model, string Id)
         {
-            
+
+            int count1 = 0;
+            List<SelectListItem> lstrole = new List<SelectListItem>();
+            DataSet ds2 = model.GetRoleMasterList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        lstrole.Add(new SelectListItem { Text = "--Select--", Value = "0" });
+                    }
+                    lstrole.Add(new SelectListItem { Text = r["RoleName"].ToString(), Value = r["PK_RoleId"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+            ViewBag.lstrole = lstrole;
+
+
+
+
             if (Id != null)
             {
                 model.PK_AdminId = Id;
@@ -34,7 +54,7 @@ namespace AnkurUdyogERP.Controllers
                     model.State = ds.Tables[0].Rows[0]["State"].ToString();
                     model.City = ds.Tables[0].Rows[0]["City"].ToString();
                     model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
-
+                    model.PK_RoleId = ds.Tables[0].Rows[0]["FK_RoleId"].ToString();
                     ViewBag.Gender = new List<SelectListItem> {
                      new SelectListItem { Value="M", Text="Male"},
                      new SelectListItem { Value="F", Text="FeMale"}
@@ -153,6 +173,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;
@@ -185,6 +206,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;

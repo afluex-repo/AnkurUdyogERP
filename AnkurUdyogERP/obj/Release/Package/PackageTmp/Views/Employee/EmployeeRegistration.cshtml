@@ -1,0 +1,209 @@
+﻿@model AnkurUdyogERP.Models.Employee
+
+@{
+    ViewBag.Title = "EmployeeRegistration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Employee Registration</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Employee/EmployeeRegistration"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"> Role Master</li>
+                        <li class="breadcrumb-item active">Employee Registration</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <span style="color:red;">@TempData["EmployeeRegistration"]</span>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("EmployeeRegistration", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label>Name <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name", @onkeypress = "return onlyAlphabets();" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Father Name <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @placeholder = "Father Name", @onkeypress = "return onlyAlphabets();" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label>Mobile Number <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control",@maxlength="10", @placeholder = "Mobile Number", @onkeypress = "return isNumberKey(event);" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Email Id <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email Id" })
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label>Gender <span style="color:red;">*</span></label>
+                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label>Role Name <span style="color:red;">*</span></label>
+                                    @Html.DropDownListFor(m => m.PK_RoleId, new SelectList(ViewBag.lstrole, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label>Address <span style="color:red;"></span></label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                </div>
+                            @*</div>
+                            <div class="row g-3">*@
+                                <div class="col-md-3 mb-3">
+                                    <label>PinCode <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @maxlength = "6", @placeholder = "PinCode", @onchange = "return GetStateCity();", @onkeypress = "return isNumberKey(event);" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label>State <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @readonly = true })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label>City <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City",@readonly=true })
+                                </div>
+
+                               
+                            </div>
+
+                            if (Model.PK_AdminId != null)
+                            {
+                                @Html.HiddenFor(m => m.PK_AdminId)
+                                <input type="submit" class="btn btn-primary mt-4" value="Update" id="btnUpdate" name="btnUpdate" onclick="return ValidateForm();" />
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn btn-primary mt-4" value="Submit" id="btnSave" name="btnSave" onclick="return ValidateForm();" />
+                            }
+
+
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+<script>
+    function ValidateForm() {
+        if ($('#Name').val() == '') {
+            $("#Name").addClass('errortext');
+            $('#Name').focus();
+            return false;
+        }
+        if ($('#FatherName').val() == '') {
+            $("#FatherName").addClass('errortext');
+            $('#FatherName').focus();
+            return false;
+        }
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+        if ($('#Gender').val() == '') {
+            $("#Gender").addClass('errortext');
+            $('#Gender').focus();
+            return false;
+        }
+        if ($('#PK_RoleId').val() == '0') {
+            $("#PK_RoleId").addClass('errortext');
+            $('#PK_RoleId').focus();
+            return false;
+        }
+        if ($('#Pincode').val() == '') {
+            $("#Pincode").addClass('errortext');
+            $('#Pincode').focus();
+            return false;
+        }
+     
+      
+        return true;
+    }
+    function GetStateCity() {
+        var PinCode = $("#Pincode").val();
+        debugger;
+        $.ajax({
+            url: '/Employee/GetStateCity', type: 'Post', dataType: 'json',
+            data: { PinCode: PinCode },
+            success: function (result) {
+                if (result.Result == "True") {
+                    $("#State").val(result.State);
+                    $("#City").val(result.City);
+                }
+                else {
+                    alert("Invailid Pincode");
+                    $("#PinCode").addClass('errortext');
+                    $("#PinCode").val('');
+                    $("#PinCode").focus();
+                }
+            }
+        });
+    }
+
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 32))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
