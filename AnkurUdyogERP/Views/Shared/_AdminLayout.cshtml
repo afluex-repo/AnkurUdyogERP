@@ -65,11 +65,11 @@
                             <div class="d-flex profile-media">
                                 <img class="b-r-50" src="../assets/images/usericon.jpg" alt="">
                                 <div class="flex-grow-1">
-                                    <span>@Session["LoginId"]</span>
+                                    <span>@Session["Name"]</span>(<span>@Session["LoginId"]</span>)
                                 </div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
-                                @*<li><a href="#"><i data-feather="user"></i><span>Profile</span></a></li>*@
+                                <li><a href="#"><i data-feather="user"></i><span>Profile</span></a></li>
                                 <li><a href="/Home/Login"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
                             </ul>
                         </li>
@@ -99,20 +99,52 @@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="/Admin/AdminDashboard"><i data-feather="home"></i><span>Dashboard</span></a>
                                 </li>
+                                @*@{Html.RenderAction("GetMenu", "Master");}*@
 
 
-                                @{Html.RenderAction("GetMenu", "Master");}
+
 
 
 
 
                                 <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>HRM</span></a>
+                                    <ul class="sidebar-submenu">
+
+                                        <li><a href="/Master/RoleMaster">Role Master</a></li>
+                                        <li><a href="/Master/RoleList">Role List</a></li>
+                                        <li><a href="/Employee/EmployeeRegistration">Employee Registration</a></li>
+                                        <li><a href="/Admin/EmployeeList">Employee List</a></li>
+                                     
+                                    </ul>
+
+                                </li>
+
+
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Distributer</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Master/DistributerRegistration">Distributer Registration</a></li>
+                                        <li><a href="/Admin/DistributerListForAdmin">Distributer List</a></li>
+                                    </ul>
+
+                                </li>
+
+
+
+
+
+
+
+
+
+                                @*<li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Permission</span></a>
                                     <ul class="sidebar-submenu">
                                         <li><a href="/Permission/SetPermission">Set Permission</a></li>
                                     </ul>
 
-                                </li>
+                                </li>*@
 
 
                                 @*<li class="sidebar-list">
@@ -128,16 +160,6 @@
                                         </ul>
                                     </li>*@
 
-                                @*<li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Role Master</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="/Employee/EmployeeRegistration">Employee Registration</a></li>
-                                            <li><a href="/Admin/EmployeeList">Employee List</a></li>
-                                            <li><a href="/Master/DistributerRegistration">Distributer Registration</a></li>
-                                            <li><a href="/Admin/DistributerListForAdmin">Distributer List</a></li>
-                                        </ul>
-
-                                    </li>*@
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Master/DistributerRegistration"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item"> Role Master</li>
+                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Distributer</li>
                         <li class="breadcrumb-item active">Distributer Registration</li>
                     </ol>
                 </div>
@@ -35,7 +35,7 @@
                         {
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <label>Name <span style="color:red;">*</span></label>
+                                    <label>Concern Person Name <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name", @onkeypress = "return onlyAlphabets();" })
                                 </div>
                                 <div class="col-md-3">
@@ -50,8 +50,12 @@
                                     <label>Email Id <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email Id" })
                                 </div>
-                            </div>
-                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label>Full Address <span style="color:red;"></span></label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                </div>
+                            @*</div>
+                            <div class="row g-3">*@
                                 <div class="col-md-3">
                                     <label>Pincode <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @maxlength = "6", @placeholder = "PinCode", @onchange = "return GetStateCity();", @onkeypress = "return isNumberKey(event);" })
@@ -74,12 +78,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Limit <span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.Limit, new { @class = "form-control", @placeholder = "Limit" })
+                                    @Html.TextBoxFor(m => m.Limit, new { @class = "form-control", @placeholder = "Limit", @onkeypress = "return isNumberKey(event);" })
                                 </div>
-                                <div class="col-md-12">
-                                    <label>Address <span style="color:red;"></span></label>
-                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
-                                </div>
+                             
                             </div>
                             if (Model.PK_AdminId != null)
                             {

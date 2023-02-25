@@ -196,5 +196,130 @@ namespace AnkurUdyogERP.Controllers
             }
             return PartialView("_GetMenu", model);
         }
+
+
+
+        public ActionResult RoleMaster(Master model,string Id)
+        {
+            if (Id != null)
+            {
+                model.PK_RoleId = Id;
+                DataSet ds = model.GetRoleMasterList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.RoleName = ds.Tables[0].Rows[0]["RoleName"].ToString();
+                }
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnSave")]
+        [ActionName("RoleMaster")]
+        public ActionResult RoleMaster(Master model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveRoleMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["RoleMaster"] = "Role Name Save Successfully";
+                    }
+                    else
+                    {
+                        TempData["RoleMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["RoleMaster"] = ex.Message;
+            }
+            return RedirectToAction("RoleMaster", "Master");
+        }
+
+
+
+        [HttpPost]
+        [OnAction(ButtonName = "btnUpdate")]
+        [ActionName("RoleMaster")]
+        public ActionResult UpdateRoleMaster(Master model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdateRoleMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["RoleMaster"] = "Role Name Updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["RoleMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["RoleMaster"] = ex.Message;
+            }
+            return RedirectToAction("RoleMaster", "Master");
+        }
+
+
+
+        public ActionResult RoleList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetRoleMasterList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_RoleId = dr["PK_RoleId"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstRole = lst;
+            }
+            return View(model);
+        }
+
+
+        
+        public ActionResult DeleteRoleMaster(Master model,string Id)
+        {
+            try
+            {
+                model.PK_RoleId = Id;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.DeleteRoleMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["RoleMaster"] = "Role Name Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["RoleMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["RoleMaster"] = ex.Message;
+            }
+            return RedirectToAction("RoleList", "Master");
+        }
+
+
+
     }
 }

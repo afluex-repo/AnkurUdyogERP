@@ -65,7 +65,7 @@
                             <div class="d-flex profile-media">
                                 <img class="b-r-50" src="../assets/images/usericon.jpg" alt="">
                                 <div class="flex-grow-1">
-                                    <span>@Session["LoginId"]</span>
+                                    <span>@Session["LoginId"]</span>(<span>@Session["Name"]</span>)
                                 </div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
@@ -111,7 +111,6 @@
                                         <ul class="sidebar-submenu">
                                             <li><a href="/Distributer/DealerRegistration">Dealer Registration</a></li>
                                             <li><a href="/Distributer/DealerList">Dealer List</a></li>
-                                  
                                         </ul>
                                     </li>
                                     @*<li class="sidebar-main-title">
