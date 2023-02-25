@@ -782,12 +782,10 @@
     <Content Include="Views\Master\DistributerDashboard.cshtml" />
     <Content Include="Views\Admin\DistributerListForAdmin.cshtml" />
     <Content Include="Views\Shared\_GetMenu.cshtml" />
-
     <Content Include="Views\Permission\SetPermission.cshtml" />
-
     <Content Include="Views\Distributer\DealerRegistration.cshtml" />
     <Content Include="Views\Distributer\DealerList.cshtml" />
-
+    <Content Include="Views\Admin\Profile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -815,7 +813,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64010</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64012/</IISUrl>
+          <IISUrl>http://localhost:64013/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
