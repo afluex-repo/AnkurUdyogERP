@@ -173,6 +173,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;
@@ -205,6 +206,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;

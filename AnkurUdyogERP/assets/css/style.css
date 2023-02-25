@@ -4867,7 +4867,7 @@ div.DTS div.dataTables_scrollBody table {
   margin-bottom: 30px;
 }
 .dataTables_wrapper .dataTables_length select {
-  border-color: #f4f4f4;
+  border-color: #1d19305e;
   color: #2c323f;
   padding: 0 10px;
   margin: 0 10px;
@@ -4900,7 +4900,7 @@ div.DTS div.dataTables_scrollBody table {
   margin-left: 15px;
 }
 .dataTables_wrapper .dataTables_filter input[type=search] {
-  border: 1px solid #EFF3F9;
+  border: 1px solid #1d19305e;
   padding: 0 10px;
   margin-left: 10px;
   height: 37px;
@@ -6074,7 +6074,7 @@ table.dataTable.display tbody tr.odd > .sorting_1 {
 .form-control:focus,
 .form-select:focus {
   box-shadow: none;
-  border-color: rgba(83, 70, 134, 0.1019607843);
+  border-color:#dd343896;
   outline: none;
 }
 .form-control.left-radius,
@@ -20590,7 +20590,7 @@ footer {
 
 .show-hide {
   position: absolute;
-  top: 52px;
+  top: 22px;
   right: 20px;
   transform: translateY(-50%);
 }
@@ -25088,7 +25088,7 @@ footer {
   overflow: auto;
   color: rgba(0, 0, 0, 0);
   margin-top: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 130px;
   padding-bottom: 30px;
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a {
@@ -25345,7 +25345,7 @@ footer {
   padding-bottom: 20px;
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-img-section .sidebar-img-content img {
-  margin-top: -50px;
+  margin-top: -27px;
   height: 100px;
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-img-section .sidebar-img-content h4 {

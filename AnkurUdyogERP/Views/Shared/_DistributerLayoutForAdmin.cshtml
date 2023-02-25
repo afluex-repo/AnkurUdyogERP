@@ -63,9 +63,9 @@
                         <li class="profile-nav onhover-dropdown p-0 me-0">
 
                             <div class="d-flex profile-media">
-                                <img class="b-r-50" src="../assets/images/usericon.jpg" alt="">
+                                <img class="b-r-50" src="../assets/images/logo/a_icon.svg" alt="">
                                 <div class="flex-grow-1">
-                                    <span>@Session["Name"]</span> (<span>@Session["LoginId"]</span>) 
+                                    <span class="text-white">@Session["Name"]</span> <span class="text-white">(@Session["LoginId"])</span>
                                 </div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
@@ -84,11 +84,12 @@
             <div class="sidebar-wrapper">
                 <div>
                     <div class="logo-wrapper">
-                        <a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a>
+                        <a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP">
+                        <img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a>
                         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-left"> </i></div>
                     </div>
-                    <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo-icon.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-icon-dark.png" alt=""></a></div>
+                    <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid for-light" src="../assets/images/logo/logo-icon.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-icon-dark.png" alt=""></a></div>
                     <nav class="sidebar-main">
                         <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                         <div id="sidebar-menu">
@@ -100,12 +101,6 @@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="/Distributer/DistributerDashboard"><i data-feather="home"></i><span>Dashboard</span></a>
                                 </li>
-                                @*<li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Role Master</span></a>
-                                    <ul class="sidebar-submenu">
-                                        <li><a href="/Master/DistributerList">Distributer List</a></li>
-                                    </ul>
-                                </li>*@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Dealer</span></a>
                                         <ul class="sidebar-submenu">
@@ -113,60 +108,13 @@
                                             <li><a href="/Distributer/DealerList">Dealer List</a></li>
                                         </ul>
                                     </li>
-                                    @*<li class="sidebar-main-title">
-                                        <div>
-                                            <h4 class="lan-8">Applications</h4>
-                                        </div>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="box"></i><span>Project                </span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="projects.html">Project List</a></li>
-                                            <li><a href="projectcreate.html">Create new</a></li>
-                                        </ul>
-                                    </li>*@
-                                    @*<li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="file-manager.html"><i data-feather="git-pull-request"> </i><span>File manager</span></a></li>
-                                    <li class="sidebar-list">  <a class="sidebar-link sidebar-title link-nav" href="kanban.html"><i data-feather="monitor"> </i><span>kanban Board</span></a></li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="shopping-bag"></i><span>Ecommerce</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="product.html">Product</a></li>
-                                            <li><a href="product-page.html">Product page</a></li>
-                                            <li><a href="add-products.html">Add Product</a></li>
-                                            <li><a href="list-products.html">Product list</a></li>
-                                            <li><a href="payment-details.html">Payment Details</a></li>
-                                            <li><a href="order-history.html">Order History</a></li>
-                                            <li><a href="invoice-template.html">Invoice</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="list-wish.html">Wishlist</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="mail"></i><span>Email</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="email_inbox.html">Mail Inbox</a></li>
-                                            <li><a href="email_read.html">Read mail</a></li>
-                                            <li><a href="email_compose.html">Compose</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="message-circle"></i><span>Chat</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="chat.html">Chat App</a></li>
-                                            <li><a href="chat-video.html">Video chat</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="users"></i><span>Users</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="user-profile.html">Users Profile</a></li>
-                                            <li><a href="edit-profile.html">Users Edit</a></li>
-                                            <li><a href="user-cards.html">Users Cards</a></li>
-                                        </ul>
-                                    </li>*@
                             </ul>
+                            <div class="sidebar-img-section">
+                                <div class="sidebar-img-content">
+                                    <img class="img-fluid" src="../assets/images/logo/ankur_logo.svg" style="height:2rem" alt="">
+                                    <h4>Experiance with more Features</h4>
+                                </div>
+                            </div>
                         </div>
                         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
                     </nav>
@@ -179,13 +127,8 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-10 p-0 footer-left">
-                            @*<p class="mb-0">Copyright 2022 © Koho theme by pixelstrap</p>*@
-
-                            <p class="mb-0">Copyright © 2022 <a target="_blank" href="#">AnkurUdyogERP</a></p>
-
-
+                            <p class="mb-0">Copyright © 2023 <a target="_blank" href="#">AnkurUdyogERP</a> All Right Reserved.</p>
                         </div>
-                        @*<div class="col-2 p-0 footer-right"><i class="fa fa-heart font-danger"></i></div>*@
                     </div>
                 </div>
             </footer>
@@ -216,10 +159,9 @@
     <script src="../assets/js/slick-slider/slick.min.js"></script>
     <script src="../assets/js/slick-slider/slick-theme.js"></script>
     <script src="../assets/js/typeahead/handlebars.js"></script>
-    @*<script src="../assets/js/dashboard/dashboard_2.js"></script>*@
+    <script src="../assets/js/dashboard/dashboard_2.js"></script>
     <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
-    
 
     <script src="../assets/js/chart/chartjs/chart.min.js"></script>
     <script src="../assets/js/chart/chartjs/chart.custom.js"></script>

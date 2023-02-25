@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 table.dataTable {
   clear: both;
   margin-top: 6px !important;
@@ -412,7 +412,6 @@ table.dataTable.nowrap th, table.dataTable.nowrap td {
 
 div.dataTables_wrapper {
   position: relative;
-  font-family: "Open Sans", sans-serif;
 }
 div.dataTables_wrapper div.dataTables_length label {
   float: left;

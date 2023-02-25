@@ -34,6 +34,9 @@
                         <h3 class="mb-3">Dealer List</h3>
                         <a href="/Distributer/DealerRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Dealer </a>
                     </div>
+                    <div>
+                        <span style="color:red">@TempData["Dealer"]</span>
+                    </div>
                     <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-3">
@@ -54,7 +57,7 @@
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch" />
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-4">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
@@ -112,26 +115,6 @@
                                         }
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

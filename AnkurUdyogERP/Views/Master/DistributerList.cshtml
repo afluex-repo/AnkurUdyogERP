@@ -43,18 +43,18 @@
                                     <label>Name <span style="color:red;"></span></label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
                                 </div>
-                                <div class="col-md-3">
+                                @*<div class="col-md-3">
                                     <label>From Date <span style="color:red;"></span></label>
                                     <input id="FromDate" name="FromDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
                                 </div>
                                 <div class="col-md-3">
                                     <label>To Date <span style="color:red;"></span></label>
                                     <input id="ToDate" name="ToDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
-                                </div>
+                                </div>*@
                             </div>
                             <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch" />
                         }
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-4">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
@@ -97,21 +97,7 @@
                                         }
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>S.No.</th>
-                                        <th>LoginId</th>
-                                        <th>Password</th>
-                                        <th>Name</th>
-                                        <th>Mobile No</th>
-                                        <th>Email</th>
-                                        <th>PinCode</th>
-                                        <th>State</th>
-                                        <th>City</th>
-                                        <th>Address</th>
-                                        <th>Joining Date</th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
                         </div>
                     </div>
