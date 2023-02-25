@@ -54,6 +54,7 @@ namespace AnkurUdyogERP.Models
                       new SqlParameter("@City",City),
                        new SqlParameter("@Gender",Gender),
                         new SqlParameter("@Address",Address),
+                           new SqlParameter("@FK_RoleId",PK_RoleId),
                            new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("UpdateEmployee", para);

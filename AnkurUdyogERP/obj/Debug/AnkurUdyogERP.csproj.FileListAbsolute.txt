@@ -266,4 +266,3 @@ D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\Syste
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
-E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
