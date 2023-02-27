@@ -1,28 +1,44 @@
 ﻿@model AnkurUdyogERP.Models.Menu
 
 
-@if (Model != null)
+
+@*<li class="sidebar-list">
+        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>HRM</span></a>
+        <ul class="sidebar-submenu">
+
+            <li><a href="/Master/RoleMaster">Role Master</a></li>
+            <li><a href="/Master/RoleList">Role List</a></li>
+            <li><a href="/Employee/EmployeeRegistration">Employee Registration</a></li>
+            <li><a href="/Admin/EmployeeList">Employee List</a></li>
+        </ul>
+    </li>*@
+
+
+<ul id="simple-bar">
+
+    @if (Model != null)
             {
                 if (Model.lstMenu != null)
                 {
                     foreach (var item in Model.lstMenu)
                     {
-            <li class="sidebar-list">
-                <a class="sidebar-link sidebar-title" href="@item.Url">
-                    <i data-feather="airplay"></i><span>@item.MenuName</span>
-                </a>
-                @foreach (var item1 in Model.lstSubMenu)
-                {
-                    if (item.PK_MenuId == item1.PK_MenuId)
+                <li class="sidebar-list">
+                    <a class="sidebar-link sidebar-title" href="@item.Url">
+                        <i data-feather="airplay"></i><span>@item.MenuName</span>
+                    </a>
+                    @foreach (var item1 in Model.lstSubMenu)
                     {
-                        <ul class="sidebar-submenu">
-                            <li><a href="@item1.Url">@item1.SubMenuName</a></li>
-                        </ul>
+                        if (item.PK_MenuId == item1.PK_MenuId)
+                        {
+                            <ul class="sidebar-submenu">
+                                <li><a href="@item1.Url">@item1.SubMenuName</a></li>
+                            </ul>
+                        }
                     }
-                }
-            </li>
+                </li>
 
+            }
         }
-    }
 
-}
+    }
+</ul>

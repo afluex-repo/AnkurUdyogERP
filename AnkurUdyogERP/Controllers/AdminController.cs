@@ -206,7 +206,9 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult Profile(Employee model)
         {
-            DataSet ds = model.GetEmployeeList();
+            
+            model.PK_AdminId = Session["Pk_adminId"].ToString();
+            DataSet ds = model.GetProfileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                     ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
@@ -221,7 +223,7 @@ namespace AnkurUdyogERP.Controllers
                     ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
                     ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
                     ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
-                    ViewBag.RoleName = ds.Tables[0].Rows[0]["RoleName"].ToString();
+                    ViewBag.UserType = ds.Tables[0].Rows[0]["UserType"].ToString();
             }
             return View(model);
         }
