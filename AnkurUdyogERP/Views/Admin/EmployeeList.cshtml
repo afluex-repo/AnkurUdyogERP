@@ -29,7 +29,6 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
-                        @*<h3 class="mb-3"></h3>*@
                         <span style="color:red;">@TempData["EmployeeRegistration"]</span>
                         <a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>
                     </div>
@@ -57,7 +56,7 @@
                                     </div>
                                     <input type="submit" class="btn btn-primary mt-4" value="Search" id="Search" name="Search" />
                                 }
-                                <div class="table-responsive">
+                                <div class="table-responsive mt-4">
                                     <table class="display" id="data-source-1" style="width:100%">
                                         <thead>
                                             <tr>
@@ -88,7 +87,12 @@
                                     <tr>
                                         <td>@i</td>
                                         <td>@Item.LoginId</td>
-                                        <td>@Item.Password</td>
+                                        @*<td>@Item.Password</td>*@
+                                        <td class="example-popover" data-bs-trigger="hover" data-container="body"
+                                             data-bs-toggle="popover" data-bs-placement="right" title="Password"
+                                             data-bs-content="@Item.Password" data-bs-offset="0,-50">
+                                           ******
+                                        </td>
                                         <td>@Item.Name</td>
                                         <td>@Item.MobileNo</td>
                                         <td>@Item.Email</td>
@@ -111,24 +115,6 @@
                                         }
                                     }
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>S.No.</th>
-                                                <th>LoginId</th>
-                                                <th>Password</th>
-                                                <th>Name</th>
-                                                <th>Mobile No</th>
-                                                <th>Email</th>
-                                                <th>Father Name</th>
-                                                <th>Gender</th>
-                                                <th>PinCode</th>
-                                                <th>State</th>
-                                                <th>City</th>
-                                                <th>Address</th>
-                                                <th>Joining Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>

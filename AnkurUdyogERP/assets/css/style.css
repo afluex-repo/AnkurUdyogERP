@@ -36355,7 +36355,9 @@ body[class*=dark-] .for-light {
   border-bottom: none;
 }
 .popover .popover-body {
-  color: rgba(43, 43, 43, 0.7);
+  color: #2B2B2B;
+  font-weight:bold !important;
+  font-family: 'Roboto Slab', serif;
 }
 
 .card-header.note-toolbar .dropdown-menu.note-check a i {
