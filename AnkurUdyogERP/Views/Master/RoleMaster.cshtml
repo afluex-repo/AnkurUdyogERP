@@ -1,0 +1,101 @@
+﻿@model AnkurUdyogERP.Models.Master
+
+@{
+    ViewBag.Title = "RoleMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("RoleMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Role Master</h3>
+                    </div>
+                    <div class="col-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item"> HRM</li>
+                            <li class="breadcrumb-item active">Role Master</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <span style="color:red;">@TempData["RoleMaster"]</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="form-label" for="validationCustom01">Role Name<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control", @Placeholder = "Role Name" })                             
+                                </div>
+                                <div class="col-md-3">
+                                    @if (Model.PK_RoleId == null)
+                                    {
+                                        <input class="btn btn-primary mt-4" type="submit" value="Save" id="btnSave" name="btnSave" onclick="return validateform();" />
+                                    }
+                                    else
+                                    {
+                                        @Html.HiddenFor(m => m.PK_RoleId)
+                                        <input class="btn btn-primary mt-4" type="submit" value="Update" id="btnUpdate" name="btnUpdate" onclick="return validateform();" />
+                                    }
+                                    <a class="btn btn-primary mt-4" href="/Master/RoleList" style="margin-left:5px;">Back To List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    function validateform() {
+        $("#divload").css({ 'display': 'none' });
+        $(".errortext").removeClass("errortext");
+        if ($('#RoleName').val() == '') {
+            $("#RoleName").addClass('errortext');
+            $('#RoleName').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

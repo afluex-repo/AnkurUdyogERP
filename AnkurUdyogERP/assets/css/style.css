@@ -4500,7 +4500,6 @@ strong ~ p {
   transition: all 0.3s ease;
 }
 .card .card-header {
-  padding: 25px;
   border-bottom: none;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;

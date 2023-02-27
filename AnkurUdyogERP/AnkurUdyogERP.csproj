@@ -713,11 +713,14 @@
     <Content Include="assets\fonts\ico\icofont.ttf" />
     <Content Include="assets\fonts\themify\themify.woff" />
     <Content Include="assets\pdf\sample.pdf" />
+    <None Include="Properties\PublishProfiles\AnkurUdyogERP.pubxml" />
+    <None Include="Properties\PublishProfiles\AnkurUdyogERP1.pubxml" />
+    <None Include="Properties\PublishProfiles\AnkurUdyogERP2.pubxml" />
+    <None Include="Properties\PublishProfiles\AnkurUdyogERP22.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
-    <Content Include="Views\Admin\DistributerList.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -768,11 +771,9 @@
     <Content Include="Views\Employee\EmployeeRegistration.cshtml" />
     <Content Include="Views\Employee\EmployeeList.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
-    <Content Include="Views\Admin\DistributerRegistration.cshtml" />
     <Content Include="Views\Shared\_DistributerLayoutForAdmin.cshtml" />
     <Content Include="Views\Distributer\DistributerDashboard.cshtml" />
     <Content Include="Views\Home\LoginDistributer.cshtml" />
-    <Content Include="Views\Distributer\DistributerRegistration.cshtml" />
     <Content Include="Views\Employee\EmployeeDashboard.cshtml" />
     <Content Include="Views\Master\DistributerList.cshtml" />
     <Content Include="Views\Master\DistributerRegistration.cshtml" />
@@ -786,6 +787,9 @@
     <Content Include="Views\Distributer\DealerRegistration.cshtml" />
     <Content Include="Views\Distributer\DealerList.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
+    <Content Include="Views\Master\RoleList.cshtml" />
+    <Content Include="Views\Master\RoleMaster.cshtml" />
+    <Content Include="Views\Shared\_DistributerLayoutPageMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -813,7 +817,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64010</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64012/</IISUrl>
+          <IISUrl>http://localhost:64013/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -15,7 +15,7 @@
                 <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/Employee/EmployeeList"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Role Master</li>
+                        <li class="breadcrumb-item">HRM</li>
                         <li class="breadcrumb-item active">Employee List</li>
                     </ol>
                 </div>
@@ -48,7 +48,7 @@
                             </div>
                             <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch"/>
                         }
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-4">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
@@ -60,6 +60,7 @@
                                         <th>Email</th>
                                         <th>Father Name</th>
                                         <th>Gender</th>
+                                        <th>Role Name</th>
                                         <th>PinCode</th>
                                         <th>State</th>
                                         <th>City</th>
@@ -84,6 +85,7 @@
                                                     <td>@Item.Email</td>
                                                     <td>@Item.FatherName</td>
                                                     <td>@Item.Gender</td>
+                                                    <td>@Item.RoleName</td>
                                                     <td>@Item.Pincode</td>
                                                     <td>@Item.State</td>
                                                     <td>@Item.City</td>
@@ -95,23 +97,7 @@
                                         }
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>S.No.</th>
-                                        <th>LoginId</th>
-                                        <th>Password</th>
-                                        <th>Name</th>
-                                        <th>Mobile No</th>
-                                        <th>Email</th>
-                                        <th>Father Name</th>
-                                        <th>Gender</th>
-                                        <th>PinCode</th>
-                                        <th>State</th>
-                                        <th>City</th>
-                                        <th>Address</th>
-                                        <th>Joining Date</th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
                         </div>
                     </div>

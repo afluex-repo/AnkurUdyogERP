@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Employee/EmployeeRegistration"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item"> Role Master</li>
+                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">HRM</li>
                         <li class="breadcrumb-item active">Employee Registration</li>
                     </ol>
                 </div>
@@ -42,7 +42,7 @@
                                     <label>Father Name <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @placeholder = "Father Name", @onkeypress = "return onlyAlphabets();" })
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-6">
                                     <label>Mobile Number <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control",@maxlength="10", @placeholder = "Mobile Number", @onkeypress = "return isNumberKey(event);" })
                                 </div>
@@ -50,8 +50,23 @@
                                     <label>Email Id <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email Id" })
                                 </div>
-                            </div>
-                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label>Gender <span style="color:red;">*</span></label>
+                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), new { @class = "js-example-basic-single" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Role Name <span style="color:red;">*</span></label>
+                                    @Html.DropDownListFor(m => m.PK_RoleId, new SelectList(ViewBag.lstrole, "Value", "Text"), new { @class = "js-example-basic-single" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Address <span style="color:red;"></span></label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                </div>
+                            @*</div>
+                            <div class="row g-3">*@
                                 <div class="col-md-6">
                                     <label>PinCode <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @maxlength = "6", @placeholder = "PinCode", @onchange = "return GetStateCity();", @onkeypress = "return isNumberKey(event);" })
@@ -65,14 +80,7 @@
                                     @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City",@readonly=true })
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label>Gender <span style="color:red;">*</span></label>
-                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), new { @class = "form-control"})
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Address <span style="color:red;"></span></label>
-                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
-                                </div>
+                               
                             </div>
 
                             if (Model.PK_AdminId != null)
@@ -84,20 +92,17 @@
                             {
                                 <input type="submit" class="btn btn-primary mt-4" value="Submit" id="btnSave" name="btnSave" onclick="return ValidateForm();" />
                             }
-                            
+
+
+
                         }
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header pb-0 d-flex justify-content-between">
-                        @*<h3 class="mb-3">Employee List</h3>*@
-                        <span style="color:red;">@TempData["EmployeeRegistration"]</span>
-                    </div>
                     <div class="card-body">
-                       
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-4">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
@@ -114,6 +119,7 @@
                                         <th>City</th>
                                         <th>Address</th>
                                         <th>Joining Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,7 +133,12 @@
                                                 <tr>
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
-                                                    <td>@Item.Password</td>
+                                                    @*<td>@Item.Password</td>*@
+                                                    <td class="example-popover" data-bs-trigger="hover" data-container="body"
+                                                        data-bs-toggle="popover" data-bs-placement="right" title="Password"
+                                                        data-bs-content="@Item.Password" data-bs-offset="0,-50">
+                                                        ******
+                                                    </td>
                                                     <td>@Item.Name</td>
                                                     <td>@Item.MobileNo</td>
                                                     <td>@Item.Email</td>
@@ -138,6 +149,12 @@
                                                     <td>@Item.City</td>
                                                     <td>@Item.Address</td>
                                                     <td>@Item.JoiningDate</td>
+                                                    <td>
+                                                        <ul class="action">
+                                                            <li class="edit"> <a href="/Employee/EmployeeRegistration?Id=@Item.PK_AdminId"><i class="icon-pencil-alt"></i></a></li>
+                                                            <li class="delete"><a href="/Admin/DeleteEmployee?Id=@Item.PK_AdminId" onclick="return confirm('Are you sure you want to delete this employee ?')"><i class="icon-trash"></i></a></li>
+                                                        </ul>
+                                                    </td>
                                                 </tr>
                                                 i++;
                                             }
@@ -176,16 +193,23 @@
             $('#Email').focus();
             return false;
         }
-        if ($('#Pincode').val() == '') {
-            $("#Pincode").addClass('errortext');
-            $('#Pincode').focus();
-            return false;
-        }
         if ($('#Gender').val() == '') {
             $("#Gender").addClass('errortext');
             $('#Gender').focus();
             return false;
         }
+        if ($('#PK_RoleId').val() == '0') {
+            $("#PK_RoleId").addClass('errortext');
+            $('#PK_RoleId').focus();
+            return false;
+        }
+        if ($('#Pincode').val() == '') {
+            $("#Pincode").addClass('errortext');
+            $('#Pincode').focus();
+            return false;
+        }
+     
+      
         return true;
     }
     function GetStateCity() {
