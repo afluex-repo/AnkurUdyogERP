@@ -74,7 +74,6 @@ namespace AnkurUdyogERP.Controllers
 
 
 
-
         [HttpPost]
         [ActionName("SetPermission")]
         [OnAction(ButtonName = "GetDetails")]
@@ -90,6 +89,9 @@ namespace AnkurUdyogERP.Controllers
                     Permisssions ob = new Permisssions();
                     ob.FormName = dr["FormName"].ToString();
                     ob.IsSelectValue = Convert.ToBoolean(dr["FormView"].ToString());
+                    ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
+                    ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
+                    ob.IsSaveValue = Convert.ToBoolean(dr["FormSave"].ToString());
                     if (ob.IsSelectValue == false)
                     {
                         ob.SelectedValue = "";
@@ -98,9 +100,32 @@ namespace AnkurUdyogERP.Controllers
                     {
                         ob.SelectedValue = "checked";
                     }
+                    if (ob.IsSaveValue == false)
+                    {
+                        ob.FormSave = "";
+                    }
+                    else
+                    {
+                        ob.FormSave = "checked";
+                    }
+                    if (ob.IsUpdateValue == false)
+                    {
+                        ob.FormUpdate = "";
+                    }
+                    else
+                    {
+                        ob.FormUpdate = "checked";
+                    }
+                    if (ob.IsDeleteValue == false)
+                    {
+                        ob.FormDelete = "";
+                    }
+                    else
+                    {
+                        ob.FormDelete = "checked";
+                    }
                     ob.IsSaveValue = Convert.ToBoolean(dr["FormSave"].ToString());
-                    ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
-                    ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
+
                     ob.Fk_FormId = dr["PK_FormId"].ToString();
                     ob.Fk_FormTypeId = dr["pk_formtypeid"].ToString();
                     ob.Fk_UserId = dr["Fk_UserId"].ToString();
@@ -140,6 +165,7 @@ namespace AnkurUdyogERP.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         [ActionName("SetPermission")]
         [OnAction(ButtonName = "Save")]
@@ -157,22 +183,49 @@ namespace AnkurUdyogERP.Controllers
 
             dtpermission.Columns.Add("Fk_FormTypeId");
             dtpermission.Columns.Add("Fk_FormId");
+            dtpermission.Columns.Add("IsSelect");
             dtpermission.Columns.Add("IsSave");
             dtpermission.Columns.Add("IsUpdate");
             dtpermission.Columns.Add("IsDelete");
-            dtpermission.Columns.Add("IsSelect");
             for (int i = 1; i < int.Parse(hdrows); i++)
             {
                 try
                 {
                     chkselect = Request["chkSelect_ " + i].ToString();
                 }
-                catch { chkselect = "0"; }
+                catch
+                {
+                    chkselect = "0";
+                }
+                try
+                {
+                    chkSave = Request["chkSave_ " + i].ToString();
+                }
+                catch
+                {
+                    chkSave = "0";
+                }
+                try
+                {
+                    chkupdate = Request["chkEdit_ " + i].ToString();
+                }
+                catch
+                {
+                    chkupdate = "0";
+                }
+                try
+                {
+                    chkdelete = Request["chkDelete_ " + i].ToString();
+                }
+                catch
+                {
+                    chkdelete = "0";
+                }
                 hdfformtypeid = Request["hdFormtypeId_ " + i].ToString();
                 hdfformid = Request["hdFormId_ " + i].ToString();
                 hdfloginid = Request["hdLoginid_ " + i].ToString();
 
-                dtpermission.Rows.Add(hdfformtypeid, hdfformid, "0", "0", "0", chkselect == "on" ? "1" : "0");
+                dtpermission.Rows.Add(hdfformtypeid, hdfformid, chkselect == "on" ? "1" : "0", chkSave == "on" ? "1" : "0", chkupdate == "on" ? "1" : "0", chkdelete == "on" ? "1" : "0");
 
             }
 
@@ -197,9 +250,7 @@ namespace AnkurUdyogERP.Controllers
             return RedirectToAction("SetPermission");
 
         }
-
-
-
+        
 
     }
 }

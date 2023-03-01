@@ -104,10 +104,18 @@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="/Admin/AdminDashboard"><i data-feather="home"></i><span>Dashboard</span></a>
                                 </li>
-                                @*@{Html.RenderAction("GetMenu", "Master");}*@
+
+                                    @{Html.RenderAction("GetMenu", "Master");}
+                              
 
 
-                           <li class="sidebar-list">
+                                @*<li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Master</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Master/SectionMaster">TMT Bar Type</a></li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>HRM</span></a>
                                     <ul class="sidebar-submenu">
 
@@ -124,35 +132,14 @@
                                         <li><a href="/Admin/DistributerListForAdmin">Distributer List</a></li>
                                     </ul>
                                 </li>
-                                @*<li class="sidebar-list">
-        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Permission</span></a>
-        <ul class="sidebar-submenu">
-            <li><a href="/Permission/SetPermission">Set Permission</a></li>
-        </ul>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Permission</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Permission/SetPermission">Set Permission</a></li>
+                                    </ul>
 
-    </li>*@
+                                </li>*@
 
-
-
-
-
-
-
-
-
-
-                                @*<li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layout"></i><span class="lan-7">Page layout</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="box-layout.html">Boxed</a></li>
-                                            <li><a href="layout-rtl.html">RTL</a></li>
-                                            <li><a href="layout-dark.html">Dark Layout</a></li>
-                                            <li><a href="hide-on-scroll.html">Hide Nav Scroll</a></li>
-                                            <li><a href="footer-light.html">Footer Light</a></li>
-                                            <li><a href="footer-dark.html">Footer Dark</a></li>
-                                            <li><a href="footer-fixed.html">Footer Fixed</a></li>
-                                        </ul>
-                                    </li>*@
 
                             </ul>
                             <div class="sidebar-img-section">

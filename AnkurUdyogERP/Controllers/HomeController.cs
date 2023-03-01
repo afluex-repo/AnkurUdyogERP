@@ -32,16 +32,29 @@ namespace AnkurUdyogERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                     {
-                        Session["Pk_adminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                        Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                        Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
-                        Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
-                        FormName = "AdminDashboard";
-                        Controller = "Admin";
+                        if (ds.Tables[0].Rows[0]["UserTypeName"].ToString() == "Admin")
+                        {
+                            Session["Pk_adminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                            Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
+                            Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
+                            Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                            Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                            Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                            FormName = "AdminDashboard";
+                            Controller = "Admin";
+                        }
+                        else
+                        {
+                            TempData["msg"] = "Incorrect LoginId Or Password";
+                            FormName = "Login";
+                            Controller = "Home";
+                        }
                     }
                     else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Employee")
                     {
                         Session["Pk_adminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                        Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
+                        Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                         Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
@@ -51,6 +64,8 @@ namespace AnkurUdyogERP.Controllers
                     else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Distributer")
                     {
                         Session["Pk_adminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                        Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
+                        Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                         Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
@@ -64,19 +79,12 @@ namespace AnkurUdyogERP.Controllers
                         Controller = "Home";
                     }
                 }
-                else
-                {
-                    TempData["msg"] = "Incorrect LoginId Or Password";
-                    FormName = "Login";
-                    Controller = "Home";
-                }
             }
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
                 FormName = "Login";
                 Controller = "Home";
-                TempData["msg"] = ex.Message;
             }
             return RedirectToAction(FormName, Controller);
         }

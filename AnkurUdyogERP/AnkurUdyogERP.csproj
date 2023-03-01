@@ -790,6 +790,8 @@
     <Content Include="Views\Master\RoleList.cshtml" />
     <Content Include="Views\Master\RoleMaster.cshtml" />
     <Content Include="Views\Shared\_DistributerLayoutPageMaster.cshtml" />
+    <Content Include="Views\Master\SectionMaster.cshtml" />
+    <Content Include="Views\Master\SectionMasterList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
