@@ -1,21 +1,6 @@
 ﻿@model AnkurUdyogERP.Models.Menu
 
 
-
-@*<li class="sidebar-list">
-        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>HRM</span></a>
-        <ul class="sidebar-submenu">
-
-            <li><a href="/Master/RoleMaster">Role Master</a></li>
-            <li><a href="/Master/RoleList">Role List</a></li>
-            <li><a href="/Employee/EmployeeRegistration">Employee Registration</a></li>
-            <li><a href="/Admin/EmployeeList">Employee List</a></li>
-        </ul>
-    </li>*@
-
-
-<ul id="simple-bar">
-
     @if (Model != null)
             {
                 if (Model.lstMenu != null)
@@ -41,4 +26,3 @@
         }
 
     }
-</ul>
