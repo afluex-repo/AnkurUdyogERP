@@ -161,9 +161,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
-
-
         public ActionResult GetMenu()
         {
             Menu model = new Menu();
@@ -395,8 +392,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("SectionMaster", "Master");
         }
-
-
         [HttpPost]
         [OnAction(ButtonName = "btUpdate")]
         [ActionName("SectionMaster")]
@@ -424,10 +419,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("SectionMaster", "Master");
         }
-
-
-
-
         public ActionResult DeleteSectionMaster(Master model, string Id)
         {
             try
@@ -449,7 +440,6 @@ namespace AnkurUdyogERP.Controllers
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -457,8 +447,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("SectionMaster", "Master");
         }
-        
-
         public ActionResult SectionMasterList()
         {
             Master model = new Master();
@@ -478,7 +466,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [OnAction(ButtonName = "btnSearch")]
         [ActionName("SectionMasterList")]
@@ -500,11 +487,5 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
-
-
-
-
-
     }
 }
