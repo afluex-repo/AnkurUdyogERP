@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
     <!-- Responsive css-->
-  
+
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
@@ -71,7 +71,7 @@
                         <li class="profile-nav onhover-dropdown p-0 me-0">
 
                             <div class="d-flex profile-media">
-                                <img class="b-r-50" src="../assets/images/logo/a_icon2.svg" alt=""/>
+                                <img class="b-r-50" src="../assets/images/logo/a_icon2.svg" alt="" />
                                 <div class="flex-grow-1">
                                     <span class="text-white">@Session["LoginId"]</span><span class="text-white">(@Session["Name"])</span>
                                 </div>
@@ -92,8 +92,10 @@
             <div class="sidebar-wrapper">
                 <div>
                     <div class="logo-wrapper">
-                        <a href="#"><img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP"/>
-                        <img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a>
+                        <a href="#">
+                            <img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP" />
+                            <img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt="">
+                        </a>
                         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-left"> </i></div>
                     </div>
@@ -111,12 +113,7 @@
                                 @*@{Html.RenderAction("GetMenu", "Master");}*@
 
 
-
-
-
-
-
-                                <li class="sidebar-list">
+                           <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>HRM</span></a>
                                     <ul class="sidebar-submenu">
 
@@ -124,36 +121,30 @@
                                         <li><a href="/Master/RoleList">Role List</a></li>
                                         <li><a href="/Employee/EmployeeRegistration">Employee Registration</a></li>
                                         <li><a href="/Admin/EmployeeList">Employee List</a></li>
-                                     
                                     </ul>
-
                                 </li>
-
-
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Distributer</span></a>
                                     <ul class="sidebar-submenu">
                                         <li><a href="/Master/DistributerRegistration">Distributer Registration</a></li>
                                         <li><a href="/Admin/DistributerListForAdmin">Distributer List</a></li>
                                     </ul>
-
                                 </li>
-
-
-
-
-
-
-
-
-
                                 @*<li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Permission</span></a>
-                                    <ul class="sidebar-submenu">
-                                        <li><a href="/Permission/SetPermission">Set Permission</a></li>
-                                    </ul>
+        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Permission</span></a>
+        <ul class="sidebar-submenu">
+            <li><a href="/Permission/SetPermission">Set Permission</a></li>
+        </ul>
 
-                                </li>*@
+    </li>*@
+
+
+
+
+
+
+
+
 
 
                                 @*<li class="sidebar-list">

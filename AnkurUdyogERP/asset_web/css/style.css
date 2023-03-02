@@ -8238,3 +8238,8 @@ select:focus {
 .about-style1-area.one-page-scrool {
     padding-bottom: 0;
 }
+
+.service_img
+{
+    height:280px;
+}
