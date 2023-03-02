@@ -1,0 +1,183 @@
+﻿@model AnkurUdyogERP.Models.Master
+
+@{
+    ViewBag.Title = "SectionMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .htttttt {
+        border-color: #ffffff;
+        font-size: 14px;
+        padding: 12px 15px;
+        border-radius: 8px;
+    }
+</style>
+
+@using (Html.BeginForm("SectionMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>TMT Bar Type</h3>
+                    </div>
+                    <div class="col-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">Master</li>
+                            <li class="breadcrumb-item active">TMT Bar Type</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <span style="color:red;">@TempData["SectionMaster"]</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label class="form-label" for="validationCustom01">Section<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(m => m.SectionMaster, new { @class = "form-control", @Placeholder = "Section", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label" for="validationCustom01"></label>
+                                            <h4 class="mt-4">MM</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label class="form-label" for="validationCustom01">Rate<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(m => m.Rate, new { @class = "form-control", @Placeholder = "Rate", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.PK_SectionId == null)
+                                            {
+                                                <input class="btn btn-primary mt-4" type="submit" value="Save" id="btnSave" name="btnSave" onclick="return validateform();" />
+                                            }
+                                            else
+                                            {
+                                                @Html.HiddenFor(m => m.PK_SectionId)
+                                                <input class="btn btn-primary mt-4" type="submit" value="Update" id="btUpdate" name="btUpdate" onclick="return validateform();" />
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <span><h3>TMT Bar Type List</h3></span><span style="color:red;">@TempData["SectionMasterList"]</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="display" id="data-source-1" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.No.</th>
+                                                    <th>Section</th>
+                                                    <th>Rate</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstsection != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstsection)
+                                                        {
+                                                            <tr>
+                                                                <td>@i</td>
+                                                                <td>@Item.SectionMaster MM</td>
+                                                                <td>@Item.Rate</td>
+                                                                <td>
+                                                                    <ul class="action">
+                                                                        <li class="edit"> <a href="/Master/SectionMaster?Id=@Item.PK_SectionId"><i class="icon-pencil-alt"></i></a></li>
+                                                                        <li class="delete"><a href="/Master/DeleteSectionMaster?Id=@Item.PK_SectionId" onclick="return confirm('Are you sure you want to delete this TMT Bar Type details ?')"><i class="icon-trash"></i></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td><td></td>
+                                                <td>
+                                                    <a class="btn btn-primary px-2" href="/Master/SectionMasterList">View More...</a>
+                                                </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    function validateform() {
+        $("#divload").css({ 'display': 'none' });
+        $(".errortext").removeClass("errortext");
+        if ($('#SectionMaster').val() == '') {
+            $("#SectionMaster").addClass('errortext');
+            $('#SectionMaster').focus();
+            return false;
+        }
+        if ($('#Rate').val() == '') {
+            $("#Rate").addClass('errortext');
+            $('#Rate').focus();
+            return false;
+        }
+
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

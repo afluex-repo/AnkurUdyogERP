@@ -1,4 +1,5 @@
 ﻿using AnkurUdyogERP.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -160,9 +161,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
-
-
         public ActionResult GetMenu()
         {
             Menu model = new Menu();
@@ -196,10 +194,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return PartialView("_GetMenu", model);
         }
-
-
-
-        public ActionResult RoleMaster(Master model,string Id)
+        public ActionResult RoleMaster(Master model, string Id)
         {
             if (Id != null)
             {
@@ -239,9 +234,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("RoleMaster", "Master");
         }
-
-
-
+        
         [HttpPost]
         [OnAction(ButtonName = "btnUpdate")]
         [ActionName("RoleMaster")]
@@ -269,9 +262,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("RoleMaster", "Master");
         }
-
-
-
         public ActionResult RoleList()
         {
             Master model = new Master();
@@ -290,10 +280,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
-
-        
-        public ActionResult DeleteRoleMaster(Master model,string Id)
+        public ActionResult DeleteRoleMaster(Master model, string Id)
         {
             try
             {
@@ -318,8 +305,187 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("RoleList", "Master");
         }
+        public ActionResult GetMenuDetails(string URL)
+        {
+            try
+            {
+                Master model = new Master();
+                model.Fk_UserId = Session["Pk_AdminId"].ToString();
+                model.UserType = Session["UserTypeName"].ToString();
+                model.Url = URL;
+                DataSet ds = model.GetMenuPermissionList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        var MenuList = JsonConvert.SerializeObject(ds.Tables[0]);
+                        return Json(MenuList, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("0", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json("0", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ActionResult SectionMaster(Master model, string Id)
+        {
+            if (Id != null)
+            {
+                model.PK_SectionId = Id;
+                DataSet ds1 = model.GetSectionMasterList();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    model.SectionMaster = ds1.Tables[0].Rows[0]["SectionMaster"].ToString();
+                    model.Rate = ds1.Tables[0].Rows[0]["Rate"].ToString();
+                }
+            }
 
-
-
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetSectionMasterList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_SectionId = dr["PK_SectionId"].ToString();
+                    obj.SectionMaster = dr["SectionMaster"].ToString();
+                    obj.Rate = dr["Rate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstsection = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnSave")]
+        [ActionName("SectionMaster")]
+        public ActionResult SectionMaster(Master model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveSectionMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["SectionMaster"] = "Record Save Successfully";
+                    }
+                    else
+                    {
+                        TempData["SectionMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["SectionMaster"] = ex.Message;
+            }
+            return RedirectToAction("SectionMaster", "Master");
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btUpdate")]
+        [ActionName("SectionMaster")]
+        public ActionResult UpdateSectionMaster(Master model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdateSectionMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["SectionMaster"] = "Record Update Successfully";
+                    }
+                    else
+                    {
+                        TempData["SectionMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["SectionMaster"] = ex.Message;
+            }
+            return RedirectToAction("SectionMaster", "Master");
+        }
+        public ActionResult DeleteSectionMaster(Master model, string Id)
+        {
+            try
+            {
+                if (Id != null)
+                {
+                    model.PK_SectionId = Id;
+                    model.AddedBy = Session["Pk_AdminId"].ToString();
+                    DataSet ds = model.DeleteSectionMaster();
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["SectionMasterList"] = "Record Deleted Successfully";
+                        }
+                        else
+                        {
+                            TempData["SectionMasterList"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["SectionMasterList"] = ex.Message;
+            }
+            return RedirectToAction("SectionMaster", "Master");
+        }
+        public ActionResult SectionMasterList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetSectionMasterList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_SectionId = dr["PK_SectionId"].ToString();
+                    obj.SectionMaster = dr["SectionMaster"].ToString();
+                    obj.Rate = dr["Rate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstsection = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnSearch")]
+        [ActionName("SectionMasterList")]
+        public ActionResult SectionMasterList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetSectionMasterList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_SectionId = dr["PK_SectionId"].ToString();
+                    obj.SectionMaster = dr["SectionMaster"].ToString();
+                    obj.Rate = dr["Rate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstsection = lst;
+            }
+            return View(model);
+        }
     }
 }

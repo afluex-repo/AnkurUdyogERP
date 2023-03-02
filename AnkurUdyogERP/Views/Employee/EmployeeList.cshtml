@@ -97,8 +97,9 @@
                                         }
                                     }
                                 </tbody>
-                                
                             </table>
+                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                         </div>
                     </div>
                 </div>
@@ -108,3 +109,124 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    $(document).ready(function () {
+        var UserType = $('#UserType').val();
+        var UserTypeName = $('#UserTypeName').val();
+        if (UserType == 'Admin' && UserTypeName != 'Admin') {
+            GetMenuDetails();
+        }
+    });
+
+    function GetMenuDetails() {
+        var URL = "/Farmers/Farmerlist";
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(data);
+                for (var i = 0; i < obj.length; i++) {
+                    debugger
+                    if (obj[i].FormDelete == true && obj[i].FormUpdate == false) {
+                        $(".delete").show();
+                        $(".edit").hide();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(true);
+                        table.column(15).visible(false);
+                    }
+                    else if (obj[i].FormDelete == false && obj[i].FormUpdate == true) {
+                        $(".delete").hide();
+                        $(".edit").show();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(false);
+                        table.column(15).visible(true);
+                    }
+                    else if (obj[i].FormDelete == true && obj[i].FormUpdate == true) {
+                        $(".delete").show();
+                        $(".edit").show();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(true);
+                        table.column(15).visible(true);
+                    }
+                    else if (obj[i].FormSave == true && obj[i].FormDelete == false && obj[i].FormUpdate == false) {
+                        $(".btnAdd").show();
+                        $(".payment").show();
+                        $(".delete").hide();
+                        $(".edit").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(true);
+                        table.column(14).visible(false);
+                        table.column(15).visible(false);
+                        //var table = $('#tableExport').DataTable();
+                        //table.column(4).visible(false);
+                    }
+                    else if (obj[i].FormDelete == false && obj[i].FormUpdate == false) {
+                        $(".delete").hide();
+                        $(".edit").hide();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(false);
+                        table.column(15).visible(false);
+                        //var table = $('#tableExport').DataTable();
+                        //table.column(4).visible(false);
+                    }
+
+                    else {
+                        $(".delete").hide();
+                        $(".edit").hide();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(false);
+                        table.column(15).visible(false);
+                    }
+
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+    function Inactive() {
+        debugger
+        if (confirm("Are you sure you want to Inactive this farmer ?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function Active() {
+        debugger
+        if (confirm("Are you sure you want to Active this farmer ?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
