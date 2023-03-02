@@ -15,7 +15,7 @@
     display: block;
     max-width: 540px;
     width: 100%;
-    border: 2px solid var(--thm-base);
+    /*border: 2px solid var(--thm-base);*/
     box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
 }
 

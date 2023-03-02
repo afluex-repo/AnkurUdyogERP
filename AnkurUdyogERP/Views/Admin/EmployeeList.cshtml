@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">HRM</li>
+                        <li class="breadcrumb-item"><a href="/Admin/EmployeeList"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Role Master</li>
                         <li class="breadcrumb-item active">Employee List</li>
                     </ol>
                 </div>
@@ -29,9 +29,8 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
-                        @*<h3 class="mb-3"></h3>*@
                         <span style="color:red;">@TempData["EmployeeRegistration"]</span>
-                        <a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
+                        <a href="/Employee/EmployeeRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Employee</a>
                     </div>
                     <div class="date-picker">
                             <div class="card-body">
@@ -55,10 +54,11 @@
                                             <input id="ToDate" name="ToDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly = true placeholder = "dd/mm/yyyy" >
                                         </div>
                                         <div class="col-md-2">
-                                            <input type="submit" class="btn btn-primary mt-4" value="Search" id="Search" name="Search" />
+                                            <label>&nbsp;</label>
+                                            <input type="submit" class="btn btn-primary" value="Search" id="Search" name="Search" />
                                         </div>
                                     </div>
-                             
+                                }
                                 <div class="table-responsive mt-4">
                                     <table class="display" id="data-source-1" style="width:100%">
                                         <thead>
@@ -69,13 +69,12 @@
                                                 <th>Name</th>
                                                 <th>Mobile No</th>
                                                 <th>Email</th>
-                                                <th>Gender</th>
-                                                <th>Role Name</th>
-                                                <th>Address</th>
                                                 <th>Father Name</th>
+                                                <th>Gender</th>
                                                 <th>PinCode</th>
                                                 <th>State</th>
                                                 <th>City</th>
+                                                <th>Address</th>
                                                 <th>Joining Date</th>
                                                 <th>Edit</th>
                                                 <th>Delete</th>
@@ -92,17 +91,21 @@
                                     <tr>
                                         <td>@i</td>
                                         <td>@Item.LoginId</td>
-                                        <td>@Item.Password</td>
+                                        @*<td>@Item.Password</td>*@
+                                        <td class="example-popover" data-bs-trigger="hover" data-container="body"
+                                             data-bs-toggle="popover" data-bs-placement="right" title="Password"
+                                             data-bs-content="@Item.Password" data-bs-offset="0,-50">
+                                           ******
+                                        </td>
                                         <td>@Item.Name</td>
                                         <td>@Item.MobileNo</td>
                                         <td>@Item.Email</td>
-                                        <td>@Item.Gender</td>
-                                        <td>@Item.RoleName</td>
-                                        <td>@Item.Address</td>
                                         <td>@Item.FatherName</td>
+                                        <td>@Item.Gender</td>
                                         <td>@Item.Pincode</td>
                                         <td>@Item.State</td>
                                         <td>@Item.City</td>
+                                        <td>@Item.Address</td>
                                         <td>@Item.JoiningDate</td>
                                         <td class="edit1">
                                             <ul class="action">
@@ -121,12 +124,10 @@
                                         }
                                     }
                                         </tbody>
-                                        
                                     </table>
                                     <input type="hidden" id="UserType" value="@Session["UserType"]" />
                                     <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                                 </div>
-                                }
                             </div>
                     </div>
                 </div>
