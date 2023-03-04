@@ -402,6 +402,209 @@ var options = {
 var chart = new ApexCharts(document.querySelector("#visitor-chart"), options);
 chart.render();
 
+// Today Order
+var options = {
+    series: [
+      {
+          name: "Statistics",
+          data: [20, 60, 50, 70, 40, 80, 20],
+      },
+      {
+          name: "Statistics",
+          data: [80, 40, 50, 30, 60, 20, 20],
+      },
+    ],
+    chart: {
+        type: "bar",
+        height: 100,
+        stacked: true,
+        stackType: "100%",
+        toolbar: {
+            show: false,
+        },
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: "40px",
+            borderRadius: 2,
+        },
+    },
+    grid: {
+        show: false,
+        xaxis: {
+            lines: {
+                show: false,
+            },
+        },
+    },
+    states: {
+        hover: {
+            filter: {
+                type: "darken",
+                value: 1,
+            },
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    legend: {
+        show: false,
+    },
+    colors: [KohoAdminConfig.secondary, "#faded1"],
+    xaxis: {
+        show: false,
+        labels: {
+            show: false,
+        },
+        axisBorder: {
+            show: false,
+        },
+        axisTicks: {
+            show: false,
+        },
+    },
+    yaxis: {
+        labels: {
+            show: false,
+        },
+    },
+    tooltip: {
+        marker: {
+            show: false,
+        },
+        fixed: {
+            enabled: false,
+            position: "bottomRight",
+            offsetX: 0,
+            offsetY: 0,
+        },
+    },
+    responsive: [
+      {
+          breakpoint: 1661,
+          options: {
+              chart: {
+                  width: 80,
+              },
+          },
+      },
+      {
+          breakpoint: 1365,
+          options: {
+              chart: {
+                  width: 80,
+              },
+          },
+      },
+    ],
+};
+var chart = new ApexCharts(document.querySelector("#today-order"), options);
+chart.render();
+
+// Pending Order
+
+var options = {
+    series: [
+      {
+          name: "Statistics",
+          data: [20, 60, 50, 70, 40, 80, 20],
+      },
+      {
+          name: "Statistics",
+          data: [80, 40, 50, 30, 60, 20, 20],
+      },
+    ],
+    chart: {
+        type: "bar",
+        height: 100,
+        stacked: true,
+        stackType: "100%",
+        toolbar: {
+            show: false,
+        },
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: "40px",
+            borderRadius: 2,
+        },
+    },
+    grid: {
+        show: false,
+        xaxis: {
+            lines: {
+                show: false,
+            },
+        },
+    },
+    states: {
+        hover: {
+            filter: {
+                type: "darken",
+                value: 1,
+            },
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    legend: {
+        show: false,
+    },
+    colors: [KohoAdminConfig.secondary, "#faded1"],
+    xaxis: {
+        show: false,
+        labels: {
+            show: false,
+        },
+        axisBorder: {
+            show: false,
+        },
+        axisTicks: {
+            show: false,
+        },
+    },
+    yaxis: {
+        labels: {
+            show: false,
+        },
+    },
+    tooltip: {
+        marker: {
+            show: false,
+        },
+        fixed: {
+            enabled: false,
+            position: "bottomRight",
+            offsetX: 0,
+            offsetY: 0,
+        },
+    },
+    responsive: [
+      {
+          breakpoint: 1661,
+          options: {
+              chart: {
+                  width: 80,
+              },
+          },
+      },
+      {
+          breakpoint: 1365,
+          options: {
+              chart: {
+                  width: 80,
+              },
+          },
+      },
+    ],
+};
+var chart = new ApexCharts(document.querySelector("#pending-order"), options);
+chart.render();
+
 //Recent Chart
 var options = {
   series: [

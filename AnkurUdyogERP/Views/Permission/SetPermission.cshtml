@@ -51,13 +51,16 @@
                                         <input type="submit" id="GetDetails" name="GetDetails" class="btn btn-primary mt-4" value="Get Details" onclick="return load();" />
                                     </div>
                                 </div>
-                                <div class="table-responsive">
+                                <div class="table-responsive mt-3">
                                     <table class="display" id="data-source-1" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Sr No.</th>
                                                 <th>Form</th>
                                                 <th>Form View</th>
+                                                <th>Form Save</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -79,6 +82,9 @@
                                                                 <input type="hidden" name="hdLoginid_ @i" id="hdLoginid_ @i" value="@item.Fk_UserId" />
                                                                 <input type="checkbox" name="chkSelect_ @i" id="chkSelect_ @i" @item.SelectedValue />
                                                             </td>
+                                                            <td><input type="checkbox" name="chkSave_ @i" id="chkSave_ @i" @item.FormSave /> </td>
+                                                            <td><input type="checkbox" name="chkEdit_ @i" id="chkEdit_ @i" @item.FormUpdate /> </td>
+                                                            <td><input type="checkbox" name="chkDelete_ @i" id="chkDelete_ @i" @item.FormDelete /> </td>
                                                         </tr>
                                                         i++;
                                                     }
@@ -86,14 +92,9 @@
                                                 }
                                             }
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Sr No.</th>
-                                                <th>Form</th>
-                                                <th>Form View</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
+                                    <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                                    <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -111,14 +112,52 @@
     </div>
 </div>
 
-
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
+        var UserType = $('#UserType').val();
+        var UserTypeName = $('#UserTypeName').val();
+        if (UserType == 'Admin' && UserTypeName != 'Admin' && UserTypeName != "") {
+            GetMenuDetails();
+        }
     });
+    function GetMenuDetails() {
+        debugger
+        var URL = "/Permission/SetPermission";
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+            //contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(obj)
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].FormSave == true) {
+                        $('#Save').show();
+
+                        $("#Save").removeAttr('disabled');
+                    }
+                    else {
+                        $('#Save').hide();
+
+                        $("#Save").attr('disabled', 'disabled');
+                    }
+                    debugger
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+
     function load() {
-        // alert("d")
         $(".errortext").removeClass("errortext");
         if ($('#Fk_UserId').val() == '0') {
             $("#Fk_UserId").addClass('errortext');

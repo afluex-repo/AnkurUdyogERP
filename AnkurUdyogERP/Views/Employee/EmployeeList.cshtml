@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "EmployeeList";
-    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="page-body">
@@ -15,7 +15,7 @@
                 <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/Employee/EmployeeList"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Role Master</li>
+                        <li class="breadcrumb-item">HRM</li>
                         <li class="breadcrumb-item active">Employee List</li>
                     </ol>
                 </div>
@@ -29,6 +29,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
+
                         @*<h3 class="mb-3">Employee List</h3>*@
                         <span style="color:red;">@TempData["EmployeeRegistration"]</span>
                     </div>
@@ -47,7 +48,7 @@
                             </div>
                             <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch"/>
                         }
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-4">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
@@ -59,6 +60,7 @@
                                         <th>Email</th>
                                         <th>Father Name</th>
                                         <th>Gender</th>
+                                        <th>Role Name</th>
                                         <th>PinCode</th>
                                         <th>State</th>
                                         <th>City</th>
@@ -83,6 +85,7 @@
                                                     <td>@Item.Email</td>
                                                     <td>@Item.FatherName</td>
                                                     <td>@Item.Gender</td>
+                                                    <td>@Item.RoleName</td>
                                                     <td>@Item.Pincode</td>
                                                     <td>@Item.State</td>
                                                     <td>@Item.City</td>
@@ -94,24 +97,9 @@
                                         }
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>S.No.</th>
-                                        <th>LoginId</th>
-                                        <th>Password</th>
-                                        <th>Name</th>
-                                        <th>Mobile No</th>
-                                        <th>Email</th>
-                                        <th>Father Name</th>
-                                        <th>Gender</th>
-                                        <th>PinCode</th>
-                                        <th>State</th>
-                                        <th>City</th>
-                                        <th>Address</th>
-                                        <th>Joining Date</th>
-                                    </tr>
-                                </tfoot>
                             </table>
+                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                         </div>
                     </div>
                 </div>
@@ -121,3 +109,124 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    $(document).ready(function () {
+        var UserType = $('#UserType').val();
+        var UserTypeName = $('#UserTypeName').val();
+        if (UserType == 'Admin' && UserTypeName != 'Admin') {
+            GetMenuDetails();
+        }
+    });
+
+    function GetMenuDetails() {
+        var URL = "/Farmers/Farmerlist";
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(data);
+                for (var i = 0; i < obj.length; i++) {
+                    debugger
+                    if (obj[i].FormDelete == true && obj[i].FormUpdate == false) {
+                        $(".delete").show();
+                        $(".edit").hide();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(true);
+                        table.column(15).visible(false);
+                    }
+                    else if (obj[i].FormDelete == false && obj[i].FormUpdate == true) {
+                        $(".delete").hide();
+                        $(".edit").show();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(false);
+                        table.column(15).visible(true);
+                    }
+                    else if (obj[i].FormDelete == true && obj[i].FormUpdate == true) {
+                        $(".delete").show();
+                        $(".edit").show();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(true);
+                        table.column(15).visible(true);
+                    }
+                    else if (obj[i].FormSave == true && obj[i].FormDelete == false && obj[i].FormUpdate == false) {
+                        $(".btnAdd").show();
+                        $(".payment").show();
+                        $(".delete").hide();
+                        $(".edit").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(true);
+                        table.column(14).visible(false);
+                        table.column(15).visible(false);
+                        //var table = $('#tableExport').DataTable();
+                        //table.column(4).visible(false);
+                    }
+                    else if (obj[i].FormDelete == false && obj[i].FormUpdate == false) {
+                        $(".delete").hide();
+                        $(".edit").hide();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(false);
+                        table.column(15).visible(false);
+                        //var table = $('#tableExport').DataTable();
+                        //table.column(4).visible(false);
+                    }
+
+                    else {
+                        $(".delete").hide();
+                        $(".edit").hide();
+                        $(".btnAdd").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(12).visible(false);
+                        table.column(14).visible(false);
+                        table.column(15).visible(false);
+                    }
+
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+    function Inactive() {
+        debugger
+        if (confirm("Are you sure you want to Inactive this farmer ?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function Active() {
+        debugger
+        if (confirm("Are you sure you want to Active this farmer ?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>

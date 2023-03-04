@@ -11,7 +11,8 @@ namespace AnkurUdyogERP.Models
     {
         public string PK_AdminId { get; set; }
         public string Gender1 { get; set; }
-        
+        public string PK_RoleId { get; set; }
+        public string RoleName { get; set; }
 
 
         public List<Employee> lstEmployee { get; set; }
@@ -31,6 +32,7 @@ namespace AnkurUdyogERP.Models
                         new SqlParameter("@Address",Address),
                          new SqlParameter("@Password",Password),
                           new SqlParameter("@Fk_UserTypeId","2"),
+                          new SqlParameter("@FK_RoleId",PK_RoleId),
                            new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("SaveEmployeeRegistration", para);
@@ -52,6 +54,7 @@ namespace AnkurUdyogERP.Models
                       new SqlParameter("@City",City),
                        new SqlParameter("@Gender",Gender),
                         new SqlParameter("@Address",Address),
+                           new SqlParameter("@FK_RoleId",PK_RoleId),
                            new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("UpdateEmployee", para);
@@ -71,6 +74,17 @@ namespace AnkurUdyogERP.Models
                 new SqlParameter("@ToDate",ToDate)
             };
             DataSet ds = Connection.ExecuteQuery("GetEmployeeList",para);
+            return ds;
+        }
+
+
+        public DataSet GetProfileDetails()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Pk_AdminId",PK_AdminId)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetProfileDetailsForAdmin", para);
             return ds;
         }
 
@@ -105,7 +119,20 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("DeleteDistributer", para);
             return ds;
         }
-        
+
+
+        public DataSet GetRoleMasterList()
+        {
+
+            SqlParameter[] para =
+          {
+               new SqlParameter("@PK_RoleId",PK_RoleId)
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetRoleMasterList", para);
+            return ds;
+        }
+
 
     }
 }

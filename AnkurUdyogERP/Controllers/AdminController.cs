@@ -47,6 +47,8 @@ namespace AnkurUdyogERP.Controllers
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
+                    
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;
@@ -80,6 +82,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.State = dr["State"].ToString();
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;
@@ -201,9 +204,28 @@ namespace AnkurUdyogERP.Controllers
             return RedirectToAction("DistributerListForAdmin", "Admin");
         }
 
-        public ActionResult Profile()
+        public ActionResult Profile(Employee model)
         {
-            return View();
+            
+            model.PK_AdminId = Session["Pk_adminId"].ToString();
+            DataSet ds = model.GetProfileDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                    ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    ViewBag.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                    ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                    ViewBag.JoiningDate = ds.Tables[0].Rows[0]["JoiningDate"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Contact"].ToString();
+                    ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    ViewBag.FatherName = ds.Tables[0].Rows[0]["FatherName"].ToString();
+                    ViewBag.Gender = ds.Tables[0].Rows[0]["Gender"].ToString();
+                    ViewBag.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.UserType = ds.Tables[0].Rows[0]["UserType"].ToString();
+            }
+            return View(model);
         }
     }
 }

@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch" />
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-4">
                             <table class="display" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
@@ -70,7 +70,7 @@
                                         <th>Email</th>
                                         <th>PanCard No.</th>
                                         <th>GST No.</th>
-                                        <th>Limit_MT</th>
+                                        @*<th>Limit_MT</th>*@
                                         <th>PinCode</th>
                                         <th>State</th>
                                         <th>City</th>
@@ -97,7 +97,7 @@
                                                     <td>@Item.Email</td>
                                                     <td>@Item.PanNo</td>
                                                     <td>@Item.GSTNo</td>
-                                                    <td>@Item.Limit</td>
+                                                    @*<td>@Item.Limit</td>*@
                                                     <td>@Item.Pincode</td>
                                                     <td>@Item.State</td>
                                                     <td>@Item.City</td>
@@ -115,26 +115,6 @@
                                         }
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -147,6 +127,20 @@
 </div>
 }
 
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script>
+$('#FromDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeYear: true,
+            changeMonth: true,
+        });
+        $('#ToDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeYear: true,
+            changeMonth: true,
 
-
+        });
+</script>
 

@@ -1,0 +1,149 @@
+﻿@model AnkurUdyogERP.Models.Distributer
+
+@{
+    ViewBag.Title = "DealerList";
+    Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
+}
+
+@using (Html.BeginForm("DealerList", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    @*<h3>Dealer List</h3>*@
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Employee/EmployeeList"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Distributer</li>
+                        <li class="breadcrumb-item active">Dealer  List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HTML (DOM) sourced data  Starts-->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 d-flex justify-content-between">
+                        <h3 class="mb-3">Dealer List</h3>
+                        <a href="/Distributer/DealerRegistration" class="btn btn-primary"><i class="fa fa-plus"></i> Add Dealer </a>
+                    </div>
+                    <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label>LoginId <span style="color:red;"></span></label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "LoginId" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Name <span style="color:red;"></span></label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>From Date <span style="color:red;"></span></label>
+                                    <input id="FromDate" name="FromDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>To Date <span style="color:red;"></span></label>
+                                    <input id="ToDate" name="ToDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch" />
+                        <div class="table-responsive">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>LoginId</th>
+                                        <th>Password</th>
+                                        <th>Firm Name</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Email</th>
+                                        <th>PanCard No.</th>
+                                        <th>GST No.</th>
+                                        <th>Limit_MT</th>
+                                        <th>PinCode</th>
+                                        <th>State</th>
+                                        <th>City</th>
+                                        <th>Address</th>
+                                        <th>Joining Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstDealer != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstDealer)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Password</td>
+                                                    <td>@Item.FirmName</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.Mobile</td>
+                                                    <td>@Item.Email</td>
+                                                    <td>@Item.PanNo</td>
+                                                    <td>@Item.GSTNo</td>
+                                                    <td>@Item.Limit</td>
+                                                    <td>@Item.Pincode</td>
+                                                    <td>@Item.State</td>
+                                                    <td>@Item.City</td>
+                                                    <td>@Item.Address</td>
+                                                    <td>@Item.JoiningDate</td>
+                                                    <td>
+                                                        <ul class="action">
+                                                            <li class="edit"> <a href="/Distributer/DealerRegistration?Id=@Item.PK_UserId"><i class="icon-pencil-alt"></i></a></li>
+                                                            <li class="delete"><a href="/Distributer/DeleteDealer?Id=@Item.PK_UserId" onclick="return confirm('Are you sure you want to delete this dealer details ?')"><i class="icon-trash"></i></a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- HTML (DOM) sourced data  Ends-->
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+}
+
+
+
+

@@ -35,26 +35,26 @@
                         </div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                         <label class="form-label" for="validationCustom01">Firm Name <span style="color:red;">*</span></label>
                                         @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name" })
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label class="form-label" for="validationCustom01">Dealer's Name <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label class="form-label" for="validationCustom02">Contact No <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Contact Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="form-label" for="validationCustom03">Email <span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
                                 </div>
                             </div>
 
                             <div class="row g-3">
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="validationCustom03">Email <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
+                                </div>
                                
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationCustom05">PanNo <span style="color:red;">*</span></label>
@@ -64,10 +64,10 @@
                                     <label class="form-label" for="validationCustom05">GSTNo <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", @Placeholder = "GST Number", @maxlength = "10", @onchange = "return validatePan();" })
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                @*<div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationCustom05">Limit (MT) <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Limit, new { @class = "form-control", @Placeholder = "Limit (MT)" })
-                                </div>
+                                </div>*@
                             </div>
 
                             <div class="row g-3">
@@ -78,15 +78,15 @@
                             </div>
 
                             <div class="row g-3">
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationCustom05">Pincode <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationCustom05">State</label>
                                     @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationCustom05">City</label>
                                     @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
                                 </div>
@@ -204,11 +204,11 @@
             $('#GSTNo').focus();
             return false;
         }
-        if ($('#Limit').val() == '') {
-            $("#Limit").addClass('errortext');
-            $('#Limit').focus();
-            return false;
-        }
+        //if ($('#Limit').val() == '') {
+        //    $("#Limit").addClass('errortext');
+        //    $('#Limit').focus();
+        //    return false;
+        //}
         if ($('#Address').val() == '') {
             $("#Address").addClass('errortext');
             $('#Address').focus();
