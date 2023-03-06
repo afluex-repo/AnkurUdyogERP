@@ -36,8 +36,9 @@
                         {
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label>Today's Pending Limit<span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.PendingLimit, new { @class = "form-control", @placeholder = "Today's Pending Limit", @onkeypress = "return isNumberKey(event);" })
+                                    <label>Today's Pending Limit</label>
+                                    <input type="text" id="PendingLimit" name="PendingLimit" class="form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly = true />
+                                    @*@Html.TextBoxFor(m => m.PendingLimit, new { @class = "form-control", @placeholder = "Today's Pending Limit", @onkeypress = "return isNumberKey(event);" })*@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Dealer <span style="color:red;">*</span></label>
@@ -46,27 +47,27 @@
                                 <div class="col-md-6">
                                     <label>Section <span style="color:red;">*</span></label>
                                     @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return changeSection();"})
-                                </div>
+                                </div>  
                                 <div class="col-md-6">
-                                    <label>Rate (per/kg)<span style="color:red;">*</span></label>
+                                    <label>Rate (per/kg)</label>
                                     @Html.TextBoxFor(m => m.Rate, new { @class = "form-control", @placeholder = "Rate (per/kg)", @onkeypress = "return isNumberKey(event);", @readonly = true })
                                 </div>
                                 
 
                                 <div class="col-md-6">
-                                    <label>Order Quantity (per/kg)<span style="color:red;"></span></label>
+                                    <label>Order Quantity (per/kg)<span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.OrderQuantity, new { @class = "form-control", @placeholder = "Order Quantity (per/kg)", @onkeypress = "return isNumberKey(event);", @onchange = "return changeOrderQuantity();" })
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Quintal<span style="color:red;">*</span></label>
+                                    <label>Quintal</label>
                                     @Html.TextBoxFor(m => m.Quintal, new { @class = "form-control", @placeholder = "Quintal ", @readonly = true})
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Ton <span style="color:red;">*</span></label>
+                                    <label>Ton </label>
                                     @Html.TextBoxFor(m => m.Ton, new { @class = "form-control", @placeholder = "Ton", @readonly = true })
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Total Amount <span style="color:red;">*</span></label>
+                                    <label>Total Amount</label>
                                     @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Total Amount ", @readonly = true })
                                 </div>
 
@@ -97,7 +98,7 @@
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Pendint Limit</th>
+                                        @*<th>Pending Limit</th>*@
                                         <th>Dealer</th>
                                         <th>Section</th>
                                         <th>Rate (per/Kg)</th>
@@ -116,7 +117,7 @@
                                                if (i < 5) { 
                                                 <tr>
                                                     <td>@i</td>
-                                                    <td>@Item.PendingLimit</td>
+                                                    @*<td>@Item.PendingLimit</td>*@
                                                     <td>@Item.Dealer</td>
                                                     <td>@Item.Section</td>
                                                     <td>@Item.Rate</td>
@@ -198,11 +199,6 @@
     }
 
     function ValidateForm() {
-        if ($('#PendingLimit').val() == '') {
-            $("#PendingLimit").addClass('errortext');
-            $('#PendingLimit').focus();
-            return false;
-        }
         if ($('#Dealer').val() == '0') {
             $("#Dealer").addClass('errortext');
             $('#Dealer').focus();
@@ -213,19 +209,9 @@
             $('#Section').focus();
             return false;
         }
-        if ($('#Rate').val() == '') {
-            $("#Rate").addClass('errortext');
-            $('#Rate').focus();
-            return false;
-        }
         if ($('#OrderQuantity').val() == '') {
             $("#OrderQuantity").addClass('errortext');
             $('#OrderQuantity').focus();
-            return false;
-        }
-        if ($('#TotalAmount').val() == '') {
-            $("#TotalAmount").addClass('errortext');
-            $('#TotalAmount').focus();
             return false;
         }
         return true;

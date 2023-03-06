@@ -41,7 +41,8 @@ namespace AnkurUdyogERP.Models
         public string OrderId { get; set; }
         public string PK_OrderId { get; set; }
         public string Date { get; set; }
-
+        public string DistributerId { get; set; }
+        public string PK_DealerId { get; set; }
 
 
 
@@ -77,7 +78,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
               {
-                new SqlParameter("@PK_UserId",PK_UserId),
+                new SqlParameter("@Fk_DistributerId",DistributerId),
                 new SqlParameter("@LoginId",LoginId),
                 new SqlParameter("@Name",Name),
                 new SqlParameter("@FromDate",FromDate),
@@ -123,7 +124,7 @@ namespace AnkurUdyogERP.Models
         public DataSet GetDealers()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@PK_UserId", UserID)
+                                      new SqlParameter("@Fk_DistributerId",DistributerId)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetDealer", para);
             return ds;
@@ -185,6 +186,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
               {
+                new SqlParameter("@Fk_DistributerId",DistributerId),
                 new SqlParameter("@PK_OrderId",OrderId),
                 new SqlParameter("@FromDate",FromDate),
                 new SqlParameter("@ToDate",ToDate)
@@ -201,6 +203,16 @@ namespace AnkurUdyogERP.Models
                 new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("DeleteOrderRequest", para);
+            return ds;
+        }
+
+        public DataSet OrderPendingLimit()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@PK_UserId",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetLimit", para);
             return ds;
         }
     }
