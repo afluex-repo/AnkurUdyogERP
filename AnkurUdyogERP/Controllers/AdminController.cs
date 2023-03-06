@@ -124,12 +124,12 @@ namespace AnkurUdyogERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Master obj = new Master();
-                    obj.PK_AdminId = dr["Pk_AdminId"].ToString();
+                    obj.PK_AdminId = dr["PK_UserId"].ToString();
                     obj.LoginId = dr["LoginId"].ToString();
                     obj.Password = dr["Password"].ToString();
                     obj.Name = dr["Name"].ToString();
                     obj.JoiningDate = dr["JoiningDate"].ToString();
-                    obj.MobileNo = dr["Contact"].ToString();
+                    obj.MobileNo = dr["Mobile"].ToString();
                     obj.Email = dr["Email"].ToString();
                     obj.Pincode = dr["PinCode"].ToString();
                     obj.State = dr["State"].ToString();

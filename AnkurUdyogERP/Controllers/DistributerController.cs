@@ -148,14 +148,14 @@ namespace AnkurUdyogERP.Controllers
         {
             Distributer model = new Distributer();
             List<Distributer> lst = new List<Distributer>();
-            //model.AddedBy = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_UserId"].ToString();
             DataSet ds = model.GetDealerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Distributer obj = new Distributer();
-                    obj.PK_UserId = dr["PK_UserId"].ToString();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
                     obj.LoginId = dr["LoginId"].ToString();
                     obj.Password = dr["Password"].ToString();
                     obj.Name = dr["Name"].ToString();
@@ -264,10 +264,25 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult OrderRequest(Distributer model, string OrderId)
         {
+            List<Distributer> lst1 = new List<Distributer>();
+            model.AddedBy = Session["PK_UserId"].ToString();
+            DataSet dss = model.OrderPendingLimit();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dss.Tables[0].Rows)
+                {
+                    Distributer obj1 = new Distributer();
+                    ViewBag.PendingLimit = dr["Limit"].ToString();
+                    lst1.Add(obj1);
+                }
+                model.lstrequest = lst1;
+            }
+
             #region ddldealer
             int dcount = 0;
             Distributer master = new Distributer();
             List<SelectListItem> ddldealer = new List<SelectListItem>();
+            master.DistributerId = Session["PK_UserId"].ToString();
             DataSet dsdealer = master.GetDealers();
             if (dsdealer != null && dsdealer.Tables.Count > 0 && dsdealer.Tables[0].Rows.Count > 0)
             {
@@ -277,7 +292,7 @@ namespace AnkurUdyogERP.Controllers
                     {
                         ddldealer.Add(new SelectListItem { Text = "Select Dealer", Value = "0" });
                     }
-                    ddldealer.Add(new SelectListItem { Text = r["DealerName"].ToString(), Value = r["PK_DealerID"].ToString() });
+                    ddldealer.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_DealerId"].ToString() });
                     dcount = dcount + 1;
                 }
             }
@@ -320,7 +335,7 @@ namespace AnkurUdyogERP.Controllers
             }
             
             List<Distributer> lst = new List<Distributer>();
-            //model.AddedBy = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_UserId"].ToString();
             DataSet dslist = model.OrderRequestList();
             if (dslist != null && dslist.Tables.Count > 0 && dslist.Tables[0].Rows.Count > 0)
             {
@@ -406,7 +421,7 @@ namespace AnkurUdyogERP.Controllers
         {
             Distributer model = new Distributer();
             List<Distributer> lst = new List<Distributer>();
-            //model.AddedBy = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_UserId"].ToString();
             DataSet ds = model.OrderRequestList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -424,10 +439,6 @@ namespace AnkurUdyogERP.Controllers
                     lst.Add(obj);
                 }
                 model.lstrequest = lst;
-            }
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
-            {
-                    ViewBag.PendingLimit = ds.Tables[1].Rows[0]["Limit"].ToString();
             }
             return View(model);
         }
@@ -485,6 +496,26 @@ namespace AnkurUdyogERP.Controllers
                 TempData["msg"] = ex.Message;
             }
             return RedirectToAction("OrderRequestList", "Distributer");
+        }
+
+        public ActionResult OrderPendingLimit()
+        {
+            Distributer model = new Distributer();
+            List<Distributer> lst = new List<Distributer>();
+            model.AddedBy = Session["PK_UserId"].ToString();
+            DataSet ds = model.OrderPendingLimit();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.OrderId = dr["PK_AdminId"].ToString();
+                    obj.PendingLimit = dr["Limit"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstrequest = lst;
+            }
+            return View(model);
         }
     }
 }

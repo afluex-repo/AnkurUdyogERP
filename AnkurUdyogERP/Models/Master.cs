@@ -74,7 +74,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
             {
-               new SqlParameter("@Pk_AdminId",PK_AdminId),
+               new SqlParameter("@PK_UserId",PK_AdminId),
                 new SqlParameter("@LoginId",LoginId),
                 new SqlParameter("@FirmName",FirmName),
                  new SqlParameter("@FromDate",FromDate),
