@@ -407,5 +407,9 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+        public ActionResult GenerateReceipt()
+        {
+            return View();
+        }
     }
 }

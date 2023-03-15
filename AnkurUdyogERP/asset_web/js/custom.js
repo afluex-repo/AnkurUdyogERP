@@ -404,7 +404,7 @@ if ($('.team-carousel').length) {
                 items: 2
             },
             1300: {
-                items: 3
+                items: 4
             },
             1700: {
                 items: 4
