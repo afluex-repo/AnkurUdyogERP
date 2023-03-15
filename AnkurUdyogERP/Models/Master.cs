@@ -26,6 +26,19 @@ namespace AnkurUdyogERP.Models
         public string SectionMaster { get; set; }
         public string Rate { get; set; }
 
+        public List<Master> lstrequest { get; set; }
+        public string DistributerId { get; set; }
+        public string OrderId { get; set; }
+        public string PendingLimit { get; set; }
+        public string Dealer { get; set; }
+        public string Section { get; set; }
+        public string OrderQuantity { get; set; }
+        public string TotalAmount { get; set; }
+        public string Date { get; set; }
+        public string Distributer { get; set; }
+        public string PK_DistributerId { get; set; }
+        
+
 
         public DataSet SaveDistributerRegistration()
         {
@@ -46,14 +59,14 @@ namespace AnkurUdyogERP.Models
                           new SqlParameter("@Fk_UserTypeId","3"),
                            new SqlParameter("@AddedBy",AddedBy)
             };
-            DataSet ds = Connection.ExecuteQuery("SaveDistributerRegistration", para);
+            DataSet ds = Connection.ExecuteQuery("DistributerRegistration", para);
             return ds;
         }
         public DataSet UpdateDistributer()
         {
             SqlParameter[] para =
             {
-                 new SqlParameter("@PK_AdminId",PK_AdminId),
+                 new SqlParameter("@PK_DistributerId",DistributerId),
                 new SqlParameter("@Name",Name),
                  new SqlParameter("@FirmName",FirmName),
                   new SqlParameter("@MobileNo",MobileNo),
@@ -74,7 +87,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
             {
-               new SqlParameter("@Pk_AdminId",PK_AdminId),
+               new SqlParameter("@PK_DistributerId",DistributerId),
                 new SqlParameter("@LoginId",LoginId),
                 new SqlParameter("@FirmName",FirmName),
                  new SqlParameter("@FromDate",FromDate),
@@ -189,7 +202,49 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetSectionMasterList",para);
             return ds;
         }
- 
+        public DataSet OrderRequestList()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Fk_DistributerId",DistributerId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("OrderRequestListforAdmin", para);
+            return ds;
+        }
 
+        public DataSet GetDistributer()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Fk_DistributerId",DistributerId)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetDistributer", para);
+            return ds;
+        }
+
+        public DataSet RejectOrderRequest()
+        {
+            SqlParameter[] para =
+             {
+                new SqlParameter("@FK_OrderId",OrderId),
+                new SqlParameter("@Status",Status),
+                new SqlParameter("@RejectedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("RejectOrderRequest", para);
+            return ds;
+        }
+
+        public DataSet ApproveOrderRequest()
+        {
+            SqlParameter[] para =
+             {
+                new SqlParameter("@FK_OrderId",OrderId),
+                new SqlParameter("@Status",Status),
+                new SqlParameter("@ApprovedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("ApproveOrderRequest", para);
+            return ds;
+        }
     }
 }

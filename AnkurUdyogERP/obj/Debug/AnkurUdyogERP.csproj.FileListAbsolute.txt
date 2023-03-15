@@ -106,59 +106,6 @@ D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogER
 D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 D:\Repository-Projects\Repository-Projects\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\csc.exe
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CSharp.Core.targets
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.VisualBasic.Core.targets
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\System.Collections.Immutable.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\System.Reflection.Metadata.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\vbc.exe
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\VBCSCompiler.exe
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\VBCSCompiler.exe.config
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll.config
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.pdb
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.Agent.Intercept.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.DependencyCollector.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.PerfCounterCollector.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.ServerTelemetryChannel.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.Web.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.WindowsServer.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.ApplicationInsights.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.Web.Infrastructure.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Newtonsoft.Json.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Net.Http.Formatting.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Helpers.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Mvc.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Razor.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Deployment.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Razor.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.DependencyCollector.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.ServerTelemetryChannel.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.Web.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.WindowsServer.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.ApplicationInsights.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Razor.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Deployment.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Razor.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Helpers.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Mvc.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Newtonsoft.Json.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Net.Http.Formatting.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.xml
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\csc.exe
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -266,7 +213,6 @@ D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\Syste
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\csc.exe
@@ -322,3 +268,56 @@ D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.x
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\csc.exe
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CSharp.Core.targets
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.VisualBasic.Core.targets
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\System.Collections.Immutable.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\System.Reflection.Metadata.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\vbc.exe
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\VBCSCompiler.exe
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\VBCSCompiler.exe.config
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll.config
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.pdb
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.Agent.Intercept.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.DependencyCollector.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.PerfCounterCollector.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.ServerTelemetryChannel.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.Web.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.WindowsServer.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.ApplicationInsights.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.Web.Infrastructure.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Newtonsoft.Json.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Net.Http.Formatting.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Helpers.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Mvc.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Razor.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Deployment.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Razor.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.DependencyCollector.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.ServerTelemetryChannel.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.Web.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.AI.WindowsServer.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.ApplicationInsights.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Razor.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Deployment.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Webpages.Razor.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Helpers.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Mvc.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\Newtonsoft.Json.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Net.Http.Formatting.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.xml
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
