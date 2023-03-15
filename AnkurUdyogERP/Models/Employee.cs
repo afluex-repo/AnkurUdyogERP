@@ -13,6 +13,8 @@ namespace AnkurUdyogERP.Models
         public string Gender1 { get; set; }
         public string PK_RoleId { get; set; }
         public string RoleName { get; set; }
+        public string DistributerId { get; set; }
+        
 
 
         public List<Employee> lstEmployee { get; set; }
@@ -113,7 +115,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
               {
-                new SqlParameter("@Pk_AdminId",PK_AdminId),
+                new SqlParameter("@Pk_DistributerId",DistributerId),
                 new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("DeleteDistributer", para);

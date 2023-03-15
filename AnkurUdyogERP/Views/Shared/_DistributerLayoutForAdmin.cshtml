@@ -24,17 +24,26 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick-theme.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/prism.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
     <!-- Responsive css-->
+
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 
 </head>
 <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <!-- Loader ends-->
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
         <!-- Page Header Start-->
@@ -108,6 +117,13 @@
                                             <li><a href="/Distributer/DealerList">Dealer List</a></li>
                                         </ul>
                                     </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Order</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Distributer/OrderRequest">Order Request</a></li>
+                                        <li><a href="/Distributer/OrderRequestList">Order List</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                             <div class="sidebar-img-section">
                                 <div class="sidebar-img-content">
@@ -136,7 +152,6 @@
     </div>
 
   
-    <!-- latest jquery-->
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/bootstrap/popper.min.js"></script>
     <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
@@ -148,7 +163,15 @@
     <!-- Sidebar jquery-->
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/sidebar-menu.js"></script>
-
+    <script src="../assets/js/counter/jquery.waypoints.min.js"></script>
+    <script src="../assets/js/counter/jquery.counterup.min.js"></script>
+    <script src="../assets/js/counter/counter-custom.js"></script>
+    <script src="../assets/js/popover-custom.js"></script>
+    <!-- Theme js-->
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/theme-customizer/customizer.js"></script>
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.en.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.custom.js"></script>
@@ -165,9 +188,6 @@
 
     <script src="../assets/js/chart/chartjs/chart.min.js"></script>
     <script src="../assets/js/chart/chartjs/chart.custom.js"></script>
-    <script src="../assets/js/tooltip-init.js"></script>
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/theme-customizer/customizer.js"></script>
+
 </body>
 </html>

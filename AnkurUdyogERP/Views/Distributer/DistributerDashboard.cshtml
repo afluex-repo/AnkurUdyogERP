@@ -56,7 +56,7 @@
                                     <div class="icon"><i data-feather="shopping-bag"></i></div>
                                     <div class="sale-content">
                                         <h3>Order Limit</h3>
-                                        <p>@ViewBag.OrderLimit</p>
+                                        <p>@ViewBag.TodayOrderLimit</p>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
                                         <h3>Total Order</h3>
-                                        <p>0</p>
+                                        <p>@ViewBag.TotalOrder</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="users"></i></div>
                                     <div class="sale-content">
-                                        <h3>Dispetch Order</h3>
+                                        <h3>Dispatch Order</h3>
                                         <p>0</p>
                                     </div>
                                 </div>
@@ -110,11 +110,11 @@
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
                                         <h3>Today Order</h3>
-                                        <p>0</p>
+                                        <p>@ViewBag.TodayOrder</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="small-chart-view order-chart" id="order-chart"></div>
+                            <div class="small-chart-view order-chart" id="today-order"></div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="small-chart-view order-chart" id="order-chart"></div>
+                            <div class="small-chart-view order-chart" id="pending-order"></div>
                         </div>
                     </div>
                 </div>
