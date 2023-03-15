@@ -124,7 +124,7 @@ namespace AnkurUdyogERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Master obj = new Master();
-                    obj.PK_AdminId = dr["PK_UserId"].ToString();
+                    obj.DistributerId = dr["PK_DistributerId"].ToString();
                     obj.LoginId = dr["LoginId"].ToString();
                     obj.Password = dr["Password"].ToString();
                     obj.Name = dr["Name"].ToString();
@@ -146,6 +146,8 @@ namespace AnkurUdyogERP.Controllers
             return View(model);
         }
         [HttpPost]
+        [ActionName("DistributerListForAdmin")]
+        [OnAction(ButtonName = "btnSearch")]
         public ActionResult DistributerListForAdmin(Master model)
         {
             List<Master> lst = new List<Master>();
@@ -157,12 +159,12 @@ namespace AnkurUdyogERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Master obj = new Master();
-                    obj.PK_AdminId = dr["Pk_AdminId"].ToString();
+                    obj.DistributerId = dr["PK_DistributerId"].ToString();
                     obj.LoginId = dr["LoginId"].ToString();
                     obj.Password = dr["Password"].ToString();
                     obj.Name = dr["Name"].ToString();
                     obj.JoiningDate = dr["JoiningDate"].ToString();
-                    obj.MobileNo = dr["Contact"].ToString();
+                    obj.MobileNo = dr["Mobile"].ToString();
                     obj.Email = dr["Email"].ToString();
                     obj.Pincode = dr["PinCode"].ToString();
                     obj.State = dr["State"].ToString();
@@ -183,23 +185,23 @@ namespace AnkurUdyogERP.Controllers
             try
             {
                 model.AddedBy = Session["Pk_adminId"].ToString();
-                model.PK_AdminId = Id;
+                model.DistributerId = Id;
                 DataSet ds = model.DeleteDistributer();
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["DeleteDistributer"] = "Distributer Deleted  Successfully";
+                        TempData["Distributer"] = "Distributer Deleted  Successfully";
                     }
                     else
                     {
-                        TempData["DeleteDistributer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Distributer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["DeleteDistributer"] = ex.Message;
+                TempData["Distributer"] = ex.Message;
             }
             return RedirectToAction("DistributerListForAdmin", "Admin");
         }
@@ -226,6 +228,184 @@ namespace AnkurUdyogERP.Controllers
                     ViewBag.UserType = ds.Tables[0].Rows[0]["UserType"].ToString();
             }
             return View(model);
+        }
+
+        public ActionResult OrderDetails()
+        {
+            #region ddldistributer
+            int dcount = 0;
+            Master master = new Master();
+            List<SelectListItem> ddldistributer = new List<SelectListItem>();
+            master.DistributerId = Session["Pk_adminId"].ToString();
+            DataSet dsdistributer = master.GetDistributer();
+            if (dsdistributer != null && dsdistributer.Tables.Count > 0 && dsdistributer.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsdistributer.Tables[0].Rows)
+                {
+                    if (dcount == 0)
+                    {
+                        ddldistributer.Add(new SelectListItem { Text = "Select Distributer", Value = "0" });
+                    }
+                    ddldistributer.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_DistributerId"].ToString() });
+                    dcount = dcount + 1;
+                }
+            }
+            ViewBag.ddldistributer = ddldistributer;
+            #endregion
+
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            //model.DistributerId = Session["Pk_adminId"].ToString();
+            DataSet ds = model.OrderRequestList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.OrderId = dr["PK_OrderId"].ToString();
+                    obj.Distributer = dr["DistributerName"].ToString();
+                    obj.PendingLimit = dr["PendingLimit"].ToString();
+                    obj.Dealer = dr["DealerName"].ToString();
+                    obj.Section = dr["Section"].ToString();
+                    obj.Rate = dr["Rate"].ToString();
+                    obj.OrderQuantity = dr["OrderQuantity"].ToString();
+                    obj.TotalAmount = dr["TotalAmount"].ToString();
+                    obj.Date = dr["Date"].ToString();
+                    obj.Status = (dr["Status"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstrequest = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("OrderDetails")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult OrderDetails(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            //model.Distributer = Session["Pk_adminId"].ToString();
+            model.DistributerId = model.DistributerId == "0" ? null : model.DistributerId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.OrderRequestList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.OrderId = dr["PK_OrderId"].ToString();
+                    obj.Distributer = dr["DistributerName"].ToString();
+                    obj.PendingLimit = dr["PendingLimit"].ToString();
+                    obj.Dealer = dr["DealerName"].ToString();
+                    obj.Section = dr["Section"].ToString();
+                    obj.Rate = dr["Rate"].ToString();
+                    obj.OrderQuantity = dr["OrderQuantity"].ToString();
+                    obj.TotalAmount = dr["TotalAmount"].ToString();
+                    obj.Date = dr["Date"].ToString();
+                    obj.Status = (dr["Status"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstrequest = lst;
+            }
+
+            #region ddldistributer
+            int dcount = 0;
+            Master master = new Master();
+            List<SelectListItem> ddldistributer = new List<SelectListItem>();
+            master.DistributerId = Session["Pk_adminId"].ToString();
+            DataSet dsdistributer = master.GetDistributer();
+            if (dsdistributer != null && dsdistributer.Tables.Count > 0 && dsdistributer.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsdistributer.Tables[0].Rows)
+                {
+                    if (dcount == 0)
+                    {
+                        ddldistributer.Add(new SelectListItem { Text = "Select Distributer", Value = "0" });
+                    }
+                    ddldistributer.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_DistributerId"].ToString() });
+                    dcount = dcount + 1;
+                }
+            }
+            ViewBag.ddldistributer = ddldistributer;
+            #endregion
+            return View(model);
+        }
+
+        public ActionResult ApproveOrderRequest(string OrderId)
+        {
+            string FormName = " ";
+            string Controller = "";
+            try
+            {
+                if (OrderId != null)
+                {
+                    Master model = new Master();
+                    model.OrderId = OrderId;
+                    model.Status = "Approved";
+                    model.AddedBy = Session["Pk_adminId"].ToString();
+                    DataSet ds = model.ApproveOrderRequest();
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["Order"] = "Order Request Approved Successfully !!";
+                            FormName = "OrderDetails";
+                            Controller = "Admin";
+                        }
+                        else
+                        {
+                            TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            FormName = "OrderDetails";
+                            Controller = "Admin";
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+        
+
+        public ActionResult RejectOrderRequest(string OrderId)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                if (OrderId != null)
+                {
+                    Master model = new Master();
+                    model.OrderId = OrderId;
+                    model.Status = "Rejected";
+                    model.AddedBy = Session["Pk_adminId"].ToString();
+                    DataSet ds = model.RejectOrderRequest();
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["Order"] = "Order Request Rejected Successfully !!";
+                            FormName = "OrderDetails";
+                            Controller = "Admin";
+                        }
+                        else
+                        {
+                            TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            FormName = "OrderDetails";
+                            Controller = "Admin";
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return RedirectToAction(FormName, Controller);
         }
     }
 }

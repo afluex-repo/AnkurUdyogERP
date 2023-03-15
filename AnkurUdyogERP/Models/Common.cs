@@ -27,7 +27,7 @@ namespace AnkurUdyogERP.Models
         public string Password { get; set; }
         public string JoiningDate { get; set; }
         public string AddedBy { get; set; }
-
+        public string Status { get; set; }
 
 
         public static string GenerateAlphaNumericNumber()
