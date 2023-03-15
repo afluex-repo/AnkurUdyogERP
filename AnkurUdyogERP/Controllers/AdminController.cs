@@ -205,10 +205,8 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DistributerListForAdmin", "Admin");
         }
-
         public ActionResult Profile(Employee model)
         {
-            
             model.PK_AdminId = Session["Pk_adminId"].ToString();
             DataSet ds = model.GetProfileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -229,7 +227,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         public ActionResult OrderDetails()
         {
             #region ddldistributer
@@ -252,7 +249,6 @@ namespace AnkurUdyogERP.Controllers
             }
             ViewBag.ddldistributer = ddldistributer;
             #endregion
-
             Master model = new Master();
             List<Master> lst = new List<Master>();
             //model.DistributerId = Session["Pk_adminId"].ToString();
@@ -278,7 +274,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("OrderDetails")]
         [OnAction(ButtonName = "btnSearch")]
@@ -332,7 +327,6 @@ namespace AnkurUdyogERP.Controllers
             #endregion
             return View(model);
         }
-
         public ActionResult ApproveOrderRequest(string OrderId)
         {
             string FormName = " ";
@@ -369,8 +363,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        
-
         public ActionResult RejectOrderRequest(string OrderId)
         {
             string FormName = "";
