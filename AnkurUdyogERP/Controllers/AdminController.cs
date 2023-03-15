@@ -407,9 +407,28 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        public ActionResult GenerateReceipt()
+        public ActionResult GenerateReceipt(Master model,string OrderId)
         {
-            return View();
+            if(OrderId!=null)
+            {
+                model.OrderId = OrderId;
+                DataSet ds = model.GetDeoDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.OrderId = ds.Tables[0].Rows[0]["PK_OrderId"].ToString();
+                    ViewBag.Distributer = ds.Tables[0].Rows[0]["DistributerName"].ToString();
+                    ViewBag.PendingLimit = ds.Tables[0].Rows[0]["PendingLimit"].ToString();
+                    ViewBag.Dealer = ds.Tables[0].Rows[0]["DealerName"].ToString();
+                    ViewBag.Section = ds.Tables[0].Rows[0]["Section"].ToString();
+                    ViewBag.Rate = ds.Tables[0].Rows[0]["Rate"].ToString();
+                    ViewBag.OrderQuantity = ds.Tables[0].Rows[0]["OrderQuantity"].ToString();
+                    ViewBag.TotalAmount = ds.Tables[0].Rows[0]["TotalAmount"].ToString();
+                    ViewBag.Date = ds.Tables[0].Rows[0]["Date"].ToString();
+                    ViewBag.Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                    ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                }
+            }
+            return View(model);
         }
     }
 }
