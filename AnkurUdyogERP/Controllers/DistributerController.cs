@@ -20,9 +20,12 @@ namespace AnkurUdyogERP.Controllers
             Distributer newdata = new Distributer();
             try
             {
+                newdata.DistributerId = Session["PK_DistributerId"].ToString();
                 DataSet Ds = newdata.GetDetails();
                 ViewBag.Dealer = Ds.Tables[0].Rows[0]["Dealer"].ToString();
-                ViewBag.OrderLimit = Ds.Tables[0].Rows[0]["OrderLimit"].ToString();
+                ViewBag.TodayOrder = Ds.Tables[0].Rows[0]["TodayOrder"].ToString();
+                ViewBag.TodayOrderLimit = Ds.Tables[0].Rows[0]["TodayOrderLimit"].ToString();
+                ViewBag.TotalOrder = Ds.Tables[0].Rows[0]["TotalOrder"].ToString();
             }
             catch (Exception ex)
             {
@@ -63,7 +66,8 @@ namespace AnkurUdyogERP.Controllers
         {
             if (Id != null)
             {
-                model.PK_UserId = Id;
+                model.PK_DealerId = Id;
+                model.DistributerId = Session["PK_DistributerId"].ToString();
                 DataSet ds = model.GetDealerList();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -81,6 +85,34 @@ namespace AnkurUdyogERP.Controllers
                     model.PanNo = ds.Tables[0].Rows[0]["PancardNo"].ToString();
                 }
             }
+            List<Distributer> lst = new List<Distributer>();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds1 = model.GetDealerList();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds1.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Password = dr["Password"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    obj.Mobile = dr["Mobile"].ToString();
+                    obj.Email = dr["Email"].ToString();
+                    obj.Pincode = dr["PinCode"].ToString();
+                    obj.State = dr["State"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.Address = dr["Address"].ToString();
+                    obj.JoiningDate = dr["JoiningDate"].ToString();
+                    obj.FirmName = dr["FirmName"].ToString();
+                    obj.GSTNo = dr["GSTNo"].ToString();
+                    //obj.Limit = dr["Limit_MT"].ToString();
+                    obj.PanNo = dr["PancardNo"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDealer = lst;
+            }
+
             return View(model);
         }
         [HttpPost]
@@ -90,7 +122,7 @@ namespace AnkurUdyogERP.Controllers
         {
             try
             {
-                model.AddedBy = Session["PK_UserId"].ToString();
+                model.AddedBy = Session["PK_DistributerId"].ToString();
                 var Pass = Common.GenerateAlphaNumericNumber();
                 model.Password = Pass;
                 DataSet ds = model.SaveDealerRegistration();
@@ -116,14 +148,14 @@ namespace AnkurUdyogERP.Controllers
         [HttpPost]
         [ActionName("DealerRegistration")]
         [OnAction(ButtonName = "btnUpdate")]
-        public ActionResult UpdateDealer(Distributer model, string PK_UserId)
+        public ActionResult UpdateDealer(Distributer model, string PK_DealerId)
         {
             try
             {
-                model.UserID = PK_UserId;
-                if (model.UserID != null)
+                model.PK_DealerId = PK_DealerId;
+                if (model.PK_DealerId != null)
                 {
-                    model.AddedBy = Session["PK_UserId"].ToString();
+                    model.AddedBy = Session["PK_DistributerId"].ToString();
                     DataSet ds = model.UpdateDealer();
                     if (ds != null && ds.Tables.Count > 0)
                     {
@@ -148,7 +180,7 @@ namespace AnkurUdyogERP.Controllers
         {
             Distributer model = new Distributer();
             List<Distributer> lst = new List<Distributer>();
-            model.DistributerId = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet ds = model.GetDealerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -184,13 +216,14 @@ namespace AnkurUdyogERP.Controllers
             List<Distributer> lst = new List<Distributer>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet ds = model.GetDealerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Distributer obj = new Distributer();
-                    obj.PK_UserId = dr["PK_UserId"].ToString();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
                     obj.LoginId = dr["LoginId"].ToString();
                     obj.Password = dr["Password"].ToString();
                     obj.Name = dr["Name"].ToString();
@@ -201,6 +234,9 @@ namespace AnkurUdyogERP.Controllers
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
                     obj.JoiningDate = dr["JoiningDate"].ToString();
+                    obj.FirmName = dr["FirmName"].ToString();
+                    obj.GSTNo = dr["GSTNo"].ToString();
+                    obj.PanNo = dr["PancardNo"].ToString();
                     lst.Add(obj);
                 }
                 model.lstDealer = lst;
@@ -212,8 +248,8 @@ namespace AnkurUdyogERP.Controllers
         {
             try
             {
-                model.AddedBy = Session["PK_UserId"].ToString();
-                model.PK_UserId = Id;
+                model.AddedBy = Session["PK_DistributerId"].ToString();
+                model.PK_DealerId = Id;
                 DataSet ds = model.DeleteDealer();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -265,24 +301,24 @@ namespace AnkurUdyogERP.Controllers
         public ActionResult OrderRequest(Distributer model, string OrderId)
         {
             List<Distributer> lst1 = new List<Distributer>();
-            model.AddedBy = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet dss = model.OrderPendingLimit();
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in dss.Tables[0].Rows)
                 {
                     Distributer obj1 = new Distributer();
-                    ViewBag.PendingLimit = dr["Limit"].ToString();
+                    ViewBag.PendingLimit = dr["TodayPendingLimit"].ToString();
                     lst1.Add(obj1);
                 }
                 model.lstrequest = lst1;
             }
-
+            
             #region ddldealer
             int dcount = 0;
             Distributer master = new Distributer();
             List<SelectListItem> ddldealer = new List<SelectListItem>();
-            master.DistributerId = Session["PK_UserId"].ToString();
+            master.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet dsdealer = master.GetDealers();
             if (dsdealer != null && dsdealer.Tables.Count > 0 && dsdealer.Tables[0].Rows.Count > 0)
             {
@@ -327,7 +363,7 @@ namespace AnkurUdyogERP.Controllers
                     model.OrderId = ds1.Tables[0].Rows[0]["PK_OrderId"].ToString();
                     model.PendingLimit = ds1.Tables[0].Rows[0]["PendingLimit"].ToString();
                     model.Dealer = ds1.Tables[0].Rows[0]["Name"].ToString();
-                    model.Section = ds1.Tables[0].Rows[0]["FK_SectionId"].ToString();
+                    model.Section = ds1.Tables[0].Rows[0]["Section"].ToString();
                     model.Rate = ds1.Tables[0].Rows[0]["Rate"].ToString();
                     model.OrderQuantity = ds1.Tables[0].Rows[0]["OrderQuantity"].ToString();
                     model.TotalAmount = ds1.Tables[0].Rows[0]["TotalAmount"].ToString();
@@ -335,7 +371,7 @@ namespace AnkurUdyogERP.Controllers
             }
             
             List<Distributer> lst = new List<Distributer>();
-            model.DistributerId = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet dslist = model.OrderRequestList();
             if (dslist != null && dslist.Tables.Count > 0 && dslist.Tables[0].Rows.Count > 0)
             {
@@ -345,7 +381,7 @@ namespace AnkurUdyogERP.Controllers
                     obj1.OrderId = dr["PK_OrderId"].ToString();
                     obj1.PendingLimit = dr["PendingLimit"].ToString();
                     obj1.Dealer = dr["Name"].ToString();
-                    obj1.Section = dr["FK_SectionId"].ToString();
+                    obj1.Section = dr["Section"].ToString();
                     obj1.Rate = dr["Rate"].ToString();
                     obj1.OrderQuantity = dr["OrderQuantity"].ToString();
                     obj1.TotalAmount = dr["TotalAmount"].ToString();
@@ -363,7 +399,8 @@ namespace AnkurUdyogERP.Controllers
         {
             try
             {
-                model.AddedBy = Session["PK_UserId"].ToString();
+                model.AddedBy = Session["PK_DistributerId"].ToString();
+                model.Status = "Pending";
                 DataSet ds = model.SaveOrderRequest();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -395,7 +432,7 @@ namespace AnkurUdyogERP.Controllers
                 model.OrderId = OrderId;
                 if (model.OrderId != null)
                 {
-                    model.AddedBy = Session["PK_UserId"].ToString();
+                    model.AddedBy = Session["PK_DistributerId"].ToString();
                     DataSet ds = model.UpdateOrderRequest();
                     if (ds != null && ds.Tables.Count > 0)
                     {
@@ -421,7 +458,7 @@ namespace AnkurUdyogERP.Controllers
         {
             Distributer model = new Distributer();
             List<Distributer> lst = new List<Distributer>();
-            model.DistributerId = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet ds = model.OrderRequestList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -431,11 +468,12 @@ namespace AnkurUdyogERP.Controllers
                     obj.OrderId = dr["PK_OrderId"].ToString();
                     obj.PendingLimit = dr["PendingLimit"].ToString();
                     obj.Dealer = dr["Name"].ToString();
-                    obj.Section = dr["FK_SectionId"].ToString();
+                    obj.Section = dr["Section"].ToString();
                     obj.Rate = dr["Rate"].ToString();
                     obj.OrderQuantity = dr["OrderQuantity"].ToString();
                     obj.TotalAmount = dr["TotalAmount"].ToString();
                     obj.Date = dr["Date"].ToString();
+                    obj.Status = (dr["Status"].ToString());
                     lst.Add(obj);
                 }
                 model.lstrequest = lst;
@@ -449,7 +487,7 @@ namespace AnkurUdyogERP.Controllers
         public ActionResult OrderRequestList(Distributer model)
         {
             List<Distributer> lst = new List<Distributer>();
-            model.OrderId = Session["PK_UserId"].ToString();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.OrderRequestList();
@@ -461,10 +499,12 @@ namespace AnkurUdyogERP.Controllers
                     obj.OrderId = dr["PK_OrderId"].ToString();
                     obj.PendingLimit = dr["PendingLimit"].ToString();
                     obj.Dealer = dr["Name"].ToString();
-                    obj.Section = dr["FK_SectionId"].ToString();
+                    obj.Section = dr["Section"].ToString();
                     obj.Rate = dr["Rate"].ToString();
                     obj.OrderQuantity = dr["OrderQuantity"].ToString();
                     obj.TotalAmount = dr["TotalAmount"].ToString();
+                    obj.Date = dr["Date"].ToString();
+                    obj.Status = (dr["Status"].ToString());
                     lst.Add(obj);
                 }
                 model.lstrequest = lst;
@@ -476,7 +516,7 @@ namespace AnkurUdyogERP.Controllers
         {
             try
             {
-                model.AddedBy = Session["PK_UserId"].ToString();
+                model.AddedBy = Session["PK_DistributerId"].ToString();
                 model.OrderId = OrderId;
                 DataSet ds = model.DeleteOrderRequest();
                 if (ds != null && ds.Tables.Count > 0)
@@ -502,7 +542,7 @@ namespace AnkurUdyogERP.Controllers
         {
             Distributer model = new Distributer();
             List<Distributer> lst = new List<Distributer>();
-            model.AddedBy = Session["PK_UserId"].ToString();
+            model.AddedBy = Session["PK_DistributerId"].ToString();
             DataSet ds = model.OrderPendingLimit();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

@@ -43,14 +43,20 @@ namespace AnkurUdyogERP.Models
         public string Date { get; set; }
         public string DistributerId { get; set; }
         public string PK_DealerId { get; set; }
-
+        public string TodayPendingLimit { get; set; }
+       
 
 
         public DataSet GetDetails()
         {
-            DataSet ds = Connection.ExecuteQuery("BindDataForDashboard");
+            SqlParameter[] para =
+                 {
+                new SqlParameter("@Pk_DistributerId",DistributerId)
+            };
+            DataSet ds = Connection.ExecuteQuery("BindDataForDashboard", para);
             return ds;
         }
+        
 
         public DataSet SaveDealerRegistration()
         {
@@ -79,6 +85,7 @@ namespace AnkurUdyogERP.Models
             SqlParameter[] para =
               {
                 new SqlParameter("@Fk_DistributerId",DistributerId),
+                new SqlParameter("@PK_DealerId",PK_DealerId),
                 new SqlParameter("@LoginId",LoginId),
                 new SqlParameter("@Name",Name),
                 new SqlParameter("@FromDate",FromDate),
@@ -92,7 +99,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
               {
-                new SqlParameter("@PK_UserId",PK_UserId),
+                new SqlParameter("@PK_UserId",PK_DealerId),
                 new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("DeleteDealer", para);
@@ -103,7 +110,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
             {
-               new SqlParameter("@PK_UserId",UserID),
+               new SqlParameter("@PK_DealerId",PK_DealerId),
                 new SqlParameter("@FirmName",FirmName),
                  new SqlParameter("@Name",Name),
                     new SqlParameter("@Mobile",Mobile),
@@ -159,6 +166,7 @@ namespace AnkurUdyogERP.Models
                      new SqlParameter("@Rate",Rate),
                       new SqlParameter("@OrderQuantity",OrderQuantity),
                        new SqlParameter("@TotalAmount",TotalAmount),
+                       new SqlParameter("@Status",Status),
                        new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("SaveOrderRequest", para);
@@ -187,7 +195,6 @@ namespace AnkurUdyogERP.Models
             SqlParameter[] para =
               {
                 new SqlParameter("@Fk_DistributerId",DistributerId),
-                new SqlParameter("@PK_OrderId",OrderId),
                 new SqlParameter("@FromDate",FromDate),
                 new SqlParameter("@ToDate",ToDate)
             };
@@ -210,7 +217,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
               {
-                new SqlParameter("@PK_UserId",AddedBy)
+                new SqlParameter("@PK_DistributerId",DistributerId)
             };
             DataSet ds = Connection.ExecuteQuery("GetLimit", para);
             return ds;

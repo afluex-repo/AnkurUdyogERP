@@ -1,8 +1,8 @@
-﻿@model AnkurUdyogERP.Models.Distributer
+﻿@model AnkurUdyogERP.Models.Master
 
 @{
-    ViewBag.Title = "OrderRequestList";
-    Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="page-body">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Distributer</li>
                         <li class="breadcrumb-item active">Order Request Details</li>
                     </ol>
@@ -29,14 +29,18 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
-                        <span style="color:red;">@TempData["msg"]</span>
-                        <a href="/Distributer/OrderRequest" class="btn btn-primary"><i class="fa fa-plus"></i> Add Order Request</a>
+                        <span style="color:red;">@TempData["Order"]</span>
+                        @*<a href="/Distributer/OrderRequest" class="btn btn-primary"><i class="fa fa-plus"></i> Add Order Request</a>*@
                     </div>
                     <div class="date-picker">
                         <div class="card-body">
-                            @using (Html.BeginForm("OrderRequestList", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("OrderDetails", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
                             {
                                 <div class="row g-3">
+                                    <div class="col-md-2">
+                                        <label>Distributer <span style="color:red;"></span></label>
+                                        @Html.DropDownListFor(m => m.DistributerId, new SelectList(ViewBag.ddldistributer, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
                                     <div class="col-md-2">
                                         <label>From Date <span style="color:red;"></span></label>
                                         <input id="FromDate" name="FromDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
@@ -57,15 +61,17 @@
                                         <tr>
                                             <th>S.No.</th>
                                             @*<th>Pending Limit</th>*@
-                                            <th>Dealer</th>
+                                            <th>Distributer Name</th>
+                                            <th style="min-width:150px">Dealer Name</th>
                                             <th>Section</th>
                                             <th>Rate (per/Kg)</th>
                                             <th>Order Quantity (per/Kg)</th>
                                             <th>Total Amount</th>
                                             <th>Order Date</th>
                                             <th>Status</th>
-                                            <th>Edit</th>
-                                            @*<th>Delete</th>*@
+                                            <th style="text-align:center;">Action</th>
+                                            @*<th>Edit</th>
+                                            <th>Delete</th>*@
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,13 +85,14 @@
                                                     <tr>
                                                         <td>@i</td>
                                                         @*<td>@Item.PendingLimit</td>*@
+                                                        <td>@Item.Distributer</td>
                                                         <td>@Item.Dealer</td>
                                                         <td>@Item.Section</td>
                                                         <td>@Item.Rate</td>
                                                         <td>@Item.OrderQuantity</td>
                                                         <td>@Item.TotalAmount</td>
                                                         <td>@Item.Date</td>
-                                                        <td style="text-align:center;">
+                                                        <td  style="text-align:center;">
                                                             @if (Item.Status == "Rejected")
                                                             {
                                                                 <span class="badge badge-danger">@Item.Status</span>
@@ -99,16 +106,20 @@
                                                                 <span class="badge badge-success">@Item.Status</span>
                                                             }
                                                         </td>
-                                                        <td class="edit1">
-                                                        @if (Item.Status == "Pending")
-                                                        {
+                                                        <td style="min-width:230px">
+                                                            @if (Item.Status == "Pending")
+                                                            {
+                                                                <a href="/Admin/ApproveOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-success edit" onclick="return confirm('Are you sure you want to Approve this Order Request ?')">Approve</a>
+                                                                <a href="/Admin/RejectOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-danger edit" onclick="return confirm('Are you sure you want to Reject this Order Request ?')">Reject </a>
+                                                            }
+                                                        </td>
+                                                        @*<td class="edit1">
                                                             <ul class="action">
                                                                 <li class="edit"> <a href="/Distributer/OrderRequest?OrderId=@Item.OrderId"><i class="icon-pencil-alt"></i></a></li>
                                                             </ul>
-                                                        }
                                                         </td>
 
-                                                        @*<td class="delete1">
+                                                        <td class="delete1">
                                                             <ul class="action">
                                                                 <li class="delete"><a href="/Distributer/DeleteOrderRequest?OrderId=@Item.OrderId" onclick="return confirm('Are you sure you want to delete this Order Request ?')"><i class="icon-trash"></i></a></li>
                                                             </ul>
@@ -132,5 +143,4 @@
         <!-- Container-fluid Ends-->
     </div>
 </div>
-
 

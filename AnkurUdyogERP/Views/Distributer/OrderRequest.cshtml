@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Distributer</li>
                         <li class="breadcrumb-item active">Order Request</li>
                     </ol>
@@ -37,8 +37,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label>Today's Pending Limit</label>
-                                    <input type="text" id="PendingLimit" name="PendingLimit" class="form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly = true />
-                                    @*@Html.TextBoxFor(m => m.PendingLimit, new { @class = "form-control", @placeholder = "Today's Pending Limit", @onkeypress = "return isNumberKey(event);" })*@
+                                    <input type="text" id="PendingLimit" name="PendingLimit" class="form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly = true , oninput="return checkLimit();"/>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Dealer <span style="color:red;">*</span></label>
@@ -60,17 +59,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Quintal</label>
-                                    @Html.TextBoxFor(m => m.Quintal, new { @class = "form-control", @placeholder = "Quintal ", @readonly = true})
+                                    @Html.TextBoxFor(m => m.Quintal, new { @class = "form-control", @placeholder = "Quintal ", @readonly = true, @style= "background-color:#f6c89b" })
                                 </div>
                                 <div class="col-md-6">
                                     <label>Ton </label>
-                                    @Html.TextBoxFor(m => m.Ton, new { @class = "form-control", @placeholder = "Ton", @readonly = true })
+                                    @Html.TextBoxFor(m => m.Ton, new { @class = "form-control", @placeholder = "Ton", @readonly = true, @style = "background-color:#f6c89b" })
                                 </div>
                                 <div class="col-md-6">
                                     <label>Total Amount</label>
-                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Total Amount ", @readonly = true })
+                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Total Amount ", @readonly = true})
                                 </div>
-
 
                             </div>
                             @Html.HiddenFor(m => m.OrderId)
@@ -204,7 +202,7 @@
             $('#Dealer').focus();
             return false;
         }
-        if ($('#Section').val() == '0') {
+        if ($('#Section').val() == '') {
             $("#Section").addClass('errortext');
             $('#Section').focus();
             return false;
@@ -253,6 +251,7 @@
 
     function changeOrderQuantity() {
         $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
         debugger;
         var OrderQuantity = $('#OrderQuantity').val();
         var Rate = $('#Rate').val();
@@ -267,8 +266,6 @@
         else {
             var OrderQuantity = $('#OrderQuantity').val();
             var Rate = $('#Rate').val();
-            var TotalAmount = ((Number(OrderQuantity) * Number(Rate)))
-            $("#TotalAmount").val(TotalAmount);
         }
 
         if (Quintal == "") {
@@ -294,6 +291,20 @@
         $("#Quintal").val(Quintal);
         $("#Ton").val(Ton);
         $("#TotalAmount").val(TotalAmount);
+
+        var Lmt = $("#PendingLimit").val();
+        
+        if ((Number(Lmt)) < (Number(TotalAmount))) {
+            alert("Daily Limit is Over.Total Amount should be less than Pending Limit !!");
+            $("#PendingLimit").addClass("errortext");
+            $("#TotalAmount").addClass("errortext");
+            $("#OrderQuantity").val("");
+            $("#Quintal").val("");
+            $("#Ton").val("");
+            $("#TotalAmount").val("");
+            $("#PendingLimit").focus();
+            $("#TotalAmount").focus();
+        }
     }
 
 </script>

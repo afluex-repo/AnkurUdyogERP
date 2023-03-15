@@ -1125,6 +1125,7 @@
     <Content Include="Views\Shared\Website_LayoutPage.cshtml" />
     <Content Include="Views\Distributer\OrderRequest.cshtml" />
     <Content Include="Views\Distributer\OrderRequestList.cshtml" />
+    <Content Include="Views\Admin\OrderDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

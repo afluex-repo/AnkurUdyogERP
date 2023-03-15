@@ -122,7 +122,7 @@ namespace AnkurUdyogERP.Controllers
                         {
                             if (ds.Tables[0].Rows[0]["UserTypeName"].ToString() == "Distributer")
                             {
-                                Session["PK_UserId"] = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                                Session["PK_DistributerId"] = ds.Tables[0].Rows[0]["PK_DistributerId"].ToString();
                                 Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
                                 Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
                                 Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();

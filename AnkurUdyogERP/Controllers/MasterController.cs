@@ -20,12 +20,12 @@ namespace AnkurUdyogERP.Controllers
         {
             if (Id != null)
             {
-                model.PK_AdminId = Id;
+                model.DistributerId = Id;
                 DataSet ds = model.GetDistributerList();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
-                    model.MobileNo = ds.Tables[0].Rows[0]["Contact"].ToString();
+                    model.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
                     model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                     model.FirmName = ds.Tables[0].Rows[0]["FirmName"].ToString();
                     model.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
@@ -71,21 +71,25 @@ namespace AnkurUdyogERP.Controllers
         [HttpPost]
         [OnAction(ButtonName = "btnUpdate")]
         [ActionName("DistributerRegistration")]
-        public ActionResult UpdateDistributer(Master model)
+        public ActionResult UpdateDistributer(Master model, string DistributerId)
         {
             try
             {
-                model.AddedBy = Session["Pk_AdminId"].ToString();
-                DataSet ds = model.UpdateDistributer();
-                if (ds != null && ds.Tables.Count > 0)
+                if(DistributerId != null)
                 {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    model.DistributerId = DistributerId;
+                    model.AddedBy = Session["Pk_AdminId"].ToString();
+                    DataSet ds = model.UpdateDistributer();
+                    if (ds != null && ds.Tables.Count > 0)
                     {
-                        TempData["DistributerRegistration"] = "Distributer Updated  Successfully";
-                    }
-                    else
-                    {
-                        TempData["DistributerRegistration"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["DistributerRegistration"] = "Distributer Updated  Successfully";
+                        }
+                        else
+                        {
+                            TempData["DistributerRegistration"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
                     }
                 }
             }
@@ -95,22 +99,23 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DistributerRegistration", "Master");
         }
+
         public ActionResult DistributerList()
         {
             Master model = new Master();
             List<Master> lst = new List<Master>();
-            model.PK_AdminId = Session["Pk_AdminId"].ToString();
             DataSet ds = model.GetDistributerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Master obj = new Master();
+                    obj.DistributerId = dr["PK_DistributerId"].ToString();
                     obj.LoginId = dr["LoginId"].ToString();
                     obj.Password = dr["Password"].ToString();
                     obj.Name = dr["Name"].ToString();
                     obj.JoiningDate = dr["JoiningDate"].ToString();
-                    obj.MobileNo = dr["Contact"].ToString();
+                    obj.MobileNo = dr["Mobile"].ToString();
                     obj.Email = dr["Email"].ToString();
                     obj.Pincode = dr["PinCode"].ToString();
                     obj.State = dr["State"].ToString();
@@ -126,6 +131,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
+
         [HttpPost]
         [OnAction(ButtonName = "btnSearch")]
         [ActionName("DistributerList")]
@@ -134,18 +140,18 @@ namespace AnkurUdyogERP.Controllers
             List<Master> lst = new List<Master>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-            model.PK_AdminId = Session["Pk_AdminId"].ToString();
             DataSet ds = model.GetDistributerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Master obj = new Master();
+                    obj.DistributerId = dr["PK_DistributerId"].ToString();
                     obj.LoginId = dr["LoginId"].ToString();
                     obj.Password = dr["Password"].ToString();
                     obj.Name = dr["Name"].ToString();
                     obj.JoiningDate = dr["JoiningDate"].ToString();
-                    obj.MobileNo = dr["Contact"].ToString();
+                    obj.MobileNo = dr["Mobile"].ToString();
                     obj.Email = dr["Email"].ToString();
                     obj.Pincode = dr["PinCode"].ToString();
                     obj.State = dr["State"].ToString();
@@ -161,6 +167,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
+
         public ActionResult GetMenu()
         {
             Menu model = new Menu();
