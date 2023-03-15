@@ -21,7 +21,15 @@ namespace AnkurUdyogERP.Controllers
         {
             return View();
         }
-        public ActionResult Career()
+        public ActionResult Services()
+        {
+            return View();
+        }
+        public ActionResult TMXProcess()
+        {
+            return View();
+        }
+        public ActionResult Faq()
         {
             return View();
         }

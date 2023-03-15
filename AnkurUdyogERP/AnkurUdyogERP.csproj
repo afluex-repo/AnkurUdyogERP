@@ -805,6 +805,7 @@
     <Content Include="asset_web\images\icon\cross-out.png" />
     <Content Include="asset_web\images\icon\preloader.svg" />
     <Content Include="asset_web\images\icon\quote.png" />
+    <Content Include="asset_web\images\logo\ankur logo.svg" />
     <Content Include="asset_web\images\parallax-background\choose-style1-area-bg.jpg" />
     <Content Include="asset_web\images\parallax-background\choose-style2-area-bg.jpg" />
     <Content Include="asset_web\images\parallax-background\contact-info-area__bg.jpg" />
@@ -1118,11 +1119,13 @@
     <Content Include="Views\Master\SectionMaster.cshtml" />
     <Content Include="Views\Master\SectionMasterList.cshtml" />
     <Content Include="Views\Website\AboutUs.cshtml" />
-    <Content Include="Views\Website\Career.cshtml" />
     <Content Include="Views\Website\ContactUs.cshtml" />
     <Content Include="Views\Website\Index.cshtml" />
     <Content Include="Views\Website\OurTeam.cshtml" />
     <Content Include="Views\Shared\Website_LayoutPage.cshtml" />
+    <Content Include="Views\Website\Faq.cshtml" />
+    <Content Include="Views\Website\Services.cshtml" />
+    <Content Include="Views\Website\TMXProcess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
