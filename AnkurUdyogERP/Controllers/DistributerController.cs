@@ -33,7 +33,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(newdata);
         }
-
         public ActionResult GetStateCity(string Pincode)
         {
             try
