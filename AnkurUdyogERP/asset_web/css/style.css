@@ -8222,14 +8222,6 @@ select:focus {
     border: 1px solid #1d1d1d;
 }
 
-
-
-
-/*** 
-=============================================
-    One Page Scrool Css
-=============================================
-***/
 .about-style1-area.one-page-scrool {
     padding-bottom: 0;
 }
@@ -8237,4 +8229,9 @@ select:focus {
 .service_img
 {
     height:280px;
+}
+
+.border-img
+{
+    border:2px solid #1e1e2a;
 }

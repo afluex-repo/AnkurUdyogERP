@@ -141,7 +141,7 @@ function fullHeight() {
 //Hide Loading Box (Preloader)
 function handlePreloader() {
     if ($('.loader-wrap').length) {
-        $('.loader-wrap').delay(1000).fadeOut(500);
+        $('.loader-wrap').delay(500).fadeOut(500);
     }
     TweenMax.to($(".loader-wrap .overlay"), 1.2, {
         force3D: true,
@@ -909,10 +909,3 @@ jQuery(window).on('load', function () {
 
     })(jQuery);
 });
-
-
-
-
-
-
-$(window).enllax();
