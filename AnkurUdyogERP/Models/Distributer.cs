@@ -86,7 +86,8 @@ namespace AnkurUdyogERP.Models
               {
                 new SqlParameter("@Fk_DistributerId",DistributerId),
                 new SqlParameter("@PK_DealerId",PK_DealerId),
-                new SqlParameter("@LoginId",LoginId),
+                //new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@PancardNo",PanNo),
                 new SqlParameter("@Name",Name),
                 new SqlParameter("@FromDate",FromDate),
                 new SqlParameter("@ToDate",ToDate)

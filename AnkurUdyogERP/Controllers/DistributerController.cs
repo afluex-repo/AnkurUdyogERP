@@ -33,7 +33,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(newdata);
         }
-        
+
         public ActionResult GetStateCity(string Pincode)
         {
             try
@@ -216,6 +216,7 @@ namespace AnkurUdyogERP.Controllers
             List<Distributer> lst = new List<Distributer>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.PanNo = model.PanNo == "" ? null : model.PanNo;
             model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet ds = model.GetDealerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -313,7 +314,7 @@ namespace AnkurUdyogERP.Controllers
                 }
                 model.lstrequest = lst1;
             }
-            
+
             #region ddldealer
             int dcount = 0;
             Distributer master = new Distributer();
@@ -369,7 +370,7 @@ namespace AnkurUdyogERP.Controllers
                     model.TotalAmount = ds1.Tables[0].Rows[0]["TotalAmount"].ToString();
                 }
             }
-            
+
             List<Distributer> lst = new List<Distributer>();
             model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet dslist = model.OrderRequestList();
