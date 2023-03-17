@@ -543,9 +543,5 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-        public ActionResult Testing()
-        {
-            return View();
-        }
     }
 }
