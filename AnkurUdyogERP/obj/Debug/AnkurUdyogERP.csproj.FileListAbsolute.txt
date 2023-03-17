@@ -213,7 +213,6 @@ D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\Syste
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 D:\Repository-Projects\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
-E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\csc.exe
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -321,3 +320,4 @@ F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.xml
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\System.Web.Http.WebHost.xml
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
+E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache

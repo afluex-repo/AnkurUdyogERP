@@ -205,10 +205,8 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DistributerListForAdmin", "Admin");
         }
-
         public ActionResult Profile(Employee model)
         {
-            
             model.PK_AdminId = Session["Pk_adminId"].ToString();
             DataSet ds = model.GetProfileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -229,7 +227,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         public ActionResult OrderDetails()
         {
             #region ddldistributer
@@ -252,7 +249,6 @@ namespace AnkurUdyogERP.Controllers
             }
             ViewBag.ddldistributer = ddldistributer;
             #endregion
-
             Master model = new Master();
             List<Master> lst = new List<Master>();
             //model.DistributerId = Session["Pk_adminId"].ToString();
@@ -278,7 +274,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("OrderDetails")]
         [OnAction(ButtonName = "btnSearch")]
@@ -332,7 +327,6 @@ namespace AnkurUdyogERP.Controllers
             #endregion
             return View(model);
         }
-
         public ActionResult ApproveOrderRequest(string OrderId)
         {
             string FormName = " ";
@@ -369,8 +363,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        
-
         public ActionResult RejectOrderRequest(string OrderId)
         {
             string FormName = "";
@@ -407,9 +399,28 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        public ActionResult GenerateReceipt()
+        public ActionResult GenerateReceipt(Master model,string OrderId)
         {
-            return View();
+            if(OrderId!=null)
+            {
+                model.OrderId = OrderId;
+                DataSet ds = model.GetDeoDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.OrderId = ds.Tables[0].Rows[0]["PK_OrderId"].ToString();
+                    ViewBag.Distributer = ds.Tables[0].Rows[0]["DistributerName"].ToString();
+                    ViewBag.PendingLimit = ds.Tables[0].Rows[0]["PendingLimit"].ToString();
+                    ViewBag.Dealer = ds.Tables[0].Rows[0]["DealerName"].ToString();
+                    ViewBag.Section = ds.Tables[0].Rows[0]["Section"].ToString();
+                    ViewBag.Rate = ds.Tables[0].Rows[0]["Rate"].ToString();
+                    ViewBag.OrderQuantity = ds.Tables[0].Rows[0]["OrderQuantity"].ToString();
+                    ViewBag.TotalAmount = ds.Tables[0].Rows[0]["TotalAmount"].ToString();
+                    ViewBag.Date = ds.Tables[0].Rows[0]["Date"].ToString();
+                    ViewBag.Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                    ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                }
+            }
+            return View(model);
         }
     }
 }

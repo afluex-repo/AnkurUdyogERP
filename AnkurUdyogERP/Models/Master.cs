@@ -246,5 +246,17 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("ApproveOrderRequest", para);
             return ds;
         }
+
+
+        public DataSet GetDeoDetails()
+        {
+            SqlParameter[] para =
+             {
+                new SqlParameter("@PK_OrderId",OrderId)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDeoDetails", para);
+            return ds;
+        }
+        
     }
 }
