@@ -6,172 +6,173 @@
 }
 
 
-    <div class="page-body">
-        <div class="container-fluid">
-            <div class="page-title">
-                <div class="row">
-                    <div class="col-6">
-                        <h3>Dealer Registration</h3>
-                    </div>
-                    <div class="col-6">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
-                            <li class="breadcrumb-item">Distributer</li>
-                            <li class="breadcrumb-item active">Dealer Registration</li>
-                        </ol>
-                    </div>
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Dealer Registration</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Distributer</li>
+                        <li class="breadcrumb-item active">Dealer Registration</li>
+                    </ol>
                 </div>
             </div>
         </div>
-        <!-- Container-fluid starts-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <span style="color:red;">@TempData["msg"]</span>
-                        </div>
-                        <div class="card-body">
-                                @using (Html.BeginForm("DealerRegistration", "Distributer", FormMethod.Post, new { @id =    "form1",enctype="multipart/ form-data" }))
-                                {
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label>Firm Name <span style="color:red;">*</span></label>
-                                        @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name" })
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Dealer's Name <span style="color:red;">*</span></label>
-                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Dealer's Name"})
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Contact No <span style="color:red;">*</span></label>
-                                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Contact Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Email <span style="color:red;">*</span></label>
-                                       @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
-                                    </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <span style="color:red;">@TempData["msg"]</span>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("DealerRegistration", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/ form-data" }))
+                        {
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label>Firm Name <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.FirmName, new { @class = "form-control", @Placeholder = "Firm Name" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Dealer's Name <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Dealer's Name" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Contact No <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Contact Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Email <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
+                                </div>
 
 
-                                    <div class="col-md-6">
-                                        <label>PanNo <span style="color:red;">*</span></label>
-                                        @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>GSTNo <span style="color:red;">*</span></label>
-                                        @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", @Placeholder = "GST Number", @maxlength = "10", @onchange = "return validatePan();" })
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Address <span style="color:red;">*</span></label>
-                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control btn-square", @Placeholder = "Address", @rows = "3" })
-                                    </div>
-                                    @*<div class="col-md-6">
+                                <div class="col-md-6">
+                                    <label>PanNo <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>GSTNo <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", @Placeholder = "GST Number", @maxlength = "15", @onchange = "return validateGSTNo();" })
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Address <span style="color:red;">*</span></label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control btn-square", @Placeholder = "Address", @rows = "3" })
+                                </div>
+                                @*<div class="col-md-6">
                                         <label>Limit (MT) <span style="color:red;">*</span></label>
                                         @Html.TextBoxFor(m => m.Limit, new { @class = "form-control", @Placeholder = "Limit (MT)" })
                                     </div>*@
-                                    <div class="col-md-6">
-                                        <label>Pincode <span style="color:red;">*</span></label>
-                                        @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>State</label>
-                                        @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>City</label>
-                                        @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
-                                    </div>
+                                <div class="col-md-6">
+                                    <label>Pincode <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
                                 </div>
+                                <div class="col-md-6">
+                                    <label>State</label>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>City</label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @readonly = "readonly" })
+                                </div>
+                            </div>
                                 @Html.HiddenFor(m => m.PK_DealerId)
-                                if (Model.PK_DealerId != null)
-                                {
-                                    <input type="submit" class="btn btn-primary mt-4" value="Update" id="btnUpdate" name="btnUpdate" onclick="return validateform();" />
-                                }
-                                else
-                                {
-                                    <input type="submit" class="btn btn-primary mt-4" value="Save" id="btnSave" name="btnSave" onclick="return validateform();" />
-                                }
+                            if (Model.PK_DealerId != null)
+                            {
+                                <input type="submit" class="btn btn-primary mt-4" value="Update" id="btnUpdate" name="btnUpdate" onclick="return validateform();" />
                             }
+                            else
+                            {
+                                <input type="submit" class="btn btn-primary mt-4" value="Save" id="btnSave" name="btnSave" onclick="return validateform();" />
+                            }
+                        }
 
-                                <input type="hidden" id="UserType" value="@Session["UserType"]" />
-                                <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
-                        </div>
+                        <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                        <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive mt-4">
-                                <table class="display" id="data-source-1" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>S.No.</th>
-                                            @*<th>LoginId</th>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive mt-4">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        @*<th>LoginId</th>
                                             <th>Password</th>*@
-                                            <th>Firm Name</th>
-                                            <th>Dealer Name</th>
-                                            <th>Contact No.</th>
-                                            <th>Email</th>
-                                            <th>PanCard No.</th>
-                                            <th>GST No.</th>
-                                            <th>PinCode</th>
-                                            <th>State</th>
-                                            <th>City</th>
-                                            <th>Address</th>
-                                            <th>Joining Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (Model != null)
+                                        <th>Firm Name</th>
+                                        <th>Dealer Name</th>
+                                        <th>Contact No.</th>
+                                        <th>Email</th>
+                                        <th>PanCard No.</th>
+                                        <th>GST No.</th>
+                                        <th>PinCode</th>
+                                        <th>State</th>
+                                        <th>City</th>
+                                        <th>Address</th>
+                                        <th>Joining Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstDealer != null)
                                         {
-                                            if (Model.lstDealer != null)
+                                            int i = 1;
+                                            foreach (var Item in Model.lstDealer)
                                             {
-                                                int i = 1;
-                                                foreach (var Item in Model.lstDealer)
+                                                if (i < 5)
                                                 {
-                                                    if (i < 5)
-                                                    {
-                                                        <tr>
-                                                            <td>@i</td>
-                                                            @*<td>@Item.LoginId</td>
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        @*<td>@Item.LoginId</td>
                                                             <td>@Item.Password</td>*@
-                                                            <td style="min-width:180px">@Item.FirmName</td>
-                                                            <td style="min-width:150px">@Item.Name</td>
-                                                            <td>@Item.Mobile</td>
-                                                            <td>@Item.Email</td>
-                                                            <td>@Item.PanNo</td>
-                                                            <td>@Item.GSTNo</td>
-                                                            <td>@Item.Pincode</td>
-                                                            <td style="min-width:150px">@Item.State</td>
-                                                            <td>@Item.City</td>
-                                                            <td style="min-width:180px">@Item.Address</td>
-                                                            <td>@Item.JoiningDate</td>
-                                                        </tr>
-                                                        i++;
-                                                    }
+                                                        <td style="min-width:180px">@Item.FirmName</td>
+                                                        <td style="min-width:150px">@Item.Name</td>
+                                                        <td>@Item.Mobile</td>
+                                                        <td>@Item.Email</td>
+                                                        <td>@Item.PanNo</td>
+                                                        <td>@Item.GSTNo</td>
+                                                        <td>@Item.Pincode</td>
+                                                        <td style="min-width:150px">@Item.State</td>
+                                                        <td>@Item.City</td>
+                                                        <td style="min-width:180px">@Item.Address</td>
+                                                        <td>@Item.JoiningDate</td>
+                                                    </tr>
+                                                    i++;
                                                 }
-                                                <tr>
-                                                    <td colspan="4"><a href="~/Distributer/DealerList" class="btn btn-primary" style="float:right">View more..</a></td>
-                                                </tr>
                                             }
+                                            <tr>
+                                                <td colspan="4"><a href="~/Distributer/DealerList" class="btn btn-primary" style="float:right">View more..</a></td>
+                                            </tr>
                                         }
-                                    </tbody>
-                                </table>
-                            </div>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Container-fluid Ends-->
     </div>
-    
+    <!-- Container-fluid Ends-->
+</div>
+
 
 
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
 <script>
     function validatePan() {
         var panVal = $('#PanNo').val();
@@ -185,6 +186,21 @@
             $("#PanNo").addClass('errortext');
         }
     }
+
+
+    function validateGSTNo() {
+        debugger;
+        var panVal = $('#GSTNo').val();
+        var regpan = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+        if (regpan.test(panVal)) {
+            $("#GSTNo").removeClass('errortext');
+        } else {
+            alert("Invalid GST Number.");
+            $("#GSTNo").val('');
+            $("#GSTNo").addClass('errortext');
+        }
+    }
+
     function getStateCity() {
 
         var pincode = $('#Pincode').val();
