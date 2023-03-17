@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace AnkurUdyogERP.Controllers
 {
-    public class PermissionController : Controller
+    public class PermissionController : AdminBaseController
     {
         // GET: Permission
      

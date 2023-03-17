@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace AnkurUdyogERP.Controllers
 {
-    public class DistributerController : Controller
+    public class DistributerController : DistributerBaseController
     {
         // GET: Distributer
         public ActionResult Index()
@@ -33,7 +33,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(newdata);
         }
-
         public ActionResult GetStateCity(string Pincode)
         {
             try

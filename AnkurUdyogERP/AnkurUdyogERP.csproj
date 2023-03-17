@@ -1765,6 +1765,7 @@
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminReportController.cs" />
+    <Compile Include="Controllers\DistributerBaseController.cs" />
     <Compile Include="Controllers\DistributerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1856,6 +1857,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\AdminBase\" />
     <Folder Include="Views\AdminReport\" />
+    <Folder Include="Views\DistributerBase\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
