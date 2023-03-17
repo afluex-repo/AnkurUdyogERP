@@ -112,7 +112,6 @@ namespace AnkurUdyogERP.Controllers
                 }
                 model.lstDealer = lst;
             }
-
             return View(model);
         }
         [HttpPost]
@@ -144,7 +143,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DealerRegistration", "Distributer");
         }
-
         [HttpPost]
         [ActionName("DealerRegistration")]
         [OnAction(ButtonName = "btnUpdate")]
@@ -217,6 +215,7 @@ namespace AnkurUdyogERP.Controllers
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             model.PanNo = model.PanNo == "" ? null : model.PanNo;
+            model.Name = model.Name == "" ? null : model.Name;
             model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet ds = model.GetDealerList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -244,7 +243,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         public ActionResult DeleteDealer(Distributer model, string Id)
         {
             try
@@ -270,9 +268,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DealerList", "Distributer");
         }
-
-
-
         public ActionResult GetSectionDetails(string Section)
         {
             Distributer model = new Distributer();
@@ -298,7 +293,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult OrderRequest(Distributer model, string OrderId)
         {
             List<Distributer> lst1 = new List<Distributer>();
@@ -370,7 +364,6 @@ namespace AnkurUdyogERP.Controllers
                     model.TotalAmount = ds1.Tables[0].Rows[0]["TotalAmount"].ToString();
                 }
             }
-
             List<Distributer> lst = new List<Distributer>();
             model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet dslist = model.OrderRequestList();
@@ -392,7 +385,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("OrderRequest")]
         [OnAction(ButtonName = "btnSave")]
@@ -421,8 +413,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("OrderRequest", "Distributer");
         }
-
-
         [HttpPost]
         [ActionName("OrderRequest")]
         [OnAction(ButtonName = "btnUpdate")]
@@ -454,7 +444,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("OrderRequest", "Distributer");
         }
-
         public ActionResult OrderRequestList()
         {
             Distributer model = new Distributer();
@@ -481,7 +470,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("OrderRequestList")]
         [OnAction(ButtonName = "btnSearch")]
@@ -512,7 +500,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         public ActionResult DeleteOrderRequest(Distributer model, string OrderId)
         {
             try
@@ -538,7 +525,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("OrderRequestList", "Distributer");
         }
-
         public ActionResult OrderPendingLimit()
         {
             Distributer model = new Distributer();
