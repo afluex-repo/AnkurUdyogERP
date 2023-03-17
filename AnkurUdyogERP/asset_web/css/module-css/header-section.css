@@ -1588,7 +1588,7 @@
 ***/
 .header-style-three {
     position: relative;
-    background: #262e39;
+    background: #fff;
 }
 
 .header-style-three__inner {
@@ -1639,7 +1639,7 @@
     position: relative;
     display: block;
     padding: 13px 0;
-    background: #262e39;
+    background: #fff;
     z-index: 1;
 }
 
@@ -1797,7 +1797,7 @@
 .header-style3 {
     position: relative;
     display: block;
-    background: #262e39;
+    background: #fff;
     z-index: 1;
 }
 
@@ -1810,21 +1810,16 @@
     flex-wrap: wrap;
 }
 
-
-
 .main-menu.style3 .navigation>li>a {
-    color: #ffffff;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    color: #1c1c27;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .main-menu.style3 .navigation>li:hover>a,
 .main-menu.style3 .navigation>li.current>a {
     color: var(--thm-base);
 }
-
-
-
 
 .header-contact-info3 {
     position: absolute;

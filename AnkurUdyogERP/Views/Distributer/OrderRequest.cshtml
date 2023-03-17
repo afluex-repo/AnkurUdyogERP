@@ -26,7 +26,7 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
                         <span style="color:red;">@TempData["msg"]</span>
@@ -35,39 +35,39 @@
                         @using (Html.BeginForm("OrderRequest", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
                         {
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Today's Pending Limit</label>
                                     <input type="text" id="PendingLimit" name="PendingLimit" class="form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly = true , oninput="return checkLimit();"/>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Dealer <span style="color:red;">*</span></label>
-                                   @Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "form-control" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Section <span style="color:red;">*</span></label>
-                                    @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return changeSection();"})
+                                    @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return changeSection();" })
                                 </div>  
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Rate (per/kg)</label>
                                     @Html.TextBoxFor(m => m.Rate, new { @class = "form-control", @placeholder = "Rate (per/kg)", @onkeypress = "return isNumberKey(event);", @readonly = true })
                                 </div>
                                 
 
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Order Quantity (per/kg)<span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.OrderQuantity, new { @class = "form-control", @placeholder = "Order Quantity (per/kg)", @onkeypress = "return isNumberKey(event);", @onchange = "return changeOrderQuantity();" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Quintal</label>
-                                    @Html.TextBoxFor(m => m.Quintal, new { @class = "form-control", @placeholder = "Quintal ", @readonly = true, @style= "background-color:#f6c89b" })
+                                    @Html.TextBoxFor(m => m.Quintal, new { @class = "form-control", @placeholder = "Quintal ", @readonly = true, @style = "background-color:#f6c89b" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Ton </label>
                                     @Html.TextBoxFor(m => m.Ton, new { @class = "form-control", @placeholder = "Ton", @readonly = true, @style = "background-color:#f6c89b" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <label>Total Amount</label>
-                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Total Amount ", @readonly = true})
+                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Total Amount ", @readonly = true })
                                 </div>
 
                             </div>
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive mt-4">
@@ -125,9 +125,9 @@
                                                    i++;
                                                }
                                            }
-                                        <tr>
+                                        @*<tr>
                                             <td colspan="6"><a href="~/Distributer/OrderRequestList" class="btn btn-primary" style="float:right">View more..</a></td>
-                                        </tr>
+                                        </tr>*@
                                        }
                                    }
                                 </tbody>
