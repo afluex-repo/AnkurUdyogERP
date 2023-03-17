@@ -25,7 +25,7 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
                         <span style="color:red;">@TempData["EmployeeRegistration"]</span>
@@ -34,52 +34,52 @@
                         @using (Html.BeginForm("EmployeeRegistration", "Employee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
                         {
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Name <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name", @onkeypress = "return onlyAlphabets();" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Father Name <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @placeholder = "Father Name", @onkeypress = "return onlyAlphabets();" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Mobile Number <span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control",@maxlength="10", @placeholder = "Mobile Number", @onkeypress = "return isNumberKey(event);" })
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @maxlength = "10", @placeholder = "Mobile Number", @onkeypress = "return isNumberKey(event);" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Email Id <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email Id" })
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Gender <span style="color:red;">*</span></label>
                                     @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), new { @class = "js-example-basic-single" })
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>Role Name <span style="color:red;">*</span></label>
                                     @Html.DropDownListFor(m => m.PK_RoleId, new SelectList(ViewBag.lstrole, "Value", "Text"), new { @class = "js-example-basic-single" })
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label>Address <span style="color:red;"></span></label>
-                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                <div class="col-md-4">
+                                    <label>City <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @readonly = true })
                                 </div>
+                                
                             @*</div>
                             <div class="row g-3">*@
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>PinCode <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @maxlength = "6", @placeholder = "PinCode", @onchange = "return GetStateCity();", @onkeypress = "return isNumberKey(event);" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>State <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @readonly = true })
                                 </div>
-                                <div class="col-md-6">
-                                    <label>City <span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City",@readonly=true })
+                                
+                                <div class="col-md-12">
+                                    <label>Address <span style="color:red;"></span></label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
                                 </div>
-
                                
                             </div>
 
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive mt-4">
