@@ -58,9 +58,7 @@
                                     <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch" />
 
                                 </div>
-
                             </div>
-
                         }
                         <div class="table-responsive mt-4">
                             <table class="display" id="data-source-1" style="width:100%">
@@ -95,7 +93,12 @@
                                                 <tr>
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
-                                                    <td>@Item.Password</td>
+                                                    <td class="example-popover" data-bs-trigger="hover" data-container="body"
+                                                        data-bs-toggle="popover" data-bs-placement="right" title="Password"
+                                                        data-bs-content="@Item.Password" data-bs-offset="0,-50">
+                                                        ******
+                                                    </td>
+                                                    @*<td>@Item.Password</td>*@
                                                     <td style="min-width:130px">@Item.Name</td>
                                                     <td>@Item.MobileNo</td>
                                                     <td>@Item.Email</td>
