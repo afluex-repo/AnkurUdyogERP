@@ -52,11 +52,11 @@
                                     </div>
 
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>PanNo <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @Placeholder = "PAN Number", @maxlength = "10", @onchange = "return validatePan();" })
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label>GSTNo <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", @Placeholder = "GST Number", @maxlength = "15", @onchange = "return validateGSTNo();" })
                                 </div>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive mt-4">
@@ -177,9 +177,9 @@
                                                     i++;
                                                 }
                                             }
-                                            <tr>
+                                            @*<tr>
                                                 <td colspan="4"><a href="~/Distributer/DealerList" class="btn btn-primary" style="float:right">View more..</a></td>
-                                            </tr>
+                                            </tr>*@
                                         }
                                     }
                                 </tbody>

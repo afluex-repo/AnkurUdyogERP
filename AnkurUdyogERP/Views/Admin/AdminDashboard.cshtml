@@ -1,127 +1,291 @@
-﻿
+﻿@model AnkurUdyogERP.Models.AdminDashboard
+
 @{
     ViewBag.Title = "AdminDashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="page-body">
-    <div class="container-fluid">
-        <div class="page-title">
-            <div class="row">
-                <div class="col-6">
-                    <h3>Admin Dashboard</h3>
+
+
+@using (Html.BeginForm("AdminDashboard", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Admin Dashboard</h3>
+                    </div>
+                    <div class="col-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="home-item" href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">Dashboard</li>
+                            <li class="breadcrumb-item active">Admin Dashboard</li>
+                        </ol>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class="home-item" href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item active">Admin Dashboard</li>
-                    </ol>
-                </div>                
             </div>
+        </div>
+
+        <!-- Container-fluid starts-->
+        <div class="container-fluid ecommerce-page">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                    <div class="card sale-chart">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="sale-detail">
+                                        <div class="icon"><i data-feather="users"></i></div>
+                                        <div class="sale-content">
+                                            <h3>Total Users</h3>
+                                            <p>@ViewBag.TotalUsers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-chart-view sales-chart" id="sales-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                    <div class="card sale-chart">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="sale-detail">
+                                        <div class="icon"><i data-feather="users"></i></div>
+                                        <div class="sale-content">
+                                            <h3>Active Users</h3>
+                                            <p>@ViewBag.ActiveUsers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-chart-view income-chart" id="income-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                    <div class="card sale-chart">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="sale-detail">
+                                        <div class="icon"><i data-feather="users"></i></div>
+                                        <div class="sale-content">
+                                            <h3>InActive Users</h3>
+                                            <p>@ViewBag.InactiveUsers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-chart-view order-chart" id="order-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                    <div class="card sale-chart">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <div class="sale-detail">
+                                        <div class="icon"><i data-feather="users"></i></div>
+                                        <div class="sale-content">
+                                            <h3>Blocked Users</h3>
+                                            <p>@ViewBag.BlockedUsers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-chart-view visitor-chart" id="visitor-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="display:none;">
+                    <div class="col-xl-6 col-md-12 box-col-6">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <h3>Order Details Chart</h3>
+                            </div>
+                            <div class="card-body chart-block">
+                                <canvas id="myBarGraph"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-12 box-col-6">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <h3>Distributer Details Chart</h3>
+                            </div>
+                            <div class="card-body chart-block chart-vertical-center">
+                                <canvas id="myDoughnutGraph"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive mt-4">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Distributer</th>
+                                        <th>City</th>
+                                        <th>Joining Date</th>
+                                        <th>Limit</th>
+                                        <th>Today's Order</th>
+                                        <th>Dispatch Order</th>
+                                        <th>Pending Limit</th>
+                                        <th>Total Dispatch</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstdistributerforadmin != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstdistributerforadmin)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td id="PK_DistributerId_@i" style="display:none">@Item.PK_DistributerId</td>
+                                                    <td id="DistributerName_@i">@Item.DistributerName</td>
+                                                    <td>@Item.City</td>
+                                                    <td>@Item.JoiningDate</td>
+                                                    <td id="Limit_@i">@Item.Limit</td>
+                                                    <td id="TodayOrder_@i">@Item.TodayOrder</td>
+                                                    <td>@Item.DispatchOrder</td>
+                                                    <td id="PendingLimit_@i">@Item.PendingLimit</td>
+                                                    <td>@Item.TotalDispatch</td>
+                                                    <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Increase Limit</a></td>
+
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
         </div>
     </div>
 
-    <!-- Container-fluid starts-->
-    <div class="container-fluid ecommerce-page">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card sale-chart">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <div class="sale-detail">
-                                    <div class="icon"><i data-feather="users"></i></div>
-                                    <div class="sale-content">
-                                        <h3>Total Users</h3>
-                                        <p>@ViewBag.TotalUsers</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="small-chart-view sales-chart" id="sales-chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card sale-chart">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <div class="sale-detail">
-                                    <div class="icon"><i data-feather="users"></i></div>
-                                    <div class="sale-content">
-                                        <h3>Active Users</h3>
-                                        <p>@ViewBag.ActiveUsers</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="small-chart-view income-chart" id="income-chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card sale-chart">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <div class="sale-detail">
-                                    <div class="icon"><i data-feather="users"></i></div>
-                                    <div class="sale-content">
-                                        <h3>InActive Users</h3>
-                                        <p>@ViewBag.InactiveUsers</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="small-chart-view order-chart" id="order-chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card sale-chart">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <div class="sale-detail">
-                                    <div class="icon"><i data-feather="users"></i></div>
-                                    <div class="sale-content">
-                                        <h3>Blocked Users</h3>
-                                        <p>@ViewBag.BlockedUsers</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="small-chart-view visitor-chart" id="visitor-chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-6 col-md-12 box-col-6">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <h3>Order Details Chart</h3>
-                        </div>
-                        <div class="card-body chart-block">
-                            <canvas id="myBarGraph"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-md-12 box-col-6">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <h3>Distributer Details Chart</h3>
-                        </div>
-                        <div class="card-body chart-block chart-vertical-center">
-                            <canvas id="myDoughnutGraph"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    <!-- Container-fluid Ends-->
 
-</div>
-    </div>
+    @*   modal statrt *@
+    <div class="card-body btn-showcase">
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input type="hidden" id="FK_DistributerId" name="FK_DistributerId" />
+                        <h4>Distributer : <label id="DistributerName_123"> </label></h4>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Limit <span style="color:red;"></span></label>
+                                <input class="form-control" id="Limit" name="Limit" type="text" readonly="true" />
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Today's Order <span style="color:red;"></span></label>
+                                <input class="form-control" id="TodayOrder" name="TodayOrder" type="text" readonly="true" />
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Pending Limit <span style="color:red;"></span></label>
+                                <input class="form-control" id="PendingLimit" name="PendingLimit" type="text" readonly="true" />
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Add On Limit <span style="color:red;">*</span></label>
+                                @Html.TextBoxFor(m => m.AddOnLimit, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label><span style="color:red;"></span></label>
+                                <button type="submit" class="btn btn-primary" onclick="return SaveIncreaseLimitDateWise();" value="Save">Save</button>
 
+                                <span class="text-danger">@TempData["Increase"]</span>
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*   modal end *@
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    function GetDetails(i) {
+        debugger;
+
+        var PK_DistributerId_ = $("#PK_DistributerId_" + i).text();
+
+        var DistributerName_ = $("#DistributerName_" + i).text();
+        var Limit_ = $("#Limit_" + i).text();
+        var TodayOrder_ = $("#TodayOrder_" + i).text();
+        var PendingLimit_ = $("#PendingLimit_" + i).text();
+
+
+        $("#FK_DistributerId").val(PK_DistributerId_);
+        $("#DistributerName_123").text(DistributerName_);
+        $("#Limit").val(Limit_);
+        $("#TodayOrder").val(TodayOrder_);
+        $("#PendingLimit").val(PendingLimit_);
+    }
+    function SaveIncreaseLimitDateWise() {
+        debugger;
+        var FK_DistributerId = $("#FK_DistributerId").val();
+        var Limit = $("#Limit").val();
+        var TodayOrder = $("#TodayOrder").val();
+        var PendingLimit = $("#PendingLimit").val();
+        var AddOnLimit = $("#AddOnLimit").val();
+        if ($("#AddOnLimit").val() == "") {
+            $("#AddOnLimit").addClass('errortext');
+            $('#AddOnLimit').focus();
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/Admin/SaveIncreaseLimitDateWise', type: 'post', dataType: 'json',
+                data: { 'AddOnLimit': AddOnLimit,'FK_DistributerId': FK_DistributerId },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        //$(".bd-example-modal-lg").modal('show');
+                        alert("Increase limit save Successfully !!");
+                        window.location.reload();
+                    }
+                    else {
+                        data.Result = "no";
+                    }
+                }
+            });
+        }
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
