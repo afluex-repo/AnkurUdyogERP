@@ -41,11 +41,11 @@
                                 <div class="row g-3">
                                     <div class="col-md-3">
                                         <label>User Name <span style="color:red;">*</span></label>
-                                        @Html.DropDownListFor(m => m.Fk_UserId, new SelectList(ViewBag.ddluser, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Fk_UserId, new SelectList(ViewBag.ddluser, "Value", "Text"), new { @class = "form-control js-example-basic-single" })
                                     </div>
                                     <div class="col-md-3">
                                         <label>Main Menu <span style="color:red;">*</span></label>
-                                        @Html.DropDownListFor(m => m.Fk_FormTypeId, new SelectList(ViewBag.ddlformtype, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Fk_FormTypeId, new SelectList(ViewBag.ddlformtype, "Value", "Text"), new { @class = "form-control js-example-basic-single" })
                                     </div>
                                     <div class="col-md-3">
                                         <input type="submit" id="GetDetails" name="GetDetails" class="btn btn-primary mt-4" value="Get Details" onclick="return load();" />
