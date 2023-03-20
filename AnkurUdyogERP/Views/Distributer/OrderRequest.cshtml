@@ -41,11 +41,11 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label>Dealer <span style="color:red;">*</span></label>
-                                    @Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "form-control js-example-basic-single" })
                                 </div>
                                 <div class="col-md-3">
                                     <label>Section <span style="color:red;">*</span></label>
-                                    @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return changeSection();" })
+                                    @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control js-example-basic-single", @onchange = "return changeSection();" })
                                 </div>  
                                 <div class="col-md-3">
                                     <label>Rate (per/kg)</label>
