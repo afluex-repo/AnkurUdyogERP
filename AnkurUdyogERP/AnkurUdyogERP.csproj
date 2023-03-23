@@ -1837,7 +1837,6 @@
     <Content Include="Views\Master\SectionMaster.cshtml" />
     <Content Include="Views\Master\SectionMasterList.cshtml" />
     <Content Include="Views\Website\AboutUs.cshtml" />
-    <Content Include="Views\Website\Career.cshtml" />
     <Content Include="Views\Website\ContactUs.cshtml" />
     <Content Include="Views\Website\Index.cshtml" />
     <Content Include="Views\Website\OurTeam.cshtml" />
@@ -1846,6 +1845,7 @@
     <Content Include="Views\Distributer\OrderRequestList.cshtml" />
     <Content Include="Views\Admin\OrderDetails.cshtml" />
     <Content Include="Views\Admin\GenerateReceipt.cshtml" />
+    <Content Include="Views\Website\Career.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

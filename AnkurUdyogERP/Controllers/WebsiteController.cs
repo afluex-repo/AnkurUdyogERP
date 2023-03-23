@@ -29,7 +29,7 @@ namespace AnkurUdyogERP.Controllers
         {
             return View();
         }
-        public ActionResult Faq()
+        public ActionResult Career()
         {
             return View();
         }
