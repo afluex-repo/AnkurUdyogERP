@@ -109,8 +109,11 @@
                                                         <td style="min-width:230px">
                                                             @if (Item.Status == "Pending")
                                                             {
-                                                                <a href="/Admin/ApproveOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-success edit" onclick="return confirm('Are you sure you want to Approve this Order Request ?')">Approve</a>
-                                                                <a href="/Admin/RejectOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-danger edit" onclick="return confirm('Are you sure you want to Reject this Order Request ?')">Reject </a>
+                                                                <div class="d-flex">
+                                                                    <a href="/Admin/ApproveOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-success edit" onclick="return confirm('Are you sure you want to Approve this Order Request ?')">Approve</a>
+                                                                    <a href="/Admin/RejectOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-danger edit ms-1" onclick="return confirm('Are you sure you want to Reject this Order Request ?')">Reject </a>
+                                                                    <a style="width:146px;" href="/Admin/GenerateReceipt?OrderId=@Item.OrderId" class="btn btn-sm btn-primary ms-1">Generate D.O</a>
+                                                                </div>
                                                             }
                                                         </td>
                                                         @*<td class="edit1">

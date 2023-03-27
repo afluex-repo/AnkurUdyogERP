@@ -890,127 +890,10 @@
     margin: 0;
 }
 
-
-.subscribe-form-box1 {
-    position: relative;
-    display: block;
-    background: #ffffff;
-    padding: 40px 40px 40px;
-}
-
-.subscribe-form-box1 .row {
-    margin-left: -10px;
-    margin-right: -10px;
-}
-
-.subscribe-form-box1 .row [class*=col-] {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.subscribe-form-box1 .left-box {
-    position: relative;
-    display: block;
-    max-width: 880px;
-    width: 100%;
-}
-
-#subscribe-form {
-    position: relative;
-    display: flex;
-}
-
-.subscribe-form-box1 form .input-box {
-    position: relative;
-    display: block;
-}
-
-.subscribe-form-box1 form .input-box .icon {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    color: #757575;
-    font-size: 16px;
-    transform: translateY(-50%);
-}
-
-.subscribe-form-box1 form input[type="text"],
-.subscribe-form-box1 form input[type="email"] {
-    position: relative;
-    display: block;
-    background: #ffffff;
-    width: 100%;
-    height: 60px;
-    border: 1px solid #e5e5e5;
-    color: #757575;
-    font-size: 16px;
-    font-weight: 400;
-    font-style: normal;
-    padding-left: 20px;
-    padding-right: 50px;
-    border-radius: 0px;
-    transition: all 500ms ease;
-    font-family: var(--thm-font);
-}
-
-.subscribe-form-box1 form input[type="text"]::-webkit-input-placeholder {
-    color: #757575;
-}
-
-.subscribe-form-box1 form input[type="text"]:-moz-placeholder {
-    color: #757575;
-}
-
-.subscribe-form-box1 form input[type="text"]::-moz-placeholder {
-    color: #757575;
-}
-
-.subscribe-form-box1 form input[type="text"]:-ms-input-placeholder {
-    color: #757575;
-}
-
-.subscribe-form-box1 form input[type="email"]::-webkit-input-placeholder {
-    color: #757575;
-}
-
-.subscribe-form-box1 form input[type="email"]:-moz-placeholder {
-    color: #757575;
-}
-
-.subscribe-form-box1 form input[type="email"]::-moz-placeholder {
-    color: #757575;
-}
-
-.subscribe-form-box1 form input[type="email"]:-ms-input-placeholder {
-    color: #757575;
-}
-
-
-.subscribe-form-box1 .right-box {
-    position: relative;
-    display: block;
-    max-width: 190px;
-    width: 100%;
-    margin-left: 20px;
-}
-
-.subscribe-form-box1 form .button-box {
-    position: relative;
-    display: block;
-}
-
-.subscribe-form-box1 form .button-box button {
-    padding: 0;
-    width: 100%;
-}
-
-
-
-
 .footer-style3 {
     position: relative;
     display: block;
-    padding-top: 170px;
+    padding-top: 65px;
     padding-bottom: 0px;
     z-index: 1;
 }
@@ -1039,8 +922,6 @@
     opacity: 0.75;
 }
 
-.single-footer-widget--style3 {}
-
 .single-footer-widget--style3 .footer-logo {
     position: relative;
     display: block;
@@ -1053,12 +934,12 @@
 }
 
 .single-footer-widget--style3 .our-company-info .text-box {
-    padding-bottom: 32px;
+    padding-bottom: 0px;
 }
 
 .single-footer-widget--style3 .our-company-info .text-box p {
     color: #acb0b5;
-}
+} 
 
 .single-footer-widget--style3 .our-company-info .text-box .btn-box2 {
     position: relative;
@@ -1073,8 +954,6 @@
 .single-footer-widget--style3 .text-box .btn-box2 a:hover {
     color: var(--thm-base);
 }
-
-
 
 .footer-widget-gallery {
     position: relative;
@@ -1163,9 +1042,6 @@
     transform: perspective(400px) rotateX(0deg) scale(1.0);
     transition-delay: .5s;
 }
-
-
-
 
 .single-footer-widget--style3 .footer-widget-links-2 .left {
     width: 190px;

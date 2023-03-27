@@ -36,30 +36,25 @@
         <!-- Container-fluid starts-->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header pb-0">
                             <span style="color:red;">@TempData["SectionMaster"]</span>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-4 form-group">
                                             <label class="form-label" for="validationCustom01">Section<span style="color:red;">*</span></label>
                                             @Html.TextBoxFor(m => m.SectionMaster, new { @class = "form-control", @Placeholder = "Section", @onkeypress = "return isNumberKey(event);" })
                                         </div>
-                                        <div class="col-md-2">
-                                            <label class="form-label" for="validationCustom01"></label>
-                                            <h4 class="mt-4">MM</h4>
+                                        <div class="col-md-1 form-group">
+                                            <h4 class="mt-5">MM</h4>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-4">
                                             <label class="form-label" for="validationCustom01">Rate<span style="color:red;">*</span></label>
                                             @Html.TextBoxFor(m => m.Rate, new { @class = "form-control", @Placeholder = "Rate", @onkeypress = "return isNumberKey(event);" })
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-2">
                                             @if (Model.PK_SectionId == null)
                                             {
                                                 <input class="btn btn-primary mt-4" type="submit" value="Save" id="btnSave" name="btnSave" onclick="return validateform();" />
@@ -71,13 +66,11 @@
 
                                             }
                                         </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                                </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header pb-0">
                             <span><h3>TMT Bar Type List</h3></span><span style="color:red;">@TempData["SectionMasterList"]</span>
@@ -119,7 +112,7 @@
                                                     }
                                                 }
                                             </tbody>
-                                            <tfoot>
+                                            @*<tfoot>
                                                 <tr>
                                                     <td></td>
                                                     <td></td><td></td>
@@ -127,7 +120,7 @@
                                                     <a class="btn btn-primary px-2" href="/Master/SectionMasterList">View More...</a>
                                                 </td>
                                                 </tr>
-                                            </tfoot>
+                                            </tfoot>*@
                                         </table>
                                     </div>
                                 </div>

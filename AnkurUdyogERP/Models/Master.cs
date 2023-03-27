@@ -37,7 +37,15 @@ namespace AnkurUdyogERP.Models
         public string Date { get; set; }
         public string Distributer { get; set; }
         public string PK_DistributerId { get; set; }
+        public string TodayOrder { get; set; }
+        public string AddOnLimit { get; set; }
+
+        public string FK_DistributerId { get; set; }
         
+
+
+        public List<Master> lstdistributerforadmin { get; set; }
+
 
 
         public DataSet SaveDistributerRegistration()
@@ -246,5 +254,34 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("ApproveOrderRequest", para);
             return ds;
         }
+
+
+        public DataSet GetDeoDetails()
+        {
+            SqlParameter[] para =
+             {
+                new SqlParameter("@PK_OrderId",OrderId)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDeoDetails", para);
+            return ds;
+        }
+
+
+
+        public DataSet SaveIncreaseLimitDateWise()
+        {
+            SqlParameter[] para =
+             {
+                new SqlParameter("@Fk_DistributerId",FK_DistributerId),
+                //new SqlParameter("@Date",Date),
+                new SqlParameter("@AddOnLimit",AddOnLimit),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveIncreaseLimitDateWise", para);
+            return ds;
+            
+
+        }
+        
     }
 }

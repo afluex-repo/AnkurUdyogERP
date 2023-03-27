@@ -36573,7 +36573,7 @@ body[class*=dark-] .for-light {
 .modal-footer .btn-close,
 .modal-content .btn-close {
   position: absolute;
-  top: 30px;
+  top: 15px;
   right: 25px;
 }
 

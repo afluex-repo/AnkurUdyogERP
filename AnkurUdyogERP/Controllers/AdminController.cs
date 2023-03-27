@@ -22,6 +22,28 @@ namespace AnkurUdyogERP.Controllers
                 ViewBag.InactiveUsers = ds.Tables[0].Rows[0]["InactiveUsers"].ToString();
                 ViewBag.ActiveUsers = ds.Tables[0].Rows[0]["ActiveUsers"].ToString();
             }
+
+            List<AdminDashboard> lst = new List<AdminDashboard>();
+            DataSet ds1 = model.DistributerListForAdminDashboard();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds1.Tables[0].Rows)
+                {
+                    AdminDashboard obj = new AdminDashboard();
+                    obj.PK_DistributerId = dr["PK_DistributerId"].ToString();
+                    obj.DistributerName = dr["DistributerName"].ToString();
+                    obj.JoiningDate = dr["JoiningDate"].ToString();
+                    obj.Limit = dr["Limit"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.TodayOrder = dr["TodayOrder"].ToString();
+                    obj.DispatchOrder = dr["DispatchOrder"].ToString();
+                    obj.PendingLimit = dr["PendingLimit"].ToString();
+                    obj.TotalDispatch = dr["TotalDispatch"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstdistributerforadmin = lst;
+            }
             return View(model);
         }
         public ActionResult EmployeeList()
@@ -48,7 +70,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
                     obj.RoleName = dr["RoleName"].ToString();
-                    
+
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;
@@ -113,7 +135,7 @@ namespace AnkurUdyogERP.Controllers
                 TempData["EmployeeRegistration"] = ex.Message;
             }
             return RedirectToAction("EmployeeList", "Admin");
-        }     
+        }
         public ActionResult DistributerListForAdmin()
         {
             Master model = new Master();
@@ -205,31 +227,28 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("DistributerListForAdmin", "Admin");
         }
-
         public ActionResult Profile(Employee model)
         {
-            
             model.PK_AdminId = Session["Pk_adminId"].ToString();
             DataSet ds = model.GetProfileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                    ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                    ViewBag.Password = ds.Tables[0].Rows[0]["Password"].ToString();
-                    ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
-                    ViewBag.JoiningDate = ds.Tables[0].Rows[0]["JoiningDate"].ToString();
-                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Contact"].ToString();
-                    ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                    ViewBag.FatherName = ds.Tables[0].Rows[0]["FatherName"].ToString();
-                    ViewBag.Gender = ds.Tables[0].Rows[0]["Gender"].ToString();
-                    ViewBag.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
-                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
-                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
-                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
-                    ViewBag.UserType = ds.Tables[0].Rows[0]["UserType"].ToString();
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                ViewBag.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                ViewBag.JoiningDate = ds.Tables[0].Rows[0]["JoiningDate"].ToString();
+                ViewBag.MobileNo = ds.Tables[0].Rows[0]["Contact"].ToString();
+                ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                ViewBag.FatherName = ds.Tables[0].Rows[0]["FatherName"].ToString();
+                ViewBag.Gender = ds.Tables[0].Rows[0]["Gender"].ToString();
+                ViewBag.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                ViewBag.UserType = ds.Tables[0].Rows[0]["UserType"].ToString();
             }
             return View(model);
         }
-
         public ActionResult OrderDetails()
         {
             #region ddldistributer
@@ -252,7 +271,6 @@ namespace AnkurUdyogERP.Controllers
             }
             ViewBag.ddldistributer = ddldistributer;
             #endregion
-
             Master model = new Master();
             List<Master> lst = new List<Master>();
             //model.DistributerId = Session["Pk_adminId"].ToString();
@@ -278,7 +296,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("OrderDetails")]
         [OnAction(ButtonName = "btnSearch")]
@@ -332,7 +349,6 @@ namespace AnkurUdyogERP.Controllers
             #endregion
             return View(model);
         }
-
         public ActionResult ApproveOrderRequest(string OrderId)
         {
             string FormName = " ";
@@ -369,8 +385,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        
-
         public ActionResult RejectOrderRequest(string OrderId)
         {
             string FormName = "";
@@ -406,6 +420,58 @@ namespace AnkurUdyogERP.Controllers
                 throw;
             }
             return RedirectToAction(FormName, Controller);
+        }
+        public ActionResult GenerateReceipt(Master model, string OrderId)
+        {
+            if (OrderId != null)
+            {
+                model.OrderId = OrderId;
+                DataSet ds = model.GetDeoDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.OrderId = ds.Tables[0].Rows[0]["PK_OrderId"].ToString();
+                    ViewBag.Distributer = ds.Tables[0].Rows[0]["DistributerName"].ToString();
+                    ViewBag.PendingLimit = ds.Tables[0].Rows[0]["PendingLimit"].ToString();
+                    ViewBag.Dealer = ds.Tables[0].Rows[0]["DealerName"].ToString();
+                    ViewBag.Section = ds.Tables[0].Rows[0]["Section"].ToString();
+                    ViewBag.Rate = ds.Tables[0].Rows[0]["Rate"].ToString();
+                    ViewBag.OrderQuantity = ds.Tables[0].Rows[0]["OrderQuantity"].ToString();
+                    ViewBag.TotalAmount = ds.Tables[0].Rows[0]["TotalAmount"].ToString();
+                    ViewBag.Date = ds.Tables[0].Rows[0]["Date"].ToString();
+                    ViewBag.Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                    ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                }
+            }
+            return View(model);
+        }
+        
+        public ActionResult SaveIncreaseLimitDateWise(Master model,string AddOnLimit, string FK_DistributerId)
+        {
+            try
+            {
+                model.FK_DistributerId = FK_DistributerId;
+                model.AddOnLimit = AddOnLimit;
+                model.AddedBy = Session["Pk_adminId"].ToString();
+                DataSet ds = model.SaveIncreaseLimitDateWise();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                        //TempData["Increase"] = "Increase limit save Successfully !!";
+                    }
+                    else
+                    {
+                        model.Result = "no";
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }
