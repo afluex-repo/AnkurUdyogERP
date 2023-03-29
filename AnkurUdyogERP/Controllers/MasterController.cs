@@ -494,5 +494,62 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
+
+        public ActionResult DailyRateMaster()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds1 = model.GetDailyRateMaster();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds1.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_DistributerId = dr["PK_DistributerId"].ToString();
+                    obj.DistributerName = dr["DistributerName"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.JoiningDate = dr["JoiningDate"].ToString();
+                    obj.PreviousRate = dr["Rate"].ToString();
+                    obj.Date = dr["Date"].ToString();
+                    obj.CurrentRate = dr["CurrentRate"].ToString();
+                    obj.CurrentDate = dr["CurrentDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdistributerforadmin = lst;
+            }
+            return View(model);
+        }
+
+
+        
+        public ActionResult SaveTodayRate(Master model, string TodayRate, string FK_DistributerId)
+        {
+            try
+            {
+                model.FK_DistributerId = FK_DistributerId;
+                model.TodayRate = TodayRate;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdateTodayRate();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                        //TempData["TodayRate"] = "Today Rate Updated Successfully !!";
+                    }
+                    else
+                    {
+                        model.Result = "no";
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

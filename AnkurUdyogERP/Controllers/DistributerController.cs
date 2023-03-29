@@ -28,6 +28,8 @@ namespace AnkurUdyogERP.Controllers
                 ViewBag.TodayOrder = Ds.Tables[0].Rows[0]["TodayOrder"].ToString();
                 ViewBag.TodayOrderLimit = Ds.Tables[0].Rows[0]["TodayOrderLimit"].ToString();
                 ViewBag.TotalOrder = Ds.Tables[0].Rows[0]["TotalOrder"].ToString();
+                ViewBag.CurrentRate = Ds.Tables[0].Rows[0]["CurrentRate"].ToString();
+                ViewBag.PreviousRate = Ds.Tables[0].Rows[0]["PreviousRate"].ToString();
             }
             catch (Exception ex)
             {
@@ -439,7 +441,6 @@ namespace AnkurUdyogERP.Controllers
         {
             try
             {
-                string PendingLimit = "";
                 string Dealer = "";
                 string Rate = "";
                 string OrderQuantity = "";
@@ -450,8 +451,7 @@ namespace AnkurUdyogERP.Controllers
                 var jdv = jss.Deserialize<dynamic>(dataValue);
 
                 DataTable OrderRequestDetails = new DataTable();
-
-                OrderRequestDetails.Columns.Add("PendingLimit");
+                
                 OrderRequestDetails.Columns.Add("Dealer");
                 OrderRequestDetails.Columns.Add("Rate");
                 OrderRequestDetails.Columns.Add("OrderQuantity");
@@ -465,13 +465,12 @@ namespace AnkurUdyogERP.Controllers
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    PendingLimit = row["PendingLimit"].ToString();
                     Dealer = row["Dealer"].ToString();
                     Rate = row["Rate"].ToString();
                     OrderQuantity = row["OrderQuantity"].ToString();
                     Amount = row["Amount"].ToString();
                     rowsno = rowsno + 1;
-                    OrderRequestDetails.Rows.Add(PendingLimit, Dealer, Rate, OrderQuantity,Amount,rowsno);
+                    OrderRequestDetails.Rows.Add(Dealer, Rate, OrderQuantity,Amount,rowsno);
                 }
                 order.dtOrderDetails = OrderRequestDetails;
                 order.AddedBy = Session["PK_DistributerId"].ToString();
