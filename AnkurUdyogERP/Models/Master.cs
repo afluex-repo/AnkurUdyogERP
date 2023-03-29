@@ -41,7 +41,15 @@ namespace AnkurUdyogERP.Models
         public string AddOnLimit { get; set; }
 
         public string FK_DistributerId { get; set; }
-        
+
+        #region DailyRate
+        public string TodayRate { get; set; }
+        public string DistributerName { get; set; }
+        public string PreviousRate { get; set; }
+        public string CurrentRate { get; set; }
+        public string CurrentDate { get; set; }
+        #endregion
+
 
 
         public List<Master> lstdistributerforadmin { get; set; }
@@ -282,6 +290,26 @@ namespace AnkurUdyogERP.Models
             
 
         }
-        
+
+        public DataSet GetDailyRateMaster()
+        {
+            DataSet ds = Connection.ExecuteQuery("DistributerListForDailyRate");
+            return ds;
+        }
+
+        public DataSet UpdateTodayRate()
+        {
+            SqlParameter[] para =
+             {
+                new SqlParameter("@Fk_DistributerId",FK_DistributerId),
+                new SqlParameter("@TodayRate",TodayRate),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveTodayRate", para);
+            return ds;
+
+
+        }
+
     }
 }

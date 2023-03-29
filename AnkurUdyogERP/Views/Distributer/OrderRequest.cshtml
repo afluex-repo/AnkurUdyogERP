@@ -6,18 +6,19 @@
 }
 
 
+
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Order Request</h3>
+                    <h3>Booking Request</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Distributer</li>
-                        <li class="breadcrumb-item active">Order Request</li>
+                        <li class="breadcrumb-item active">Booking Request</li>
                     </ol>
                 </div>
             </div>
@@ -26,67 +27,97 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <span style="color:red;">@TempData["msg"]</span>
-                    </div>
-                    <div class="card-body">
-                        @using (Html.BeginForm("OrderRequest", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
-                        {
+
+            @using (Html.BeginForm("OrderRequest", "Distributer", FormMethod.Post, new { @id = "form1", @autocomplete = "off", enctype = "multipart/form-data" }))
+            {
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <span style="color:red;">@TempData["msg"]</span>
+                        </div>
+
+                        <div class="card-body">
+
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label>Today's Pending Limit</label>
-                                    <input type="text" id="PendingLimit" name="PendingLimit" class="form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly = true , oninput="return checkLimit();"/>
+                                    <input type="text" id="PendingLimit" name="PendingLimit" class="form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly=true , oninput="return checkLimit();" />
                                 </div>
-                                <div class="col-md-3">
-                                    <label>Dealer <span style="color:red;">*</span></label>
-                                    @Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "form-control js-example-basic-single" })
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Section <span style="color:red;">*</span></label>
-                                    @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control js-example-basic-single", @onchange = "return changeSection();" })
-                                </div>  
-                                <div class="col-md-3">
-                                    <label>Rate (per/kg)</label>
-                                    @Html.TextBoxFor(m => m.Rate, new { @class = "form-control", @placeholder = "Rate (per/kg)", @onkeypress = "return isNumberKey(event);", @readonly = true })
-                                </div>
-                                
-
-                                <div class="col-md-3">
-                                    <label>Order Quantity (per/kg)<span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.OrderQuantity, new { @class = "form-control", @placeholder = "Order Quantity (per/kg)", @onkeypress = "return isNumberKey(event);", @onchange = "return changeOrderQuantity();" })
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Quintal</label>
-                                    @Html.TextBoxFor(m => m.Quintal, new { @class = "form-control", @placeholder = "Quintal ", @readonly = true, @style = "background-color:#f6c89b" })
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Ton </label>
-                                    @Html.TextBoxFor(m => m.Ton, new { @class = "form-control", @placeholder = "Ton", @readonly = true, @style = "background-color:#f6c89b" })
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Total Amount</label>
-                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Total Amount ", @readonly = true })
-                                </div>
-
                             </div>
-                            @Html.HiddenFor(m => m.OrderId)
-                            if (Model.OrderId != null)
-                            {
-                                <input type="submit" class="btn btn-primary mt-4" value="Update Order Request" id="btnUpdate" name="btnUpdate" onclick="return ValidateForm();" />
-                            }
-                            else
-                            {
-                                <input type="submit" class="btn btn-primary mt-4" value="Order Request" id="btnSave" name="btnSave" onclick="return ValidateForm();" />
-                            }
 
+                            <div class="table table-responsive">
+                                <table class="table table-responsive table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            @*<th width="120px">Today's Pending Limit</th>*@
+                                            <th width="120px">Dealer<span style="color:red;">*</span></th>
+                                            @*<th width="120px">Section<span style="color:red;">*</span></th>*@
+                                            <th width="110px">Rate (Per Ton)</th>
+                                            <th>Booking Quantity (Per Ton)<span style="color:red;">*</span></th>
+                                            @*<th>Quintal</th>
+                                                <th>Ton</th>*@
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TextBoxContainer">
+                                        <tr class="mycontainer" id="mainrow">
+                                            @*<td style="min-width:200px">
+                                                    <input type="text" id="PendingLimit" name="PendingLimit" class="PendingLimit form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly="readonly" , oninput="return checkLimit();" />
+                                                </td>*@
+                                            <td>
+                                                @Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "Dealer form-control select2", @style = "min-width:180px" })
+                                                <span class="error"> Select Dealer</span>
+                                            </td>
+                                            @*<td>
+                                                    @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "Section form-control select2", @onchange = "return changeSection();", @style = "min-width:150px" })
+                                                    <span class="error">Select Section</span>
+                                                </td>*@
+                                            <td style="min-width:150px">
+                                                <input type="text" id="Rate" name="Rate" class="Rate form-control" placeholder="Rate" value="@ViewBag.DailyRate" readonly="readonly" />
+
+
+                                                @*@Html.TextBoxFor(m => m.Rate, new { @class = "Rate form-control", @placeholder = "Rate (per/kg)", @onkeypress = "return isNumberKey(event);", @readonly = true, @style = "min-width:150px" })*@
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(m => m.OrderQuantity, new { @class = "OrderQuantity form-control", @placeholder = "Order Quantity (per/kg)", @onkeypress = "return isNumberKey(event);", @onchange = "return changeOrderQuantity();", @style = "min-width:150px" })
+                                                <span class="error">OrderQuantity</span>
+                                            </td>
+                                            @*<td style="min-width:160px">
+                                                    @Html.TextBoxFor(m => m.Quintal, new { @class = "Quintal form-control", @placeholder = "Quintal ", @readonly = true, @style = "background-color:#f6c89b" })
+                                                </td>
+                                                <td style="min-width:160px">
+                                                    @Html.TextBoxFor(m => m.Ton, new { @class = "Ton form-control", @placeholder = "Ton", @readonly = true, @style = "background-color:#f6c89b" })
+                                                </td>*@
+                                            <td>
+                                                @Html.TextBoxFor(m => m.Amount, new { @class = "Amount form-control", @placeholder = "Amount ", @readonly = true, @style = "min-width:150px" })
+                                            </td>
+
+                                            <td>
+                                                <input type="button" id="add" data-toggle="tooltip" data-original-title="Add" value="Add" style="width:80px" class="btn btn-success" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id="orderItems">
+                                    <table class="table table-responsive" id="orderdetailsItems"></table>
+                                    <span id="orderItemError" style="color:red"></span>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group row">
+                                <div class="col-md-4 col-lg-4">
+                                    <input id="submit" type="button" value="Booking Request" class="btn btn-warning" />
+                                    @*<a class="btn btn-info" href="/Distributer/OrderRequestList" id="btn_View" style="margin-left:5px;">Back To List</a>*@
+                                </div>
+                            </div>
                             <input type="hidden" id="UserType" value="@Session["UserType"]" />
                             <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
-                        }
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            }
 
             <div class="col-lg-12">
                 <div class="card">
@@ -98,40 +129,45 @@
                                         <th>S.No.</th>
                                         @*<th>Pending Limit</th>*@
                                         <th>Dealer</th>
-                                        <th>Section</th>
-                                        <th>Rate (per/Kg)</th>
-                                        <th>Order Quantity (per/Kg)</th>
+                                        @*<th>Section</th>*@
+                                        <th>Rate (Per Ton)</th>
+                                        <th>Booking Quantity (Per Ton)</th>
                                         <th>Total Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @if (Model != null)
-                                   {
-                                       if (Model.lstrequest != null)
-                                       {
-                                           int i = 1;
-                                           foreach (var Item in Model.lstrequest)
-                                           {
-                                               if (i < 5) { 
-                                                <tr>
-                                                    <td>@i</td>
-                                                    @*<td>@Item.PendingLimit</td>*@
-                                                    <td>@Item.Dealer</td>
-                                                    <td>@Item.Section</td>
-                                                    <td>@Item.Rate</td>
-                                                    <td>@Item.OrderQuantity</td>
-                                                    <td>@Item.TotalAmount</td>
-                                                </tr>
-                                                   i++;
-                                               }
-                                           }
-                                        @*<tr>
-                                            <td colspan="6"><a href="~/Distributer/OrderRequestList" class="btn btn-primary" style="float:right">View more..</a></td>
-                                        </tr>*@
-                                       }
-                                   }
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstrequest != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstrequest)
+                                            {
+                                                if (i < 51)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        @*<td>@Item.PendingLimit</td>*@
+                                                        <td>@Item.Dealer</td>
+                                                        @*<td>@Item.Section</td>*@
+                                                        <td>@Item.Rate</td>
+                                                        <td>@Item.OrderQuantity</td>
+                                                        <td>@Item.TotalAmount</td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                                @*<tr>
+                                                    <td colspan="3"><a href="~/Distributer/OrderRequestList" class="btn btn-primary" style="float:right">view more..</a></td>
+                                                </tr>*@
+
+                                        }
+                                    }
+                                   
                                 </tbody>
+
                             </table>
+                            <a href="~/Distributer/OrderRequestList" class="btn btn-primary mb-4" style="float:right">View more..</a>
                         </div>
                     </div>
                 </div>
@@ -140,8 +176,7 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-
-<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
@@ -154,47 +189,145 @@
         if (UserType == 'Admin' && UserTypeName != 'Admin' && UserTypeName != "") {
             GetMenuDetails();
         }
-    });
+        //Add button click event
+        $('#add').click(function () {
+            debugger
+            //validation and add order items
+            var today = new Date();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var isAllValid = true;
 
-    function GetMenuDetails() {
-        debugger
-        var URL = "/Employee/EmployeeRegistration";
-        $.ajax({
-            type: "POST",
-            url: "/Master/GetMenuDetails",
-            data: { URL: URL },
-            dataType: "json",
-            //contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                var obj = jQuery.parseJSON(data);
-                console.log(obj)
-                for (var i = 0; i < obj.length; i++) {
-                    if (obj[i].FormSave == true) {
-                        $('#btnSave').show();
-                        $("#btnSave").removeAttr('disabled');
-                    }
-                    else {
-                        $('#btnSave').hide();
+            if ($('#Dealer').val() == "0") {
+                isAllValid = false;
+                $('#Dealer').siblings('span.error').css('visibility', 'visible');
+            }
+            //if ($('#Section').val() == "0") {
+            //    isAllValid = false;
+            //    $('#Section').siblings('span.error').css('visibility', 'visible');
+            //}
+            if ($('#OrderQuantity').val() == '') {
+                isAllValid = false;
+                $('#OrderQuantity').siblings('span.error').css('visibility', 'visible');
+            }
+            debugger
+            if (isAllValid) {
+                //var datetime = date.concat(" ", time);
+                //alert(datetime);
+                var $newRow = $('#mainrow').clone().removeAttr('id');
+                $('.Dealer', $newRow).prop('disabled', true).val($('#Dealer').val());
+                $('.Rate', $newRow).prop('disabled', true).val($('#Rate').val());
+                $('.OrderQuantity', $newRow).prop('disabled', true).val($('#OrderQuantity').val());
+                $('.Amount', $newRow).prop('disabled', true).val($('#Amount').val());
+                //Replace add button with remove button
+                $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
 
-                        $("#btnSave").attr('disabled', 'disabled');
-                    }
-                    debugger
-                    if (obj[i].FormUpdate == true && $('#PK_AdminId').val() != "") {
-                        $('#btnUpdate').show();
+                //remove id attribute from new clone row
+                $('#Dealer,#Rate,#OrderQuantity,#Amount,#add', $newRow).removeAttr('id');
+                $('span.error', $newRow).remove();
+                //append clone row
+                $('#orderdetailsItems').append($newRow);
 
-                        $("#btnUpdate").removeAttr('disabled');
+                //clear select data
+                $('#orderdetailsItems .ThToTransactionMode').removeClass("ThToTransactionMode");
+                $('#Dealer,#OrderQuantity,#Amount').val('0');
+                $('#select2-Dealer-container').text('Select Dealer Name');
+                $('#OrderQuantity').val('');
+                $('#orderItemError').empty();
+            }
+
+        })
+        //remove button click event
+        $('#orderdetailsItems').on('click', '.remove', function () {
+            $(this).parents('tr').remove();
+        });
+        $('#submit').click(function () {
+            debugger;
+            var isAllValid = true;
+            $("#divload").css({ 'display': 'none' });
+            $('#orderItemError').text('');
+            var list = [];
+            var lst = [];
+            var sum = 0
+            var sum1 = 0
+
+            var errorItemCount = 0;
+            $('#orderdetailsItems tr').each(function (index, ele) {
+                if (
+                    $('select.Dealer', this).val() == "0"
+                    ) {
+                    errorItemCount++;
+                    $(this).addClass('error');
+                    $("#divload").css({ 'display': 'none' });
+                } else {
+                    var orderItem = {
+                        Dealer: $('select.Dealer', this).val(),
+                        Rate: $('.Rate', this).val(),
+                        OrderQuantity: $('.OrderQuantity', this).val(),
+                        Amount: $('.Amount', this).val()
                     }
-                    else {
-                        $('#btnUpdate').hide();
-                        $("#btnUpdate").attr('disabled', 'disabled');
-                    }
+                    list.push(orderItem);
+
+                    //var odrItem = {
+                    //    OrderQuantity: $('.OrderQuantity', this).val()
+                    //}
+                    //lst.push(odrItem)
                 }
-            },
-            error: function () {
-                alert("Error occured!!")
+
+            })
+
+            console.log(list)
+            if (errorItemCount > 0) {
+                $('#orderItemError').text(errorItemCount + " Invalid entry in list.");
+                isAllValid = false;
+                $("#divload").css({ 'display': 'none' });
+            }
+
+            if (list.length == 0) {
+                $('#orderItemError').text('At least 1  row required.');
+                isAllValid = false;
+                $("#divload").css({ 'display': 'none' });
+            }
+
+            if (isAllValid) {
+                var data = {
+                    OrderRequest: JSON.stringify(list)
+                }
+                $("#divload").css({ 'display': 'block' });
+                debugger
+                $.ajax({
+                    type: 'post',
+                    url: '/Distributer/OrderRequestAction',
+                    dataType: 'json',
+                    data: JSON.stringify({ dataValue: JSON.stringify(data) }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if (data.status == "Yes") {
+                            $("#divload").css({ 'display': 'block' });
+                            alert('Order Request Successfully saved');
+                            //here we will clear the form
+                            list = [];
+                            window.location.href = '@Url.Action("OrderRequest", "Distributer")';
+                            $('#Dealer,#Rate,#OrderQuantity,#Amount').val('0');
+                            $('#Dealer,#Rate,#OrderQuantity,#Amount').val('');
+                            $('#orderdetailsItems').empty();
+                            $('#orderdetailsItems').hide();
+                        }
+
+                        else {
+                            console.log(data.status)
+                            alert(data.status);
+                        }
+                        $('#submit').text('Save');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        $('#submit').text('Save');
+                    }
+                });
+                $('#submit').text('Save');
             }
         });
-    }
+    });
 
     function ValidateForm() {
         if ($('#Dealer').val() == '0') {
@@ -229,7 +362,7 @@
         $("#divload").css({ 'display': '' });
         debugger;
         var Section = $('#Section').val();
-        
+
         $.ajax({
             url: '/Distributer/GetSectionDetails', type: 'post', dataType: 'json',
             data: { 'Section': Section },
@@ -268,50 +401,93 @@
             var Rate = $('#Rate').val();
         }
 
-        if (Quintal == "") {
-            Quintal = 0;
+        if (Amount == "") {
+            Amount = 0;
         }
         else {
-            var Quintal = ((Number(OrderQuantity) / 100 ))
-        }
-        if (Ton == "") {
-            Ton = 0;
-        }
-        else {
-            var Ton = ((Number(OrderQuantity) / 1000))
+            var Amount = ((Number(OrderQuantity) * Number(Rate)))
         }
 
-        if (TotalAmount == "") {
-            TotalAmount = 0;
-        }
-        else {
-            var TotalAmount = ((Number(OrderQuantity) * Number(Rate)))
-        }
 
-        $("#Quintal").val(Quintal);
-        $("#Ton").val(Ton);
-        $("#TotalAmount").val(TotalAmount);
+        $("#Amount").val(Amount);
+        var PendingLmt = $("#PendingLimit").val();
 
-        var Lmt = $("#PendingLimit").val();
-        
-        if ((Number(Lmt)) < (Number(TotalAmount))) {
-            alert("Daily Limit is Over.Total Amount should be less than Pending Limit !!");
+        if ((Number(PendingLmt)) < (Number(OrderQuantity))) {
+            alert("Daily Limit is Over. Booking Quantity should be less than Pending Limit !!");
             $("#PendingLimit").addClass("errortext");
-            $("#TotalAmount").addClass("errortext");
+            $("#Quintal").addClass("errortext");
             $("#OrderQuantity").val("");
             $("#Quintal").val("");
             $("#Ton").val("");
-            $("#TotalAmount").val("");
             $("#PendingLimit").focus();
-            $("#TotalAmount").focus();
+            $("#Quintal").focus();
         }
     }
 
+    function GetMenuDetails() {
+        debugger
+        var URL = "/Distributer/OrderRequestList";
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+            //contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(obj)
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].FormSave == true) {
+                        $('#submit').show();
+                        $("#submit").removeAttr('disabled');
+                    }
+                    else {
+                        $('#submit').hide();
+                        $("#submit").attr('disabled', 'disabled');
+                    }
+                    debugger
+                    if (obj[i].FormView == true) {
+                        $('#btn_View').show();
+                        $("#btn_View").removeAttr('disabled');
+                    }
+                    else {
+                        $('#btn_View').hide();
+                        $("#btn_View").attr('disabled', 'disabled');
+                    }
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
 </script>
 <style>
     .errortext {
         border: 1px solid red !important;
         background-color: #fff0f0 !important;
+    }
+
+    span.error, error1 {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error, error1 {
+        background-color: rgba(255,0,0,0.35);
+    }
+
+    span.error1 {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error1 {
+        background-color: rgba(255,0,0,0.35);
     }
 </style>
 

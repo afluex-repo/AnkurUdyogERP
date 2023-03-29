@@ -9,6 +9,7 @@ namespace AnkurUdyogERP.Models
     public class AdminDashboard
     {
         public List<AdminDashboard> lstdistributerforadmin { get; set; }
+        public List<AdminDashboard> lstgeneralReport { get; set; }
         public string PK_DealerId { get; set; }
         public string DistributerName { get; set; }
         public string JoiningDate { get; set; }
@@ -20,7 +21,11 @@ namespace AnkurUdyogERP.Models
         public string AddOnLimit { get; set; }
         public string PK_DistributerId { get; set; }
         public string City { get; set; }
-        
+
+        public string CurrentMonthOrder { get; set; }
+        public string CurrentMonthDispatch { get; set; }
+        public string CurrentMonthPendency { get; set; }
+
 
 
 
@@ -35,7 +40,5 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
-       
-        
     }
 }

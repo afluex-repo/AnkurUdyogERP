@@ -35,9 +35,7 @@ namespace AnkurUdyogERP.Controllers
                 }
             }
             ViewBag.lstrole = lstrole;
-
-
-
+            
 
             if (Id != null)
             {
@@ -66,6 +64,32 @@ namespace AnkurUdyogERP.Controllers
             {
                 List<SelectListItem> Gender = Common.BindGender();
                 ViewBag.Gender = Gender;
+            }
+
+            List<Employee> lst = new List<Employee>();
+            DataSet ds1 = model.GetEmployeeList();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds1.Tables[0].Rows)
+                {
+                    Employee obj = new Employee();
+                    obj.PK_AdminId = dr["Pk_AdminId"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Password = dr["Password"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    obj.JoiningDate = dr["JoiningDate"].ToString();
+                    obj.MobileNo = dr["Contact"].ToString();
+                    obj.Email = dr["Email"].ToString();
+                    obj.FatherName = dr["FatherName"].ToString();
+                    obj.Gender = dr["Gender"].ToString();
+                    obj.Pincode = dr["PinCode"].ToString();
+                    obj.State = dr["State"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.Address = dr["Address"].ToString();
+                    obj.RoleName = dr["RoleName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstEmployee = lst;
             }
          
             return View(model);

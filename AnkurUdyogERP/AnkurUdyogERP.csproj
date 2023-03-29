@@ -1846,6 +1846,7 @@
     <Content Include="Views\Admin\OrderDetails.cshtml" />
     <Content Include="Views\Admin\GenerateReceipt.cshtml" />
     <Content Include="Views\Website\Career.cshtml" />
+    <Content Include="Views\Master\DailyRateMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

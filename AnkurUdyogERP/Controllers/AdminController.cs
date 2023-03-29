@@ -39,10 +39,29 @@ namespace AnkurUdyogERP.Controllers
                     obj.DispatchOrder = dr["DispatchOrder"].ToString();
                     obj.PendingLimit = dr["PendingLimit"].ToString();
                     obj.TotalDispatch = dr["TotalDispatch"].ToString();
+                    obj.TodayOrder = dr["TodayOrder"].ToString();
 
                     lst.Add(obj);
                 }
                 model.lstdistributerforadmin = lst;
+            }
+
+            List<AdminDashboard> lstt = new List<AdminDashboard>();
+            DataSet ds2 = model.DistributerListForAdminDashboard();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[1].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds2.Tables[1].Rows)
+                {
+                    AdminDashboard obj = new AdminDashboard();
+                    obj.PK_DistributerId = dr["PK_DistributerId"].ToString();
+                    obj.DistributerName = dr["DistributerName"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.CurrentMonthOrder = dr["TodayOrder"].ToString();
+                    obj.CurrentMonthDispatch = dr["DispatchOrder"].ToString();
+                    obj.CurrentMonthPendency = dr["PendingLimit"].ToString();
+                    lstt.Add(obj);
+                }
+                model.lstgeneralReport = lstt;
             }
             return View(model);
         }
