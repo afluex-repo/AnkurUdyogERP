@@ -132,6 +132,8 @@
                                             int i = 1;
                                             foreach (var Item in Model.lstEmployee)
                                             {
+                                                if (i < 51)
+                                                {
                                                 <tr>
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
@@ -158,12 +160,14 @@
                                                         </ul>
                                                     </td>
                                                 </tr>
-                                                i++;
+                                                    i++;
+                                                }
                                             }
                                         }
                                     }
                                 </tbody>
                             </table>
+                            <a href="~/Admin/EmployeeList" class="btn btn-primary  mb-4" style="float:right">View more..</a>
                         </div>
                     </div>
                 </div>
