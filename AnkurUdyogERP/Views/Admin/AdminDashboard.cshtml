@@ -31,7 +31,7 @@
         <!-- Container-fluid starts-->
         <div class="container-fluid ecommerce-page">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -212,10 +212,7 @@
                             <div class="col-md-4 mt-3">
                                 <label><span style="color:red;"></span></label>
                                 <button type="submit" class="btn btn-primary" onclick="return SaveIncreaseLimitDateWise();" value="Save">Save</button>
-
                                 <span class="text-danger">@TempData["Increase"]</span>
-                                
-
                             </div>
                         </div>
                     </div>
@@ -231,15 +228,11 @@
 <script>
     function GetDetails(i) {
         debugger;
-
         var PK_DistributerId_ = $("#PK_DistributerId_" + i).text();
-
         var DistributerName_ = $("#DistributerName_" + i).text();
         var Limit_ = $("#Limit_" + i).text();
         var TodayOrder_ = $("#TodayOrder_" + i).text();
         var PendingLimit_ = $("#PendingLimit_" + i).text();
-
-
         $("#FK_DistributerId").val(PK_DistributerId_);
         $("#DistributerName_123").text(DistributerName_);
         $("#Limit").val(Limit_);
@@ -261,7 +254,7 @@
         else {
             $.ajax({
                 url: '/Admin/SaveIncreaseLimitDateWise', type: 'post', dataType: 'json',
-                data: { 'AddOnLimit': AddOnLimit,'FK_DistributerId': FK_DistributerId },
+                data: { 'AddOnLimit': AddOnLimit, 'FK_DistributerId': FK_DistributerId },
                 success: function (data) {
                     if (data.Result == "yes") {
                         //$(".bd-example-modal-lg").modal('show');
