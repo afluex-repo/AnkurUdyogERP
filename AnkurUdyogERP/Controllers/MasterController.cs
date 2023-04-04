@@ -75,7 +75,7 @@ namespace AnkurUdyogERP.Controllers
         {
             try
             {
-                if(DistributerId != null)
+                if (DistributerId != null)
                 {
                     model.DistributerId = DistributerId;
                     model.AddedBy = Session["Pk_AdminId"].ToString();
@@ -241,7 +241,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction("RoleMaster", "Master");
         }
-        
+
         [HttpPost]
         [OnAction(ButtonName = "btnUpdate")]
         [ActionName("RoleMaster")]
@@ -521,7 +521,7 @@ namespace AnkurUdyogERP.Controllers
         }
 
 
-        
+
         public ActionResult SaveTodayRate(Master model, string TodayRate, string FK_DistributerId)
         {
             try
@@ -549,6 +549,76 @@ namespace AnkurUdyogERP.Controllers
                 model.Result = ex.Message;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult DealerList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetDealerList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Password = dr["Password"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    obj.FirmName = dr["FirmName"].ToString();
+                    obj.MobileNo = dr["Mobile"].ToString();
+                    obj.Address = dr["Address"].ToString();
+                    obj.PanNo = dr["PancardNo"].ToString();
+                    obj.GSTNO = dr["GSTNo"].ToString();
+                    obj.Pincode = dr["PinCode"].ToString();
+                    obj.State = dr["State"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.Email = dr["Email"].ToString();
+                    obj.JoiningDate = dr["JoiningDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdealer = lst;
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [OnAction(ButtonName = "btnSearch")]
+        [ActionName("DealerList")]
+        public ActionResult GetDealerList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            model.Name = model.Name == "" ? null : model.Name;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetDealerList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Password = dr["Password"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    obj.FirmName = dr["FirmName"].ToString();
+                    obj.MobileNo = dr["Mobile"].ToString();
+                    obj.Address = dr["Address"].ToString();
+                    obj.PanNo = dr["PancardNo"].ToString();
+                    obj.GSTNO = dr["GSTNo"].ToString();
+                    obj.Pincode = dr["PinCode"].ToString();
+                    obj.State = dr["State"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.Email = dr["Email"].ToString();
+                    obj.JoiningDate = dr["JoiningDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdealer = lst;
+            }
+            return View(model);
         }
 
     }

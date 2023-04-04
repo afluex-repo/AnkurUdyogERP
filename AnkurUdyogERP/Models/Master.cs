@@ -26,6 +26,7 @@ namespace AnkurUdyogERP.Models
         public string SectionMaster { get; set; }
         public string Rate { get; set; }
 
+
         public List<Master> lstrequest { get; set; }
         public string DistributerId { get; set; }
         public string OrderId { get; set; }
@@ -50,11 +51,9 @@ namespace AnkurUdyogERP.Models
         public string CurrentDate { get; set; }
         #endregion
 
-
-
         public List<Master> lstdistributerforadmin { get; set; }
-
-
+        public List<Master> lstdealer { get; set; }
+        public string PK_DealerId { get; set; }
 
         public DataSet SaveDistributerRegistration()
         {
@@ -204,7 +203,7 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("DeleteSectionMaster", para);
             return ds;
         }
-        
+
 
 
         public DataSet GetSectionMasterList()
@@ -213,9 +212,9 @@ namespace AnkurUdyogERP.Models
                                         new SqlParameter("@PK_SectionId",PK_SectionId),
                                         new SqlParameter("@Section", SectionMaster),
                                         new SqlParameter("@Rate", Rate)
-                                    
+
             };
-            DataSet ds = Connection.ExecuteQuery("GetSectionMasterList",para);
+            DataSet ds = Connection.ExecuteQuery("GetSectionMasterList", para);
             return ds;
         }
         public DataSet OrderRequestList()
@@ -287,7 +286,7 @@ namespace AnkurUdyogERP.Models
             };
             DataSet ds = Connection.ExecuteQuery("SaveIncreaseLimitDateWise", para);
             return ds;
-            
+
 
         }
 
@@ -310,6 +309,21 @@ namespace AnkurUdyogERP.Models
 
 
         }
+
+        public DataSet GetDealerList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Name",Name),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDealerListForAdmin", para);
+            return ds;
+        }
+
+
+
 
     }
 }
