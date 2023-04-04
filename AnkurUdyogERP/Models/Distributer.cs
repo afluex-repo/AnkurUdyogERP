@@ -11,22 +11,13 @@ namespace AnkurUdyogERP.Models
     {
         public List<Distributer> lstDealer { get; set; }
         public List<Distributer> lstrequest { get; set; }
+        public List<Distributer> lst1DailyRate { get; set; }
         public string FirmName { get; set; }
-        public string FatherName { get; set; }
         public string Mobile { get; set; }
-        public string Email { get; set; }
         public string UserID { get; set; }
         public string GSTNo { get; set; }
         public string Limit { get; set; }
-        public string Password { get; set; }
-        public string AddedBy { get; set; }
         public string PK_UserId { get; set; }
-        public string LoginId { get; set; }
-        public string JoiningDate { get; set; }
-        public string Name { get; set; }
-        public string FromDate { get; set; }
-        public string ToDate { get; set; }
-
         public string PendingLimit { get; set; }
         public string Dealer { get; set; }
         public string Section { get; set; }
@@ -35,6 +26,7 @@ namespace AnkurUdyogERP.Models
         public string Quintal { get; set; }
         public string Ton { get; set; }
         public string TotalAmount { get; set; }
+        public string Amount { get; set; }
         public string FK_SectionId { get; set; }
         public string SectionId { get; set; }
         public string PK_SectionId { get; set; }
@@ -44,7 +36,7 @@ namespace AnkurUdyogERP.Models
         public string DistributerId { get; set; }
         public string PK_DealerId { get; set; }
         public string TodayPendingLimit { get; set; }
-       
+        public DataTable dtOrderDetails { get; set; }
 
 
         public DataSet GetDetails()
@@ -157,22 +149,40 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
+        //public DataSet SaveOrderRequest()
+        //{
+        //    SqlParameter[] para =
+        //    {
+        //        new SqlParameter("@PendingLimit",PendingLimit),
+        //         new SqlParameter("@FK_Dealer",Dealer),
+        //            new SqlParameter("@FK_SectionId",Section),
+        //             new SqlParameter("@Rate",Rate),
+        //              new SqlParameter("@OrderQuantity",OrderQuantity),
+        //               new SqlParameter("@TotalAmount",TotalAmount),
+        //               new SqlParameter("@Status",Status),
+        //               new SqlParameter("@AddedBy",AddedBy)
+        //    };
+        //    DataSet ds = Connection.ExecuteQuery("SaveOrderRequest", para);
+        //    return ds;
+        //}
+
+
+
         public DataSet SaveOrderRequest()
         {
-            SqlParameter[] para =
-            {
-                new SqlParameter("@PendingLimit",PendingLimit),
-                 new SqlParameter("@FK_Dealer",Dealer),
-                    new SqlParameter("@FK_SectionId",Section),
-                     new SqlParameter("@Rate",Rate),
-                      new SqlParameter("@OrderQuantity",OrderQuantity),
-                       new SqlParameter("@TotalAmount",TotalAmount),
-                       new SqlParameter("@Status",Status),
-                       new SqlParameter("@AddedBy",AddedBy)
+            SqlParameter[] para = { 
+                                    new SqlParameter("@AddedBy",AddedBy) ,
+                                    new SqlParameter("@Status",Status) ,
+                                    new SqlParameter("@dtOrderDetails",dtOrderDetails)
+
             };
             DataSet ds = Connection.ExecuteQuery("SaveOrderRequest", para);
             return ds;
         }
+
+
+
+
 
         public DataSet UpdateOrderRequest()
         {
@@ -221,6 +231,16 @@ namespace AnkurUdyogERP.Models
                 new SqlParameter("@PK_DistributerId",DistributerId)
             };
             DataSet ds = Connection.ExecuteQuery("GetLimit", para);
+            return ds;
+        }
+
+        public DataSet DailyDate()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@FK_DistributerId",DistributerId)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDailyRate", para);
             return ds;
         }
     }

@@ -53,7 +53,7 @@
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
-                                        <h3>Total Order</h3>
+                                        <h3>Total Booking</h3>
                                         <p>@ViewBag.TotalOrder</p>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
-                                        <h3>Today's Order</h3>
+                                        <h3>Today's Booking</h3>
                                         <p>@ViewBag.TodayOrder</p>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="users"></i></div>
                                     <div class="sale-content">
-                                        <h3>Dispatch Order</h3>
+                                        <h3>Dispatch Booking</h3>
                                         <p>0</p>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                         </div>
                     </div>
                 </div>*@
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            @*<div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card sale-chart">
                     <div class="card-body">
                         <div class="d-flex">
@@ -129,6 +129,42 @@
                                     <div class="sale-content">
                                         <h3>Pending Section</h3>
                                         <p>0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-chart-view order-chart" id="pending-order"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card sale-chart">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="sale-detail">
+                                    <div class="icon"><i data-feather="file-text"></i></div>
+                                    <div class="sale-content">
+                                        <h3>Previous Day Rate</h3>
+                                        <p>@ViewBag.PreviousRate /Ton</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-chart-view order-chart" id="pending-order1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card sale-chart">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <div class="sale-detail">
+                                    <div class="icon"><i data-feather="file-text"></i></div>
+                                    <div class="sale-content">
+                                        <h3>Today Rate</h3>
+                                        <p>@ViewBag.CurrentRate /Ton</p>
                                     </div>
                                 </div>
                             </div>

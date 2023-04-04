@@ -10,13 +10,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>Order Request Details</h3>
+                    <h3>Booking Request Details</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Distributer</li>
-                        <li class="breadcrumb-item active">Order Request Details</li>
+                        <li class="breadcrumb-item active">Booking Request Details</li>
                     </ol>
                 </div>
             </div>
@@ -64,10 +64,10 @@
                                             <th>Distributer Name</th>
                                             <th style="min-width:150px">Dealer Name</th>
                                             <th>Section</th>
-                                            <th>Rate (per/Kg)</th>
-                                            <th>Order Quantity (per/Kg)</th>
+                                            <th>Rate (Per Ton)</th>
+                                            <th>Booking Quantity (Per Ton)</th>
                                             <th>Total Amount</th>
-                                            <th>Order Date</th>
+                                            <th>Booking Date</th>
                                             <th>Status</th>
                                             <th style="text-align:center;">Action</th>
                                             @*<th>Edit</th>
@@ -85,11 +85,11 @@
                                                     <tr>
                                                         <td>@i</td>
                                                         @*<td>@Item.PendingLimit</td>*@
-                                                        <td>@Item.Distributer</td>
+                                                        <td style="min-width:150px">@Item.Distributer</td>
                                                         <td>@Item.Dealer</td>
                                                         <td>@Item.Section</td>
-                                                        <td>@Item.Rate</td>
-                                                        <td>@Item.OrderQuantity</td>
+                                                        <td style="min-width:150px">@Item.Rate</td>
+                                                        <td style="min-width:160px">@Item.OrderQuantity</td>
                                                         <td>@Item.TotalAmount</td>
                                                         <td>@Item.Date</td>
                                                         <td  style="text-align:center;">

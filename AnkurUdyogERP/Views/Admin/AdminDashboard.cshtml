@@ -31,7 +31,7 @@
         <!-- Container-fluid starts-->
         <div class="container-fluid ecommerce-page">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6"  style="display:none;">
+                <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
                     <div class="card sale-chart">
                         <div class="card-body">
                             <div class="d-flex">
@@ -107,7 +107,7 @@
                     <div class="col-xl-6 col-md-12 box-col-6">
                         <div class="card">
                             <div class="card-header pb-0">
-                                <h3>Order Details Chart</h3>
+                                <h3>Booking Details Chart</h3>
                             </div>
                             <div class="card-body chart-block">
                                 <canvas id="myBarGraph"></canvas>
@@ -128,20 +128,23 @@
 
                 <div class="card">
                     <div class="card-body">
+                        <h2>Daily Basis Report</h2>
                         <div class="table-responsive mt-4">
-                            <table class="display" id="data-source-1" style="width:100%">
+                            <table class="display" id="data-source-1" style="width:100%;text-align:center">
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
+                                        <th style="display:none">PK_DistributerId_</th>
                                         <th>Distributer</th>
                                         <th>City</th>
-                                        <th>Joining Date</th>
-                                        <th>Limit</th>
-                                        <th>Today's Order</th>
-                                        <th>Dispatch Order</th>
-                                        <th>Pending Limit</th>
-                                        <th>Total Dispatch</th>
-                                        <th>Action</th>
+                                        @*<th>Joining Date</th>*@
+                                        <th>Today's Limit</th>
+                                        @*<th>Today's Booking</th>*@
+                                        @*<th>Dispatch Booking</th>*@
+                                        <th>Today's Booking</th>
+                                        <th>Today's Pending Limit</th>
+                                        @*<th>Total Dispatch</th>*@
+                                        <th>Increase Limit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -157,14 +160,60 @@
                                                     <td id="PK_DistributerId_@i" style="display:none">@Item.PK_DistributerId</td>
                                                     <td id="DistributerName_@i">@Item.DistributerName</td>
                                                     <td>@Item.City</td>
-                                                    <td>@Item.JoiningDate</td>
+                                                    @*<td>@Item.JoiningDate</td>*@
                                                     <td id="Limit_@i">@Item.Limit</td>
-                                                    <td id="TodayOrder_@i">@Item.TodayOrder</td>
-                                                    <td>@Item.DispatchOrder</td>
+                                                    @*<td id="TodayOrder_@i">@Item.TodayOrder</td>
+                                                    <td>@Item.DispatchOrder</td>*@
+                                                    <td>@Item.TodayOrder</td>
                                                     <td id="PendingLimit_@i">@Item.PendingLimit</td>
-                                                    <td>@Item.TotalDispatch</td>
+                                                    @*<td>@Item.TotalDispatch</td>*@
                                                     <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Increase Limit</a></td>
 
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h2>General Report</h2>
+                        <div class="table-responsive mt-4">
+                            <table class="display" id="basic-9" style="width:100%;text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Distributer</th>
+                                        <th>City</th>
+                                        <th>Till Now Current Month Booking</th>
+                                        <th>Till Now Current Month Dispatch</th>
+                                        <th>Till Today Current Month Pendency</th>
+                                        @*<th>View</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstgeneralReport != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstgeneralReport)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@Item.DistributerName</td>
+                                                    <td>@Item.City</td>
+                                                    <td>@Item.CurrentMonthOrder</td>
+                                                    <td>@Item.CurrentMonthDispatch</td>
+                                                    <td>@Item.CurrentMonthPendency</td>
+                                                    @*<td>
+                                                       <a href="#" class="btn btn-primary btn-sm">Date Wise Details</a>
+                                                    </td>*@
                                                 </tr>
                                                 i++;
                                             }
@@ -198,7 +247,7 @@
                                 <input class="form-control" id="Limit" name="Limit" type="text" readonly="true" />
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Today's Order <span style="color:red;"></span></label>
+                                <label>Today's Booking <span style="color:red;"></span></label>
                                 <input class="form-control" id="TodayOrder" name="TodayOrder" type="text" readonly="true" />
                             </div>
                             <div class="col-md-6 form-group">
@@ -212,10 +261,7 @@
                             <div class="col-md-4 mt-3">
                                 <label><span style="color:red;"></span></label>
                                 <button type="submit" class="btn btn-primary" onclick="return SaveIncreaseLimitDateWise();" value="Save">Save</button>
-
                                 <span class="text-danger">@TempData["Increase"]</span>
-                                
-
                             </div>
                         </div>
                     </div>
@@ -231,15 +277,11 @@
 <script>
     function GetDetails(i) {
         debugger;
-
         var PK_DistributerId_ = $("#PK_DistributerId_" + i).text();
-
         var DistributerName_ = $("#DistributerName_" + i).text();
         var Limit_ = $("#Limit_" + i).text();
         var TodayOrder_ = $("#TodayOrder_" + i).text();
         var PendingLimit_ = $("#PendingLimit_" + i).text();
-
-
         $("#FK_DistributerId").val(PK_DistributerId_);
         $("#DistributerName_123").text(DistributerName_);
         $("#Limit").val(Limit_);
@@ -261,7 +303,7 @@
         else {
             $.ajax({
                 url: '/Admin/SaveIncreaseLimitDateWise', type: 'post', dataType: 'json',
-                data: { 'AddOnLimit': AddOnLimit,'FK_DistributerId': FK_DistributerId },
+                data: { 'AddOnLimit': AddOnLimit, 'FK_DistributerId': FK_DistributerId },
                 success: function (data) {
                     if (data.Result == "yes") {
                         //$(".bd-example-modal-lg").modal('show');
