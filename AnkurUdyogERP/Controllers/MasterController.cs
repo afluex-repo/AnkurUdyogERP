@@ -494,7 +494,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
         public ActionResult DailyRateMaster()
         {
             Master model = new Master();
@@ -519,9 +518,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
-
-
         public ActionResult SaveTodayRate(Master model, string TodayRate, string FK_DistributerId)
         {
             try
@@ -550,9 +546,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
-
-
         public ActionResult DealerList()
         {
             Master model = new Master();
@@ -583,8 +576,6 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
-
         [HttpPost]
         [OnAction(ButtonName = "btnSearch")]
         [ActionName("DealerList")]

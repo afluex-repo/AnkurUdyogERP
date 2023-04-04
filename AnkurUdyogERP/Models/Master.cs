@@ -143,8 +143,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetRoleMasterList", para);
             return ds;
         }
-
-
         public DataSet DeleteRoleMaster()
         {
             SqlParameter[] para =
@@ -155,7 +153,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("DeleteRoleMaster", para);
             return ds;
         }
-
         public DataSet GetMenuPermissionList()
         {
             SqlParameter[] para = { new SqlParameter("@PK_AdminId", Fk_UserId),
@@ -165,8 +162,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetMenuListForUser", para);
             return ds;
         }
-
-
         public DataSet SaveSectionMaster()
         {
             SqlParameter[] para = {
@@ -177,9 +172,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("SaveSectionMaster", para);
             return ds;
         }
-
-
-
         public DataSet UpdateSectionMaster()
         {
             SqlParameter[] para = {
@@ -191,9 +183,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("UpdateSectionMaster", para);
             return ds;
         }
-
-
-
         public DataSet DeleteSectionMaster()
         {
             SqlParameter[] para = {
@@ -203,16 +192,12 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("DeleteSectionMaster", para);
             return ds;
         }
-
-
-
         public DataSet GetSectionMasterList()
         {
             SqlParameter[] para = {
                                         new SqlParameter("@PK_SectionId",PK_SectionId),
                                         new SqlParameter("@Section", SectionMaster),
                                         new SqlParameter("@Rate", Rate)
-
             };
             DataSet ds = Connection.ExecuteQuery("GetSectionMasterList", para);
             return ds;
@@ -228,7 +213,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("OrderRequestListforAdmin", para);
             return ds;
         }
-
         public DataSet GetDistributer()
         {
             SqlParameter[] para = {
@@ -237,7 +221,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDistributer", para);
             return ds;
         }
-
         public DataSet RejectOrderRequest()
         {
             SqlParameter[] para =
@@ -249,7 +232,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("RejectOrderRequest", para);
             return ds;
         }
-
         public DataSet ApproveOrderRequest()
         {
             SqlParameter[] para =
@@ -261,8 +243,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("ApproveOrderRequest", para);
             return ds;
         }
-
-
         public DataSet GetDeoDetails()
         {
             SqlParameter[] para =
@@ -272,9 +252,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDeoDetails", para);
             return ds;
         }
-
-
-
         public DataSet SaveIncreaseLimitDateWise()
         {
             SqlParameter[] para =
@@ -289,13 +266,11 @@ namespace AnkurUdyogERP.Models
 
 
         }
-
         public DataSet GetDailyRateMaster()
         {
             DataSet ds = Connection.ExecuteQuery("DistributerListForDailyRate");
             return ds;
         }
-
         public DataSet UpdateTodayRate()
         {
             SqlParameter[] para =
@@ -309,7 +284,6 @@ namespace AnkurUdyogERP.Models
 
 
         }
-
         public DataSet GetDealerList()
         {
             SqlParameter[] para =
@@ -321,9 +295,5 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDealerListForAdmin", para);
             return ds;
         }
-
-
-
-
     }
 }
