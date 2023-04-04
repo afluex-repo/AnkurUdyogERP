@@ -1,0 +1,118 @@
+﻿@model AnkurUdyogERP.Models.Master
+
+@{
+    ViewBag.Title = "DealerList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("DealerList", "Admin", FormMethod.Post, new {enctype = "multipart/form-data" }))
+{
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Dealer List</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">HRM</li>
+                        <li class="breadcrumb-item active">Dealer List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HTML (DOM) sourced data  Starts-->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="date-picker">
+                        <div class="card-body">
+                        
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Name <span style="color:red;"></span></label>
+                                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>From Date <span style="color:red;"></span></label>
+                                            <input id="FromDate" name="FromDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>To Date <span style="color:red;"></span></label>
+                                            <input id="ToDate" name="ToDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>&nbsp;</label>
+                                            <input type="submit" class="btn btn-primary" value="Search" id="btnSearch" name="btnSearch" />
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h2>Dealer List</h2>
+                                        <div class="table-responsive mt-4">
+                                            <table class="display" id="data-source-1" style="width:100%;text-align:center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No.</th>
+                                                        <th>Name</th>
+                                                        <th>Firm Name</th>
+                                                        <th>Mobile No</th>
+                                                        <th>Address</th>
+                                                        <th>PanNo</th>
+                                                        <th>GSTNO</th>
+                                                        <th>Pincode</th>
+                                                        <th>State</th>
+                                                        <th>City</th>
+                                                        <th>Email</th>
+                                                        <th>JoiningDate</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model != null)
+                                                    {
+                                                        if (Model.lstdealer != null)
+                                                        {
+                                                            int i = 1;
+                                                            foreach (var Item in Model.lstdealer)
+                                                            {
+                                                                <tr>
+                                                                    <td>@i</td>
+                                                                    <td>@Item.Name</td>
+                                                                    <td>@Item.FirmName</td>
+                                                                    <td>@Item.MobileNo</td>
+                                                                    <td>@Item.Address</td>
+                                                                    <td>@Item.PanNo</td>
+                                                                    <td>@Item.GSTNO</td>
+                                                                    <td>@Item.Pincode</td>
+                                                                    <td>@Item.State</td>
+                                                                    <td>@Item.City</td>
+                                                                    <td>@Item.Email</td>
+                                                                    <td>@Item.JoiningDate</td>
+                                                                </tr>
+                                                                i++;
+                                                            }
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                         
+                        </div>
+                    </div>
+                </div>
+                <!-- HTML (DOM) sourced data  Ends-->
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+</div>
+
+}
