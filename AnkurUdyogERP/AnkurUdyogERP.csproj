@@ -1847,6 +1847,8 @@
     <Content Include="Views\Admin\GenerateReceipt.cshtml" />
     <Content Include="Views\Website\Career.cshtml" />
     <Content Include="Views\Master\DailyRateMaster.cshtml" />
+    <Content Include="Views\Admin\DealerList.cshtml" />
+    <Content Include="Views\Master\DealerList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1875,7 +1877,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64010</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64014/</IISUrl>
+          <IISUrl>http://localhost:64015/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
