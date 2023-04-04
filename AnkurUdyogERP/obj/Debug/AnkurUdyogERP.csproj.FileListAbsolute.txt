@@ -176,7 +176,6 @@ D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\VBCSCompiler.exe.c
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll.config
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.pdb
-D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
