@@ -1,0 +1,179 @@
+﻿@model AnkurUdyogERP.Models.Master
+
+@{
+    ViewBag.Title = "DailyRateMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("DailyRateMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Daily Rate Master</h3>
+                    </div>
+                    <div class="col-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a class="home-item" href="/Admin/AdminDashboard"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">Master</li>
+                            <li class="breadcrumb-item active">Daily Rate Master</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container-fluid starts-->
+        <div class="container-fluid ecommerce-page">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive mt-4">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Distributer</th>
+                                        <th>City</th>
+                                        @*<th>Joining Date</th>*@
+                                        <th>Previous Day Rate</th>
+                                        <th>Today Rate</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstdistributerforadmin != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstdistributerforadmin)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td id="PK_DistributerId_@i" style="display:none">@Item.PK_DistributerId</td>
+                                                    <td id="DistributerName_@i">@Item.DistributerName</td>
+                                                    <td>@Item.City</td>
+                                                    @*<td>@Item.JoiningDate</td>*@
+                                                    <td id="PreviousRate_@i">@Item.PreviousRate  (@Item.Date)</td>
+                                                    <td  style="text-align:center;">
+                                                        @if (Item.CurrentRate == null || Item.CurrentRate == "")
+                                                        {
+                                                        <label style="color:#ed9245">Not Updated</label>
+                                                        }
+                                                        else{
+                                                        @Item.CurrentRate
+                                                        }
+                                                    </td>
+                                                    <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Update Today Rate</a></td>
+
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+        </div>
+    </div>
+
+
+    @*   modal statrt *@
+    <div class="card-body btn-showcase">
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input type="hidden" id="FK_DistributerId" name="FK_DistributerId" />
+                        <h4>Distributer : <label id="DistributerName_123"> </label></h4>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Previous Day Rate <span style="color:red;"></span></label>
+                                <input class="form-control" id="PreviousRate" name="PreviousRate" type="text" readonly="true" />
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Update Today Rate <span style="color:red;">*</span></label>
+                                @Html.TextBoxFor(m => m.TodayRate, new { @class = "form-control", @onkeypress = "return isNumberKey(event);", @Placeholder= "Update Today Rate" })
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label><span style="color:red;"></span></label>
+                                <button type="submit" class="btn btn-primary" onclick="return SaveTodayRate();" value="Save">Update</button>
+
+                                <span class="text-danger">@TempData["Increase"]</span>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*   modal end *@
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    function GetDetails(i) {
+        debugger;
+        var PK_DistributerId_ = $("#PK_DistributerId_" + i).text();
+        var DistributerName_ = $("#DistributerName_" + i).text();
+        var PreviousRate_ = $("#PreviousRate_" + i).text();
+        $("#FK_DistributerId").val(PK_DistributerId_);
+        $("#DistributerName_123").text(DistributerName_);
+        $("#PreviousRate").val(PreviousRate_);
+    }
+
+    function SaveTodayRate() {
+        debugger;
+        var FK_DistributerId = $("#FK_DistributerId").val();
+        var TodayRate = $("#TodayRate").val();
+        if ($("#TodayRate").val() == "") {
+            $("#TodayRate").addClass('errortext');
+            $('#TodayRate').focus();
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/Master/SaveTodayRate', type: 'post', dataType: 'json',
+                data: { 'TodayRate': TodayRate, 'FK_DistributerId': FK_DistributerId },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        alert("Today Rate Save Successfully !!");
+                        window.location.reload();
+                    }
+                    else if (data.Result == "no") {
+                        alert("Today Rate has been  Updated Already !!");
+                    }
+                    else {
+                        data.Result = "no";
+                    }
+                }
+            });
+        }
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick-theme.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/prism.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
     <!-- App css-->
@@ -31,15 +32,18 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
     <!-- Responsive css-->
-  
+
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
-
-
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 
 </head>
 <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <!-- Loader ends-->
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
         <!-- Page Header Start-->
@@ -49,7 +53,7 @@
                     <div class="form-group w-100">
                         <div class="Typeahead Typeahead--twitterUsers">
                             <div class="u-posRelative">
-                                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Koho .." name="q" title="" autofocus="">
+                                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Ankur Udyog .." name="q" title="" autofocus="">
                                 <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div><i class="close-search" data-feather="x"></i>
                             </div>
                             <div class="Typeahead-menu"></div>
@@ -67,9 +71,9 @@
                         <li class="profile-nav onhover-dropdown p-0 me-0">
 
                             <div class="d-flex profile-media">
-                                <img class="b-r-50" src="../assets/images/logo/a_icon2.svg" alt=""/>
+                                <img class="b-r-50" src="../assets/images/logo/a_icon2.svg" alt="" />
                                 <div class="flex-grow-1">
-                                    <span class="text-white">@Session["LoginId"]</span>
+                                    <span class="text-white">@Session["LoginId"]</span><span class="text-white">(@Session["Name"])</span>
                                 </div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
@@ -88,12 +92,14 @@
             <div class="sidebar-wrapper">
                 <div>
                     <div class="logo-wrapper">
-                        <a href="#"><img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP">
-                        <img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a>
+                        <a href="#">
+                            <img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP" />
+                            <img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt="">
+                        </a>
                         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-left"> </i></div>
                     </div>
-                    <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/a_icon.svg" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-icon-dark.png" alt=""></a></div>
+                    <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid for-light" src="../assets/images/logo/a_icon.svg" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-icon-dark.png" alt=""></a></div>
                     <nav class="sidebar-main">
                         <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                         <div id="sidebar-menu">
@@ -104,14 +110,14 @@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="/Admin/AdminDashboard"><i data-feather="home"></i><span>Dashboard</span></a>
                                 </li>
-                                @*@{Html.RenderAction("GetMenu", "Master");}*@
-
-
-
-
-
-
-
+                                    @*@{Html.RenderAction("GetMenu", "Master");}*@
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Master</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Master/SectionMaster">TMT Bar Type</a></li>
+                                        <li><a href="/Master/DailyRateMaster">Daily Rate Master</a></li>
+                                    </ul>
+                                </li>
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>HRM</span></a>
                                     <ul class="sidebar-submenu">
@@ -120,56 +126,32 @@
                                         <li><a href="/Master/RoleList">Role List</a></li>
                                         <li><a href="/Employee/EmployeeRegistration">Employee Registration</a></li>
                                         <li><a href="/Admin/EmployeeList">Employee List</a></li>
-                                     
                                     </ul>
-
                                 </li>
-
-
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Distributer</span></a>
                                     <ul class="sidebar-submenu">
                                         <li><a href="/Master/DistributerRegistration">Distributer Registration</a></li>
-                                        <li><a href="/Admin/DistributerListForAdmin">Distributer List</a></li>
+                                        <li><a href="/Master/DistributerList">Distributer List</a></li>
                                     </ul>
-
                                 </li>
-
-
-
-
-
-
-
-
-
-                                @*<li class="sidebar-list">
+                                <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Permission</span></a>
                                     <ul class="sidebar-submenu">
                                         <li><a href="/Permission/SetPermission">Set Permission</a></li>
                                     </ul>
-
-                                </li>*@
-
-
-                                @*<li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layout"></i><span class="lan-7">Page layout</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="box-layout.html">Boxed</a></li>
-                                            <li><a href="layout-rtl.html">RTL</a></li>
-                                            <li><a href="layout-dark.html">Dark Layout</a></li>
-                                            <li><a href="hide-on-scroll.html">Hide Nav Scroll</a></li>
-                                            <li><a href="footer-light.html">Footer Light</a></li>
-                                            <li><a href="footer-dark.html">Footer Dark</a></li>
-                                            <li><a href="footer-fixed.html">Footer Fixed</a></li>
-                                        </ul>
-                                    </li>*@
-
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Booking</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Admin/OrderDetails">Booking List</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                             <div class="sidebar-img-section">
                                 <div class="sidebar-img-content">
                                     <img class="img-fluid" src="../assets/images/logo/ankur_logo.svg" style="height:2rem" alt="">
-                                    <h4>Experiance with more Features</h4><a class="btn btn-primary" href="https://themeforest.net/user/pixelstrap/portfolio" target="_blank">Check now</a>
+                                    <h4>Experience with more Features</h4>
                                 </div>
                             </div>
 
@@ -194,7 +176,6 @@
             </footer>
         </div>
     </div>
-
     <!-- latest jquery-->
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/bootstrap/popper.min.js"></script>
@@ -207,7 +188,15 @@
     <!-- Sidebar jquery-->
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/sidebar-menu.js"></script>
-
+    <script src="../assets/js/counter/jquery.waypoints.min.js"></script>
+    <script src="../assets/js/counter/jquery.counterup.min.js"></script>
+    <script src="../assets/js/counter/counter-custom.js"></script>
+    <script src="../assets/js/popover-custom.js"></script>
+    <!-- Theme js-->
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/theme-customizer/customizer.js"></script>
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.en.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.custom.js"></script>
@@ -224,9 +213,5 @@
 
     <script src="../assets/js/chart/chartjs/chart.min.js"></script>
     <script src="../assets/js/chart/chartjs/chart.custom.js"></script>
-    <script src="../assets/js/tooltip-init.js"></script>
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/theme-customizer/customizer.js"></script>
 </body>
 </html>
