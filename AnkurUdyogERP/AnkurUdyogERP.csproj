@@ -1849,6 +1849,7 @@
     <Content Include="Views\Master\DailyRateMaster.cshtml" />
     <Content Include="Views\Admin\DealerList.cshtml" />
     <Content Include="Views\Master\DealerList.cshtml" />
+    <Content Include="Views\Website\Default.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
