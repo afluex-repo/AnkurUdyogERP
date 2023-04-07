@@ -8,8 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../assets/images/favicon/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../assets/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="icon" href="../assets/images/logo/a_icon.svg" type="image/x-icon">
     <!-- Google font-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/font-awesome.css">
     <!-- ico-font-->
@@ -24,35 +23,32 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick-theme.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/prism.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
     <!-- Responsive css-->
+
+    <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 
 </head>
 <body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <!-- Loader ends-->
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
         <!-- Page Header Start-->
         <div class="page-header">
             <div class="header-wrapper row m-0">
-                <form class="form-inline search-full col" action="#" method="get">
-                    <div class="form-group w-100">
-                        <div class="Typeahead Typeahead--twitterUsers">
-                            <div class="u-posRelative">
-                                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Koho .." name="q" title="" autofocus="">
-                                <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div><i class="close-search" data-feather="x"></i>
-                            </div>
-                            <div class="Typeahead-menu"></div>
-                        </div>
-                    </div>
-                </form>
                 <div class="header-logo-wrapper col-auto p-0">
-                    <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a></div>
                     <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
                 </div>
                 <div class="left-header col horizontal-wrapper ps-0">
@@ -63,9 +59,9 @@
                         <li class="profile-nav onhover-dropdown p-0 me-0">
 
                             <div class="d-flex profile-media">
-                                <img class="b-r-50" src="../assets/images/usericon.jpg" alt="">
+                                <img class="b-r-50" src="../assets/images/logo/a_icon.svg" alt="">
                                 <div class="flex-grow-1">
-                                    <span>@Session["Name"]</span> (<span>@Session["LoginId"]</span>) 
+                                    <span class="text-white">@Session["Name"]</span> <span class="text-white">(@Session["LoginId"])</span>
                                 </div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
@@ -84,28 +80,23 @@
             <div class="sidebar-wrapper">
                 <div>
                     <div class="logo-wrapper">
-                        <a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a>
+                        <a href="#"><img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP">
+                        <img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a>
                         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-left"> </i></div>
                     </div>
-                    <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo-icon.png" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo-icon-dark.png" alt=""></a></div>
+                    <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid for-light" src="../assets/images/logo/a_icon.svg" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/a_icon.svg" alt=""></a></div>
                     <nav class="sidebar-main">
                         <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
                         <div id="sidebar-menu">
                             <ul class="sidebar-links" id="simple-bar">
                                 <li class="back-btn">
-                                    <a href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/logo-icon.png" alt="AnkurUdyogeERP"><img class="img-fluid for-dark" src="../assets/images/logo/logo-icon-dark.png" alt=""></a>
+                                    <a href="#"><img class="img-fluid for-light" src="../assets/images/logo/logo-icon.png" alt="AnkurUdyogeERP"><img class="img-fluid for-dark" src="../assets/images/logo/a_icon.svg" alt=""></a>
                                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                                 </li>
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="/Distributer/DistributerDashboard"><i data-feather="home"></i><span>Dashboard</span></a>
                                 </li>
-                                @*<li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Role Master</span></a>
-                                    <ul class="sidebar-submenu">
-                                        <li><a href="/Master/DistributerList">Distributer List</a></li>
-                                    </ul>
-                                </li>*@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Dealer</span></a>
                                         <ul class="sidebar-submenu">
@@ -113,60 +104,20 @@
                                             <li><a href="/Distributer/DealerList">Dealer List</a></li>
                                         </ul>
                                     </li>
-                                    @*<li class="sidebar-main-title">
-                                        <div>
-                                            <h4 class="lan-8">Applications</h4>
-                                        </div>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="box"></i><span>Project                </span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="projects.html">Project List</a></li>
-                                            <li><a href="projectcreate.html">Create new</a></li>
-                                        </ul>
-                                    </li>*@
-                                    @*<li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="file-manager.html"><i data-feather="git-pull-request"> </i><span>File manager</span></a></li>
-                                    <li class="sidebar-list">  <a class="sidebar-link sidebar-title link-nav" href="kanban.html"><i data-feather="monitor"> </i><span>kanban Board</span></a></li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="shopping-bag"></i><span>Ecommerce</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="product.html">Product</a></li>
-                                            <li><a href="product-page.html">Product page</a></li>
-                                            <li><a href="add-products.html">Add Product</a></li>
-                                            <li><a href="list-products.html">Product list</a></li>
-                                            <li><a href="payment-details.html">Payment Details</a></li>
-                                            <li><a href="order-history.html">Order History</a></li>
-                                            <li><a href="invoice-template.html">Invoice</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="list-wish.html">Wishlist</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="mail"></i><span>Email</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="email_inbox.html">Mail Inbox</a></li>
-                                            <li><a href="email_read.html">Read mail</a></li>
-                                            <li><a href="email_compose.html">Compose</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="message-circle"></i><span>Chat</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="chat.html">Chat App</a></li>
-                                            <li><a href="chat-video.html">Video chat</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="sidebar-list">
-                                        <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="users"></i><span>Users</span></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="user-profile.html">Users Profile</a></li>
-                                            <li><a href="edit-profile.html">Users Edit</a></li>
-                                            <li><a href="user-cards.html">Users Cards</a></li>
-                                        </ul>
-                                    </li>*@
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Booking</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="/Distributer/OrderRequest">Booking Request</a></li>
+                                        <li><a href="/Distributer/OrderRequestList">Booking List</a></li>
+                                    </ul>
+                                </li>
                             </ul>
+                            <div class="sidebar-img-section">
+                                <div class="sidebar-img-content">
+                                    <img class="img-fluid" src="../assets/images/logo/ankur_logo.svg" style="height:2rem" alt="">
+                                    <h4>Experience with more Features</h4>
+                                </div>
+                            </div>
                         </div>
                         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
                     </nav>
@@ -179,13 +130,8 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-10 p-0 footer-left">
-                            @*<p class="mb-0">Copyright 2022 © Koho theme by pixelstrap</p>*@
-
-                            <p class="mb-0">Copyright © 2022 <a target="_blank" href="#">AnkurUdyogERP</a></p>
-
-
+                            <p class="mb-0">Copyright © 2023 <a target="_blank" href="#">AnkurUdyogERP</a> All Right Reserved.</p>
                         </div>
-                        @*<div class="col-2 p-0 footer-right"><i class="fa fa-heart font-danger"></i></div>*@
                     </div>
                 </div>
             </footer>
@@ -193,7 +139,6 @@
     </div>
 
   
-    <!-- latest jquery-->
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/bootstrap/popper.min.js"></script>
     <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
@@ -205,7 +150,15 @@
     <!-- Sidebar jquery-->
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/sidebar-menu.js"></script>
-
+    <script src="../assets/js/counter/jquery.waypoints.min.js"></script>
+    <script src="../assets/js/counter/jquery.counterup.min.js"></script>
+    <script src="../assets/js/counter/counter-custom.js"></script>
+    <script src="../assets/js/popover-custom.js"></script>
+    <!-- Theme js-->
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/theme-customizer/customizer.js"></script>
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.en.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.custom.js"></script>
@@ -216,16 +169,12 @@
     <script src="../assets/js/slick-slider/slick.min.js"></script>
     <script src="../assets/js/slick-slider/slick-theme.js"></script>
     <script src="../assets/js/typeahead/handlebars.js"></script>
-    @*<script src="../assets/js/dashboard/dashboard_2.js"></script>*@
+    <script src="../assets/js/dashboard/dashboard_2.js"></script>
     <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
-    
 
     <script src="../assets/js/chart/chartjs/chart.min.js"></script>
     <script src="../assets/js/chart/chartjs/chart.custom.js"></script>
-    <script src="../assets/js/tooltip-init.js"></script>
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/theme-customizer/customizer.js"></script>
+
 </body>
 </html>
