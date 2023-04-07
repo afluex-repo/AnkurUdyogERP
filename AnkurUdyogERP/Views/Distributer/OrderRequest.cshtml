@@ -218,6 +218,7 @@
                 $('.Rate', $newRow).prop('disabled', true).val($('#Rate').val());
                 $('.OrderQuantity', $newRow).prop('disabled', true).val($('#OrderQuantity').val());
                 $('.Amount', $newRow).prop('disabled', true).val($('#Amount').val());
+                                
                 //Replace add button with remove button
                 $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
 
@@ -233,6 +234,7 @@
                 $('#select2-Dealer-container').text('Select Dealer Name');
                 $('#OrderQuantity').val('');
                 $('#orderItemError').empty();
+
             }
 
         })
@@ -246,9 +248,6 @@
             $("#divload").css({ 'display': 'none' });
             $('#orderItemError').text('');
             var list = [];
-            var lst = [];
-            var sum = 0
-            var sum1 = 0
 
             var errorItemCount = 0;
             $('#orderdetailsItems tr').each(function (index, ele) {
@@ -266,16 +265,11 @@
                         Amount: $('.Amount', this).val()
                     }
                     list.push(orderItem);
-
-                    //var odrItem = {
-                    //    OrderQuantity: $('.OrderQuantity', this).val()
-                    //}
-                    //lst.push(odrItem)
                 }
 
             })
-
             console.log(list)
+
             if (errorItemCount > 0) {
                 $('#orderItemError').text(errorItemCount + " Invalid entry in list.");
                 isAllValid = false;
@@ -460,6 +454,8 @@
             }
         });
     }
+
+   
 </script>
 <style>
     .errortext {

@@ -1,0 +1,131 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Generate Receipt</title>
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background:#eff3f9;
+        }
+         .table-bordered tr, .table-bordered td, .table-bordered th{
+            border-color: #2c323f !important;
+        }
+
+         @@media print
+        {
+          #print_btn
+              {
+              display:none;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header pb-0 pt-4 d-flex justify-content-between p-25">
+                        <h3>D.O </h3>
+                        <img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP" />
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td colspan="7"><strong>Party Name : @ViewBag.Dealer</strong></td>
+                                        <td colspan="3"><strong>Rate : @ViewBag.Rate</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7"><strong>Vehicle No.</strong></td>
+                                        <td colspan="3"><strong>Date : @ViewBag.Date</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th><strong>S. No.</strong></th>
+                                        <th><strong>Section</strong></th>
+                                        <th><strong>F/R</strong></th>
+                                        <th><strong>Qty</strong></th>
+                                        <th><strong>Bundle</strong></th>
+                                        <th><strong>G. Wt.</strong></th>
+                                        <th><strong>T. Wt.</strong></th>
+                                        <th><strong>N. Wt.</strong></th>
+                                        <th><strong>Sec. Wt.</strong></th>
+                                        <th><strong>Remark</strong></th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="10">पहले लोडिंग 10 से 25 एम तक होगी</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7"><strong>Loading Supervisor</strong></td>
+                                        <td colspan="3" rowspan="2"><strong>Sig of Super</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7"><strong>Driver Name & Licence No.</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7"><strong>Mo. No. : @ViewBag.Mobile</strong></td>
+                                        <td colspan="3" rowspan="2"><strong>Sig of Driver</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7"><strong>Transporter Name</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                          
+                        </div>
+                        <button class="btn btn btn-primary me-2 mt-3" type="button" id="print_btn" onclick="window.print()">Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
