@@ -38,8 +38,8 @@
                                         <th>Distributer</th>
                                         <th>City</th>
                                         @*<th>Joining Date</th>*@
-                                        <th>Previous Day Rate</th>
-                                        <th>Today Rate</th>
+                                        <th>Previous Rate</th>
+                                        <th>Current Rate</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -64,7 +64,7 @@
                                                         <label style="color:#ed9245">Not Updated</label>
                                                         }
                                                         else{
-                                                        @Item.CurrentRate
+                                                       <label> @Item.CurrentRate  (@Item.CurrentDate)</label>
                                                         }
                                                     </td>
                                                     <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Update Today Rate</a></td>

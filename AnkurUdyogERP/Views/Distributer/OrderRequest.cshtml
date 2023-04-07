@@ -404,8 +404,10 @@
 
         $("#Amount").val(Amount);
         var PendingLmt = $("#PendingLimit").val();
+        var extPendingLmt = "2";
+        var pendinglmt = ((Number(PendingLmt) + Number(extPendingLmt)))
 
-        if ((Number(PendingLmt)) < (Number(OrderQuantity))) {
+        if ((Number(pendinglmt)) < (Number(OrderQuantity))) {
             alert("Daily Limit is Over. Booking Quantity should be less than Pending Limit !!");
             $("#PendingLimit").addClass("errortext");
             $("#Quintal").addClass("errortext");

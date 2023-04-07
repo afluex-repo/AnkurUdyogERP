@@ -379,7 +379,6 @@ namespace AnkurUdyogERP.Controllers
                     model.OrderId = ds1.Tables[0].Rows[0]["PK_OrderId"].ToString();
                     model.PendingLimit = ds1.Tables[0].Rows[0]["PendingLimit"].ToString();
                     model.Dealer = ds1.Tables[0].Rows[0]["Name"].ToString();
-                    model.Section = ds1.Tables[0].Rows[0]["Section"].ToString();
                     model.Rate = ds1.Tables[0].Rows[0]["Rate"].ToString();
                     model.OrderQuantity = ds1.Tables[0].Rows[0]["OrderQuantity"].ToString();
                     model.TotalAmount = ds1.Tables[0].Rows[0]["TotalAmount"].ToString();
