@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace AnkurUdyogERP.Controllers
 {
@@ -303,7 +304,6 @@ namespace AnkurUdyogERP.Controllers
                     obj.Distributer = dr["DistributerName"].ToString();
                     obj.PendingLimit = dr["PendingLimit"].ToString();
                     obj.Dealer = dr["DealerName"].ToString();
-                    obj.Section = dr["Section"].ToString();
                     obj.Rate = dr["Rate"].ToString();
                     obj.OrderQuantity = dr["OrderQuantity"].ToString();
                     obj.TotalAmount = dr["TotalAmount"].ToString();
@@ -335,7 +335,6 @@ namespace AnkurUdyogERP.Controllers
                     obj.Distributer = dr["DistributerName"].ToString();
                     obj.PendingLimit = dr["PendingLimit"].ToString();
                     obj.Dealer = dr["DealerName"].ToString();
-                    obj.Section = dr["Section"].ToString();
                     obj.Rate = dr["Rate"].ToString();
                     obj.OrderQuantity = dr["OrderQuantity"].ToString();
                     obj.TotalAmount = dr["TotalAmount"].ToString();
@@ -492,6 +491,30 @@ namespace AnkurUdyogERP.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+
+
+        public ActionResult DistributerListForAutoSearch()
+        {
+            Admin obj = new Admin();
+            List<Admin> lst = new List<Admin>();
+            obj.Fk_DistributerId = Session["Pk_adminId"].ToString();
+            DataSet ds = obj.GetDistributerListAutoSeach();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            serializer.MaxJsonLength = int.MaxValue;
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Admin objList = new Admin();
+                    objList.DistributerName = dr["Name"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            var jsonResult = Json(lst, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+            //return Json(lst, JsonRequestBehavior.AllowGet);
+        }
     }
 }
+

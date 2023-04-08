@@ -47,7 +47,7 @@
                                         @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Contact Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Email <span style="color:red;">*</span></label>
+                                        <label>Email </label>
                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
                                     </div>
 
@@ -61,7 +61,7 @@
                                     @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", @Placeholder = "GST Number", @maxlength = "15", @onchange = "return validateGSTNo();" })
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Address <span style="color:red;">*</span></label>
+                                    <label>Address </label>
                                     @Html.TextAreaFor(m => m.Address, new { @class = "form-control btn-square", @Placeholder = "Address", @rows = "3" })
                                 </div>
                                 @*<div class="col-md-6">
@@ -269,11 +269,11 @@
             $('#Mobile').focus();
             return false;
         }
-        if ($('#Email').val() == '') {
-            $("#Email").addClass('errortext');
-            $('#Email').focus();
-            return false;
-        }
+        //if ($('#Email').val() == '') {
+        //    $("#Email").addClass('errortext');
+        //    $('#Email').focus();
+        //    return false;
+        //}
         if ($('#PanNo').val() == '') {
             $("#PanNo").addClass('errortext');
             $('#PanNo').focus();
@@ -289,11 +289,11 @@
         //    $('#Limit').focus();
         //    return false;
         //}
-        if ($('#Address').val() == '') {
-            $("#Address").addClass('errortext');
-            $('#Address').focus();
-            return false;
-        }
+        //if ($('#Address').val() == '') {
+        //    $("#Address").addClass('errortext');
+        //    $('#Address').focus();
+        //    return false;
+        //}
         if ($('#Pincode').val() == '') {
             $("#Pincode").addClass('errortext');
             $('#Pincode').focus();

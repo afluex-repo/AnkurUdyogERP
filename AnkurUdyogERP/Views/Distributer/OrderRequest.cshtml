@@ -209,6 +209,12 @@
                 isAllValid = false;
                 $('#OrderQuantity').siblings('span.error').css('visibility', 'visible');
             }
+            if ($('#Amount').val() == '' || $('#Amount').val() == "0") {
+                isAllValid = false;
+                alert("Amount should be grater than 0 !!");
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+            }
             debugger
             if (isAllValid) {
                 //var datetime = date.concat(" ", time);
@@ -297,7 +303,7 @@
                     success: function (data) {
                         if (data.status == "Yes") {
                             $("#divload").css({ 'display': 'block' });
-                            alert('Order Request Successfully saved');
+                            alert('Booking Request Successfully saved');
                             //here we will clear the form
                             list = [];
                             window.location.href = '@Url.Action("OrderRequest", "Distributer")';
@@ -408,7 +414,7 @@
         var pendinglmt = ((Number(PendingLmt) + Number(extPendingLmt)))
 
         if ((Number(pendinglmt)) < (Number(OrderQuantity))) {
-            alert("Daily Limit is Over. Booking Quantity should be less than Pending Limit !!");
+            alert("Daily Limit is Over. Booking Quantity should be less than or equal to Pending Limit !!");
             $("#PendingLimit").addClass("errortext");
             $("#Quintal").addClass("errortext");
             $("#OrderQuantity").val("");

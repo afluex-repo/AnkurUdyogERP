@@ -97,12 +97,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>Previous Day Rate <span style="color:red;"></span></label>
+                            <div class="col-md-7 form-group">
+                                <label>Current Rate <span style="color:red;"></span></label>
                                 <input class="form-control" id="PreviousRate" name="PreviousRate" type="text" readonly="true" />
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label>Update Today Rate <span style="color:red;">*</span></label>
+                            <div class="col-md-5 form-group">
+                                <label>New Rate <span style="color:red;">*</span></label>
                                 @Html.TextBoxFor(m => m.TodayRate, new { @class = "form-control", @onkeypress = "return isNumberKey(event);", @Placeholder= "Update Today Rate" })
                             </div>
                             <div class="col-md-4 mt-3">
@@ -150,7 +150,7 @@
                 data: { 'TodayRate': TodayRate, 'FK_DistributerId': FK_DistributerId },
                 success: function (data) {
                     if (data.Result == "yes") {
-                        alert("Today Rate Save Successfully !!");
+                        alert("New Rate Saved Successfully !!");
                         window.location.reload();
                     }
                     else if (data.Result == "no") {
