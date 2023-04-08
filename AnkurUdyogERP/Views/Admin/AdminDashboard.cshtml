@@ -11,6 +11,7 @@
 {
 
     <div class="page-body">
+
         <div class="container-fluid">
             <div class="page-title">
                 <div class="row">
@@ -27,8 +28,117 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h2>Daily Basis Report</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="dt-ext table-responsive">
+                                <table class="display" id="export-button">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th style="display:none">PK_DistributerId_</th>
+                                            <th>Distributer</th>
+                                            <th>City</th>
+                                            @*<th>Joining Date</th>*@
+                                            <th>Today's Limit</th>
+                                            @*<th>Today's Booking</th>*@
+                                            @*<th>Dispatch Booking</th>*@
+                                            <th>Today's Booking</th>
+                                            <th>Today's Pending Limit</th>
+                                            @*<th>Total Dispatch</th>*@
+                                            <th>Increase Limit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstdistributerforadmin != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstdistributerforadmin)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td id="PK_DistributerId_@i" style="display:none">@Item.PK_DistributerId</td>
+                                                        <td id="DistributerName_@i">@Item.DistributerName</td>
+                                                        <td>@Item.City</td>
+                                                        @*<td>@Item.JoiningDate</td>*@
+                                                        <td id="Limit_@i">@Item.Limit</td>
+                                                        @*<td id="TodayOrder_@i">@Item.TodayOrder</td>
+                        <td>@Item.DispatchOrder</td>*@
+                                                        <td>@Item.TodayOrder</td>
+                                                        <td id="PendingLimit_@i">@Item.PendingLimit</td>
+                                                        @*<td>@Item.TotalDispatch</td>*@
+                                                        <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Increase Limit</a></td>
 
-        <!-- Container-fluid starts-->
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h2>General Report</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="dt-ext table-responsive">
+                                <table class="display" id="show-hidden-row">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Distributer</th>
+                                            <th>City</th>
+                                            <th>Till Now Current Month Booking</th>
+                                            <th>Till Now Current Month Dispatch</th>
+                                            <th>Till Today Current Month Pendency</th>
+                                            @*<th>View</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstgeneralReport != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstgeneralReport)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@Item.DistributerName</td>
+                                                        <td>@Item.City</td>
+                                                        <td>@Item.CurrentMonthOrder</td>
+                                                        <td>@Item.CurrentMonthDispatch</td>
+                                                        <td>@Item.CurrentMonthPendency</td>
+                                                        @*<td>
+                               <a href="#" class="btn btn-primary btn-sm">Date Wise Details</a>
+                            </td>*@
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+
         <div class="container-fluid ecommerce-page">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6" style="display:none;">
@@ -126,104 +236,7 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Daily Basis Report</h2>
-                        <div class="table-responsive mt-4">
-                            <table class="display" id="data-source-1" style="width:100%;text-align:center">
-                                <thead>
-                                    <tr>
-                                        <th>S.No.</th>
-                                        <th style="display:none">PK_DistributerId_</th>
-                                        <th>Distributer</th>
-                                        <th>City</th>
-                                        @*<th>Joining Date</th>*@
-                                        <th>Today's Limit</th>
-                                        @*<th>Today's Booking</th>*@
-                                        @*<th>Dispatch Booking</th>*@
-                                        <th>Today's Booking</th>
-                                        <th>Today's Pending Limit</th>
-                                        @*<th>Total Dispatch</th>*@
-                                        <th>Increase Limit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
-                                        if (Model.lstdistributerforadmin != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var Item in Model.lstdistributerforadmin)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td id="PK_DistributerId_@i" style="display:none">@Item.PK_DistributerId</td>
-                                                    <td id="DistributerName_@i">@Item.DistributerName</td>
-                                                    <td>@Item.City</td>
-                                                    @*<td>@Item.JoiningDate</td>*@
-                                                    <td id="Limit_@i">@Item.Limit</td>
-                                                    @*<td id="TodayOrder_@i">@Item.TodayOrder</td>
-                                                    <td>@Item.DispatchOrder</td>*@
-                                                    <td id="TodayOrder_@i">@Item.TodayOrder</td>
-                                                    <td id="PendingLimit_@i">@Item.PendingLimit</td>
-                                                    @*<td>@Item.TotalDispatch</td>*@
-                                                    <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Increase Limit</a></td>
 
-                                                </tr>
-                                                i++;
-                                            }
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <h2>General Report</h2>
-                        <div class="table-responsive mt-4">
-                            <table class="display" id="basic-9" style="width:100%;text-align:center">
-                                <thead>
-                                    <tr>
-                                        <th>S.No.</th>
-                                        <th>Distributer</th>
-                                        <th>City</th>
-                                        <th>Till Now Current Month Booking</th>
-                                        <th>Till Now Current Month Dispatch</th>
-                                        <th>Till Today Current Month Pendency</th>
-                                        @*<th>View</th>*@
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
-                                        if (Model.lstgeneralReport != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var Item in Model.lstgeneralReport)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td>@Item.DistributerName</td>
-                                                    <td>@Item.City</td>
-                                                    <td>@Item.CurrentMonthOrder</td>
-                                                    <td>@Item.CurrentMonthDispatch</td>
-                                                    <td>@Item.CurrentMonthPendency</td>
-                                                    @*<td>
-                                                       <a href="#" class="btn btn-primary btn-sm">Date Wise Details</a>
-                                                    </td>*@
-                                                </tr>
-                                                i++;
-                                            }
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- Container-fluid Ends-->
         </div>
@@ -331,3 +344,7 @@
         background-color: #fff0f0 !important;
     }
 </style>
+
+<script>
+    $('.display').attr('id', 'export-button');
+</script>
