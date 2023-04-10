@@ -67,30 +67,17 @@
                                                 <span class="error"> Select Dealer</span>*@
                                                 
 
-                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control ui-autocomplete-input", @Placeholder = "Distributer Name", @style = "min-width:180px;position:relative" })
-                                                @Html.HiddenFor(m =>m.UserID)
+                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2 ui-autocomplete-input", @Placeholder = "Dealer Name", @style = "min-width:180px;position:relative" })
+                                                @Html.HiddenFor(m =>m.DealerId, new { @class = "DealerId" })
                                                 <span class="error"> Select Dealer</span>
                                             </td>
-                                            @*<td>
-                                                    @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "Section form-control select2", @onchange = "return changeSection();", @style = "min-width:150px" })
-                                                    <span class="error">Select Section</span>
-                                                </td>*@
                                             <td style="min-width:150px">
                                                 <input type="text" id="Rate" name="Rate" class="Rate form-control" placeholder="Rate" value="@ViewBag.DailyRate" readonly="readonly" />
-
-
-                                                @*@Html.TextBoxFor(m => m.Rate, new { @class = "Rate form-control", @placeholder = "Rate (per/kg)", @onkeypress = "return isNumberKey(event);", @readonly = true, @style = "min-width:150px" })*@
                                             </td>
                                             <td>
                                                 @Html.TextBoxFor(m => m.OrderQuantity, new { @class = "OrderQuantity form-control", @placeholder = "Order Quantity (per/kg)", @onkeypress = "return isNumberKey(event);", @onchange = "return changeOrderQuantity();", @style = "min-width:150px" })
                                                 <span class="error">OrderQuantity</span>
                                             </td>
-                                            @*<td style="min-width:160px">
-                                                    @Html.TextBoxFor(m => m.Quintal, new { @class = "Quintal form-control", @placeholder = "Quintal ", @readonly = true, @style = "background-color:#f6c89b" })
-                                                </td>
-                                                <td style="min-width:160px">
-                                                    @Html.TextBoxFor(m => m.Ton, new { @class = "Ton form-control", @placeholder = "Ton", @readonly = true, @style = "background-color:#f6c89b" })
-                                                </td>*@
                                             <td>
                                                 @Html.TextBoxFor(m => m.Amount, new { @class = "Amount form-control", @placeholder = "Amount ", @readonly = true, @style = "min-width:150px" })
                                             </td>
@@ -200,8 +187,7 @@
                 debugger;
                 if (response != null) {
                     $(response).each(function (index, item) {
-                        //cityuse.push(item.DealerName);
-                        cityuse.push(item.DealerName + "(" + item.LoginId + ")");
+                        cityuse.push(item.DealerName + "(" + item.PK_DealerId + ")");
                     });
                     debugger;
                     $('#Dealer').autocomplete({
@@ -210,7 +196,7 @@
                             var str = ui.item.label;
                             var strsplit = str.split("(");
 
-                            $('#UserID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                            $('#DealerId').val(strsplit[1].substr(0, strsplit[1].length - 1));
                         }
                     })
                 }
@@ -221,9 +207,6 @@
         });
 
 
-
-
-
         //Add button click event
         $('#add').click(function () {
             debugger
@@ -232,14 +215,10 @@
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             var isAllValid = true;
 
-            if ($('#Dealer').val() == "0") {
+            if ($('#Dealer').val() == '') {
                 isAllValid = false;
                 $('#Dealer').siblings('span.error').css('visibility', 'visible');
             }
-            //if ($('#Section').val() == "0") {
-            //    isAllValid = false;
-            //    $('#Section').siblings('span.error').css('visibility', 'visible');
-            //}
             if ($('#OrderQuantity').val() == '') {
                 isAllValid = false;
                 $('#OrderQuantity').siblings('span.error').css('visibility', 'visible');
@@ -272,7 +251,7 @@
                 //clear select data
                 $('#orderdetailsItems .ThToTransactionMode').removeClass("ThToTransactionMode");
                 $('#Dealer,#OrderQuantity,#Amount').val('0');
-                $('#select2-Dealer-container').text('Select Dealer Name');
+                $('#Dealer').val('');
                 $('#OrderQuantity').val('');
                 $('#orderItemError').empty();
 
@@ -300,7 +279,7 @@
                     $("#divload").css({ 'display': 'none' });
                 } else {
                     var orderItem = {
-                        Dealer: $('select.Dealer', this).val(),
+                        Dealer: $('.DealerId', this).val(),
                         Rate: $('.Rate', this).val(),
                         OrderQuantity: $('.OrderQuantity', this).val(),
                         Amount: $('.Amount', this).val()
