@@ -245,15 +245,15 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
-        
 
-        //public DataSet GetDealerListAutoSeach()
-        //{
-        //    SqlParameter[] para = {
-        //                                new SqlParameter("@FK_DistributerId", DistributerId)};
-        //    DataSet ds = Connection.ExecuteQuery("GetDealerListAutoSeach", para);
-        //    return ds;
-        //}
+
+        public DataSet GetDealerListAutoSeach()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@FK_DistributerId", DistributerId)};
+            DataSet ds = Connection.ExecuteQuery("GetDealerListAutoSeach", para);
+            return ds;
+        }
 
     }
 }
