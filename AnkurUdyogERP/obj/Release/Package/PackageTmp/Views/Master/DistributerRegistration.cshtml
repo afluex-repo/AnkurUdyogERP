@@ -82,9 +82,10 @@
                                 </div>
                              
                             </div>
-                            if (Model.PK_AdminId != null)
+
+                            @Html.HiddenFor(m => m.DistributerId)
+                            if (Model.DistributerId != null)
                             {
-                                @Html.HiddenFor(m => m.PK_AdminId)
                                 <input type="submit" class="btn btn-primary mt-4" value="Update" id="btnUpdate" name="btnUpdate" onclick="return ValidateForm();" />
                             }
                             else
