@@ -531,7 +531,7 @@ namespace AnkurUdyogERP.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         model.Result = "yes";
-                        //TempData["TodayRate"] = "Today Rate Updated Successfully !!";
+                        //TempData["TodayRate"] = "New Rate Saved Successfully !!";
                     }
                     else
                     {

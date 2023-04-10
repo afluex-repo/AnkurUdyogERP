@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace AnkurUdyogERP.Controllers
 {
@@ -303,7 +304,6 @@ namespace AnkurUdyogERP.Controllers
                     obj.Distributer = dr["DistributerName"].ToString();
                     obj.PendingLimit = dr["PendingLimit"].ToString();
                     obj.Dealer = dr["DealerName"].ToString();
-                    obj.Section = dr["Section"].ToString();
                     obj.Rate = dr["Rate"].ToString();
                     obj.OrderQuantity = dr["OrderQuantity"].ToString();
                     obj.TotalAmount = dr["TotalAmount"].ToString();
@@ -335,7 +335,6 @@ namespace AnkurUdyogERP.Controllers
                     obj.Distributer = dr["DistributerName"].ToString();
                     obj.PendingLimit = dr["PendingLimit"].ToString();
                     obj.Dealer = dr["DealerName"].ToString();
-                    obj.Section = dr["Section"].ToString();
                     obj.Rate = dr["Rate"].ToString();
                     obj.OrderQuantity = dr["OrderQuantity"].ToString();
                     obj.TotalAmount = dr["TotalAmount"].ToString();
@@ -463,8 +462,8 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-        
-        public ActionResult SaveIncreaseLimitDateWise(Master model,string AddOnLimit, string FK_DistributerId)
+
+        public ActionResult SaveIncreaseLimitDateWise(Master model, string AddOnLimit, string FK_DistributerId)
         {
             try
             {
@@ -492,6 +491,8 @@ namespace AnkurUdyogERP.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+
+
     }
 }
+

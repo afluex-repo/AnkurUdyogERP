@@ -4,9 +4,13 @@
     ViewBag.Title = "OrderRequest";
     Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
 }
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 
-
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags">
+</div>
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
@@ -66,8 +70,13 @@
                                                     <input type="text" id="PendingLimit" name="PendingLimit" class="PendingLimit form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly="readonly" , oninput="return checkLimit();" />
                                                 </td>*@
                                             <td>
-                                                @Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "Dealer form-control select2", @style = "min-width:180px" })
-                                                <span class="error"> Select Dealer</span>
+                                                @*@Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "Dealer form-control select2", @style = "min-width:180px" })
+                                                <span class="error"> Select Dealer</span>*@
+
+
+                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2", @Placeholder = "Distributer Name", @style = "min-width:180px" })
+                                                @Html.HiddenFor(m =>m.UserID)
+                                               
                                             </td>
                                             @*<td>
                                                     @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "Section form-control select2", @onchange = "return changeSection();", @style = "min-width:150px" })
@@ -176,9 +185,6 @@
     </div>
     <!-- Container-fluid Ends-->
 </div>
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
     $(document).ready(function () {
@@ -189,6 +195,40 @@
         if (UserType == 'Admin' && UserTypeName != 'Admin' && UserTypeName != "") {
             GetMenuDetails();
         }
+
+        $("input").attr("autocomplete", "off");
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Distributer/DealerListForAutoSearch',
+            type: 'Post',
+            success: function (response) {
+                debugger;
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.DealerName);
+                    });
+                    debugger;
+                    $('#Dealer').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#UserID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+
+
+
+
+
         //Add button click event
         $('#add').click(function () {
             debugger
@@ -208,6 +248,12 @@
             if ($('#OrderQuantity').val() == '') {
                 isAllValid = false;
                 $('#OrderQuantity').siblings('span.error').css('visibility', 'visible');
+            }
+            if ($('#Amount').val() == '' || $('#Amount').val() == "0") {
+                isAllValid = false;
+                alert("Amount should be grater than 0 !!");
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
             }
             debugger
             if (isAllValid) {
@@ -297,7 +343,7 @@
                     success: function (data) {
                         if (data.status == "Yes") {
                             $("#divload").css({ 'display': 'block' });
-                            alert('Order Request Successfully saved');
+                            alert('Booking Request Successfully saved');
                             //here we will clear the form
                             list = [];
                             window.location.href = '@Url.Action("OrderRequest", "Distributer")';
@@ -404,9 +450,11 @@
 
         $("#Amount").val(Amount);
         var PendingLmt = $("#PendingLimit").val();
+        var extPendingLmt = "2";
+        var pendinglmt = ((Number(PendingLmt) + Number(extPendingLmt)))
 
-        if ((Number(PendingLmt)) < (Number(OrderQuantity))) {
-            alert("Daily Limit is Over. Booking Quantity should be less than Pending Limit !!");
+        if ((Number(pendinglmt)) < (Number(OrderQuantity))) {
+            alert("Daily Limit is Over. Booking Quantity should be less than or equal to Pending Limit !!");
             $("#PendingLimit").addClass("errortext");
             $("#Quintal").addClass("errortext");
             $("#OrderQuantity").val("");

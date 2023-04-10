@@ -379,7 +379,6 @@ namespace AnkurUdyogERP.Controllers
                     model.OrderId = ds1.Tables[0].Rows[0]["PK_OrderId"].ToString();
                     model.PendingLimit = ds1.Tables[0].Rows[0]["PendingLimit"].ToString();
                     model.Dealer = ds1.Tables[0].Rows[0]["Name"].ToString();
-                    model.Section = ds1.Tables[0].Rows[0]["Section"].ToString();
                     model.Rate = ds1.Tables[0].Rows[0]["Rate"].ToString();
                     model.OrderQuantity = ds1.Tables[0].Rows[0]["OrderQuantity"].ToString();
                     model.TotalAmount = ds1.Tables[0].Rows[0]["TotalAmount"].ToString();
@@ -638,6 +637,30 @@ namespace AnkurUdyogERP.Controllers
                 model.lstrequest = lst;
             }
             return View(model);
+        }
+
+
+        public ActionResult DealerListForAutoSearch()
+        {
+            Distributer obj = new Distributer();
+            List<Distributer> lst = new List<Distributer>();
+            obj.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = obj.GetDealerListAutoSeach();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            serializer.MaxJsonLength = int.MaxValue;
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer objList = new Distributer();
+                    objList.DealerName = dr["Name"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            var jsonResult = Json(lst, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+            //return Json(lst, JsonRequestBehavior.AllowGet);
         }
     }
 }

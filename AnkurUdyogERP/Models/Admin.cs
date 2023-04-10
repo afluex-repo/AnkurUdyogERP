@@ -9,6 +9,6 @@ namespace AnkurUdyogERP.Models
 {
     public class Admin
     {
-    
+       
     }
 }
