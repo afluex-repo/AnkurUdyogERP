@@ -653,6 +653,7 @@ namespace AnkurUdyogERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Distributer objList = new Distributer();
+                    objList.LoginId = dr["LoginId"].ToString();
                     objList.DealerName = dr["Name"].ToString();
                     lst.Add(objList);
                 }

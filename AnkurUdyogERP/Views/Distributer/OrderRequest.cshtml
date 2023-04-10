@@ -4,13 +4,7 @@
     ViewBag.Title = "OrderRequest";
     Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
 }
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-
-<div class="ui-widget">
-    <label for="tags">Tags: </label>
-    <input id="tags">
-</div>
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
@@ -41,7 +35,6 @@
                         </div>
 
                         <div class="card-body">
-
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label>Today's Pending Limit</label>
@@ -72,11 +65,11 @@
                                             <td>
                                                 @*@Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "Dealer form-control select2", @style = "min-width:180px" })
                                                 <span class="error"> Select Dealer</span>*@
+                                                
 
-
-                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2", @Placeholder = "Distributer Name", @style = "min-width:180px" })
+                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control ui-autocomplete-input", @Placeholder = "Distributer Name", @style = "min-width:180px;position:relative" })
                                                 @Html.HiddenFor(m =>m.UserID)
-                                               
+                                                <span class="error"> Select Dealer</span>
                                             </td>
                                             @*<td>
                                                     @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "Section form-control select2", @onchange = "return changeSection();", @style = "min-width:150px" })
@@ -186,6 +179,7 @@
     <!-- Container-fluid Ends-->
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         debugger;
@@ -206,7 +200,8 @@
                 debugger;
                 if (response != null) {
                     $(response).each(function (index, item) {
-                        cityuse.push(item.DealerName);
+                        //cityuse.push(item.DealerName);
+                        cityuse.push(item.DealerName + "(" + item.LoginId + ")");
                     });
                     debugger;
                     $('#Dealer').autocomplete({
