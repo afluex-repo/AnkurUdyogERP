@@ -462,8 +462,8 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-        
-        public ActionResult SaveIncreaseLimitDateWise(Master model,string AddOnLimit, string FK_DistributerId)
+
+        public ActionResult SaveIncreaseLimitDateWise(Master model, string AddOnLimit, string FK_DistributerId)
         {
             try
             {
@@ -493,28 +493,6 @@ namespace AnkurUdyogERP.Controllers
         }
 
 
-        public ActionResult DistributerListForAutoSearch()
-        {
-            Admin obj = new Admin();
-            List<Admin> lst = new List<Admin>();
-            obj.Fk_DistributerId = Session["Pk_adminId"].ToString();
-            DataSet ds = obj.GetDistributerListAutoSeach();
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = int.MaxValue;
-            if (ds != null && ds.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow dr in ds.Tables[0].Rows)
-                {
-                    Admin objList = new Admin();
-                    objList.DistributerName = dr["Name"].ToString();
-                    lst.Add(objList);
-                }
-            }
-            var jsonResult = Json(lst, JsonRequestBehavior.AllowGet);
-            jsonResult.MaxJsonLength = int.MaxValue;
-            return jsonResult;
-            //return Json(lst, JsonRequestBehavior.AllowGet);
-        }
     }
 }
 

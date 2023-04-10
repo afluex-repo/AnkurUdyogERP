@@ -39,11 +39,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-2">
                                         <label>Distributer <span style="color:red;"></span></label>
-                                        @*@Html.DropDownListFor(m => m.DistributerId, new SelectList(ViewBag.ddldistributer, "Value", "Text"), new { @class = "form-control js-example-basic-single" })*@
-
-
-
-                                        @Html.TextBoxFor(m => m.DistributerId, new { @class = "form-control", @Placeholder = "Distributer Name",@oninput= "return autosearch()" })
+                                        @Html.DropDownListFor(m => m.DistributerId, new SelectList(ViewBag.ddldistributer, "Value", "Text"), new { @class = "form-control js-example-basic-single" })
                                     </div>
                                     <div class="col-md-2">
                                         <label>From Date <span style="color:red;"></span></label>
@@ -60,7 +56,7 @@
                                 </div>
                             }
                             <div class="table-responsive mt-4">
-                                    <table class="display" id="data-source-1" style="width:100%">
+                                    <table class="display" id="export-button" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>S.No.</th>
@@ -148,57 +144,6 @@
         <!-- Container-fluid Ends-->
     </div>
 </div>
-
-
-<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-
-<script>
-    //$(document).ready(function () {
-    //    $("#divload").css({ 'display': 'none' });
-    //    debugger;
-    //    var UserType = $('#UserType').val();
-    //    var UserTypeName = $('#UserTypeName').val();
-
-    //    $("input").attr("autocomplete", "off");
-    //    var cityuse = [];
-    //    $("#loader").css({ 'display': '' });
-    //    $.ajax({
-    //        url: '/Admin/DistributerListForAutoSearch',
-    //        type: 'Post',
-    //        success: function (response) {
-    //            if (response != null) {
-    //                $(response).each(function (index, item) {
-    //                    cityuse.push(item.DistributerName + "(" + item.LoginIDD + ")");
-    //                });
-    //            }
-    //        }, error: function () {
-    //            alert('Some Thing wrong!');
-    //            $("#loader").css({ 'display': 'none' });
-    //        }
-    //    });
-    //});
-
-    function autosearch() {
-        debugger;
-        var cityuse = [];
-        $.ajax({
-            url: '/Admin/DistributerListForAutoSearch',
-            type: 'Post',
-            success: function (response) {
-                if (response != null) {
-                    $(response).each(function (index, item) {
-                        cityuse.push(item.DistributerName + "(" + item.LoginIDD + ")");
-                    });
-                }
-            }, error: function () {
-                alert('Some Thing wrong!');
-                $("#loader").css({ 'display': 'none' });
-            }
-        });
-    }
-</script>
 
 
 
