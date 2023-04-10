@@ -11,10 +11,6 @@
     <link rel="icon" href="../assets/images/logo/a_icon.svg" type="image/x-icon">
     <!-- Google font-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/font-awesome.css">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/icofont.css">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/themify.css">
     <!-- Feather icon-->
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/scrollbar.css">
@@ -29,6 +25,7 @@
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatable-extension.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vendors/date-picker.css">
     <!-- Responsive css-->
 
@@ -66,7 +63,7 @@
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
                                 <li><a href="#"><i data-feather="user"></i><span>Profile</span></a></li>
-                                <li><a href="/Home/Login"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
+                                <li><a href="/Home/LoginDistributer"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -80,7 +77,7 @@
             <div class="sidebar-wrapper">
                 <div>
                     <div class="logo-wrapper">
-                        <a href="#"><img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP">
+                        <a href="/Distributer/DistributerDashboard"><img class="img-fluid for-light" src="../assets/images/logo/ankur_logo.svg" style="height:2.8rem" alt="AnkurUdyogeERP">
                         <img class="img-fluid for-dark" src="../assets/images/logo/logo-dark.png" alt=""></a>
                         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-left"> </i></div>
@@ -138,7 +135,6 @@
         </div>
     </div>
 
-  
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/bootstrap/popper.min.js"></script>
     <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
@@ -150,13 +146,35 @@
     <!-- Sidebar jquery-->
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/sidebar-menu.js"></script>
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.buttons.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/jszip.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/buttons.colVis.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/pdfmake.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/vfs_fonts.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.autoFill.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.select.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/buttons.bootstrap4.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/buttons.html5.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/buttons.print.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.bootstrap4.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.responsive.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/responsive.bootstrap4.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.keyTable.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.colReorder.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.rowReorder.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/dataTables.scroller.min.js"></script>
+    <script src="../assets/js/datatable/datatable-extension/custom.js"></script>
+    <script src="../assets/js/tooltip-init.js"></script>
+    <!-- Theme js-->
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/theme-customizer/customizer.js"></script>
+    <!-- Sidebar jquery-->
     <script src="../assets/js/counter/jquery.waypoints.min.js"></script>
     <script src="../assets/js/counter/jquery.counterup.min.js"></script>
     <script src="../assets/js/counter/counter-custom.js"></script>
     <script src="../assets/js/popover-custom.js"></script>
     <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/theme-customizer/customizer.js"></script>
     <script src="../assets/js/select2/select2.full.min.js"></script>
     <script src="../assets/js/select2/select2-custom.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
@@ -170,11 +188,14 @@
     <script src="../assets/js/slick-slider/slick-theme.js"></script>
     <script src="../assets/js/typeahead/handlebars.js"></script>
     <script src="../assets/js/dashboard/dashboard_2.js"></script>
-    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
 
     <script src="../assets/js/chart/chartjs/chart.min.js"></script>
     <script src="../assets/js/chart/chartjs/chart.custom.js"></script>
 
+    <script src="../assets/js/chart/chartjs/chart.min.js"></script>
+    <script src="../assets/js/chart/chartjs/chart.custom.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
 </html>

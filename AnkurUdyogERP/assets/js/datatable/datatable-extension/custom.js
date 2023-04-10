@@ -39,18 +39,28 @@ $(document).ready(function(){
         ]
     } );
 
-
-// Restricted column ordering
-
-    $('#export-button').DataTable( {
+    $('#export-button').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
-    } );
+        extend:'',
+        buttons: {
+            buttons: [
+                {
+                    extend: 'copyHtml5'
+                }, {
+                    extend: 'excelHtml5'
+                }
+                , {
+                    extend: 'csvHtml5'
+                }
+                , {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape'
+                }
+            ]
+        }
+    });
+
+
     $('#show-hidden-row').DataTable( {
         responsive: {
             details: {
