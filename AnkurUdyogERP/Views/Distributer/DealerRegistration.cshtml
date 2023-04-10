@@ -42,7 +42,7 @@
                                         <label>Dealer's Name <span style="color:red;">*</span></label>
                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Dealer's Name"})
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4">                                         
                                         <label>Contact No <span style="color:red;">*</span></label>
                                         @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Contact Number", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10" })
                                     </div>
