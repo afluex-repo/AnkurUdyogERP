@@ -37,6 +37,7 @@ namespace AnkurUdyogERP.Models
         public string PK_DealerId { get; set; }
         public string TodayPendingLimit { get; set; }
         public DataTable dtOrderDetails { get; set; }
+        public string DealerName { get; set; }
 
 
         public DataSet GetDetails()
@@ -243,5 +244,16 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDailyRate", para);
             return ds;
         }
+
+        
+
+        //public DataSet GetDealerListAutoSeach()
+        //{
+        //    SqlParameter[] para = {
+        //                                new SqlParameter("@FK_DistributerId", DistributerId)};
+        //    DataSet ds = Connection.ExecuteQuery("GetDealerListAutoSeach", para);
+        //    return ds;
+        //}
+
     }
 }

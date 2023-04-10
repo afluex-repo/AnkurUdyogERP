@@ -29,6 +29,7 @@ namespace AnkurUdyogERP.Models
 
         public List<Master> lstrequest { get; set; }
         public string DistributerId { get; set; }
+        public string UserID { get; set; }
         public string OrderId { get; set; }
         public string PendingLimit { get; set; }
         public string Dealer { get; set; }
