@@ -404,36 +404,7 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
-
-        //[HttpPost]
-        //[ActionName("OrderRequest")]
-        //[OnAction(ButtonName = "btnSave")]
-        //public ActionResult OrderRequestAction(Distributer model)
-        //{
-        //    try
-        //    {
-        //        model.AddedBy = Session["PK_DistributerId"].ToString();
-        //        model.Status = "Pending";
-        //        DataSet ds = model.SaveOrderRequest();
-        //        if (ds != null && ds.Tables.Count > 0)
-        //        {
-        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
-        //            {
-        //                TempData["msg"] = "Order Request Saved Successfully !!";
-        //            }
-        //            else
-        //            {
-        //                TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["msg"] = ex.Message;
-        //    }
-        //    return RedirectToAction("OrderRequest", "Distributer");
-        //}
-
+        
 
         [HttpPost]
         public JsonResult OrderRequestAction(Distributer order, string dataValue)
@@ -655,6 +626,7 @@ namespace AnkurUdyogERP.Controllers
                     Distributer objList = new Distributer();
                     objList.LoginId = dr["LoginId"].ToString();
                     objList.DealerName = dr["Name"].ToString();
+                    objList.PK_DealerId = dr["PK_DealerId"].ToString();
                     lst.Add(objList);
                 }
             }
