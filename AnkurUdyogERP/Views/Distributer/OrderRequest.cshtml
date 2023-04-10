@@ -35,7 +35,6 @@
                         </div>
 
                         <div class="card-body">
-
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label>Today's Pending Limit</label>
@@ -68,9 +67,9 @@
                                                 <span class="error"> Select Dealer</span>*@
                                                 
 
-                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2", @Placeholder = "Distributer Name", @style = "min-width:180px" })
+                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control ui-autocomplete-input", @Placeholder = "Distributer Name", @style = "min-width:180px;position:relative" })
                                                 @Html.HiddenFor(m =>m.UserID)
-
+                                                <span class="error"> Select Dealer</span>
                                             </td>
                                             @*<td>
                                                     @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "Section form-control select2", @onchange = "return changeSection();", @style = "min-width:150px" })
