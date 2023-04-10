@@ -170,8 +170,12 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult GetMenu()
         {
+           
+         
+        
+
             Menu model = new Menu();
-            List<Menu> lst = new List<Menu>();
+            List<Menu> lstmenu = new List<Menu>();
             List<Menu> lstsubmenu = new List<Menu>();
             DataSet ds = model.GetMenu();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -183,21 +187,25 @@ namespace AnkurUdyogERP.Controllers
                     obj.MenuName = r["FormType"].ToString();
                     obj.Sequence = r["Sequence"].ToString();
                     obj.Url = r["Url"].ToString();
-                    lst.Add(obj);
+                    lstmenu.Add(obj);
                 }
-                model.lstMenu = lst;
+                model.lstMenu = lstmenu;
 
                 foreach (DataRow dr in ds.Tables[1].Rows)
                 {
-                    Menu obj1 = new Menu();
-                    obj1.PK_SubMenuId = dr["PK_FormId"].ToString();
-                    obj1.SubMenuName = dr["FormName"].ToString();
-                    obj1.Sequence = dr["Sequence"].ToString();
-                    obj1.PK_MenuId = dr["PK_FormTypeId"].ToString();
-                    obj1.Url = dr["Url"].ToString();
-                    lstsubmenu.Add(obj1);
+                    Menu obj = new Menu();
+                    obj.PK_SubMenuId = dr["PK_FormId"].ToString();
+                    obj.SubMenuName = dr["FormName"].ToString();
+                    obj.Sequence = dr["Sequence"].ToString();
+                    obj.PK_MenuId = dr["PK_FormTypeId"].ToString();
+                    obj.Url = dr["Url"].ToString();
+                    lstsubmenu.Add(obj);
                 }
                 model.lstSubMenu = lstsubmenu;
+
+                
+
+
             }
             return PartialView("_GetMenu", model);
         }
