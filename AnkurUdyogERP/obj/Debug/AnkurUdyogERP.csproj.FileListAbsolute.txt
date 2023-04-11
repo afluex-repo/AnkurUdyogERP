@@ -216,3 +216,23 @@ E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
 E:\Repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\ApplicationInsights.config
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\csc.exe
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\vbc.exe
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\VBCSCompiler.exe
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll.config
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.pdb
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
+C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
