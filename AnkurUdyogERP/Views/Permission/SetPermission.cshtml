@@ -57,7 +57,7 @@
                                             <tr>
                                                 <th>Sr No.</th>
                                                 <th>Form</th>
-                                                <th>Form View</th>
+                                                <th>Form Show</th>
                                                 <th>Form Save</th>
                                                 <th>Edit</th>
                                                 <th>Delete</th>
@@ -82,13 +82,14 @@
                                                                 <input type="hidden" name="hdLoginid_ @i" id="hdLoginid_ @i" value="@item.Fk_UserId" />
                                                                 <input type="checkbox" name="chkSelect_ @i" id="chkSelect_ @i" @item.SelectedValue />
                                                             </td>
+                                                          
                                                             <td><input type="checkbox" name="chkSave_ @i" id="chkSave_ @i" @item.FormSave /> </td>
                                                             <td><input type="checkbox" name="chkEdit_ @i" id="chkEdit_ @i" @item.FormUpdate /> </td>
                                                             <td><input type="checkbox" name="chkDelete_ @i" id="chkDelete_ @i" @item.FormDelete /> </td>
                                                         </tr>
                                                         i++;
                                                     }
-                                                    <input type="text" id="hdRows" name="hdRows" value="@i" />
+                                                    <input type="text" id="hdRows" name="hdRows" value="@i"/>
                                                 }
                                             }
                                         </tbody>
@@ -155,13 +156,14 @@
                 alert("Error occured!!")
             }
         });
-    }
+    } 
 
     function load() {
         $(".errortext").removeClass("errortext");
         if ($('#Fk_UserId').val() == '0') {
             $("#Fk_UserId").addClass('errortext');
             $('#Fk_UserId').focus();
+
             return false;
         }
         if ($('#Fk_FormTypeId').val() == '0') {
