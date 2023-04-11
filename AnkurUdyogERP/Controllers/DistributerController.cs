@@ -662,10 +662,11 @@ namespace AnkurUdyogERP.Controllers
             return View(model);
         }
 
-        public ActionResult BindDelearlist(string FK_DistributerId)
+        public ActionResult BindDelearlist(string FK_DistributerId, string OrderDate)
         {
             Distributer model = new Distributer();
-
+            model.DistributerId = FK_DistributerId;
+            model.BookingDate = OrderDate;
             List<Distributer> lst = new List<Distributer>();
 
             DataSet ds = model.DealerDetailsByDistributerId();
@@ -683,7 +684,7 @@ namespace AnkurUdyogERP.Controllers
                 model.Delearlist = lst;
             }
 
-            return View(model);
+            return Json(model.Delearlist, JsonRequestBehavior.AllowGet);
 
         }
     }

@@ -24,59 +24,65 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <table class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>S.No.</th>
-                                <th>Dealer</th>
-                                <th>Amount</th>
-                                <th>Booking Quantity</th>
-                              
-                            </tr>
-                        </thead>
+                    DistributerName: <input type="text"   name="DistributerName" id="DistributerName" readonly/>
+                    BookingDate: <input type="text" name="BookingDate" id="BookingDate" readonly />
 
-                        <tbody>
-                        <tbody id="TextBoxContainer">
-                            @if (Model != null)
-                            {
-                                if (Model.Delearlist != null)
-                                {
-                                    int i = 1;
-                                    foreach (var Item in Model.Delearlist)
-                                    {
-                                        <tr>
-                                            <td>@i</td>
-                                            <td>@Item.Dealer</td>
-                                            <td>@Item.TotalAmount</td>
-                                            <td>@Item.OrderQuantity</td>
-                                         
-                                        </tr>
-                                        i++;
-                                    }
-                                }
-                            }
-                        </tbody>
-
-
-                    </table>
-
-
-                   
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="table-responsive">
+                        <table class="table" id="tableOrderDetail">
+                            <thead>
+                                <tr>
+
+                                    <th>Dealer Name</th>
+                                    <th>Amount</th>
+                                    <th>Booking Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td width="25%" class="Dealer"></td>
+                                    <td width="12%" class="Amount"></td>
+                                    <td width="12%" class="Booking"></td>
+                                    <td>
+                                        <input type="text"  id="txtAmount" name="txtAmount"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    @*<table id="myTable" class="table display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Dealer Name</th>
+                                <th>Amount</th>
+                                <th>Booking Quantity</th>                     
+                            </tr>
+
+                        </thead>
+
+                        
+                        <tbody>
+
+                        </tbody>
+
+
+                    </table>*@
+                        </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
+             
             </div>
         </div>
     </div>
+
+
+
+
 
     <!-- Container-fluid starts-->
     <div class="container-fluid">
@@ -113,15 +119,14 @@
                                                 {
                                                         <tr>
                                                             <td>@i</td>    
-                                                            <td>@Item.FK_DistributerId</td>                                                       
-                                                            <td>@Item.Distributor</td>
-                                                            <td>@Item.BookingDate</td>
-                                                            <td>@Item.TotalBookingQuantity</td>
-                                                            <td>@Item.Status</td>
-                                                            <td>
-                                                               <a  href="/Distributer/BindDelearlist?FK_DistributerId=@Item.FK_DistributerId" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btn_View" style="margin-left:5px;">View</a>
-                                               
-                                                             </td>
+                                                            <td id="FK_DistributerId_@i" style="">@Item.FK_DistributerId</td>  
+                                                            <td id="Distributor_@i">@Item.Distributor</td>    
+                                                            <td id="BookingDate_@i">@Item.BookingDate</td>     
+                                                            
+                                                            <td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>                                 
+                                                            <td id="Status_@i">@Item.Status</td>     
+                                                            <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return GetDetails(@i)">View</a></td>
+                                                       
                                                               </tr>
                                                         i++;
                                                 }
@@ -149,14 +154,60 @@
 
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+@*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
 
 <script>
-    function SaveDistributerRecord() {
+    function GetDetails(i)
+    {
+        debugger;
+        var FK_DistributerId_ = $("#FK_DistributerId_" + i).text();
+        var Distributor_ = $("#Distributor_" + i).text();
+        var BookingDate_ = $("#BookingDate_" + i).text();
+        
+
+
+        $("#DistributerName").val(Distributor_);
+        $("#BookingDate").val(BookingDate_)
+
+
+        var ViewData = {};
+        ViewData.FK_DistributerId = FK_DistributerId_;
+        ViewData.OrderDate = BookingDate_;
+     
+
+        $.ajax({
+            url: '/Distributer/BindDelearlist', type: 'post', dataType: 'json',
+            data: ViewData,
+            success: function (data) {
+               
+                $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
+
+                $.each(data, function (i, v) {
+                    $('#tableOrderDetail').find('tbody')
+                        .append('<tr>').append('<td width="25%" class="Dealer">' + v.Dealer + '</td>')
+                        .append('<td width="25%" class="Amount">' + v.TotalAmount + '</td>')
+                        .append('<td width="25%" class="Booking">' + v.OrderQuantity + '</td>')
+                        .append('<td width="25%" id="txtAmount">' + v.OrderQuantity + '</td>')
+                        .append('<tr>');
+                });
+
+            }
+
+            
+        });
+
 
     }
-
+    function setDataOnRow(rowObject, v) {
+         debugger
+         $(rowObject).find(".Dealer").html(v.Dealer);
+        $(rowObject).find(".Amount").html(v.TotalAmount);
+        $(rowObject).find(".Booking").html(v.OrderQuantity);
+        $(rowObject).find("#txtAmount").html(v.OrderQuantity);
+        
+    }
+ 
 </script>
 
 
