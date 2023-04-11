@@ -27,7 +27,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    DistributerName: <input type="text"   name="DistributerName" id="DistributerName" style="border:none" readonly/>
+                    DistributerName: <input type="button"   name="DistributerName" id="DistributerName" style="border:none" readonly/>
                     BookingDate: <input type="text" name="BookingDate" id="BookingDate"  style="border:none"  readonly />
 
                     <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -45,14 +45,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="">
+                                @*<tr class="">
                                     <td width="25%" class="Dealer"></td>
                                     <td width="12%" class="Amount"></td>
                                     <td width="12%" class="Booking"></td>                              
-                                </tr>
-                            
+                                </tr>*@                         
                             </tbody>
-                           
+                           <button id="btnSave" class="btn btn-primary" name="btnSave" value="Dispatch" onclick="SaveAllRecord()">Dispatch</button>
                         </table>
 
                         </div>
@@ -168,34 +167,79 @@
                 $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
 
                 $.each(data, function (i, v) {
-                    $('#tableOrderDetail').find('tbody')
-                        .append('<tr>').append('<td width="25%" class="Dealer">' + v.Dealer + '</td>')
-                        .append('<td width="25%" class="Amount">' + v.TotalAmount + '</td>')
-                        .append('<td width="25%" class="Booking">' + v.OrderQuantity + '</td>')
-                        .append('<td width="25%"><input type="text"  id="txtAmount" name="txtAmount" class="form-control"/></td>')
-                        .append('</tr>')
-                       
-                    ;
+
+                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td>" + v.TotalAmount + "</td><td>" + v.OrderQuantity + "</td></tr>"
+                    $("#tableOrderDetail").last().append(Htmldata);
+
+
+                    //$('#tableOrderDetail').find('tbody')
+                    //    .append('<tr>').append('<td width="25%" class="Dealer">' + v.Dealer + '</td>')
+                    //    .append('<td width="25%" class="Amount">' + v.TotalAmount + '</td>')
+                    //    .append('<td width="25%" class="Booking">' + v.OrderQuantity + '</td>')
+                    //    .append('<td width="25%"><input type="text"  id="txtAmount" name="txtAmount" class="form-control"/></td>')
+                    //    .append('</tr>');
+
                 });
-
-            }
-
-            
+            }         
         });
-
-
     }
     function setDataOnRow(rowObject, v) {
          debugger
          $(rowObject).find(".Dealer").html(v.Dealer);
         $(rowObject).find(".Amount").html(v.TotalAmount);
         $(rowObject).find(".Booking").html(v.OrderQuantity);
-        $(rowObject).find("#txtAmount").html(v.OrderQuantity);
-        
+       // $(rowObject).find("#txtAmount").html(v.OrderQuantity); 
     }
     $("#str").click(function () {
         location.reload(true);
     });
+    $("#btnSave").click(function () {
+        SaveAllRecord();
+    });
+
+
+    function SaveAllRecord() {
+      
+        var listoftblRecord = new Array();
+        $("#tableOrderDetail tbody").find("tr:gt(0)").each(function () {
+            var Dealer = $(this).find("td:eq(0)").text();
+            var TotalAmount = $(this).find("td:eq(1)").text();
+            var OrderQuantity = $(this).find("td:eq(2)").text();
+        
+         alert(Dealer);
+
+            var AllRecord = {};
+            AllRecord.Dealer = Dealer;
+            AllRecord.TotalAmount = TotalAmount;
+            AllRecord.OrderQuantity = OrderQuantity;
+            (listoftblRecord).push(AllRecord);
+        });
+        //listoftblRecord = JSON.stringify(listoftblRecord);
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: '/User/AddStudentMark',
+            data: JSON.stringify(listoftblRecord),
+            success: OnSuccess,
+            failure: function (response) {
+                alert("error");
+            }
+            //success: function (response) {
+            //    alert("successfully Register!!!");
+            // $()
+            //},
+            //failure: function (response) {
+            //    alert("Error!!");
+            //}
+        });
+
+        function OnSuccess(response) {
+           // jQuery.noConflict();
+
+            alert("ok");
+        }
+    }
 
 
 </script>
