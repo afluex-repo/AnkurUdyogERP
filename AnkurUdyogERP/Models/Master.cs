@@ -296,5 +296,25 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDealerListForAdmin", para);
             return ds;
         }
+
+        #region DispatchReport
+        public string DispatchQuantity { get; set; }
+        public string DispatchDate { get; set; }
+        public string BookingQuantity { get; set; }
+        public string Pk_BookingDispatchId { get; set; }
+        public string BookingDate { get; set; }
+        public List<Master> lstDispatchOrder { get; set; }
+        #endregion
+        public DataSet GetDispatchReport()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Fk_DistributerId",DistributerId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDispatchReport", para);
+            return ds;
+        }
     }
 }
