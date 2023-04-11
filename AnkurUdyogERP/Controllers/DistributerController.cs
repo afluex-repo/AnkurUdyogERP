@@ -635,5 +635,56 @@ namespace AnkurUdyogERP.Controllers
             return jsonResult;
             //return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult DispatchForBookingRequest()
+        {
+            Distributer model = new Distributer();
+
+            List<Distributer> lst = new List<Distributer>();
+
+            DataSet ds = model.DispatchForBookingRequest();
+            //model.DistributerId = Session["PK_DistributerId"].ToString();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
+                    obj.Distributor = dr["Distributor"].ToString();
+                    obj.BookingDate = (dr["BookingDate"]).ToString();
+                    obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+                    obj.Status = dr["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdistributer = lst;
+
+            }
+            return View(model);
+        }
+
+        public ActionResult BindDelearlist(string FK_DistributerId)
+        {
+            Distributer model = new Distributer();
+
+            List<Distributer> lst = new List<Distributer>();
+
+            DataSet ds = model.DealerDetailsByDistributerId();
+            //model.DistributerId = Session["PK_DistributerId"].ToString();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.Dealer = dr["Dealer"].ToString();
+                    obj.OrderQuantity = (dr["OrderQuantity"]).ToString();
+                    obj.TotalAmount = (dr["TotalAmount"].ToString());
+                    lst.Add(obj);
+                }
+                model.Delearlist = lst;
+            }
+
+            return View(model);
+
+        }
     }
 }
