@@ -283,10 +283,10 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
               {
-                   new SqlParameter("@OrderDate",FromDate),
+                   new SqlParameter("@OrderDate",BookingDate),
                    new SqlParameter("@Fk_DistributerId",DistributerId)
             };
-            DataSet ds = Connection.ExecuteQuery("OrderRequestList", para);
+            DataSet ds = Connection.ExecuteQuery("DealerDetailsByDistributerId", para);
             return ds;
         }
 
