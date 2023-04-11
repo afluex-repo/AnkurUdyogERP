@@ -235,4 +235,3 @@ C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\bin\AnkurUdyogERP.pdb
 C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 C:\Users\Afluex\Desktop\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache

@@ -3,6 +3,11 @@
     Layout = null;
 }
 
+
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,19 +18,18 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <style>
-        body{
-            background:#eff3f9;
+        body {
+            background: #eff3f9;
         }
-         .table-bordered tr, .table-bordered td, .table-bordered th{
+
+        .table-bordered tr, .table-bordered td, .table-bordered th {
             border-color: #2c323f !important;
         }
 
-         @@media print
-        {
-          #print_btn
-              {
-              display:none;
-          }
+        @@media print {
+            #print_btn {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -119,7 +123,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                          
+
                         </div>
                         <button class="btn btn btn-primary me-2 mt-3" type="button" id="print_btn" onclick="window.print()">Print</button>
                     </div>
@@ -129,3 +133,5 @@
     </div>
 </body>
 </html>
+
+
