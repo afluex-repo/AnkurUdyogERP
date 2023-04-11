@@ -14,6 +14,7 @@ namespace AnkurUdyogERP.Models
         public List<Distributer> lstDealer { get; set; }
         public List<Distributer> lstrequest { get; set; }
         public List<Distributer> lst1DailyRate { get; set; }
+        public List<Distributer> lstDispatchOrder { get; set; }
         public List<Distributer> Delearlist { get; set; }      
         public string FirmName { get; set; }
         public string Mobile { get; set; }
@@ -48,6 +49,11 @@ namespace AnkurUdyogERP.Models
         public string BookingDate { get; set; }
         public string TotalBookingQuantity { get; set; }
         public string FK_DistributerId { get; set; }
+
+        public string DispatchQuantity { get; set; }
+        public string DispatchDate { get; set; }
+        public string BookingQuantity { get; set; }
+        public string Pk_BookingDispatchId { get; set; }
 
 
 
@@ -281,6 +287,35 @@ namespace AnkurUdyogERP.Models
                    new SqlParameter("@Fk_DistributerId",DistributerId)
             };
             DataSet ds = Connection.ExecuteQuery("OrderRequestList", para);
+            return ds;
+        }
+
+        public DataSet SaveDispatchForBookingRequest()
+        {
+            SqlParameter[] para =
+            {
+                  new SqlParameter("@Fk_DealerId",DealerId),
+                   new SqlParameter("@Fk_DistributerId",DistributerId),
+                    new SqlParameter("@BookingQuantity",BookingQuantity),
+                     new SqlParameter("@DispatchDate",DispatchQuantity),
+                      new SqlParameter("@DispatchDate",DispatchDate),
+                       new SqlParameter("@Amount",Amount),
+                       new SqlParameter("@BookingDate",BookingDate),
+                        new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveOrderDispatchDetails", para);
+            return ds;
+        }
+
+        public DataSet GetDispatchReport()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Fk_DistributerId",DistributerId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDispatchReport", para);
             return ds;
         }
 

@@ -492,7 +492,59 @@ namespace AnkurUdyogERP.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult DispatchReportForAdmin()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            model.DistributerId = Session["Pk_adminId"].ToString();
+            DataSet ds = model.GetDispatchReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.Pk_BookingDispatchId = dr["Pk_BookingDispatchId"].ToString();
+                    obj.Dealer = dr["DealerName"].ToString();
+                    obj.DistributerName = dr["DistributerName"].ToString();
+                    obj.BookingQuantity = dr["BookingQuantity"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.DispatchDate = dr["DispatchDate"].ToString();
+                    obj.TotalAmount = dr["Amount"].ToString();
+                    obj.BookingDate = dr["BookingDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDispatchOrder = lst;
+            }
+            return View(model);
+        }
 
+        [HttpPost]
+        [ActionName("DispatchReport")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DispatchReportForAdminSearch(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            model.DistributerId = Session["Pk_adminId"].ToString();
+            DataSet ds = model.GetDispatchReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.Pk_BookingDispatchId = dr["Pk_BookingDispatchId"].ToString();
+                    obj.Dealer = dr["DealerName"].ToString();
+                    obj.DistributerName = dr["DistributerName"].ToString();
+                    obj.BookingQuantity = dr["BookingQuantity"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.DispatchDate = dr["DispatchDate"].ToString();
+                    obj.TotalAmount = dr["Amount"].ToString();
+                    obj.BookingDate = dr["BookingDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDispatchOrder = lst;
+            }
+            return View(model);
+        }
     }
 }
 

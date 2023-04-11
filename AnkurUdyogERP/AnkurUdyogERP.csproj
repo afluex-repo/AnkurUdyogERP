@@ -1022,6 +1022,9 @@
     <Content Include="Views\Master\DealerList.cshtml" />
     <Content Include="Views\Website\Default.cshtml" />
     <Content Include="Views\Distributer\DispatchForBookingRequest.cshtml" />
+    <Content Include="Views\Distributer\DispatchReport.cshtml" />
+    <Content Include="Views\Admin\DispatchReportForAdmin.cshtml" />
+    <Content Include="Views\Distributer\PrintReceipt.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

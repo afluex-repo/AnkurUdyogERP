@@ -473,13 +473,6 @@ namespace AnkurUdyogERP.Controllers
             return new JsonResult { Data = new { status = order.Result } };
         }
 
-
-
-
-
-
-
-
         [HttpPost]
         [ActionName("OrderRequest")]
         [OnAction(ButtonName = "btnUpdate")]
@@ -543,8 +536,6 @@ namespace AnkurUdyogERP.Controllers
         {
             List<Distributer> lst = new List<Distributer>();
             model.DistributerId = Session["PK_DistributerId"].ToString();
-            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.OrderRequestList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -685,6 +676,116 @@ namespace AnkurUdyogERP.Controllers
 
             return View(model);
 
+        }
+
+        public ActionResult DispatchForBookingRequestAction(Distributer model, string DealerId, string DistributerId,
+            string BookingQuantity, string DispatchQuantity, string DispatchDate, string Amount, string BookingDate)
+        {
+            try
+            {
+                model.DealerId = DealerId;
+                model.DistributerId = DistributerId;
+                model.BookingQuantity = BookingQuantity;
+                model.DispatchQuantity = DispatchQuantity;
+                model.DispatchDate = DispatchDate;
+                model.Amount = Amount;
+                model.BookingDate = BookingDate;
+                model.AddedBy = Session["PK_DistributerId"].ToString();
+                DataSet ds = model.SaveDispatchForBookingRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "Yes";
+                        //TempData["OrderDispatch"] = "Order Dispatched  Successfully !!";
+                    }
+                    else
+                    {
+                        TempData["OrderDispatch"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["OrderDispatch"] = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DispatchReport()
+        {
+            Distributer model = new Distributer();
+            List<Distributer> lst = new List<Distributer>();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = model.GetDispatchReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.Pk_BookingDispatchId = dr["Pk_BookingDispatchId"].ToString();
+                    obj.DealerName = dr["DealerName"].ToString();
+                    obj.BookingQuantity = dr["BookingQuantity"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.DispatchDate = dr["DispatchDate"].ToString();
+                    obj.Amount = dr["Amount"].ToString();
+                    obj.BookingDate = dr["BookingDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDispatchOrder = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("DispatchReport")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DispatchReportSearch(Distributer model)
+        {
+            List<Distributer> lst = new List<Distributer>();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = model.GetDispatchReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.Pk_BookingDispatchId = dr["Pk_BookingDispatchId"].ToString();
+                    obj.DealerName = dr["DealerName"].ToString();
+                    obj.BookingQuantity = dr["BookingQuantity"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.DispatchDate = dr["DispatchDate"].ToString();
+                    obj.Amount = dr["Amount"].ToString();
+                    obj.BookingDate = dr["BookingDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDispatchOrder = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult PrintReceipt(Master model, string OrderId)
+        {
+            if (OrderId != null)
+            {
+                model.OrderId = OrderId;
+                DataSet ds = model.GetDeoDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.OrderId = ds.Tables[0].Rows[0]["PK_OrderId"].ToString();
+                    ViewBag.Distributer = ds.Tables[0].Rows[0]["DistributerName"].ToString();
+                    ViewBag.PendingLimit = ds.Tables[0].Rows[0]["PendingLimit"].ToString();
+                    ViewBag.Dealer = ds.Tables[0].Rows[0]["DealerName"].ToString();
+                    ViewBag.Section = ds.Tables[0].Rows[0]["Section"].ToString();
+                    ViewBag.Rate = ds.Tables[0].Rows[0]["Rate"].ToString();
+                    ViewBag.OrderQuantity = ds.Tables[0].Rows[0]["OrderQuantity"].ToString();
+                    ViewBag.TotalAmount = ds.Tables[0].Rows[0]["TotalAmount"].ToString();
+                    ViewBag.Date = ds.Tables[0].Rows[0]["Date"].ToString();
+                    ViewBag.Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                    ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                }
+            }
+            return View(model);
         }
     }
 }

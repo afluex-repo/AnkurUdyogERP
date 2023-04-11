@@ -1,0 +1,106 @@
+﻿@model AnkurUdyogERP.Models.Master
+
+@{
+    ViewBag.Title = "DispatchReportForAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("DispatchReportForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Dispatch Report</h3>
+                    </div>
+                    <div class="col-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">Distributer</li>
+                            <li class="breadcrumb-item active">Dispatch Report</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- HTML (DOM) sourced data  Starts-->
+                <div class="col-sm-12">
+                    <div class="card">
+                        @*<div class="card-header pb-0 d-flex justify-content-between">
+                                <span style="color:red">@TempData["OrderDispatch"]</span>
+                                <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i>Add</a>
+                            </div>*@
+
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label>From Date <span style="color:red;"></span></label>
+                                    <input id="FromDate" name="FromDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>To Date <span style="color:red;"></span></label>
+                                    <input id="ToDate" name="ToDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-primary mt-4" value="Search" id="btnSearch" name="btnSearch" />
+                            <div class="dt-ext table-responsive mt-4">
+                                <table class="display" id="export-button" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Distributer</th>
+                                            <th>Dealer</th>
+                                            <th>Booking Quantity</th>
+                                            <th>Dispatch Quantity</th>
+                                            <th>Dispatch Date</th>
+                                            <th>Booking Date</th>
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstDispatchOrder != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstDispatchOrder)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td style="min-width:150px">@Item.DistributerName</td>
+                                                        <td>@Item.Dealer</td>
+                                                        <td>@Item.BookingQuantity</td>
+                                                        <td>@Item.DispatchQuantity</td>
+                                                        <td>@Item.DispatchDate</td>
+                                                        <td>@Item.BookingDate</td>
+                                                        <td>@Item.TotalAmount</td>
+                                                        <td>
+                                                            <a style="width:120px;" href="/Admin/GenerateReceipt?BookingDispatchId=" class="btn btn-sm btn-primary ms-1">Print D.O</a>
+                                                        </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
