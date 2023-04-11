@@ -9,9 +9,12 @@ namespace AnkurUdyogERP.Models
 {
     public class Distributer : Common
     {
+        
+        public List<Distributer> lstdistributer { get; set; }
         public List<Distributer> lstDealer { get; set; }
         public List<Distributer> lstrequest { get; set; }
         public List<Distributer> lst1DailyRate { get; set; }
+        public List<Distributer> Delearlist { get; set; }      
         public string FirmName { get; set; }
         public string Mobile { get; set; }
         public string UserID { get; set; }
@@ -39,6 +42,14 @@ namespace AnkurUdyogERP.Models
         public DataTable dtOrderDetails { get; set; }
         public string DealerName { get; set; }
         public string DealerId { get; set; }
+        
+
+        public string Distributor { get; set; }
+        public string BookingDate { get; set; }
+        public string TotalBookingQuantity { get; set; }
+        public string FK_DistributerId { get; set; }
+
+
 
 
         public DataSet GetDetails()
@@ -253,6 +264,23 @@ namespace AnkurUdyogERP.Models
             SqlParameter[] para = {
                                         new SqlParameter("@FK_DistributerId", DistributerId)};
             DataSet ds = Connection.ExecuteQuery("GetDealerListAutoSeach", para);
+            return ds;
+        }
+        
+        public DataSet DispatchForBookingRequest()
+        {
+            DataSet ds = Connection.ExecuteQuery("DispatchedForBookingRequest");
+            return ds;
+        }
+
+        public DataSet DealerDetailsByDistributerId()
+        {
+            SqlParameter[] para =
+              {
+                   new SqlParameter("@OrderDate",FromDate),
+                   new SqlParameter("@Fk_DistributerId",DistributerId)
+            };
+            DataSet ds = Connection.ExecuteQuery("OrderRequestList", para);
             return ds;
         }
 
