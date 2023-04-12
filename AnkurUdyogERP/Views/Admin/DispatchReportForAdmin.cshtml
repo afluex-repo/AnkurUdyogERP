@@ -58,7 +58,7 @@
                                             <th>Dispatch Quantity</th>
                                             <th>Dispatch Date</th>
                                             <th>Booking Date</th>
-                                            <th>Amount</th>
+                                            @*<th>Amount</th>*@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -78,9 +78,9 @@
                                                         <td>@Item.DispatchQuantity</td>
                                                         <td>@Item.DispatchDate</td>
                                                         <td>@Item.BookingDate</td>
-                                                        <td>@Item.TotalAmount</td>
+                                                        @*<td>@Item.TotalAmount</td>*@
                                                         <td>
-                                                            <a style="width:120px;" href="/Admin/GenerateReceipt?BookingDispatchId=" class="btn btn-sm btn-primary ms-1">Print D.O</a>
+                                                            <a style="width:120px;" href="/Admin/GenerateReceipt?Name=@Item.Dealer" class="btn btn-sm btn-primary ms-1">Print D.O</a>
                                                         </td>
                                                     </tr>
                                                     i++;

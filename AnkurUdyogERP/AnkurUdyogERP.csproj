@@ -1021,7 +1021,7 @@
     <Content Include="Views\Admin\DealerList.cshtml" />
     <Content Include="Views\Master\DealerList.cshtml" />
     <Content Include="Views\Website\Default.cshtml" />
-    <Content Include="Views\Distributer\DispatchForBookingRequest.cshtml" />
+    <Content Include="Views\Admin\DispatchForBookingRequest.cshtml" />
     <Content Include="Views\Distributer\DispatchReport.cshtml" />
     <Content Include="Views\Admin\DispatchReportForAdmin.cshtml" />
     <Content Include="Views\Distributer\PrintReceipt.cshtml" />
