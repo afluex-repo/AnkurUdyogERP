@@ -671,6 +671,8 @@ namespace AnkurUdyogERP.Controllers
                     obj.Dealer = dr["Dealer"].ToString();
                     obj.OrderQuantity = (dr["OrderQuantity"]).ToString();
                     obj.TotalAmount = (dr["TotalAmount"].ToString());
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Dispatched = dr["Dispatched"].ToString();
                     lst.Add(obj);
                 }
                 model.Delearlist = lst;
@@ -680,7 +682,14 @@ namespace AnkurUdyogERP.Controllers
 
         }
 
+<<<<<<< HEAD
+        
+
+        public ActionResult DispatchForBookingRequestAction(Distributer model, string DealerId, string DistributerId,
+            string BookingQuantity, string DispatchQuantity, string DispatchDate, string Amount, string BookingDate)
+=======
         public JsonResult DispatchForBookingRequestAction(Distributer order, string dataValue)
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf
         {
             try
             {
@@ -748,6 +757,7 @@ namespace AnkurUdyogERP.Controllers
 
             return new JsonResult { Data = new { status = order.Result } };
         }
+
 
         public ActionResult DispatchReport()
         {
