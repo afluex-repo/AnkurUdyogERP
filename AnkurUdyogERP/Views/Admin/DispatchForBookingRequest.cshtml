@@ -1,7 +1,7 @@
-﻿@model AnkurUdyogERP.Models.Distributer
+﻿@model AnkurUdyogERP.Models.Admin
 @{
     ViewBag.Title = "DispatchForBookingRequest";
-    Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="page-body">
@@ -27,8 +27,14 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
                     DistributerName: <input type="button" name="DistributerName" id="DistributerName" style="border:none" readonly />
                     BookingDate: <input type="text" name="BookingDate" id="BookingDate" style="border:none" readonly />
+=======
+                    DistributerName: <input type="button"   name="DistributerName" id="DistributerName" style="border:none" readonly/>
+                    BookingDate: <input type="text" name="BookingDate" id="BookingDate"  style="border:none"  readonly />
+                    <input type="hidden" name="DistributerID" id="DistributerID" style="display:none" readonly />
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
 
                     <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -41,6 +47,7 @@
                                    
                                     <th>Amount</th>
                                     <th>Booking Quantity</th>
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
                                     <th>Dispatch Quantity </th>
                                     <th>Dispatched</th>
                                 </tr>
@@ -52,12 +59,27 @@
                 </div>
 
 
+=======
+                                    <th>Dispatched</th>
+                                    <th>Dispatch Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*<tr class="">
+                                    <td width="25%" class="Dealer"></td>
+                                    <td width="12%" class="Amount"></td>
+                                    <td width="12%" class="Booking"></td>                              
+                                </tr>*@                         
+                            </tbody>
+                           @*<button id="btnSave" class="btn btn-primary" name="btnSave" value="Dispatch" onclick="SaveAllRecord()">Dispatch</button>*@
+                        </table>
+                        <button id="btnSave" class="btn btn-primary" name="btnSave" value="Dispatch" onclick="SaveAllRecord()">Dispatch</button>
+                        </div>
+                </div>
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
             </div>
         </div>
     </div>
-
-
-
 
 
     <!-- Container-fluid starts-->
@@ -73,14 +95,23 @@
 
                         <div class="card-body">
                             <div class="table table-responsive">
-                                <table class="table table-responsive table-striped table-bordered">
+                                <table class="display" id="export-button">
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
                                             <th width="120px">FK_DistributerId<span style="color:red;">*</span></th>
                                             <th width="120px">Distributor<span style="color:red;">*</span></th>
                                             <th width="120px">BookingDate<span style="color:red;">*</span></th>
                                             <th>Total Booking Quantity<span style="color:red;">*</span></th>
+=======
+                                            <th width="120px" style="display:none">FK_DistributerId<span style="color:red;">*</span></th>
+                                            <th>Distributor</th>
+                                            <th>BookingDate</th>
+                                            <th>Total Amount</th>
+                                            <th>Total Booking Quantity</th>
+                                            <th>Dispatch Quantity</th>
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
                                             <th>Status</th>
                                             <th>View</th>
 
@@ -96,11 +127,20 @@
                                                 {
                                                     <tr>
                                                         <td>@i</td>
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
                                                         <td id="FK_DistributerId_@i" style="">@Item.FK_DistributerId</td>
                                                         <td id="Distributor_@i">@Item.Distributor</td>
                                                         <td id="BookingDate_@i">@Item.BookingDate</td>
 
                                                         <td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>
+=======
+                                                        <td id="FK_DistributerId_@i" style="display:none">@Item.FK_DistributerId</td>
+                                                        <td id="Distributor_@i">@Item.Distributor</td>
+                                                        <td id="BookingDate_@i">@Item.BookingDate</td>
+                                                        <td id="TotalAmount_@i">@Item.TotalAmount</td>
+                                                        <td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>
+                                                        <td id="DispatchQuantity_@i">@Item.DispatchQuantity</td>
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
                                                         <td id="Status_@i">@Item.Status</td>
                                                         <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return GetDetails(@i)">View</a></td>
                                                     </tr>
@@ -110,6 +150,7 @@
                                         }
                                     </tbody>
                                 </table>
+
                             </div>
                             <br />
                             <div class="form-group row">
@@ -127,8 +168,6 @@
     </div>
 </div>
 
-
-
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 @*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
@@ -138,15 +177,25 @@
         var FK_DistributerId_ = $("#FK_DistributerId_" + i).text();
         var Distributor_ = $("#Distributor_" + i).text();
         var BookingDate_ = $("#BookingDate_" + i).text();
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
         $("#DistributerName").val(Distributor_);
         $("#BookingDate").val(BookingDate_);
+=======
+
+        $("#DistributerName").val(Distributor_);
+        $("#DistributerID").val(FK_DistributerId_);
+        $("#BookingDate").val(BookingDate_)
+
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
         var ViewData = {};
         ViewData.FK_DistributerId = FK_DistributerId_;
         ViewData.OrderDate = BookingDate_;
         $.ajax({
-            url: '/Distributer/BindDelearlist', type: 'post', dataType: 'json',
+            //url: '/Distributer/BindDelearlist', type: 'post', dataType: 'json',
+            url: '/Admin/BindDelearlist', type: 'post', dataType: 'json',
             data: ViewData,
             success: function (data) {
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
                 debugger;
                 $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
                 $("#tableOrderDetail tbody").find("td:eq(0)").remove();
@@ -154,6 +203,13 @@
                     var Htmldata = "<tr><td>" + v.Dealer + "</td><td style='display:none'>" + v.PK_DealerId + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text'id='txtAmount' value='" + (v.OrderQuantity - v.Dispatched) + "'name='txtAmount' onkeypress='allowNumbersOnly(event)' class='form-control' onchange='return GetBookingQuantityValues()'/></td></tr>"
                     $("#tableOrderDetail").append(Htmldata);
 
+=======
+                $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
+                $.each(data, function (i, v) {
+
+                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text'id='txtAmount' value='" + v.DispatchPending + "' name='txtAmount' class='form-control' onchange='return GetBookingQuantityValues()'/></td><td style='display:none'>" + v.PK_DealerId + "</td><td id='lbldispatch'>" + v.DispatchPending + "</td></tr>"
+                    $("#tableOrderDetail").last().append(Htmldata);
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
                 });
             }
         });
@@ -166,7 +222,6 @@
     //    $(rowObject).find(".Booking").html(v.OrderQuantity);
     //   // $(rowObject).find("#txtAmount").html(v.OrderQuantity);
     //}
-
     $("#str").click(function () {
         location.reload(true);
     });
@@ -175,39 +230,71 @@
     });
     function SaveAllRecord() {
         debugger;
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
+=======
+        var DistributerID = $("#DistributerID").val();
+        //var DistributerName = $("#DistributerName").val();
+        var BookingDate = $("#BookingDate").val();
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
         var listoftblRecord = new Array();
-        $("#tableOrderDetail tbody").find("tr:gt(0)").each(function () {
+        $("#tableOrderDetail").find("tr:gt(0)").each(function () {
             var Dealer = $(this).find("td:eq(0)").text();
             var TotalAmount = $(this).find("td:eq(1)").text();
             var OrderQuantity = $(this).find("td:eq(2)").text();
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
             var NewAmount = $(this).find("#txtAmount").val();
             // alert(Dealer);
+=======
+            var DispatchValue = $(this).find("#txtAmount").val();
+            var PK_DealerId = $(this).find("td:eq(4)").text();
+
+
+            //alert(Dealer);
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
             var AllRecord = {};
-            AllRecord.Dealer = Dealer;
+            AllRecord.DistributerID = DistributerID;
+            AllRecord.BookingDate = BookingDate;
+            AllRecord.PK_DealerId = PK_DealerId;
             AllRecord.TotalAmount = TotalAmount;
             AllRecord.OrderQuantity = OrderQuantity;
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
             AllRecord.DispatchValue = NewAmount;
+=======
+            AllRecord.DispatchValue = DispatchValue;
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
             (listoftblRecord).push(AllRecord);
         });
         //listoftblRecord = JSON.stringify(listoftblRecord);
+        var data = { OrderRequest: JSON.stringify(listoftblRecord) }
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: 'POST',
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
             url: '/Distributer/DispatchForBookingRequestAction',
             data: JSON.stringify(listoftblRecord),
             success: OnSuccess,
             failure: function (response) {
                 alert("error");
+=======
+            //url: '/Distributer/DispatchForBookingRequestAction',
+            url: '/Admin/DispatchForBookingRequestAction',
+            data: JSON.stringify({ dataValue: JSON.stringify(data) }),
+            //success: OnSuccess,
+            success: function (data) {
+                if (data.status == "Yes") {
+                    alert('Order Dispatch Successfully !!');
+                    window.location.href = '@Url.Action("DispatchForBookingRequest", "Admin")';
+                }
+
+                else {
+                    console.log(data.status)
+                    alert(data.status);
+                }
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
             }
-            //success: function (response) {
-            //    alert("successfully Register!!!");
-            // $()
-            //},
-            //failure: function (response) {
-            //    alert("Error!!");
-            //}
         });
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
 
         function OnSuccess(response) {
             // jQuery.noConflict();
@@ -237,13 +324,34 @@
         if (code > 31 && (code < 48 || code > 57)) {
             e.preventDefault();
         }
+=======
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
     }
 
+    function GetBookingQuantityValues() {
+        debugger;
+        var NewDispatchVlaue = $("#txtAmount").val();
+        var DispatchValue = $("#lbldispatch").text();
+
+
+        if (NewDispatchVlaue > DispatchValue) {
+            $("#txtAmount").val('');
+            alert("Dispatch value should be less than or equal to  Booking Quantity!!!")
+        }
+        if (NewDispatchVlaue < 0) {
+            // alert("Please Enter Valid Quantity!!");
+            $("#txtAmount").val('');
+        }
+            
+    }
 
 </script>
+<<<<<<< HEAD:AnkurUdyogERP/Views/Distributer/DispatchForBookingRequest.cshtml
 
 
 
+=======
+>>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf:AnkurUdyogERP/Views/Admin/DispatchForBookingRequest.cshtml
 <style>
     .errortext {
         border: 1px solid red !important;
