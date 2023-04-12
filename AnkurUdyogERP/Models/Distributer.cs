@@ -54,8 +54,7 @@ namespace AnkurUdyogERP.Models
         public string DispatchDate { get; set; }
         public string BookingQuantity { get; set; }
         public string Pk_BookingDispatchId { get; set; }
-
-
+        public string Dispatched { get; set; }
 
 
         public DataSet GetDetails()
