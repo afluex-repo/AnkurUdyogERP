@@ -671,6 +671,8 @@ namespace AnkurUdyogERP.Controllers
                     obj.Dealer = dr["Dealer"].ToString();
                     obj.OrderQuantity = (dr["OrderQuantity"]).ToString();
                     obj.TotalAmount = (dr["TotalAmount"].ToString());
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Dispatched = dr["Dispatched"].ToString();
                     lst.Add(obj);
                 }
                 model.Delearlist = lst;
@@ -679,6 +681,7 @@ namespace AnkurUdyogERP.Controllers
             return Json(model.Delearlist, JsonRequestBehavior.AllowGet);
 
         }
+
 
         public JsonResult DispatchForBookingRequestAction(Distributer order, string dataValue)
         {
@@ -748,6 +751,7 @@ namespace AnkurUdyogERP.Controllers
 
             return new JsonResult { Data = new { status = order.Result } };
         }
+
 
         public ActionResult DispatchReport()
         {

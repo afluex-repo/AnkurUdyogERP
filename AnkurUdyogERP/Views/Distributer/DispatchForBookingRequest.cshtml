@@ -1,7 +1,7 @@
-﻿@model AnkurUdyogERP.Models.Admin
+﻿@model AnkurUdyogERP.Models.Distributer
 @{
     ViewBag.Title = "DispatchForBookingRequest";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
 }
 
 <div class="page-body">
@@ -13,8 +13,8 @@
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Admin/DistributerDashboard"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Distributer</li>
                         <li class="breadcrumb-item active">Booking Request</li>
                     </ol>
                 </div>
@@ -29,7 +29,6 @@
                 <div class="modal-header">
                     DistributerName: <input type="button" name="DistributerName" id="DistributerName" style="border:none" readonly />
                     BookingDate: <input type="text" name="BookingDate" id="BookingDate" style="border:none" readonly />
-                    <input type="hidden" name="DistributerID" id="DistributerID" style="display:none" readonly />
 
                     <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -39,6 +38,7 @@
                             <thead>
                                 <tr>
                                     <th>Dealer Name</th>
+                                   
                                     <th>Amount</th>
                                     <th>Booking Quantity</th>
                                     <th>Dispatch Quantity </th>
@@ -47,9 +47,11 @@
                             </thead>
                             <tbody></tbody>
                         </table>
-                        <button class="btn btn-primary" onclick="return SaveAllRecord()">Dispatch</button>
+                        <button id="btnSave" class="btn btn-primary" name="btnSave" value="Dispatch" onclick="SaveAllRecord()">Dispatch</button>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -71,16 +73,14 @@
 
                         <div class="card-body">
                             <div class="table table-responsive">
-                                <table class="display" id="export-button">
+                                <table class="table table-responsive table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
-                                            <th style="display:none">FK_DistributerId</th>
-                                            <th>Distributor</th>
-                                            <th>BookingDate</th>
-                                            <th>Total Amount</th>
-                                            <th>Total Booking Quantity</th>
-                                            <th>Dispatch Quantity</th>
+                                            <th width="120px">FK_DistributerId<span style="color:red;">*</span></th>
+                                            <th width="120px">Distributor<span style="color:red;">*</span></th>
+                                            <th width="120px">BookingDate<span style="color:red;">*</span></th>
+                                            <th>Total Booking Quantity<span style="color:red;">*</span></th>
                                             <th>Status</th>
                                             <th>View</th>
 
@@ -96,12 +96,11 @@
                                                 {
                                                     <tr>
                                                         <td>@i</td>
-                                                        <td style="display:none" id="FK_DistributerId_@i" style="">@Item.FK_DistributerId</td>
+                                                        <td id="FK_DistributerId_@i" style="">@Item.FK_DistributerId</td>
                                                         <td id="Distributor_@i">@Item.Distributor</td>
                                                         <td id="BookingDate_@i">@Item.BookingDate</td>
-                                                        <td id="TotalAmount_@i">@Item.TotalAmount</td>
+
                                                         <td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>
-                                                        <td id="DispatchQuantity_@i">@Item.DispatchQuantity</td>
                                                         <td id="Status_@i">@Item.Status</td>
                                                         <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return GetDetails(@i)">View</a></td>
                                                     </tr>
@@ -140,20 +139,19 @@
         var Distributor_ = $("#Distributor_" + i).text();
         var BookingDate_ = $("#BookingDate_" + i).text();
         $("#DistributerName").val(Distributor_);
-        $("#DistributerID").val(FK_DistributerId_);
         $("#BookingDate").val(BookingDate_);
         var ViewData = {};
         ViewData.FK_DistributerId = FK_DistributerId_;
         ViewData.OrderDate = BookingDate_;
         $.ajax({
-            url: '/Admin/BindDelearlist', type: 'post', dataType: 'json',
+            url: '/Distributer/BindDelearlist', type: 'post', dataType: 'json',
             data: ViewData,
             success: function (data) {
                 debugger;
                 $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
                 $("#tableOrderDetail tbody").find("td:eq(0)").remove();
                 $.each(data, function (i, v) {
-                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td style='display:none'>" + v.PK_DealerId + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity" + i + "'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text' id='txtAmount" + i + "'  value='" + v.DispatchPending + "'name='txtAmount' onkeypress='allowNumbersOnly(event)' class='form-control' onchange='return GetBookingQuantityValues(" + i + ")'/></td><td style='display:none' id='PendingDispatch" + i + "'>" + v.DispatchPending + "</td></tr>"
+                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td style='display:none'>" + v.PK_DealerId + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text'id='txtAmount' value='" + (v.OrderQuantity - v.Dispatched) + "'name='txtAmount' onkeypress='allowNumbersOnly(event)' class='form-control' onchange='return GetBookingQuantityValues()'/></td></tr>"
                     $("#tableOrderDetail").append(Htmldata);
 
                 });
@@ -168,84 +166,71 @@
     //    $(rowObject).find(".Booking").html(v.OrderQuantity);
     //   // $(rowObject).find("#txtAmount").html(v.OrderQuantity);
     //}
-    //$("#str").click(function () {
-    //    location.reload(true);
-    //});
-    //$("#btnSave").click(function () {
-    //    SaveAllRecord();
-    //});
+
+    $("#str").click(function () {
+        location.reload(true);
+    });
+    $("#btnSave").click(function () {
+        SaveAllRecord();
+    });
     function SaveAllRecord() {
         debugger;
-        var DistributerID = $("#DistributerID").val();
-        var BookingDate = $("#BookingDate").val();
         var listoftblRecord = new Array();
-        var i = 0;
-        $("#tableOrderDetail").find("tr:gt(0)").each(function () {
-            var PK_DealerId = $(this).find("td:eq(1)").text();
-            var TotalAmount = $(this).find("td:eq(2)").text();
-            var OrderQuantity = $(this).find("td:eq(3)").text();
-
-            var a = 'txtAmount';
-            a = a.concat(i);
-
-            var DispatchValue = $(this).find("#" + a + "").html(i).val();
+        $("#tableOrderDetail tbody").find("tr:gt(0)").each(function () {
+            var Dealer = $(this).find("td:eq(0)").text();
+            var TotalAmount = $(this).find("td:eq(1)").text();
+            var OrderQuantity = $(this).find("td:eq(2)").text();
+            var NewAmount = $(this).find("#txtAmount").val();
             // alert(Dealer);
             var AllRecord = {};
-            AllRecord.DistributerID = DistributerID;
-            AllRecord.BookingDate = BookingDate;
-            AllRecord.PK_DealerId = PK_DealerId;
+            AllRecord.Dealer = Dealer;
             AllRecord.TotalAmount = TotalAmount;
             AllRecord.OrderQuantity = OrderQuantity;
-            AllRecord.DispatchValue = DispatchValue;
+            AllRecord.DispatchValue = NewAmount;
             (listoftblRecord).push(AllRecord);
-            i = i + 1;
         });
-
-        var data = {
-            OrderRequest: JSON.stringify(listoftblRecord)
-        }
         //listoftblRecord = JSON.stringify(listoftblRecord);
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: 'POST',
-            url: '/Admin/DispatchForBookingRequestAction',
-            data: JSON.stringify({ dataValue: JSON.stringify(data) }),
-            contentType: 'application/json',
-            success: function (data) {
-                if (data.status == "Yes") {
-                    alert('Order has been dispatch successfully !!');
-                    window.location.href = '@Url.Action("DispatchForBookingRequest", "Admin")';
-
-                }
-                else {
-                    console.log(data.status)
-                    alert(data.status);
-                }
+            url: '/Distributer/DispatchForBookingRequestAction',
+            data: JSON.stringify(listoftblRecord),
+            success: OnSuccess,
+            failure: function (response) {
+                alert("error");
             }
+            //success: function (response) {
+            //    alert("successfully Register!!!");
+            // $()
+            //},
+            //failure: function (response) {
+            //    alert("Error!!");
+            //}
         });
 
+        function OnSuccess(response) {
+            // jQuery.noConflict();
 
-    }
-
-    function GetBookingQuantityValues(i) {
-        debugger;
-        var DispatchVlaue = $("#txtAmount" + i).val();
-
-        var Dispatched = $("#PendingDispatch" + i).text();
-
-
-        if (Number(DispatchVlaue) > Number(Dispatched)) {
-
-            alert("Dispatch value should be less than pending booking quantity !")
-            $("#txtAmount" + i).val(Dispatched);
+            //  alert("ok");
         }
-        if (DispatchVlaue < 0) {
+    }
+    
+    function GetBookingQuantityValues() {
+        var NewDispatchVlaue = $("#txtAmount").val();
+      
+        var DispatchVlaue = $("#textQuantity").text();
+
+
+        if (NewDispatchVlaue == NewDispatchVlaue) {
+            $("#txtAmount").val("");
+            alert("Dispatch value should be less than or equal to  Booking Quantity!!!")
+        }
+        if (NewDispatchVlaue < 0)
             // alert("Please Enter Valid Quantity!!");
-            $("#txtAmount" + i).val("");
-        }
-
+            $("#txtAmount").val("");
     }
+
     // Validation
     function allowNumbersOnly(e) {
         var code = (e.which) ? e.which : e.keyCode;
@@ -253,7 +238,12 @@
             e.preventDefault();
         }
     }
+
+
 </script>
+
+
+
 <style>
     .errortext {
         border: 1px solid red !important;
