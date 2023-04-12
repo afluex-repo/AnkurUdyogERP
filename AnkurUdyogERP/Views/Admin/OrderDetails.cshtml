@@ -67,8 +67,8 @@
                                                 <th>Booking Quantity (Per Ton)</th>
                                                 <th>Total Amount</th>
                                                 <th>Booking Date</th>
-                                                <th>Status</th>
-                                                <th style="text-align:center;">Action</th>
+                                                @*<th>Status</th>*@
+                                                @*<th style="text-align:center;">Action</th>*@
                                                 @*<th>Edit</th>
                         <th>Delete</th>*@
                                             </tr>
@@ -90,7 +90,7 @@
                                                             <td style="min-width:160px">@Item.OrderQuantity</td>
                                                             <td>@Item.TotalAmount</td>
                                                             <td>@Item.Date</td>
-                                                            <td style="text-align:center;">
+                                                            <td style="display:none">
                                                                 @if (Item.Status == "Rejected")
                                                                 {
                                                                     <span class="badge badge-danger">@Item.Status</span>
@@ -104,7 +104,7 @@
                                                                     <span class="badge badge-success">@Item.Status</span>
                                                                 }
                                                             </td>
-                                                            <td style="min-width:230px">
+                                                            <td style="display:none">
                                                                 @if (Item.Status == "Pending")
                                                                 {
                                                                     <div class="d-flex">

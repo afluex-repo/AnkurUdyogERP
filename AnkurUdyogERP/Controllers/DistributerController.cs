@@ -682,14 +682,8 @@ namespace AnkurUdyogERP.Controllers
 
         }
 
-<<<<<<< HEAD
-        
 
-        public ActionResult DispatchForBookingRequestAction(Distributer model, string DealerId, string DistributerId,
-            string BookingQuantity, string DispatchQuantity, string DispatchDate, string Amount, string BookingDate)
-=======
         public JsonResult DispatchForBookingRequestAction(Distributer order, string dataValue)
->>>>>>> 87cfbd48de51946e00723bccf85f8239e6da4bdf
         {
             try
             {
