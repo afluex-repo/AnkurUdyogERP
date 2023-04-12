@@ -42,7 +42,7 @@
                                     <th>Dealer Name</th>
                                     <th>Amount</th>
                                     <th>Booking Quantity</th>
-                                    <th>Dispatched</th>
+                                   
                                     <th>Dispatch Quantity</th>
                                 </tr>
                             </thead>
@@ -161,7 +161,7 @@
                 $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
                 $.each(data, function (i, v) {
 
-                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text'id='txtAmount' value='" + v.DispatchPending + "' name='txtAmount' class='form-control' onchange='return GetBookingQuantityValues()'/></td><td style='display:none'>" + v.PK_DealerId + "</td><td id='lbldispatch'>" + v.DispatchPending + "</td></tr>"
+                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity1'>" + v.OrderQuantity + "</td><td><input type='text' id='txtAmount' value='" + v.OrderQuantity + "' name='txtAmount' class='form-control' onchange='return GetBookingQuantityValues()'/></td><td style='display:none'>" + v.PK_DealerId + "</td></tr>"
                     $("#tableOrderDetail").last().append(Htmldata);
                 });
             }         
@@ -232,18 +232,18 @@
 
     function GetBookingQuantityValues() {
         debugger;
-        var NewDispatchVlaue = $("#txtAmount").val();
-        var DispatchValue = $("#lbldispatch").text();
+        var DispatchVlaue = $("#txtAmount").val();
+        //var DispatchValue = $("#txtDispatch").text();
 
 
-        if (NewDispatchVlaue > DispatchValue) {
-            $("#txtAmount").val('');
-            alert("Dispatch value should be less than or equal to  Booking Quantity!!!")
-        }
-        if (NewDispatchVlaue < 0) {
-            // alert("Please Enter Valid Quantity!!");
-            $("#txtAmount").val('');
-        }
+        //if (NewDispatchVlaue > DispatchValue) {
+        //    $("#txtAmount").val('');
+        //    alert("Dispatch value should be less than or equal to  Booking Quantity!!!")
+        //}
+        //if (NewDispatchVlaue < 0) {
+        //    // alert("Please Enter Valid Quantity!!");
+        //    $("#txtAmount").val('');
+        //}
             
     }
 
