@@ -667,6 +667,7 @@ namespace AnkurUdyogERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Distributer obj = new Distributer();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
                     obj.Dealer = dr["Dealer"].ToString();
                     obj.OrderQuantity = (dr["OrderQuantity"]).ToString();
                     obj.TotalAmount = (dr["TotalAmount"].ToString());
@@ -679,38 +680,73 @@ namespace AnkurUdyogERP.Controllers
 
         }
 
-        public ActionResult DispatchForBookingRequestAction(Distributer model, string DealerId, string DistributerId,
-            string BookingQuantity, string DispatchQuantity, string DispatchDate, string Amount, string BookingDate)
+        public JsonResult DispatchForBookingRequestAction(Distributer order, string dataValue)
         {
             try
             {
-                model.DealerId = DealerId;
-                model.DistributerId = DistributerId;
-                model.BookingQuantity = BookingQuantity;
-                model.DispatchQuantity = DispatchQuantity;
-                model.DispatchDate = DispatchDate;
-                model.Amount = Amount;
-                model.BookingDate = BookingDate;
-                model.AddedBy = Session["PK_DistributerId"].ToString();
-                DataSet ds = model.SaveDispatchForBookingRequest();
-                if (ds != null && ds.Tables.Count > 0)
+                string DistributerID = "";
+                string BookingDate = "";
+                string PK_DealerId = "";
+                string TotalAmount = "";
+                string OrderQuantity = "";
+                string DispatchValue = "";
+                int rowsno = 0;
+                var isValidModel = TryUpdateModel(order);
+                var jss = new JavaScriptSerializer();
+                var jdv = jss.Deserialize<dynamic>(dataValue);
+
+                DataTable OrderDispatch = new DataTable();
+
+                OrderDispatch.Columns.Add("DistributerID");
+                OrderDispatch.Columns.Add("BookingDate");
+                OrderDispatch.Columns.Add("PK_DealerId");
+                OrderDispatch.Columns.Add("TotalAmount");
+                OrderDispatch.Columns.Add("OrderQuantity");
+                OrderDispatch.Columns.Add("DispatchValue");
+                OrderDispatch.Columns.Add("rowsno");
+                DataTable dt = new DataTable();
+                dt = JsonConvert.DeserializeObject<DataTable>(jdv["OrderRequest"]);
+
+                int numberOfRecords = dt.Rows.Count;
+                foreach (DataRow row in dt.Rows)
+                {
+                    DistributerID = row["DistributerID"].ToString();
+                    BookingDate = row["BookingDate"].ToString();
+                    PK_DealerId = row["PK_DealerId"].ToString();
+                    TotalAmount = row["TotalAmount"].ToString();
+                    OrderQuantity = row["OrderQuantity"].ToString();
+                    DispatchValue = row["DispatchValue"].ToString();
+                    rowsno = rowsno + 1;
+                    OrderDispatch.Rows.Add(DistributerID, BookingDate, PK_DealerId, TotalAmount, OrderQuantity, DispatchValue, rowsno);
+                }
+                order.dtOrderDispatch = OrderDispatch;
+                order.AddedBy = Session["PK_DistributerId"].ToString();
+                DataSet ds = new DataSet();
+                ds = order.SaveDispatchForBookingRequest();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        model.Result = "Yes";
-                        //TempData["OrderDispatch"] = "Order Dispatched  Successfully !!";
+
+                        order.Result = "Yes";
                     }
-                    else
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        TempData["OrderDispatch"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        order.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                TempData["OrderDispatch"] = ex.Message;
+
+                throw ex;
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+
+            return new JsonResult { Data = new { status = order.Result } };
         }
 
         public ActionResult DispatchReport()

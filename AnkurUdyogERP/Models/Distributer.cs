@@ -41,6 +41,7 @@ namespace AnkurUdyogERP.Models
         public string PK_DealerId { get; set; }
         public string TodayPendingLimit { get; set; }
         public DataTable dtOrderDetails { get; set; }
+        public DataTable dtOrderDispatch { get; set; }
         public string DealerName { get; set; }
         public string DealerId { get; set; }
         
@@ -294,13 +295,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
             {
-                  new SqlParameter("@Fk_DealerId",DealerId),
-                   new SqlParameter("@Fk_DistributerId",DistributerId),
-                    new SqlParameter("@BookingQuantity",BookingQuantity),
-                     new SqlParameter("@DispatchDate",DispatchQuantity),
-                      new SqlParameter("@DispatchDate",DispatchDate),
-                       new SqlParameter("@Amount",Amount),
-                       new SqlParameter("@BookingDate",BookingDate),
+                        new SqlParameter("@dtOrderDispatch",dtOrderDispatch),
                         new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("SaveOrderDispatchDetails", para);
