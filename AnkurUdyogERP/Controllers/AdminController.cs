@@ -551,28 +551,55 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult DispatchForBookingRequest()
         {
+            //Admin model = new Admin();
+
+            //List<Admin> lst2 = new List<Admin>();
+
+            //DataSet ds = model.DispatchForBookingRequest();
+            ////model.DistributerId = Session["Pk_adminId"].ToString();
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow dr in ds.Tables[0].Rows)
+            //    {
+            //        Admin obj = new Admin();
+            //        obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
+            //        obj.Distributor = dr["Distributor"].ToString();
+            //        obj.BookingDate = (dr["BookingDate"]).ToString();
+            //        obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+            //        obj.Status = dr["Status"].ToString();
+            //        obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+            //        obj.TotalAmount = dr["TotalAmount"].ToString();
+            //        lst2.Add(obj);
+            //    }
+            //    model.lstdistributer = lst2;
+
+            //}
+
             Admin model = new Admin();
-
-            List<Admin> lst2 = new List<Admin>();
-
-            DataSet ds = model.DispatchForBookingRequest();
-            //model.DistributerId = Session["Pk_adminId"].ToString();
+            List<Admin> lst3 = new List<Admin>();
+            DataSet ds = model.DealerDetailsByDistributerId();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Dealer = dr["Dealer"].ToString();
+           
+                    obj.TotalAmount = (dr["TotalAmount"].ToString());
+                    obj.Dispatched = (dr["Dispatched"].ToString());
+                    obj.DispatchPending = (dr["DispatchPending"].ToString());
+
                     obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
                     obj.Distributor = dr["Distributor"].ToString();
                     obj.BookingDate = (dr["BookingDate"]).ToString();
-                    obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+                    obj.TotalBookingQuantity = (dr["TotalBookingQuantity"].ToString());
                     obj.Status = dr["Status"].ToString();
-                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+  
                     obj.TotalAmount = dr["TotalAmount"].ToString();
-                    lst2.Add(obj);
+                    lst3.Add(obj);
                 }
-                model.lstdistributer = lst2;
-
+                model.lstdistributer = lst3;
             }
             return View(model);
         }
@@ -597,6 +624,15 @@ namespace AnkurUdyogERP.Controllers
                     obj.TotalAmount = (dr["TotalAmount"].ToString());
                     obj.Dispatched = (dr["Dispatched"].ToString());
                     obj.DispatchPending = (dr["DispatchPending"].ToString());
+
+                    obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
+                    obj.Distributor = dr["Distributor"].ToString();
+                    obj.BookingDate = (dr["BookingDate"]).ToString();
+                    obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+                    obj.Status = dr["Status"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.TotalAmount = dr["TotalAmount"].ToString();
+
                     lst3.Add(obj);
                 }
                 model.Delearlist = lst3;
