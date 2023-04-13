@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+@using (Html.BeginForm("DispatchForBookingRequest", "Admin", FormMethod.Post, new { @id = "form1", @autocomplete = "off", enctype = "multipart/form-data" }))
+{
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
@@ -22,32 +24,32 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     modal 
+    <div class="modal fade" id="examplemodal" tabindex="-1" aria-labelledby="examplemodallabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    DistributerName: <input type="button" name="DistributerName" id="DistributerName" style="border:none" readonly />
-                    BookingDate: <input type="text" name="BookingDate" id="BookingDate" style="border:none" readonly />
-                    <input type="hidden" name="DistributerID" id="DistributerID" style="display:none" readonly />
+                    distributername: <input type="button" name="distributername" id="distributername" style="border:none" readonly />
+                    bookingdate: <input type="text" name="bookingdate" id="bookingdate" style="border:none" readonly />
+                    <input type="hidden" name="distributerid" id="distributerid" style="display:none" readonly />
 
-                    <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="table-responsive">
-                        <table class="table" id="tableOrderDetail">
+                        <table class="table" id="tableorderdetail">
                             <thead>
                                 <tr>
-                                    <th>Dealer Name</th>
-                                    <th>Amount</th>
-                                    <th>Booking Quantity</th>
-                                    <th>Dispatch Quantity </th>
-                                    <th>Dispatched</th>
+                                    <th>dealer name</th>
+                                    <th>amount</th>
+                                    <th>booking quantity</th>
+                                    <th>dispatched</th>
+                                    <th>dispatch quantity </th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
-                        <button class="btn btn-primary" onclick="return SaveAllRecord()">Dispatch</button>
+                        <button class="btn btn-primary" onclick="return saveallrecord()">dispatch</button>
                     </div>
                 </div>
             </div>
@@ -55,20 +57,14 @@
     </div>
 
 
-
-
-
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            @using (Html.BeginForm("DispatchForBookingRequest", "Distributer", FormMethod.Post, new { @id = "form1", @autocomplete = "off", enctype = "multipart/form-data" }))
-            {
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header pb-0">
                             <span style="color:red;">@TempData["msg"]</span>
                         </div>
-
                         <div class="card-body">
                             <div class="table table-responsive">
                                 <table class="display" id="export-button">
@@ -76,14 +72,19 @@
                                         <tr>
                                             <th>Sr No.</th>
                                             <th style="display:none">FK_DistributerId</th>
+                                            <th style="display:none">PK_DealerId</th>
                                             <th>Distributor</th>
+                                            <th>Dealer</th>
                                             <th>BookingDate</th>
                                             <th>Total Amount</th>
-                                            <th>Total Booking Quantity</th>
-                                            <th>Dispatch Quantity</th>
                                             <th>Status</th>
-                                            <th>View</th>
-
+                                            <th>Booking Quantity</th>
+                                            <th>Dispatched</th>
+                                           
+                                            @*<th>Total Booking Quantity</th>*@
+                                            <th>Dispatch Quantity</th>
+                                            @*<th>Dispatch Quantity </th>*@
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="TextBoxContainer">
@@ -96,14 +97,29 @@
                                                 {
                                                     <tr>
                                                         <td>@i</td>
-                                                        <td style="display:none" id="FK_DistributerId_@i" style="">@Item.FK_DistributerId</td>
+                                                        <td style="display:none" id="FK_DistributerId_@i" >@Item.FK_DistributerId</td>
+                                                        <td style="display:none" id="PK_DealerId_@i">@Item.PK_DealerId</td>
+                                                        <td style="display:none" id="PK_DealerId_@i">@Item.PK_DealerId</td>
                                                         <td id="Distributor_@i">@Item.Distributor</td>
+                                                        <td id="Dealer_@i">@Item.Dealer</td>
                                                         <td id="BookingDate_@i">@Item.BookingDate</td>
                                                         <td id="TotalAmount_@i">@Item.TotalAmount</td>
-                                                        <td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>
-                                                        <td id="DispatchQuantity_@i">@Item.DispatchQuantity</td>
                                                         <td id="Status_@i">@Item.Status</td>
-                                                        <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return GetDetails(@i)">View</a></td>
+                                                        <td id="OrderQuantity_@i">@Item.TotalBookingQuantity</td>
+                                                        <td id="Dispatched_@i">@Item.Dispatched</td>
+                                                        
+                                                        <td id="DispatchPending_@i" style="display:none">@Item.DispatchPending</td>
+                                                        @*<td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>*@
+                                                        @*<td id="DispatchQuantity_@i">@Item.DispatchQuantity</td>*@
+                                                        @*<td id="TotalAmount_@i">@Item.TotalAmount</td>*@
+                                                        <td>
+                                                            <input type="text" id="txtAmount_@i" name="txtAmount" value="@Item.DispatchPending" onkeypress="allowNumbersOnly(event)" class="form-control" onchange="return GetBookingQuantityValues(@i)" style ="min-width:150px;border:1px solid gray"/>
+                                                        </td>
+                                                        <td style="display:none" id="Dispatched_@i">
+                                                            <input type="text" id="txtAmount" name="txtAmount" value="@Item.Dispatched" class="form-control" />
+                                                        </td>
+                                                        <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return SaveAllRecord(@i)">Dispatch</a>
+                                                        </td>
                                                     </tr>
                                                     i++;
                                                 }
@@ -112,23 +128,14 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <br />
-                            <div class="form-group row">
-                                <div class="col-md-4 col-lg-4">
-                                    @*<input id="submit" type="button" value="Dispatch" class="btn btn-warning" />*@
-                                    @*<a class="btn btn-info" href="/Distributer/OrderRequestList" id="btn_View" style="margin-left:5px;">Back To List</a>*@
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            }
-
         </div>
     </div>
 </div>
 
-
+}
 
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 @*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -161,50 +168,31 @@
         });
     }
 
-    //function setDataOnRow(rowObject, v) {
-    //     debugger
-    //     $(rowObject).find(".Dealer").html(v.Dealer);
-    //    $(rowObject).find(".Amount").html(v.TotalAmount);
-    //    $(rowObject).find(".Booking").html(v.OrderQuantity);
-    //   // $(rowObject).find("#txtAmount").html(v.OrderQuantity);
-    //}
-    //$("#str").click(function () {
-    //    location.reload(true);
-    //});
-    //$("#btnSave").click(function () {
-    //    SaveAllRecord();
-    //});
-    function SaveAllRecord() {
+    function SaveAllRecord(i) {
         debugger;
-        var DistributerID = $("#DistributerID").val();
-        var BookingDate = $("#BookingDate").val();
+        var DealerId = $("#PK_DealerId_" + i).text();
+        //var Distributor_ = $("#Distributor_" + i).text();
+        var DistributerID = $("#FK_DistributerId_" + i).text();
+        var BookingDate = $("#BookingDate_" + i).text();
+        var PK_DealerId = $("#PK_DealerId_" + i).text();
+        var TotalAmount = $("#TotalAmount_" + i).text();
+        var OrderQuantity = $("#OrderQuantity_" + i).text();
+        var DispatchValue = $("#txtAmount_" + i).val();
         var listoftblRecord = new Array();
-        var i = 0;
-        $("#tableOrderDetail").find("tr:gt(0)").each(function () {
-            var PK_DealerId = $(this).find("td:eq(1)").text();
-            var TotalAmount = $(this).find("td:eq(2)").text();
-            var OrderQuantity = $(this).find("td:eq(3)").text();
 
-            var a = 'txtAmount';
-            a = a.concat(i);
 
-            var DispatchValue = $(this).find("#" + a + "").html(i).val();
-            // alert(Dealer);
-            var AllRecord = {};
-            AllRecord.DistributerID = DistributerID;
-            AllRecord.BookingDate = BookingDate;
-            AllRecord.PK_DealerId = PK_DealerId;
-            AllRecord.TotalAmount = TotalAmount;
-            AllRecord.OrderQuantity = OrderQuantity;
-            AllRecord.DispatchValue = DispatchValue;
-            (listoftblRecord).push(AllRecord);
-            i = i + 1;
-        });
-
+        var AllRecord = {};
+        AllRecord.DistributerID = DistributerID;
+        AllRecord.BookingDate = BookingDate;
+        AllRecord.PK_DealerId = PK_DealerId;
+        AllRecord.TotalAmount = TotalAmount;
+        AllRecord.OrderQuantity = OrderQuantity;
+        AllRecord.DispatchValue = DispatchValue;
+        (listoftblRecord).push(AllRecord);
+       
         var data = {
             OrderRequest: JSON.stringify(listoftblRecord)
         }
-        //listoftblRecord = JSON.stringify(listoftblRecord);
         $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
@@ -224,25 +212,21 @@
                 }
             }
         });
-
-
     }
 
     function GetBookingQuantityValues(i) {
         debugger;
-        var DispatchVlaue = $("#txtAmount" + i).val();
-
-        var Dispatched = $("#PendingDispatch" + i).text();
-
-
-        if (Number(DispatchVlaue) > Number(Dispatched)) {
-
+        var DealerId = $("#PK_DealerId_" + i).text();
+        var DispatchedPending = $("#DispatchPending_" + i).text();
+        var Dispatched = $("#Dispatched_" + i).text();
+        var DispatchVlaue = $("#txtAmount_" + i).val();
+       
+        if (Number(DispatchVlaue) > Number(DispatchedPending)) {
             alert("Dispatch value should be less than pending booking quantity !")
-            $("#txtAmount" + i).val(Dispatched);
+            $("#txtAmount_" + i).val(DispatchedPending);
         }
         if (DispatchVlaue < 0) {
-            // alert("Please Enter Valid Quantity!!");
-            $("#txtAmount" + i).val("");
+            $("#txtAmount_" + i).val(DispatchedPending);
         }
 
     }
