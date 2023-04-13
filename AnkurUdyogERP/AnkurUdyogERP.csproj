@@ -934,6 +934,7 @@
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Admin\DispatchForBookingRequest.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1021,6 +1022,9 @@
     <Content Include="Views\Admin\DealerList.cshtml" />
     <Content Include="Views\Master\DealerList.cshtml" />
     <Content Include="Views\Website\Default.cshtml" />
+    <Content Include="Views\Distributer\DispatchReport.cshtml" />
+    <Content Include="Views\Admin\DispatchReportForAdmin.cshtml" />
+    <Content Include="Views\Distributer\PrintReceipt.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1057,7 +1061,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64010</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64016/</IISUrl>
+          <IISUrl>http://localhost:64017/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

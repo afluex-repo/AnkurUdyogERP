@@ -1,0 +1,275 @@
+﻿@model AnkurUdyogERP.Models.Distributer
+@{
+    ViewBag.Title = "DispatchForBookingRequest";
+    Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
+}
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Dispatch For Booking Request</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Distributer/DistributerDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Distributer</li>
+                        <li class="breadcrumb-item active">Booking Request</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    DistributerName: <input type="button" name="DistributerName" id="DistributerName" style="border:none" readonly />
+                    BookingDate: <input type="text" name="BookingDate" id="BookingDate" style="border:none" readonly />
+
+                    <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table" id="tableOrderDetail">
+                            <thead>
+                                <tr>
+                                    <th>Dealer Name</th>
+                                   
+                                    <th>Amount</th>
+                                    <th>Booking Quantity</th>
+                                    <th>Dispatch Quantity </th>
+                                    <th>Dispatched</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <button id="btnSave" class="btn btn-primary" name="btnSave" value="Dispatch" onclick="SaveAllRecord()">Dispatch</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            @using (Html.BeginForm("DispatchForBookingRequest", "Distributer", FormMethod.Post, new { @id = "form1", @autocomplete = "off", enctype = "multipart/form-data" }))
+            {
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <span style="color:red;">@TempData["msg"]</span>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table table-responsive">
+                                <table class="table table-responsive table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th width="120px">FK_DistributerId<span style="color:red;">*</span></th>
+                                            <th width="120px">Distributor<span style="color:red;">*</span></th>
+                                            <th width="120px">BookingDate<span style="color:red;">*</span></th>
+                                            <th>Total Booking Quantity<span style="color:red;">*</span></th>
+                                            <th>Status</th>
+                                            <th>View</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TextBoxContainer">
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstdistributer != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstdistributer)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td id="FK_DistributerId_@i" style="">@Item.FK_DistributerId</td>
+                                                        <td id="Distributor_@i">@Item.Distributor</td>
+                                                        <td id="BookingDate_@i">@Item.BookingDate</td>
+
+                                                        <td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>
+                                                        <td id="Status_@i">@Item.Status</td>
+                                                        <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return GetDetails(@i)">View</a></td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br />
+                            <div class="form-group row">
+                                <div class="col-md-4 col-lg-4">
+                                    @*<input id="submit" type="button" value="Dispatch" class="btn btn-warning" />*@
+                                    @*<a class="btn btn-info" href="/Distributer/OrderRequestList" id="btn_View" style="margin-left:5px;">Back To List</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+@*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
+
+<script>
+    function GetDetails(i) {
+        var FK_DistributerId_ = $("#FK_DistributerId_" + i).text();
+        var Distributor_ = $("#Distributor_" + i).text();
+        var BookingDate_ = $("#BookingDate_" + i).text();
+        $("#DistributerName").val(Distributor_);
+        $("#BookingDate").val(BookingDate_);
+        var ViewData = {};
+        ViewData.FK_DistributerId = FK_DistributerId_;
+        ViewData.OrderDate = BookingDate_;
+        $.ajax({
+            url: '/Distributer/BindDelearlist', type: 'post', dataType: 'json',
+            data: ViewData,
+            success: function (data) {
+                debugger;
+                $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
+                $("#tableOrderDetail tbody").find("td:eq(0)").remove();
+                $.each(data, function (i, v) {
+                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td style='display:none'>" + v.PK_DealerId + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text'id='txtAmount' value='" + (v.OrderQuantity - v.Dispatched) + "'name='txtAmount' onkeypress='allowNumbersOnly(event)' class='form-control' onchange='return GetBookingQuantityValues()'/></td></tr>"
+                    $("#tableOrderDetail").append(Htmldata);
+
+                });
+            }
+        });
+    }
+
+    //function setDataOnRow(rowObject, v) {
+    //     debugger
+    //     $(rowObject).find(".Dealer").html(v.Dealer);
+    //    $(rowObject).find(".Amount").html(v.TotalAmount);
+    //    $(rowObject).find(".Booking").html(v.OrderQuantity);
+    //   // $(rowObject).find("#txtAmount").html(v.OrderQuantity);
+    //}
+
+    $("#str").click(function () {
+        location.reload(true);
+    });
+    $("#btnSave").click(function () {
+        SaveAllRecord();
+    });
+    function SaveAllRecord() {
+        debugger;
+        var listoftblRecord = new Array();
+        $("#tableOrderDetail tbody").find("tr:gt(0)").each(function () {
+            var Dealer = $(this).find("td:eq(0)").text();
+            var TotalAmount = $(this).find("td:eq(1)").text();
+            var OrderQuantity = $(this).find("td:eq(2)").text();
+            var NewAmount = $(this).find("#txtAmount").val();
+            // alert(Dealer);
+            var AllRecord = {};
+            AllRecord.Dealer = Dealer;
+            AllRecord.TotalAmount = TotalAmount;
+            AllRecord.OrderQuantity = OrderQuantity;
+            AllRecord.DispatchValue = NewAmount;
+            (listoftblRecord).push(AllRecord);
+        });
+        //listoftblRecord = JSON.stringify(listoftblRecord);
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: '/Distributer/DispatchForBookingRequestAction',
+            data: JSON.stringify(listoftblRecord),
+            success: OnSuccess,
+            failure: function (response) {
+                alert("error");
+            }
+            //success: function (response) {
+            //    alert("successfully Register!!!");
+            // $()
+            //},
+            //failure: function (response) {
+            //    alert("Error!!");
+            //}
+        });
+
+        function OnSuccess(response) {
+            // jQuery.noConflict();
+
+            //  alert("ok");
+        }
+    }
+    
+    function GetBookingQuantityValues() {
+        var NewDispatchVlaue = $("#txtAmount").val();
+      
+        var DispatchVlaue = $("#textQuantity").text();
+
+
+        if (NewDispatchVlaue == NewDispatchVlaue) {
+            $("#txtAmount").val("");
+            alert("Dispatch value should be less than or equal to  Booking Quantity!!!")
+        }
+        if (NewDispatchVlaue < 0)
+            // alert("Please Enter Valid Quantity!!");
+            $("#txtAmount").val("");
+    }
+
+    // Validation
+    function allowNumbersOnly(e) {
+        var code = (e.which) ? e.which : e.keyCode;
+        if (code > 31 && (code < 48 || code > 57)) {
+            e.preventDefault();
+        }
+    }
+
+
+</script>
+
+
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+
+    span.error, error1 {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error, error1 {
+        background-color: rgba(255,0,0,0.35);
+    }
+
+    span.error1 {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error1 {
+        background-color: rgba(255,0,0,0.35);
+    }
+</style>
+

@@ -90,7 +90,7 @@
                                                             <td style="min-width:160px">@Item.OrderQuantity</td>
                                                             <td>@Item.TotalAmount</td>
                                                             <td>@Item.Date</td>
-                                                            <td style="text-align:center;">
+                                                            <td>
                                                                 @if (Item.Status == "Rejected")
                                                                 {
                                                                     <span class="badge badge-danger">@Item.Status</span>
@@ -104,13 +104,13 @@
                                                                     <span class="badge badge-success">@Item.Status</span>
                                                                 }
                                                             </td>
-                                                            <td style="min-width:230px">
+                                                            <td>
                                                                 @if (Item.Status == "Pending")
                                                                 {
                                                                     <div class="d-flex">
                                                                         <a href="/Admin/ApproveOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-success edit" onclick="return confirm('Are you sure you want to Approve this Order Request ?')">Approve</a>
                                                                         <a href="/Admin/RejectOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-danger edit ms-1" onclick="return confirm('Are you sure you want to Reject this Order Request ?')">Reject </a>
-                                                                        <a style="width:146px;" href="/Admin/GenerateReceipt?OrderId=@Item.OrderId" class="btn btn-sm btn-primary ms-1">Generate D.O</a>
+                                                                    
                                                                     </div>
                                                                 }
                                                             </td>
