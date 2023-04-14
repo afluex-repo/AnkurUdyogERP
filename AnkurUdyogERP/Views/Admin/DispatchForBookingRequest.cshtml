@@ -24,39 +24,6 @@
         </div>
     </div>
 
-     modal 
-    <div class="modal fade" id="examplemodal" tabindex="-1" aria-labelledby="examplemodallabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    distributername: <input type="button" name="distributername" id="distributername" style="border:none" readonly />
-                    bookingdate: <input type="text" name="bookingdate" id="bookingdate" style="border:none" readonly />
-                    <input type="hidden" name="distributerid" id="distributerid" style="display:none" readonly />
-
-                    <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table" id="tableorderdetail">
-                            <thead>
-                                <tr>
-                                    <th>dealer name</th>
-                                    <th>amount</th>
-                                    <th>booking quantity</th>
-                                    <th>dispatched</th>
-                                    <th>dispatch quantity </th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                        <button class="btn btn-primary" onclick="return saveallrecord()">dispatch</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
@@ -118,7 +85,7 @@
                                                         <td style="display:none" id="Dispatched_@i">
                                                             <input type="text" id="txtAmount" name="txtAmount" value="@Item.Dispatched" class="form-control" />
                                                         </td>
-                                                        <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return SaveAllRecord(@i)">Dispatch</a>
+                                                        <td id="btndispatch_@i"><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return SaveAllRecord(@i)">Dispatch</a>
                                                         </td>
                                                     </tr>
                                                     i++;
@@ -142,77 +109,55 @@
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
 
 <script>
-    function GetDetails(i) {
-        var FK_DistributerId_ = $("#FK_DistributerId_" + i).text();
-        var Distributor_ = $("#Distributor_" + i).text();
-        var BookingDate_ = $("#BookingDate_" + i).text();
-        $("#DistributerName").val(Distributor_);
-        $("#DistributerID").val(FK_DistributerId_);
-        $("#BookingDate").val(BookingDate_);
-        var ViewData = {};
-        ViewData.FK_DistributerId = FK_DistributerId_;
-        ViewData.OrderDate = BookingDate_;
-        $.ajax({
-            url: '/Admin/BindDelearlist', type: 'post', dataType: 'json',
-            data: ViewData,
-            success: function (data) {
-                debugger;
-                $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
-                $("#tableOrderDetail tbody").find("td:eq(0)").remove();
-                $.each(data, function (i, v) {
-                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td style='display:none'>" + v.PK_DealerId + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity" + i + "'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text' id='txtAmount" + i + "'  value='" + v.DispatchPending + "'name='txtAmount' onkeypress='allowNumbersOnly(event)' class='form-control' onchange='return GetBookingQuantityValues(" + i + ")'/></td><td style='display:none' id='PendingDispatch" + i + "'>" + v.DispatchPending + "</td></tr>"
-                    $("#tableOrderDetail").append(Htmldata);
-
-                });
-            }
-        });
-    }
+    $(document).ready(function () {
+        debugger;
+        GetBookingQuantityValues()
+    });
 
     function SaveAllRecord(i) {
         debugger;
-        var DealerId = $("#PK_DealerId_" + i).text();
-        //var Distributor_ = $("#Distributor_" + i).text();
-        var DistributerID = $("#FK_DistributerId_" + i).text();
-        var BookingDate = $("#BookingDate_" + i).text();
-        var PK_DealerId = $("#PK_DealerId_" + i).text();
-        var TotalAmount = $("#TotalAmount_" + i).text();
-        var OrderQuantity = $("#OrderQuantity_" + i).text();
-        var DispatchValue = $("#txtAmount_" + i).val();
-        var listoftblRecord = new Array();
+            var DealerId = $("#PK_DealerId_" + i).text();
+            var DistributerID = $("#FK_DistributerId_" + i).text();
+            var BookingDate = $("#BookingDate_" + i).text();
+            var PK_DealerId = $("#PK_DealerId_" + i).text();
+            var TotalAmount = $("#TotalAmount_" + i).text();
+            var OrderQuantity = $("#OrderQuantity_" + i).text();
+            var DispatchValue = $("#txtAmount_" + i).val();
+            var listoftblRecord = new Array();
 
 
-        var AllRecord = {};
-        AllRecord.DistributerID = DistributerID;
-        AllRecord.BookingDate = BookingDate;
-        AllRecord.PK_DealerId = PK_DealerId;
-        AllRecord.TotalAmount = TotalAmount;
-        AllRecord.OrderQuantity = OrderQuantity;
-        AllRecord.DispatchValue = DispatchValue;
-        (listoftblRecord).push(AllRecord);
-       
-        var data = {
-            OrderRequest: JSON.stringify(listoftblRecord)
-        }
-        $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: '/Admin/DispatchForBookingRequestAction',
-            data: JSON.stringify({ dataValue: JSON.stringify(data) }),
-            contentType: 'application/json',
-            success: function (data) {
-                if (data.status == "Yes") {
-                    alert('Order has been dispatch successfully !!');
-                    window.location.href = '@Url.Action("DispatchForBookingRequest", "Admin")';
+            var AllRecord = {};
+            AllRecord.DistributerID = DistributerID;
+            AllRecord.BookingDate = BookingDate;
+            AllRecord.PK_DealerId = PK_DealerId;
+            AllRecord.TotalAmount = TotalAmount;
+            AllRecord.OrderQuantity = OrderQuantity;
+            AllRecord.DispatchValue = DispatchValue;
+            (listoftblRecord).push(AllRecord);
 
-                }
-                else {
-                    console.log(data.status)
-                    alert(data.status);
-                }
+            var data = {
+                OrderRequest: JSON.stringify(listoftblRecord)
             }
-        });
-    }
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Admin/DispatchForBookingRequestAction',
+                data: JSON.stringify({ dataValue: JSON.stringify(data) }),
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.status == "Yes") {
+                        alert('Order has been dispatch successfully !!');
+                        window.location.href = '@Url.Action("DispatchForBookingRequest", "Admin")';
+
+                    }
+                    else {
+                        console.log(data.status)
+                        alert(data.status);
+                    }
+                }
+            });
+        }
 
     function GetBookingQuantityValues(i) {
         debugger;
@@ -220,15 +165,20 @@
         var DispatchedPending = $("#DispatchPending_" + i).text();
         var Dispatched = $("#Dispatched_" + i).text();
         var DispatchVlaue = $("#txtAmount_" + i).val();
-       
-        if (Number(DispatchVlaue) > Number(DispatchedPending)) {
-            alert("Dispatch value should be less than pending booking quantity !")
-            $("#txtAmount_" + i).val(DispatchedPending);
-        }
-        if (DispatchVlaue < 0) {
-            $("#txtAmount_" + i).val(DispatchedPending);
-        }
 
+        if (DispatchedPending == "0") {
+            $("#txtamount_" + i).hide();
+            $("#btndispatch_" + i).hide();
+        }
+        else {
+            if (Number(DispatchVlaue) > Number(DispatchedPending)) {
+                alert("Dispatch value should be less than pending booking quantity !")
+                $("#txtAmount_" + i).val(DispatchedPending);
+            }
+            if (DispatchVlaue < 0) {
+                $("#txtAmount_" + i).val(DispatchedPending);
+            }
+        }
     }
     // Validation
     function allowNumbersOnly(e) {
