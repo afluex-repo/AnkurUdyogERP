@@ -709,7 +709,6 @@ namespace AnkurUdyogERP.Controllers
                 OrderDispatch.Columns.Add("rowsno");
                 DataTable dt = new DataTable();
                 dt = JsonConvert.DeserializeObject<DataTable>(jdv["OrderRequest"]);
-
                 int numberOfRecords = dt.Rows.Count;
                 foreach (DataRow row in dt.Rows)
                 {
@@ -828,5 +827,77 @@ namespace AnkurUdyogERP.Controllers
             }
             return View(model);
         }
+
+        public ActionResult Profile(Distributer model)
+        {
+             model.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = model.GetProfileDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                ViewBag.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                ViewBag.JoiningDate = ds.Tables[0].Rows[0]["JoiningDate"].ToString();
+                ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();             
+                ViewBag.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["PK_DistributerId"].ToString();
+                ViewBag.UserType = ds.Tables[0].Rows[0]["UserType"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                
+            }
+            return View(model);
+        }
+
+
+        #region Change password for Distributer
+
+        public ActionResult ChangePassword()
+        {      
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ChangePassword")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdatePassword(Password obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.UpdatedBy = Session["PK_DistributerId"].ToString();
+                obj.OldPassword = obj.OldPassword;
+                obj.NewPassword = obj.NewPassword;
+                DataSet ds = obj.ChangePasswordForDistributer();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["ChangePassword"] = "Password updated successfully..";
+                        FormName = "ChangePassword";
+                        Controller = "Distributer";
+                    }
+                    else
+                    {
+                        TempData["ChangePassword"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "ChangePassword";
+                        Controller = "Distributer";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ChangePassword"] = ex.Message;
+                FormName = "Login";
+                Controller = "Home";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
+
+        #endregion
     }
 }

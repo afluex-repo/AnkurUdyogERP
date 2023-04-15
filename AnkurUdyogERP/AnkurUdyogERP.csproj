@@ -967,6 +967,7 @@
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\Master.cs" />
     <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Password.cs" />
     <Compile Include="Models\Permisssions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1025,6 +1026,9 @@
     <Content Include="Views\Distributer\DispatchReport.cshtml" />
     <Content Include="Views\Admin\DispatchReportForAdmin.cshtml" />
     <Content Include="Views\Distributer\PrintReceipt.cshtml" />
+    <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Distributer\Profile.cshtml" />
+    <Content Include="Views\Distributer\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

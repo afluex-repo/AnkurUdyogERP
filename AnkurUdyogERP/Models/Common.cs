@@ -110,5 +110,15 @@ namespace AnkurUdyogERP.Models
         }
 
 
+        public static List<SelectListItem> BindPasswordType()
+        {
+            List<SelectListItem> PasswordType = new List<SelectListItem>();
+            PasswordType.Add(new SelectListItem { Text = "Select", Value = "0" });
+            PasswordType.Add(new SelectListItem { Text = "Profile Password", Value = "P" });
+            PasswordType.Add(new SelectListItem { Text = "Transaction Password", Value = "T" });
+
+            return PasswordType;
+        }
+
     }
 }
