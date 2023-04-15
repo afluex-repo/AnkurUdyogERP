@@ -70,11 +70,5 @@ namespace AnkurUdyogERP.Models
                 }
                 return ds;
             }
-
-       
-
-
-
-
     }
 }

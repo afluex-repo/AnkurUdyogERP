@@ -250,8 +250,8 @@ namespace AnkurUdyogERP.Controllers
         }
         public ActionResult Profile(Employee model)
         {
-            model.PK_AdminId = Session["Pk_adminId"].ToString();
-            DataSet ds = model.GetProfileDetails();
+             model.PK_AdminId = Session["Pk_adminId"].ToString();
+            DataSet ds = model.GetProfileDetailsForAdmin();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
@@ -460,7 +460,7 @@ namespace AnkurUdyogERP.Controllers
                     ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                 }
             }
-            
+
             return View(model);
         }
 
@@ -551,28 +551,55 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult DispatchForBookingRequest()
         {
+            //Admin model = new Admin();
+
+            //List<Admin> lst2 = new List<Admin>();
+
+            //DataSet ds = model.DispatchForBookingRequest();
+            ////model.DistributerId = Session["Pk_adminId"].ToString();
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow dr in ds.Tables[0].Rows)
+            //    {
+            //        Admin obj = new Admin();
+            //        obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
+            //        obj.Distributor = dr["Distributor"].ToString();
+            //        obj.BookingDate = (dr["BookingDate"]).ToString();
+            //        obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+            //        obj.Status = dr["Status"].ToString();
+            //        obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+            //        obj.TotalAmount = dr["TotalAmount"].ToString();
+            //        lst2.Add(obj);
+            //    }
+            //    model.lstdistributer = lst2;
+
+            //}
+
             Admin model = new Admin();
-
-            List<Admin> lst2 = new List<Admin>();
-
-            DataSet ds = model.DispatchForBookingRequest();
-            //model.DistributerId = Session["Pk_adminId"].ToString();
+            List<Admin> lst3 = new List<Admin>();
+            DataSet ds = model.DealerDetailsByDistributerId();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Dealer = dr["Dealer"].ToString();
+
+                    obj.TotalAmount = (dr["TotalAmount"].ToString());
+                    obj.Dispatched = (dr["Dispatched"].ToString());
+                    obj.DispatchPending = (dr["DispatchPending"].ToString());
+
                     obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
                     obj.Distributor = dr["Distributor"].ToString();
                     obj.BookingDate = (dr["BookingDate"]).ToString();
-                    obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+                    obj.TotalBookingQuantity = (dr["TotalBookingQuantity"].ToString());
                     obj.Status = dr["Status"].ToString();
-                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
-                    obj.TotalAmount = dr["TotalAmount"].ToString();
-                    lst2.Add(obj);
-                }
-                model.lstdistributer = lst2;
 
+                    obj.TotalAmount = dr["TotalAmount"].ToString();
+                    lst3.Add(obj);
+                }
+                model.lstdistributer = lst3;
             }
             return View(model);
         }
@@ -597,6 +624,15 @@ namespace AnkurUdyogERP.Controllers
                     obj.TotalAmount = (dr["TotalAmount"].ToString());
                     obj.Dispatched = (dr["Dispatched"].ToString());
                     obj.DispatchPending = (dr["DispatchPending"].ToString());
+
+                    obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
+                    obj.Distributor = dr["Distributor"].ToString();
+                    obj.BookingDate = (dr["BookingDate"]).ToString();
+                    obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+                    obj.Status = dr["Status"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.TotalAmount = dr["TotalAmount"].ToString();
+
                     lst3.Add(obj);
                 }
                 model.Delearlist = lst3;
@@ -672,8 +708,61 @@ namespace AnkurUdyogERP.Controllers
                 throw ex;
             }
 
+
             return new JsonResult { Data = new { status = order.Result } };
         }
+
+
+        #region Change password for Admin
+
+        public ActionResult ChangePassword()
+        {
+            List<SelectListItem> ddlPasswordType = Common.BindPasswordType();
+            ViewBag.ddlPasswordType = ddlPasswordType;
+            return View();
+
+        }
+
+        [HttpPost]
+        [ActionName("ChangePassword")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdatePassword(Password obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.UpdatedBy = Session["Pk_adminId"].ToString();
+                obj.OldPassword = obj.OldPassword;
+                obj.NewPassword = obj.NewPassword;
+                DataSet ds = obj.UpdatePassword();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["ChangePassword"] = "Password updated successfully..";
+                        FormName = "ChangePassword";
+                        Controller = "Admin";
+                    }
+                    else
+                    {
+                        TempData["ChangePassword"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "ChangePassword";
+                        Controller = "Admin";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ChangePassword"] = ex.Message;
+                FormName = "Login";
+                Controller = "Home";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
+    
+        #endregion
     }
 }
 

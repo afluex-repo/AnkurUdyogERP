@@ -170,10 +170,6 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult GetMenu()
         {
-           
-         
-        
-
             Menu model = new Menu();
             List<Menu> lstmenu = new List<Menu>();
             List<Menu> lstsubmenu = new List<Menu>();
@@ -202,10 +198,6 @@ namespace AnkurUdyogERP.Controllers
                     lstsubmenu.Add(obj);
                 }
                 model.lstSubMenu = lstsubmenu;
-
-                
-
-
             }
             return PartialView("_GetMenu", model);
         }
