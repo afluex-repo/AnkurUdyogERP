@@ -313,5 +313,15 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
+        public DataSet GetProfileDetails()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Pk_Distributer",DistributerId)
+            };
+            DataSet ds = Connection.ExecuteQuery("[GetProfileDetails]", para);
+            return ds;
+        }
+
     }
 }
