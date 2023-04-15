@@ -91,7 +91,6 @@ namespace AnkurUdyogERP.Controllers
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
                     obj.RoleName = dr["RoleName"].ToString();
-
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;
