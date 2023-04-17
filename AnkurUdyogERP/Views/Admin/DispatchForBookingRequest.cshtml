@@ -109,10 +109,6 @@
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
 
 <script>
-    $(document).ready(function () {
-        debugger;
-        GetBookingQuantityValues()
-    });
 
     function SaveAllRecord(i) {
         debugger;
@@ -166,11 +162,7 @@
         var Dispatched = $("#Dispatched_" + i).text();
         var DispatchVlaue = $("#txtAmount_" + i).val();
 
-        if (DispatchedPending == "0") {
-            $("#txtamount_" + i).hide();
-            $("#btndispatch_" + i).hide();
-        }
-        else {
+       
             if (Number(DispatchVlaue) > Number(DispatchedPending)) {
                 alert("Dispatch value should be less than pending booking quantity !")
                 $("#txtAmount_" + i).val(DispatchedPending);
@@ -179,7 +171,7 @@
                 $("#txtAmount_" + i).val(DispatchedPending);
             }
         }
-    }
+   
     // Validation
     function allowNumbersOnly(e) {
         var code = (e.which) ? e.which : e.keyCode;
