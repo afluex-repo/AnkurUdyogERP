@@ -1,0 +1,269 @@
+﻿@model AnkurUdyogERP.Models.Admin
+@{
+    ViewBag.Title = "DispatchForBookingRequest";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("DispatchForBookingRequest", "Admin", FormMethod.Post, new { @id = "form1", @autocomplete = "off", enctype = "multipart/form-data" }))
+{
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Dispatch For Booking Request</h3>
+                </div>
+                <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin/DistributerDashboard"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Admin</li>
+                        <li class="breadcrumb-item active">Booking Request</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     modal 
+    <div class="modal fade" id="examplemodal" tabindex="-1" aria-labelledby="examplemodallabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    distributername: <input type="button" name="distributername" id="distributername" style="border:none" readonly />
+                    bookingdate: <input type="text" name="bookingdate" id="bookingdate" style="border:none" readonly />
+                    <input type="hidden" name="distributerid" id="distributerid" style="display:none" readonly />
+
+                    <button type="button" id="str" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table" id="tableorderdetail">
+                            <thead>
+                                <tr>
+                                    <th>dealer name</th>
+                                    <th>amount</th>
+                                    <th>booking quantity</th>
+                                    <th>dispatched</th>
+                                    <th>dispatch quantity </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <button class="btn btn-primary" onclick="return saveallrecord()">dispatch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <span style="color:red;">@TempData["msg"]</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="table table-responsive">
+                                <table class="display" id="export-button">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th style="display:none">FK_DistributerId</th>
+                                            <th style="display:none">PK_DealerId</th>
+                                            <th>Distributor</th>
+                                            <th>Dealer</th>
+                                            <th>BookingDate</th>
+                                            <th>Total Amount</th>
+                                            <th>Status</th>
+                                            <th>Booking Quantity</th>
+                                            <th>Dispatched</th>
+                                           
+                                            @*<th>Total Booking Quantity</th>*@
+                                            <th>Dispatch Quantity</th>
+                                            @*<th>Dispatch Quantity </th>*@
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TextBoxContainer">
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstdistributer != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstdistributer)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td style="display:none" id="FK_DistributerId_@i" >@Item.FK_DistributerId</td>
+                                                        <td style="display:none" id="PK_DealerId_@i">@Item.PK_DealerId</td>
+                                                        <td style="display:none" id="PK_DealerId_@i">@Item.PK_DealerId</td>
+                                                        <td id="Distributor_@i">@Item.Distributor</td>
+                                                        <td id="Dealer_@i">@Item.Dealer</td>
+                                                        <td id="BookingDate_@i">@Item.BookingDate</td>
+                                                        <td id="TotalAmount_@i">@Item.TotalAmount</td>
+                                                        <td id="Status_@i">@Item.Status</td>
+                                                        <td id="OrderQuantity_@i">@Item.TotalBookingQuantity</td>
+                                                        <td id="Dispatched_@i">@Item.Dispatched</td>
+                                                        
+                                                        <td id="DispatchPending_@i" style="display:none">@Item.DispatchPending</td>
+                                                        @*<td id="TotalBookingQuantity_@i">@Item.TotalBookingQuantity</td>*@
+                                                        @*<td id="DispatchQuantity_@i">@Item.DispatchQuantity</td>*@
+                                                        @*<td id="TotalAmount_@i">@Item.TotalAmount</td>*@
+                                                        <td>
+                                                            <input type="text" id="txtAmount_@i" name="txtAmount" value="@Item.DispatchPending" onkeypress="allowNumbersOnly(event)" class="form-control" onchange="return GetBookingQuantityValues(@i)" style ="min-width:150px;border:1px solid gray"/>
+                                                        </td>
+                                                        <td style="display:none" id="Dispatched_@i">
+                                                            <input type="text" id="txtAmount" name="txtAmount" value="@Item.Dispatched" class="form-control" />
+                                                        </td>
+                                                        <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="return SaveAllRecord(@i)">Dispatch</a>
+                                                        </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+}
+
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+@*<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
+
+<script>
+    function GetDetails(i) {
+        var FK_DistributerId_ = $("#FK_DistributerId_" + i).text();
+        var Distributor_ = $("#Distributor_" + i).text();
+        var BookingDate_ = $("#BookingDate_" + i).text();
+        $("#DistributerName").val(Distributor_);
+        $("#DistributerID").val(FK_DistributerId_);
+        $("#BookingDate").val(BookingDate_);
+        var ViewData = {};
+        ViewData.FK_DistributerId = FK_DistributerId_;
+        ViewData.OrderDate = BookingDate_;
+        $.ajax({
+            url: '/Admin/BindDelearlist', type: 'post', dataType: 'json',
+            data: ViewData,
+            success: function (data) {
+                debugger;
+                $("#tableOrderDetail tbody").find("tr:gt(0)").remove();
+                $("#tableOrderDetail tbody").find("td:eq(0)").remove();
+                $.each(data, function (i, v) {
+                    var Htmldata = "<tr><td>" + v.Dealer + "</td><td style='display:none'>" + v.PK_DealerId + "</td><td>" + v.TotalAmount + "</td><td id='textQuantity" + i + "'>" + v.OrderQuantity + "</td><td>" + v.Dispatched + "</td><td><input type='text' id='txtAmount" + i + "'  value='" + v.DispatchPending + "'name='txtAmount' onkeypress='allowNumbersOnly(event)' class='form-control' onchange='return GetBookingQuantityValues(" + i + ")'/></td><td style='display:none' id='PendingDispatch" + i + "'>" + v.DispatchPending + "</td></tr>"
+                    $("#tableOrderDetail").append(Htmldata);
+
+                });
+            }
+        });
+    }
+
+    function SaveAllRecord(i) {
+        debugger;
+        var DealerId = $("#PK_DealerId_" + i).text();
+        //var Distributor_ = $("#Distributor_" + i).text();
+        var DistributerID = $("#FK_DistributerId_" + i).text();
+        var BookingDate = $("#BookingDate_" + i).text();
+        var PK_DealerId = $("#PK_DealerId_" + i).text();
+        var TotalAmount = $("#TotalAmount_" + i).text();
+        var OrderQuantity = $("#OrderQuantity_" + i).text();
+        var DispatchValue = $("#txtAmount_" + i).val();
+        var listoftblRecord = new Array();
+
+
+        var AllRecord = {};
+        AllRecord.DistributerID = DistributerID;
+        AllRecord.BookingDate = BookingDate;
+        AllRecord.PK_DealerId = PK_DealerId;
+        AllRecord.TotalAmount = TotalAmount;
+        AllRecord.OrderQuantity = OrderQuantity;
+        AllRecord.DispatchValue = DispatchValue;
+        (listoftblRecord).push(AllRecord);
+       
+        var data = {
+            OrderRequest: JSON.stringify(listoftblRecord)
+        }
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: '/Admin/DispatchForBookingRequestAction',
+            data: JSON.stringify({ dataValue: JSON.stringify(data) }),
+            contentType: 'application/json',
+            success: function (data) {
+                if (data.status == "Yes") {
+                    alert('Order has been dispatch successfully !!');
+                    window.location.href = '@Url.Action("DispatchForBookingRequest", "Admin")';
+
+                }
+                else {
+                    console.log(data.status)
+                    alert(data.status);
+                }
+            }
+        });
+    }
+
+    function GetBookingQuantityValues(i) {
+        debugger;
+        var DealerId = $("#PK_DealerId_" + i).text();
+        var DispatchedPending = $("#DispatchPending_" + i).text();
+        var Dispatched = $("#Dispatched_" + i).text();
+        var DispatchVlaue = $("#txtAmount_" + i).val();
+       
+        if (Number(DispatchVlaue) > Number(DispatchedPending)) {
+            alert("Dispatch value should be less than pending booking quantity !")
+            $("#txtAmount_" + i).val(DispatchedPending);
+        }
+        if (DispatchVlaue < 0) {
+            $("#txtAmount_" + i).val(DispatchedPending);
+        }
+
+    }
+    // Validation
+    function allowNumbersOnly(e) {
+        var code = (e.which) ? e.which : e.keyCode;
+        if (code > 31 && (code < 48 || code > 57)) {
+            e.preventDefault();
+        }
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+
+    span.error, error1 {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error, error1 {
+        background-color: rgba(255,0,0,0.35);
+    }
+
+    span.error1 {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error1 {
+        background-color: rgba(255,0,0,0.35);
+    }
+</style>
+

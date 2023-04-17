@@ -9,9 +9,13 @@ namespace AnkurUdyogERP.Models
 {
     public class Distributer : Common
     {
+        
+        public List<Distributer> lstdistributer { get; set; }
         public List<Distributer> lstDealer { get; set; }
         public List<Distributer> lstrequest { get; set; }
         public List<Distributer> lst1DailyRate { get; set; }
+        public List<Distributer> lstDispatchOrder { get; set; }
+        public List<Distributer> Delearlist { get; set; }      
         public string FirmName { get; set; }
         public string Mobile { get; set; }
         public string UserID { get; set; }
@@ -37,8 +41,21 @@ namespace AnkurUdyogERP.Models
         public string PK_DealerId { get; set; }
         public string TodayPendingLimit { get; set; }
         public DataTable dtOrderDetails { get; set; }
+        public DataTable dtOrderDispatch { get; set; }
         public string DealerName { get; set; }
         public string DealerId { get; set; }
+        
+
+        public string Distributor { get; set; }
+        public string BookingDate { get; set; }
+        public string TotalBookingQuantity { get; set; }
+        public string FK_DistributerId { get; set; }
+
+        public string DispatchQuantity { get; set; }
+        public string DispatchDate { get; set; }
+        public string BookingQuantity { get; set; }
+        public string Pk_BookingDispatchId { get; set; }
+        public string Dispatched { get; set; }
 
 
         public DataSet GetDetails()
@@ -253,6 +270,56 @@ namespace AnkurUdyogERP.Models
             SqlParameter[] para = {
                                         new SqlParameter("@FK_DistributerId", DistributerId)};
             DataSet ds = Connection.ExecuteQuery("GetDealerListAutoSeach", para);
+            return ds;
+        }
+        
+        public DataSet DispatchForBookingRequest()
+        {
+            DataSet ds = Connection.ExecuteQuery("DispatchedForBookingRequest");
+            return ds;
+        }
+
+        public DataSet DealerDetailsByDistributerId()
+        {
+            SqlParameter[] para =
+              {
+                   new SqlParameter("@OrderDate",BookingDate),
+                   new SqlParameter("@Fk_DistributerId",DistributerId)
+            };
+            DataSet ds = Connection.ExecuteQuery("DealerDetailsByDistributerId", para);
+            return ds;
+        }
+
+        public DataSet SaveDispatchForBookingRequest()
+        {
+            SqlParameter[] para =
+            {
+                        new SqlParameter("@dtOrderDispatch",dtOrderDispatch),
+                        new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveOrderDispatchDetails", para);
+            return ds;
+        }
+
+        public DataSet GetDispatchReport()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Fk_DistributerId",DistributerId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDispatchReport", para);
+            return ds;
+        }
+
+        public DataSet GetProfileDetails()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Pk_Distributer",DistributerId)
+            };
+            DataSet ds = Connection.ExecuteQuery("[GetProfileDetails]", para);
             return ds;
         }
 

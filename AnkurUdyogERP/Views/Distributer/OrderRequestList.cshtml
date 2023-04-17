@@ -63,9 +63,7 @@
                                             <th>Booking Quantity (Per Ton)</th>
                                             <th>Total Amount</th>
                                             <th>Booking Date</th>
-                                            <th>Status</th>
-                                            <th>Edit</th>
-                                            @*<th>Delete</th>*@
+                                     
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -85,34 +83,9 @@
                                                         <td>@Item.OrderQuantity</td>
                                                         <td>@Item.TotalAmount</td>
                                                         <td>@Item.Date</td>
-                                                        <td style="text-align:center;">
-                                                            @if (Item.Status == "Rejected")
-                                                            {
-                                                                <span class="badge badge-danger">@Item.Status</span>
-                                                            }
-                                                            else if (Item.Status == "Pending")
-                                                            {
-                                                                <span class="badge badge-warning">@Item.Status</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="badge badge-success">@Item.Status</span>
-                                                            }
-                                                        </td>
-                                                        <td class="edit1">
-                                                        @if (Item.Status == "Pending")
-                                                        {
-                                                            <ul class="action">
-                                                                <li class="edit"> <a href="/Distributer/OrderRequest?OrderId=@Item.OrderId"><i class="icon-pencil-alt"></i></a></li>
-                                                            </ul>
-                                                        }
-                                                        </td>
+                                              
 
-                                                        @*<td class="delete1">
-                                                            <ul class="action">
-                                                                <li class="delete"><a href="/Distributer/DeleteOrderRequest?OrderId=@Item.OrderId" onclick="return confirm('Are you sure you want to delete this Order Request ?')"><i class="icon-trash"></i></a></li>
-                                                            </ul>
-                                                        </td>*@
+                                                
                                                     </tr>
                                                     i++;
                                                 }

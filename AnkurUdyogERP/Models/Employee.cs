@@ -80,15 +80,7 @@ namespace AnkurUdyogERP.Models
         }
 
 
-        public DataSet GetProfileDetails()
-        {
-            SqlParameter[] para =
-              {
-                new SqlParameter("@Pk_AdminId",PK_AdminId)
-            };
-            DataSet ds = Connection.ExecuteQuery("GetProfileDetailsForAdmin", para);
-            return ds;
-        }
+      
 
         public DataSet GetEmployeeData()
         {
@@ -135,6 +127,15 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
+        public DataSet GetProfileDetailsForAdmin()
+        {
+            SqlParameter[] para =
+              {
+                new SqlParameter("@Pk_AdminId",PK_AdminId)
+            };
+            DataSet ds = Connection.ExecuteQuery("[GetProfileDetailsForAdmin]", para);
+            return ds;
+        }
 
     }
 }

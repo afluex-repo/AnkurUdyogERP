@@ -114,7 +114,6 @@
                                                                 <li class="edit"> <a href="/Employee/EmployeeRegistration?Id=@Item.PK_AdminId"><i class="icon-pencil-alt"></i></a></li>
                                                             </ul>
                                                         </td>
-
                                                         <td class="delete1">
                                                             <ul class="action">
                                                                 <li class="delete"><a href="/Admin/DeleteEmployee?Id=@Item.PK_AdminId" onclick="return confirm('Are you sure you want to delete this employee ?')"><i class="icon-trash"></i></a></li>
@@ -221,10 +220,8 @@
                 }
             },
             error: function () {
-                alert("Error occured!!")
+            alert("Error occured!!")
             }
         });
     }
-
-
 </script>

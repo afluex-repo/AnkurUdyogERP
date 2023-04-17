@@ -46,22 +46,15 @@
                                 <table class="table table-responsive table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            @*<th width="120px">Today's Pending Limit</th>*@
                                             <th width="120px">Dealer<span style="color:red;">*</span></th>
-                                            @*<th width="120px">Section<span style="color:red;">*</span></th>*@
                                             <th width="110px">Rate (Per Ton)</th>
                                             <th>Booking Quantity (Per Ton)<span style="color:red;">*</span></th>
-                                            @*<th>Quintal</th>
-                                                <th>Ton</th>*@
                                             <th>Amount</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="TextBoxContainer">
                                         <tr class="mycontainer" id="mainrow">
-                                            @*<td style="min-width:200px">
-                                                    <input type="text" id="PendingLimit" name="PendingLimit" class="PendingLimit form-control" placeholder="Today's Pending Limit" value="@ViewBag.PendingLimit" readonly="readonly" , oninput="return checkLimit();" />
-                                                </td>*@
                                             <td>
                                                 @*@Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "Dealer form-control select2", @style = "min-width:180px" })
                                                 <span class="error"> Select Dealer</span>*@
@@ -116,9 +109,7 @@
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
-                                        @*<th>Pending Limit</th>*@
                                         <th>Dealer</th>
-                                        @*<th>Section</th>*@
                                         <th>Rate (Per Ton)</th>
                                         <th>Booking Quantity (Per Ton)</th>
                                         <th>Total Amount</th>
@@ -136,9 +127,7 @@
                                                 {
                                                     <tr>
                                                         <td>@i</td>
-                                                        @*<td>@Item.PendingLimit</td>*@
                                                         <td>@Item.Dealer</td>
-                                                        @*<td>@Item.Section</td>*@
                                                         <td>@Item.Rate</td>
                                                         <td>@Item.OrderQuantity</td>
                                                         <td>@Item.TotalAmount</td>
@@ -146,10 +135,6 @@
                                                     i++;
                                                 }
                                             }
-                                                @*<tr>
-                                                    <td colspan="3"><a href="~/Distributer/OrderRequestList" class="btn btn-primary" style="float:right">view more..</a></td>
-                                                </tr>*@
-
                                         }
                                     }
                                    

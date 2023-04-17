@@ -473,13 +473,6 @@ namespace AnkurUdyogERP.Controllers
             return new JsonResult { Data = new { status = order.Result } };
         }
 
-
-
-
-
-
-
-
         [HttpPost]
         [ActionName("OrderRequest")]
         [OnAction(ButtonName = "btnUpdate")]
@@ -543,8 +536,6 @@ namespace AnkurUdyogERP.Controllers
         {
             List<Distributer> lst = new List<Distributer>();
             model.DistributerId = Session["PK_DistributerId"].ToString();
-            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.OrderRequestList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -635,5 +626,278 @@ namespace AnkurUdyogERP.Controllers
             return jsonResult;
             //return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult DispatchForBookingRequest()
+        {
+            Distributer model = new Distributer();
+
+            List<Distributer> lst = new List<Distributer>();
+
+            DataSet ds = model.DispatchForBookingRequest();
+            //model.DistributerId = Session["PK_DistributerId"].ToString();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.FK_DistributerId = dr["FK_DistributerId"].ToString();
+                    obj.Distributor = dr["Distributor"].ToString();
+                    obj.BookingDate = (dr["BookingDate"]).ToString();
+                    obj.TotalBookingQuantity = (dr["TotalBookingQuanity"].ToString());
+                    obj.Status = dr["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdistributer = lst;
+
+            }
+            return View(model);
+        }
+
+        public ActionResult BindDelearlist(string FK_DistributerId, string OrderDate)
+        {
+            Distributer model = new Distributer();
+            model.DistributerId = FK_DistributerId;
+            model.BookingDate = OrderDate;
+            List<Distributer> lst = new List<Distributer>();
+
+            DataSet ds = model.DealerDetailsByDistributerId();
+            //model.DistributerId = Session["PK_DistributerId"].ToString();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Dealer = dr["Dealer"].ToString();
+                    obj.OrderQuantity = (dr["OrderQuantity"]).ToString();
+                    obj.TotalAmount = (dr["TotalAmount"].ToString());
+                    obj.PK_DealerId = dr["PK_DealerId"].ToString();
+                    obj.Dispatched = dr["Dispatched"].ToString();
+                    lst.Add(obj);
+                }
+                model.Delearlist = lst;
+            }
+
+            return Json(model.Delearlist, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public JsonResult DispatchForBookingRequestAction(Distributer order, string dataValue)
+        {
+            try
+            {
+                string DistributerID = "";
+                string BookingDate = "";
+                string PK_DealerId = "";
+                string TotalAmount = "";
+                string OrderQuantity = "";
+                string DispatchValue = "";
+                int rowsno = 0;
+                var isValidModel = TryUpdateModel(order);
+                var jss = new JavaScriptSerializer();
+                var jdv = jss.Deserialize<dynamic>(dataValue);
+
+                DataTable OrderDispatch = new DataTable();
+
+                OrderDispatch.Columns.Add("DistributerID");
+                OrderDispatch.Columns.Add("BookingDate");
+                OrderDispatch.Columns.Add("PK_DealerId");
+                OrderDispatch.Columns.Add("TotalAmount");
+                OrderDispatch.Columns.Add("OrderQuantity");
+                OrderDispatch.Columns.Add("DispatchValue");
+                OrderDispatch.Columns.Add("rowsno");
+                DataTable dt = new DataTable();
+                dt = JsonConvert.DeserializeObject<DataTable>(jdv["OrderRequest"]);
+                int numberOfRecords = dt.Rows.Count;
+                foreach (DataRow row in dt.Rows)
+                {
+                    DistributerID = row["DistributerID"].ToString();
+                    BookingDate = row["BookingDate"].ToString();
+                    PK_DealerId = row["PK_DealerId"].ToString();
+                    TotalAmount = row["TotalAmount"].ToString();
+                    OrderQuantity = row["OrderQuantity"].ToString();
+                    DispatchValue = row["DispatchValue"].ToString();
+                    rowsno = rowsno + 1;
+                    OrderDispatch.Rows.Add(DistributerID, BookingDate, PK_DealerId, TotalAmount, OrderQuantity, DispatchValue, rowsno);
+                }
+                order.dtOrderDispatch = OrderDispatch;
+                order.AddedBy = Session["PK_DistributerId"].ToString();
+                DataSet ds = new DataSet();
+                ds = order.SaveDispatchForBookingRequest();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+
+                        order.Result = "Yes";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        order.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return new JsonResult { Data = new { status = order.Result } };
+        }
+
+
+        public ActionResult DispatchReport()
+        {
+            Distributer model = new Distributer();
+            List<Distributer> lst = new List<Distributer>();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = model.GetDispatchReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.Pk_BookingDispatchId = dr["Pk_BookingDispatchId"].ToString();
+                    obj.DealerName = dr["DealerName"].ToString();
+                    obj.BookingQuantity = dr["BookingQuantity"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.DispatchDate = dr["DispatchDate"].ToString();
+                    obj.Amount = dr["Amount"].ToString();
+                    obj.BookingDate = dr["BookingDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDispatchOrder = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("DispatchReport")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DispatchReportSearch(Distributer model)
+        {
+            List<Distributer> lst = new List<Distributer>();
+            model.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = model.GetDispatchReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Distributer obj = new Distributer();
+                    obj.Pk_BookingDispatchId = dr["Pk_BookingDispatchId"].ToString();
+                    obj.DealerName = dr["DealerName"].ToString();
+                    obj.BookingQuantity = dr["BookingQuantity"].ToString();
+                    obj.DispatchQuantity = dr["DispatchQuantity"].ToString();
+                    obj.DispatchDate = dr["DispatchDate"].ToString();
+                    obj.Amount = dr["Amount"].ToString();
+                    obj.BookingDate = dr["BookingDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDispatchOrder = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult PrintReceipt(Master model, string OrderId)
+        {
+            if (OrderId != null)
+            {
+                model.OrderId = OrderId;
+                DataSet ds = model.GetDeoDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.OrderId = ds.Tables[0].Rows[0]["PK_OrderId"].ToString();
+                    ViewBag.Distributer = ds.Tables[0].Rows[0]["DistributerName"].ToString();
+                    ViewBag.PendingLimit = ds.Tables[0].Rows[0]["PendingLimit"].ToString();
+                    ViewBag.Dealer = ds.Tables[0].Rows[0]["DealerName"].ToString();
+                    ViewBag.Section = ds.Tables[0].Rows[0]["Section"].ToString();
+                    ViewBag.Rate = ds.Tables[0].Rows[0]["Rate"].ToString();
+                    ViewBag.OrderQuantity = ds.Tables[0].Rows[0]["OrderQuantity"].ToString();
+                    ViewBag.TotalAmount = ds.Tables[0].Rows[0]["TotalAmount"].ToString();
+                    ViewBag.Date = ds.Tables[0].Rows[0]["Date"].ToString();
+                    ViewBag.Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                    ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult Profile(Distributer model)
+        {
+             model.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = model.GetProfileDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                ViewBag.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                ViewBag.JoiningDate = ds.Tables[0].Rows[0]["JoiningDate"].ToString();
+                ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();             
+                ViewBag.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["PK_DistributerId"].ToString();
+                ViewBag.UserType = ds.Tables[0].Rows[0]["UserType"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                
+            }
+            return View(model);
+        }
+
+
+        #region Change password for Distributer
+
+        public ActionResult ChangePassword()
+        {      
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ChangePassword")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdatePassword(Password obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.UpdatedBy = Session["PK_DistributerId"].ToString();
+                obj.OldPassword = obj.OldPassword;
+                obj.NewPassword = obj.NewPassword;
+                DataSet ds = obj.ChangePasswordForDistributer();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["ChangePassword"] = "Password updated successfully..";
+                        FormName = "ChangePassword";
+                        Controller = "Distributer";
+                    }
+                    else
+                    {
+                        TempData["ChangePassword"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "ChangePassword";
+                        Controller = "Distributer";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ChangePassword"] = ex.Message;
+                FormName = "Login";
+                Controller = "Home";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
+
+        #endregion
     }
 }
