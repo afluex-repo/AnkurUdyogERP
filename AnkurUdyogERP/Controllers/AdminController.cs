@@ -710,7 +710,7 @@ namespace AnkurUdyogERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["ChangePassword"] = "Password updated successfully..";
+                        TempData["ChangePassword"] = "Password updated successfully !!";
                         FormName = "ChangePassword";
                         Controller = "Admin";
                     }
