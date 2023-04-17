@@ -173,6 +173,8 @@ namespace AnkurUdyogERP.Controllers
             Menu model = new Menu();
             List<Menu> lstmenu = new List<Menu>();
             List<Menu> lstsubmenu = new List<Menu>();
+            model.Pk_AdminId = Session["Pk_adminId"].ToString();
+            model.UserType = Session["UserType"].ToString();
             DataSet ds = model.GetMenu();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -192,8 +194,13 @@ namespace AnkurUdyogERP.Controllers
                     Menu obj = new Menu();
                     obj.PK_SubMenuId = dr["PK_FormId"].ToString();
                     obj.SubMenuName = dr["FormName"].ToString();
-                    obj.Sequence = dr["Sequence"].ToString();
-                    obj.PK_MenuId = dr["PK_FormTypeId"].ToString();
+                    //obj.Sequence = dr["Sequence"].ToString();
+                    obj.Sequence = dr["DisplaySequence"].ToString();
+
+                    //obj.PK_MenuId = dr["PK_FormTypeId"].ToString();
+                    obj.PK_MenuId = dr["FK_FormTypeId"].ToString();
+                    
+
                     obj.Url = dr["Url"].ToString();
                     lstsubmenu.Add(obj);
                 }
