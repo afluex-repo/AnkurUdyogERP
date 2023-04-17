@@ -10,9 +10,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h3>
-                        Distributer Dashboard
-                    </h3>
+                    <h3> Distributer Dashboard</h3>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -31,7 +29,6 @@
                 <div class="card sale-chart">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="flex-shrink-0">
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="shopping-bag"></i></div>
                                     <div class="sale-content">
@@ -39,7 +36,6 @@
                                         <p>@ViewBag.TodayOrderLimit</p>
                                     </div>
                                 </div>
-                            </div>
                             <div class="small-chart-view income-chart" id="income-chart"></div>
                         </div>
                     </div>
@@ -49,7 +45,6 @@
                 <div class="card sale-chart">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="flex-shrink-0">
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
@@ -57,7 +52,6 @@
                                         <p>@ViewBag.TotalOrder</p>
                                     </div>
                                 </div>
-                            </div>
                             <div class="small-chart-view order-chart" id="order-chart"></div>
                         </div>
                     </div>
@@ -67,7 +61,6 @@
                 <div class="card sale-chart">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="flex-shrink-0">
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
@@ -75,7 +68,6 @@
                                         <p>@ViewBag.TodayOrder</p>
                                     </div>
                                 </div>
-                            </div>
                             <div class="small-chart-view order-chart" id="today-order"></div>
                         </div>
                     </div>
@@ -85,7 +77,6 @@
                 <div class="card sale-chart">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="flex-shrink-0">
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="users"></i></div>
                                     <div class="sale-content">
@@ -93,7 +84,6 @@
                                         <p>0</p>
                                     </div>
                                 </div>
-                            </div>
                             <div class="small-chart-view visitor-chart" id="visitor-chart"></div>
                         </div>
                     </div>
@@ -137,11 +127,10 @@
                     </div>
                 </div>
             </div>*@
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card sale-chart">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="flex-shrink-0">
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
@@ -149,8 +138,7 @@
                                         <p>@ViewBag.PreviousRate /Ton</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="small-chart-view order-chart" id="pending-order1"></div>
+                            <div class="small-chart-view sales-chart" id="sales-chart"></div>
                         </div>
                     </div>
                 </div>
@@ -159,7 +147,6 @@
                 <div class="card sale-chart">
                     <div class="card-body">
                         <div class="d-flex">
-                            <div class="flex-shrink-0">
                                 <div class="sale-detail">
                                     <div class="icon"><i data-feather="file-text"></i></div>
                                     <div class="sale-content">
@@ -167,7 +154,6 @@
                                         <p>@ViewBag.CurrentRate /Ton</p>
                                     </div>
                                 </div>
-                            </div>
                             <div class="small-chart-view order-chart" id="pending-order"></div>
                         </div>
                     </div>

@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             }
-                            <div class="table-responsive mt-4">
+                            <div class="dt-ext table-responsive mt-4">
                                 <table class="display" id="export-button" style="width:100%">
                                     <thead>
                                         <tr>
@@ -63,7 +63,7 @@
                                             <th>Booking Quantity (Per Ton)</th>
                                             <th>Total Amount</th>
                                             <th>Booking Date</th>
-                                     
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,9 +83,21 @@
                                                         <td>@Item.OrderQuantity</td>
                                                         <td>@Item.TotalAmount</td>
                                                         <td>@Item.Date</td>
-                                              
+                                                        <td>
+                                                            @if (Item.Status == "Rejected")
+                                                            {
+                                                                <span class="badge badge-danger">@Item.Status</span>
+                                                            }
+                                                            else if (Item.Status == "Pending")
+                                                            {
+                                                                <span class="badge badge-warning">@Item.Status</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge badge-success">@Item.Status</span>
+                                                            }
+                                                        </td>
 
-                                                
                                                     </tr>
                                                     i++;
                                                 }
