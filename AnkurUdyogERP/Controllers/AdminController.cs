@@ -91,7 +91,6 @@ namespace AnkurUdyogERP.Controllers
                     obj.City = dr["City"].ToString();
                     obj.Address = dr["Address"].ToString();
                     obj.RoleName = dr["RoleName"].ToString();
-
                     lst.Add(obj);
                 }
                 model.lstEmployee = lst;
@@ -250,8 +249,8 @@ namespace AnkurUdyogERP.Controllers
         }
         public ActionResult Profile(Employee model)
         {
-            model.PK_AdminId = Session["Pk_adminId"].ToString();
-            DataSet ds = model.GetProfileDetails();
+             model.PK_AdminId = Session["Pk_adminId"].ToString();
+            DataSet ds = model.GetProfileDetailsForAdmin();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
@@ -460,7 +459,7 @@ namespace AnkurUdyogERP.Controllers
                     ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                 }
             }
-            
+
             return View(model);
         }
 
@@ -561,6 +560,7 @@ namespace AnkurUdyogERP.Controllers
                     Admin obj = new Admin();
                     obj.PK_DealerId = dr["PK_DealerId"].ToString();
                     obj.Dealer = dr["Dealer"].ToString();
+
                     obj.TotalAmount = (dr["TotalAmount"].ToString());
                     obj.Dispatched = (dr["Dispatched"].ToString());
                     obj.DispatchPending = (dr["DispatchPending"].ToString());
@@ -569,6 +569,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.BookingDate = (dr["BookingDate"]).ToString();
                     obj.TotalBookingQuantity = (dr["TotalBookingQuantity"].ToString());
                     obj.Status = dr["Status"].ToString();
+
                     obj.TotalAmount = dr["TotalAmount"].ToString();
                     lst3.Add(obj);
                 }
@@ -680,6 +681,58 @@ namespace AnkurUdyogERP.Controllers
             }
             return new JsonResult { Data = new { status = order.Result } };
         }
+
+
+        #region Change password for Admin
+
+        public ActionResult ChangePassword()
+        {
+            List<SelectListItem> ddlPasswordType = Common.BindPasswordType();
+            ViewBag.ddlPasswordType = ddlPasswordType;
+            return View();
+
+        }
+
+        [HttpPost]
+        [ActionName("ChangePassword")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdatePassword(Password obj)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.UpdatedBy = Session["Pk_adminId"].ToString();
+                obj.OldPassword = obj.OldPassword;
+                obj.NewPassword = obj.NewPassword;
+                DataSet ds = obj.UpdatePassword();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["ChangePassword"] = "Password updated successfully..";
+                        FormName = "ChangePassword";
+                        Controller = "Admin";
+                    }
+                    else
+                    {
+                        TempData["ChangePassword"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "ChangePassword";
+                        Controller = "Admin";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ChangePassword"] = ex.Message;
+                FormName = "Login";
+                Controller = "Home";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
+    
+        #endregion
     }
 }
 

@@ -51,7 +51,11 @@
                                             <th>Today's Booking</th>
                                             <th>Today's Pending Limit</th>
                                             @*<th>Total Dispatch</th>*@
-                                            <th>Increase Limit</th>
+
+                                            @if (Session["Pk_adminId"].ToString() == "1")
+                                            {
+                                                <th>Increase Limit</th>
+                                            }
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,11 +74,18 @@
                                                         @*<td>@Item.JoiningDate</td>*@
                                                         <td id="Limit_@i">@Item.Limit</td>
                                                         @*<td id="TodayOrder_@i">@Item.TodayOrder</td>
-                        <td>@Item.DispatchOrder</td>*@
+                                                            <td>@Item.DispatchOrder</td>*@
                                                         <td>@Item.TodayOrder</td>
                                                         <td id="PendingLimit_@i">@Item.PendingLimit</td>
                                                         @*<td>@Item.TotalDispatch</td>*@
-                                                        <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Increase Limit</a></td>
+
+                                                        @if (Session["Pk_adminId"].ToString() == "1")
+                                                        {
+                                                            <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Increase Limit</a></td>
+                                                        }
+
+
+
 
                                                     </tr>
                                                     i++;
@@ -122,8 +133,8 @@
                                                         <td>@Item.CurrentMonthDispatch</td>
                                                         <td>@Item.CurrentMonthPendency</td>
                                                         @*<td>
-                               <a href="#" class="btn btn-primary btn-sm">Date Wise Details</a>
-                            </td>*@
+                                                               <a href="#" class="btn btn-primary btn-sm">Date Wise Details</a>
+                                                            </td>*@
                                                     </tr>
                                                     i++;
                                                 }
