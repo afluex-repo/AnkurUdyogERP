@@ -92,10 +92,15 @@
                                                 </tr>
                                                 i++;
                                             }
+
+                                            <input type="text" style="display:none" id="hdRows" name="hdRows" value="@i" />
+
                                         }
                                     }
                                 </tbody>
                             </table>
+                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                         </div>
                     </div>
                 </div>
@@ -106,14 +111,69 @@
     <!-- Container-fluid Ends-->
 </div>
 
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+        var UserType = $('#UserType').val();
+        var UserTypeName = $('#UserTypeName').val();
+        if (UserType == 'Admin' && UserTypeName != 'Admin' && UserTypeName != "") {
+            GetMenuDetails();
+        }
+    });
+    function GetMenuDetails() {
+        debugger
+        var URL = "/Master/DealerList";
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+            //contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(obj)
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].FormView == true) {
+                        $('#Save').show();
 
+                        $("#Save").removeAttr('disabled');
+                    }
+                    else {
+                        $('#Save').hide();
 
+                        $("#Save").attr('disabled', 'disabled');
+                    }
+                    debugger
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
 
+    function load() {
+        $(".errortext").removeClass("errortext");
+        if ($('#Fk_UserId').val() == '0') {
+            $("#Fk_UserId").addClass('errortext');
+            $('#Fk_UserId').focus();
 
-
-
-
-
+            return false;
+        }
+        if ($('#Fk_FormTypeId').val() == '0') {
+            $("#Fk_FormTypeId").addClass('errortext');
+            $('#Fk_FormTypeId').focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
 
 
 
