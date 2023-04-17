@@ -111,11 +111,13 @@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="/Admin/AdminDashboard"><i data-feather="home"></i><span>Dashboard</span></a>
                                 </li>
-                                    @*@{Html.RenderAction("GetMenu", "Master");}*@
-                                <li class="sidebar-list">
+                                    @{Html.RenderAction("GetMenu", "Master");}
+
+
+
+                                @*<li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="airplay"></i><span>Master</span></a>
                                     <ul class="sidebar-submenu">
-                                        @*<li><a href="/Master/SectionMaster">TMT Bar Type</a></li>*@
                                         <li><a href="/Master/DailyRateMaster">Daily Rate Master</a></li>
                                     </ul>
                                 </li>
@@ -152,8 +154,12 @@
                                     <ul class="sidebar-submenu">
                                         <li><a href="/Admin/OrderDetails">Booking List</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
                             </ul>
+
+
+
+
                             <div class="sidebar-img-section">
                                 <div class="sidebar-img-content">
                                     <img class="img-fluid" src="../assets/images/logo/ankur_logo.svg" style="height:2rem" alt="">
