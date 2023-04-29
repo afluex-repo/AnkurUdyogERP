@@ -5,6 +5,44 @@
     Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
 }
 
+
+
+
+<style>
+#overlay{
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height:100%;
+  display: none;
+  background: rgba(0,0,0,0.6);
+}
+.cv-spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px #ddd solid;
+  border-top: 4px #2e93e6 solid;
+  border-radius: 50%;
+  animation: sp-anime 0.8s infinite linear;
+}</style>
+
+<style>
+    @@keyframes sp-anime {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.is-hide{
+  display:none;
+}
+</style>
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
@@ -25,7 +63,6 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-
             @using (Html.BeginForm("OrderRequest", "Distributer", FormMethod.Post, new { @id = "form1", @autocomplete = "off", enctype = "multipart/form-data" }))
             {
                 <div class="col-sm-12">
@@ -57,11 +94,11 @@
                                         <tr class="mycontainer" id="mainrow">
                                             <td>
                                                 @*@Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "Dealer form-control select2", @style = "min-width:180px" })
-                                                <span class="error"> Select Dealer</span>*@
-                                                
+                                                    <span class="error"> Select Dealer</span>*@
 
-                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2 ui-autocomplete-input", @Placeholder = "Dealer Name", @style = "min-width:180px;position:relative" })
-                                                @Html.HiddenFor(m =>m.DealerId, new { @class = "DealerId" })
+
+                                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2 ui-autocomplete-input", @Placeholder = "Dealer Name", @style = "min-width:180px;position:relative", @OnInput = "return checkrate();" })
+                                                @Html.HiddenFor(m => m.DealerId, new { @class = "DealerId" })
                                                 <span class="error"> Select Dealer</span>
                                             </td>
                                             <td style="min-width:150px">
@@ -92,11 +129,16 @@
                                     <input id="submit" type="button" value="Booking Request" class="btn btn-warning" />
                                     @*<a class="btn btn-info" href="/Distributer/OrderRequestList" id="btn_View" style="margin-left:5px;">Back To List</a>*@
                                 </div>
-                            </div>
-                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
-                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
-                        </div>
+                                    </div>
+                                    <div id="overlay">
+                                        <div class="cv-spinner">
+                                            <span class="spinner"></span>
+                                        </div>
+                                    </div>
 
+                                    <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                                    <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
+                                </div>
                     </div>
                 </div>
             }
@@ -137,7 +179,7 @@
                                             }
                                         }
                                     }
-                                   
+
                                 </tbody>
 
                             </table>
@@ -152,6 +194,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         debugger;
@@ -223,7 +266,7 @@
                 $('.Rate', $newRow).prop('disabled', true).val($('#Rate').val());
                 $('.OrderQuantity', $newRow).prop('disabled', true).val($('#OrderQuantity').val());
                 $('.Amount', $newRow).prop('disabled', true).val($('#Amount').val());
-                                
+
                 //Replace add button with remove button
                 $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
 
@@ -247,8 +290,28 @@
         $('#orderdetailsItems').on('click', '.remove', function () {
             $(this).parents('tr').remove();
         });
+
+
+
+        jQuery(function ($) {
+            $(document).ajaxSend(function () {
+                $("#overlay").fadeIn(300);
+            });
+        });
+
         $('#submit').click(function () {
             debugger;
+            $.ajax({
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                }
+            }).done(function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(900);
+                }, 1500);
+            });
+
             var isAllValid = true;
             $("#divload").css({ 'display': 'none' });
             $('#orderItemError').text('');
@@ -302,6 +365,8 @@
                     success: function (data) {
                         if (data.status == "Yes") {
                             $("#divload").css({ 'display': 'block' });
+                            debugger;
+                            $('.preloader').fadeOut();
                             alert('Booking Request Successfully saved');
                             //here we will clear the form
                             list = [];
@@ -462,7 +527,15 @@
         });
     }
 
-   
+    function checkrate() {
+        debugger;
+        if ($("#Rate").val() == "0")
+        {
+            alert('Today Rate Not Open. Please Contact To Admin !');
+            $("#Dealer").val('');
+        }
+    }
+
 </script>
 <style>
     .errortext {
@@ -492,4 +565,14 @@
         background-color: rgba(255,0,0,0.35);
     }
 </style>
+
+
+
+
+
+
+
+
+
+
 
