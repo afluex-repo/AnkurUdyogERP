@@ -133,7 +133,7 @@
                 var obj = jQuery.parseJSON(data);
                 console.log(obj)
                 for (var i = 0; i < obj.length; i++) {
-                    if (obj[i].FormView == true) {
+                    if (obj[i].FormSave == true) {
                         $('#Save').show();
 
                         $("#Save").removeAttr('disabled');

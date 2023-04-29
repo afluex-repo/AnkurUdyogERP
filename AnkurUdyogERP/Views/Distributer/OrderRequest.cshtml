@@ -25,7 +25,6 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-
             @using (Html.BeginForm("OrderRequest", "Distributer", FormMethod.Post, new { @id = "form1", @autocomplete = "off", enctype = "multipart/form-data" }))
             {
                 <div class="col-sm-12">
@@ -57,11 +56,11 @@
                                         <tr class="mycontainer" id="mainrow">
                                             <td>
                                                 @*@Html.DropDownListFor(m => m.Dealer, new SelectList(ViewBag.ddldealer, "Value", "Text"), new { @class = "Dealer form-control select2", @style = "min-width:180px" })
-                                                <span class="error"> Select Dealer</span>*@
-                                                
+                                                    <span class="error"> Select Dealer</span>*@
 
-                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2 ui-autocomplete-input", @Placeholder = "Dealer Name", @style = "min-width:180px;position:relative" })
-                                                @Html.HiddenFor(m =>m.DealerId, new { @class = "DealerId" })
+
+                                                @Html.TextBoxFor(m => m.Dealer, new { @class = "Dealer form-control select2 ui-autocomplete-input", @Placeholder = "Dealer Name", @style = "min-width:180px;position:relative", @OnInput = "return checkrate();" })
+                                                @Html.HiddenFor(m => m.DealerId, new { @class = "DealerId" })
                                                 <span class="error"> Select Dealer</span>
                                             </td>
                                             <td style="min-width:150px">
@@ -92,11 +91,14 @@
                                     <input id="submit" type="button" value="Booking Request" class="btn btn-warning" />
                                     @*<a class="btn btn-info" href="/Distributer/OrderRequestList" id="btn_View" style="margin-left:5px;">Back To List</a>*@
                                 </div>
-                            </div>
-                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
-                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
-                        </div>
+                                    </div>
+                                    <div class="loader-wrapper" id="overlay">
+                                        <div class="loader"></div>
+                                    </div>
 
+                                    <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                                    <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
+                                </div>
                     </div>
                 </div>
             }
@@ -137,7 +139,7 @@
                                             }
                                         }
                                     }
-                                   
+
                                 </tbody>
 
                             </table>
@@ -152,6 +154,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         debugger;
@@ -223,7 +226,7 @@
                 $('.Rate', $newRow).prop('disabled', true).val($('#Rate').val());
                 $('.OrderQuantity', $newRow).prop('disabled', true).val($('#OrderQuantity').val());
                 $('.Amount', $newRow).prop('disabled', true).val($('#Amount').val());
-                                
+
                 //Replace add button with remove button
                 $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
 
@@ -247,8 +250,28 @@
         $('#orderdetailsItems').on('click', '.remove', function () {
             $(this).parents('tr').remove();
         });
+
+
+
+        jQuery(function ($) {
+            $(document).ajaxSend(function () {
+                $("#overlay").fadeIn(300);
+            });
+        });
+
         $('#submit').click(function () {
             debugger;
+            $.ajax({
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                }
+            }).done(function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(900);
+                }, 1500);
+            });
+
             var isAllValid = true;
             $("#divload").css({ 'display': 'none' });
             $('#orderItemError').text('');
@@ -462,7 +485,15 @@
         });
     }
 
-   
+    function checkrate() {
+        debugger;
+        if ($("#Rate").val() == "0")
+        {
+            alert('Today Rate Not Open. Please Contact To Admin !');
+            $("#Dealer").val('');
+        }
+    }
+
 </script>
 <style>
     .errortext {
@@ -492,4 +523,14 @@
         background-color: rgba(255,0,0,0.35);
     }
 </style>
+
+
+
+
+
+
+
+
+
+
 
