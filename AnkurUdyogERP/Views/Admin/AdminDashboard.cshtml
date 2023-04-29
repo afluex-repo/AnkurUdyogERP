@@ -51,7 +51,6 @@
                                             <th>Today's Booking</th>
                                             <th>Today's Pending Limit</th>
                                             @*<th>Total Dispatch</th>*@
-
                                             @if (Session["Pk_adminId"].ToString() == "1")
                                             {
                                                 <th>Increase Limit</th>
@@ -83,10 +82,6 @@
                                                         {
                                                             <td><a class="btn btn-primary btn-sm" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" onclick="return GetDetails(@i)">Increase Limit</a></td>
                                                         }
-
-
-
-
                                                     </tr>
                                                     i++;
                                                 }

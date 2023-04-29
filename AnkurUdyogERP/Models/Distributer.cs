@@ -9,13 +9,13 @@ namespace AnkurUdyogERP.Models
 {
     public class Distributer : Common
     {
-        
+
         public List<Distributer> lstdistributer { get; set; }
         public List<Distributer> lstDealer { get; set; }
         public List<Distributer> lstrequest { get; set; }
         public List<Distributer> lst1DailyRate { get; set; }
         public List<Distributer> lstDispatchOrder { get; set; }
-        public List<Distributer> Delearlist { get; set; }      
+        public List<Distributer> Delearlist { get; set; }
         public string FirmName { get; set; }
         public string Mobile { get; set; }
         public string UserID { get; set; }
@@ -44,7 +44,7 @@ namespace AnkurUdyogERP.Models
         public DataTable dtOrderDispatch { get; set; }
         public string DealerName { get; set; }
         public string DealerId { get; set; }
-        
+
 
         public string Distributor { get; set; }
         public string BookingDate { get; set; }
@@ -67,7 +67,7 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("BindDataForDashboard", para);
             return ds;
         }
-        
+
 
         public DataSet SaveDealerRegistration()
         {
@@ -189,7 +189,7 @@ namespace AnkurUdyogERP.Models
 
         public DataSet SaveOrderRequest()
         {
-            SqlParameter[] para = { 
+            SqlParameter[] para = {
                                     new SqlParameter("@AddedBy",AddedBy) ,
                                     new SqlParameter("@Status",Status) ,
                                     new SqlParameter("@dtOrderDetails",dtOrderDetails)
@@ -272,7 +272,7 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDealerListAutoSeach", para);
             return ds;
         }
-        
+
         public DataSet DispatchForBookingRequest()
         {
             DataSet ds = Connection.ExecuteQuery("DispatchedForBookingRequest");
@@ -322,6 +322,6 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("[GetProfileDetails]", para);
             return ds;
         }
-
+       
     }
-}
+    }

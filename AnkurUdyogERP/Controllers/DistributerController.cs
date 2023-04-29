@@ -604,6 +604,8 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult DealerListForAutoSearch()
         {
+            string FormController = "";
+            string FormAction = "";
             Distributer obj = new Distributer();
             List<Distributer> lst = new List<Distributer>();
             obj.DistributerId = Session["PK_DistributerId"].ToString();
@@ -612,18 +614,28 @@ namespace AnkurUdyogERP.Controllers
             serializer.MaxJsonLength = int.MaxValue;
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow dr in ds.Tables[0].Rows)
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                 {
-                    Distributer objList = new Distributer();
-                    objList.LoginId = dr["LoginId"].ToString();
-                    objList.DealerName = dr["Name"].ToString();
-                    objList.PK_DealerId = dr["PK_DealerId"].ToString();
-                    lst.Add(objList);
+                    //TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    FormController = "Distributer";
+                    FormAction = "OrderRequest";
                 }
-            }
-            var jsonResult = Json(lst, JsonRequestBehavior.AllowGet);
-            jsonResult.MaxJsonLength = int.MaxValue;
-            return jsonResult;
+                else
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        Distributer objList = new Distributer();
+                        objList.LoginId = dr["LoginId"].ToString();
+                        objList.DealerName = dr["Name"].ToString();
+                        objList.PK_DealerId = dr["PK_DealerId"].ToString();
+                        lst.Add(objList);
+                    }
+                 }
+                    
+                }
+                var jsonResult = Json(lst, JsonRequestBehavior.AllowGet);
+                jsonResult.MaxJsonLength = int.MaxValue;
+                return jsonResult;
             //return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
@@ -899,5 +911,7 @@ namespace AnkurUdyogERP.Controllers
 
 
         #endregion
+
+        
     }
 }
