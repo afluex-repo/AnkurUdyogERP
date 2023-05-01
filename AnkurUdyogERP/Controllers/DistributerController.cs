@@ -604,8 +604,6 @@ namespace AnkurUdyogERP.Controllers
 
         public ActionResult DealerListForAutoSearch()
         {
-            string FormController = "";
-            string FormAction = "";
             Distributer obj = new Distributer();
             List<Distributer> lst = new List<Distributer>();
             obj.DistributerId = Session["PK_DistributerId"].ToString();
@@ -614,14 +612,7 @@ namespace AnkurUdyogERP.Controllers
             serializer.MaxJsonLength = int.MaxValue;
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
-                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
-                {
-                    //TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    FormController = "Distributer";
-                    FormAction = "OrderRequest";
-                }
-                else
-                {
+                
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
                         Distributer objList = new Distributer();
@@ -631,8 +622,6 @@ namespace AnkurUdyogERP.Controllers
                         lst.Add(objList);
                     }
                  }
-                    
-                }
                 var jsonResult = Json(lst, JsonRequestBehavior.AllowGet);
                 jsonResult.MaxJsonLength = int.MaxValue;
                 return jsonResult;
@@ -912,6 +901,35 @@ namespace AnkurUdyogERP.Controllers
 
         #endregion
 
-        
+
+
+        public ActionResult CheckRateForAutoSearch()
+        {
+            Distributer obj = new Distributer();
+            List<Distributer> lst = new List<Distributer>();
+            obj.DistributerId = Session["PK_DistributerId"].ToString();
+            DataSet ds = obj.GetCheckRateForAutoSearch();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    obj.Result = "Yes";
+                }
+                else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                {
+                    obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+                obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+            }
+            return new JsonResult { Data = new { status = obj.Result } };
+            //return Json(obj, JsonRequestBehavior.AllowGet);
+        }
     }
 }
