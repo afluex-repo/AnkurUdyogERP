@@ -30,7 +30,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header pb-0">
-                            <span style="color:red;">@TempData["msg"]</span>
+                            @*<span style="color:red;">@TempData["msg"]</span>*@
                         </div>
 
                         <div class="card-body">
@@ -164,7 +164,24 @@
         if (UserType == 'Admin' && UserTypeName != 'Admin' && UserTypeName != "") {
             GetMenuDetails();
         }
-
+        
+        //$("input").attr("autocomplete", "off");
+        //$("#loader").css({ 'display': '' });
+        //$.ajax({
+        //    url: '/Distributer/CheckRateForAutoSearch',
+        //    type: 'Post',
+        //    success: function (data) {
+        //        debugger;
+        //        if (data.status == "Yes"){
+        //            //alert('Today Rate Not Open. Please Contact To Admin !');
+        //        }
+        //        else {
+        //            console.log(data.status)
+        //            alert(data.status);
+        //        }
+        //    }
+        //});
+        
         $("input").attr("autocomplete", "off");
         var cityuse = [];
         $("#loader").css({ 'display': '' });
@@ -219,8 +236,6 @@
             }
             debugger
             if (isAllValid) {
-                //var datetime = date.concat(" ", time);
-                //alert(datetime);
                 var $newRow = $('#mainrow').clone().removeAttr('id');
                 $('.Dealer', $newRow).prop('disabled', true).val($('#Dealer').val());
                 $('.Rate', $newRow).prop('disabled', true).val($('#Rate').val());
@@ -251,8 +266,7 @@
             $(this).parents('tr').remove();
         });
 
-
-
+        //For loader
         jQuery(function ($) {
             $(document).ajaxSend(function () {
                 $("#overlay").fadeIn(300);
@@ -261,17 +275,6 @@
 
         $('#submit').click(function () {
             debugger;
-            $.ajax({
-                type: 'GET',
-                success: function (data) {
-                    console.log(data);
-                }
-            }).done(function () {
-                setTimeout(function () {
-                    $("#overlay").fadeOut(900);
-                }, 1500);
-            });
-
             var isAllValid = true;
             $("#divload").css({ 'display': 'none' });
             $('#orderItemError').text('');
@@ -309,8 +312,21 @@
                 isAllValid = false;
                 $("#divload").css({ 'display': 'none' });
             }
+                       
 
             if (isAllValid) {
+                //For loader
+                $.ajax({
+                    type: 'GET',
+                    success: function (data) {
+                        console.log(data);
+                    }
+                }).done(function () {
+                    setTimeout(function () {
+                        $("#overlay").fadeOut(900);
+                    }, 1500);
+                });
+
                 var data = {
                     OrderRequest: JSON.stringify(list)
                 }
@@ -487,7 +503,7 @@
 
     function checkrate() {
         debugger;
-        if ($("#Rate").val() == "0")
+        if ($("#Rate").val() == "0" || $("#Rate").val() == '')
         {
             alert('Today Rate Not Open. Please Contact To Admin !');
             $("#Dealer").val('');
