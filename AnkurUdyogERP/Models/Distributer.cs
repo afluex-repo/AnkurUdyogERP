@@ -322,6 +322,13 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("[GetProfileDetails]", para);
             return ds;
         }
-       
+
+        public DataSet GetCheckRateForAutoSearch()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@FK_DistributerId", DistributerId)};
+            DataSet ds = Connection.ExecuteQuery("IsTodayRateUpdated", para);
+            return ds;
+        }
     }
     }
