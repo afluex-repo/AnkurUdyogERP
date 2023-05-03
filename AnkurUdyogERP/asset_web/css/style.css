@@ -8239,3 +8239,12 @@ select:focus {
 {
     border:2px solid #1e1e2a;
 }
+  .slider_img
+    {
+        height:800px;
+    }
+#text-dark
+{
+    color:#000 !important;
+    font-weight:600
+}

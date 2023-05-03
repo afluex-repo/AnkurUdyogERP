@@ -404,10 +404,10 @@ if ($('.team-carousel').length) {
                 items: 2
             },
             1300: {
-                items: 4
+                items: 3
             },
             1700: {
-                items: 4
+                items: 3
             }
         }
     });
