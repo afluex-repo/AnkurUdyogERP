@@ -8243,6 +8243,14 @@ select:focus {
     {
         height:800px;
     }
+  @media(max-width:768px)
+  {
+      .slider_img
+      {
+          height:300px;
+          width:100%;
+      }
+  }
 #text-dark
 {
     color:#000 !important;
