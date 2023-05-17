@@ -57,7 +57,7 @@
                                 </div>
                            
                             <div class="table-responsive mt-4">
-                                    <table class="display" id="export-button" style="width:100%">
+                                    <table class="display" id="table" style="width:100%">
                                             <thead>
                                                 <tr>
                                                    <th hidden></th>
@@ -172,7 +172,6 @@
 <script>
 
     function checkAll(ele) {
-        debugger;
         var checkboxes = document.getElementsByTagName('input');
         if (ele.checked) {
             for (var i = 0; i < checkboxes.length; i++) {
@@ -204,6 +203,7 @@
 
 
 </script>
+
 <style>
     .btn-sm{
         margin-left:35%;
