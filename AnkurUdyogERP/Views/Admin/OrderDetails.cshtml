@@ -60,9 +60,11 @@
                                     <table class="display" id="export-button" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" /> Select All</th>
-                                                    @*<th>S.No.</th>*@
-                                                    @*<th>Pending Limit</th>*@
+                                                   <th hidden></th>
+                                                    <th class="d-flex" style="width:100px"><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" />
+                                                     &nbsp;&nbsp;Select All
+                                                    </th>
+                                                    
                                                     <th>Distributer Name</th>
                                                     <th style="min-width:150px">Dealer Name</th>
                                                     <th>Rate (Per Ton)</th>
@@ -72,8 +74,7 @@
                                                     <th>Status</th>
 
                                                     <th style="text-align:center; display: none">Action</th>
-                                                    @*<th>Edit</th>
-                    <th>Delete</th>*@
+                                                
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -87,7 +88,7 @@
                                                         {
                                                             <tr class="text-left">
                                                                 <td hidden><input type="hidden" id="PK_OrderID_@i" name="PK_OrderID_@i" value="@Item.OrderId" />
-                                                                <td><input type="checkbox" name="chkpayment_@i" /> @i</td>
+                                                                <td class="d-flex"><input type="checkbox" name="chkpayment_@i" />&nbsp;&nbsp; @i</td>
                                                                 @*<td>@i</td>*@
                                                                 @*<td>@Item.PendingLimit</td>*@
                                                                 <td style="min-width:150px">@Item.Distributer</td>
@@ -116,27 +117,27 @@
                                                                     {
                                                                         <div class="d-flex">
                                                                             @*<a href="/Admin/ApproveOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-success edit" onclick="return confirm('Are you sure you want to Approve this Order Request ?')">Approve</a>
-                                            <a href="/Admin/RejectOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-danger edit ms-1" onclick="return confirm('Are you sure you want to Reject this Order Request ?')">Reject </a>*@
+                                                                            <a href="/Admin/RejectOrderRequest?OrderId=@Item.OrderId" class="btn btn-sm btn-danger edit ms-1" onclick="return confirm('Are you sure you want to Reject this Order Request ?')">Reject </a>*@
                                                                             @*<input type="submit" class="btn btn-sm btn-success" name="btnApprove" onclick="return Approve(@i)" value="Approve" />*@
 
                                                                         </div>
                                                                     }
                                                                 </td>
                                                                 @*<td class="edit1">
-                                    <ul class="action">
-                                        <li class="edit"> <a href="/Distributer/OrderRequest?OrderId=@Item.OrderId"><i class="icon-pencil-alt"></i></a></li>
-                                    </ul>
-                                </td>
+                                                                    <ul class="action">
+                                                                        <li class="edit"> <a href="/Distributer/OrderRequest?OrderId=@Item.OrderId"><i class="icon-pencil-alt"></i></a></li>
+                                                                    </ul>
+                                                                </td>
 
-                                <td class="delete1">
-                                    <ul class="action">
-                                        <li class="delete"><a href="/Distributer/DeleteOrderRequest?OrderId=@Item.OrderId" onclick="return confirm('Are you sure you want to delete this Order Request ?')"><i class="icon-trash"></i></a></li>
-                                    </ul>
-                                </td>*@
+                                                                <td class="delete1">
+                                                                    <ul class="action">
+                                                                        <li class="delete"><a href="/Distributer/DeleteOrderRequest?OrderId=@Item.OrderId" onclick="return confirm('Are you sure you want to delete this Order Request ?')"><i class="icon-trash"></i></a></li>
+                                                                    </ul>
+                                                                </td>*@
                                                             </tr>
                                                             i++;
                                                         }
-                                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                       <lable style="display:none"><input type="text" id="hdRows" name="hdRows" value="@i" /></lable> 
                                                     }
 
                                                 }
@@ -147,11 +148,10 @@
                                     <input type="hidden" id="UserType" value="@Session["UserType"]" />
                                     <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                              </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <br />
-                                    <input type="submit" id="btnapprove"  name="btnapprove" onclick="return Validate();" class="btn btn-success btn-sm" value="Approve" />
-                                    <input type="submit" id="btnreject" onclick="return Validate();" name="btnreject" class="btn btn-danger btn-sm" value="Reject" />
+                            <div class="row mt-3">
+                                <div class="col-md-3 d-flex justify-content-evenly offset-4">
+                                    <input type="submit" id="btnapprove"  name="btnapprove" onclick="return ValidateApprove();" class="btn btn-success" value="Approve" />
+                                    <input type="submit" id="btnreject" onclick="return ValidateReject();" name="btnreject" class="btn btn-danger" value="Reject" />
                                 </div>
                             </div>
                         </div>
@@ -190,13 +190,31 @@
         }
     }
 
-    function Validate() {
+    function ValidateApprove() {
         $("#divload").css({ 'display': 'none' });
         $(".errortext").removeClass("errortext");
        
         if ($('input[type=checkbox]:checked').length == 0) {
             alert("ERROR! Please select at least one checkbox");
             return false;
+        }
+        else {
+            confirm('Are you sure you want to Approve this Order Request ?');
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+
+    function ValidateReject() {
+        $("#divload").css({ 'display': 'none' });
+        $(".errortext").removeClass("errortext");
+
+        if ($('input[type=checkbox]:checked').length == 0) {
+            alert("ERROR! Please select at least one checkbox");
+            return false;
+        }
+        else {
+            confirm('Are you sure you want to Reject this Order Request ?');
         }
         $("#divload").css({ 'display': '' });
         return true;
