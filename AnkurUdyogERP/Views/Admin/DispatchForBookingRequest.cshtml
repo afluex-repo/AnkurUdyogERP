@@ -80,7 +80,7 @@
                                                         @*<td id="DispatchQuantity_@i">@Item.DispatchQuantity</td>*@
                                                         @*<td id="TotalAmount_@i">@Item.TotalAmount</td>*@
                                                         <td>
-                                                            <input type="text" id="txtAmount_@i" name="txtAmount" value="@Item.DispatchPending" onkeypress="allowNumbersOnly(event)" class="form-control" onchange="return GetBookingQuantityValues(@i)" style ="min-width:150px;border:1px solid gray"/>
+                                                            <input type="text" id="txtAmount_@i" name="txtAmount" value="@Item.DispatchPending" onkeypress = "return isNumberKey(event);" class="form-control" onchange="return GetBookingQuantityValues(@i)" style ="min-width:150px;border:1px solid gray"/>
                                                         </td>
                                                         <td style="display:none" id="Dispatched_@i">
                                                             <input type="text" id="txtAmount" name="txtAmount" value="@Item.Dispatched" class="form-control" />
@@ -178,6 +178,17 @@
         if (code > 31 && (code < 48 || code > 57)) {
             e.preventDefault();
         }
+    }
+
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
     }
 </script>
 <style>

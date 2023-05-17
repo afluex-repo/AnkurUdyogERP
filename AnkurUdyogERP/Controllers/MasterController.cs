@@ -590,6 +590,7 @@ namespace AnkurUdyogERP.Controllers
         {
             List<Master> lst = new List<Master>();
             model.Name = model.Name == "" ? null : model.Name;
+            model.PanNo = model.PanNo == "" ? null : model.PanNo;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.GetDealerList();
