@@ -627,7 +627,7 @@ li {
     left: 0;
     bottom: 0;
     right: 0;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--thm-base);
     color: var(--thm-base);
     font-size: 18px;
     line-height: 56px;
@@ -8238,4 +8238,21 @@ select:focus {
 .border-img
 {
     border:2px solid #1e1e2a;
+}
+  .slider_img
+    {
+        height:800px;
+    }
+  @media(max-width:768px)
+  {
+      .slider_img
+      {
+          height:300px;
+          width:100%;
+      }
+  }
+#text-dark
+{
+    color:#000 !important;
+    font-weight:600
 }

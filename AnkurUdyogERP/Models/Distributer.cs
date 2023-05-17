@@ -226,7 +226,8 @@ namespace AnkurUdyogERP.Models
               {
                 new SqlParameter("@Fk_DistributerId",DistributerId),
                 new SqlParameter("@FromDate",FromDate),
-                new SqlParameter("@ToDate",ToDate)
+                new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@PancardNo",PanNo)
             };
             DataSet ds = Connection.ExecuteQuery("OrderRequestList", para);
             return ds;
@@ -307,7 +308,8 @@ namespace AnkurUdyogERP.Models
               {
                 new SqlParameter("@Fk_DistributerId",DistributerId),
                 new SqlParameter("@FromDate",FromDate),
-                new SqlParameter("@ToDate",ToDate)
+                new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@PancardNo",PanNo)
             };
             DataSet ds = Connection.ExecuteQuery("GetDispatchReport", para);
             return ds;

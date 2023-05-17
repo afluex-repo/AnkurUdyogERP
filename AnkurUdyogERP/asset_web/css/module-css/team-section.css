@@ -25,7 +25,7 @@
 .team-style1-area .sec-title {}
 
 .team-style1-area .sec-title h2 {
-    color: #ffffff;
+    color:  var(--thm-black);
 }
 
 .single-team-style1 {
@@ -104,7 +104,7 @@
 }
 
 .single-team-style1 .title-holder h3 a {
-    color: #ffffff;
+    color: var(--thm-black);
     transition: all 200ms linear;
     transition-delay: 0.1s;
 }

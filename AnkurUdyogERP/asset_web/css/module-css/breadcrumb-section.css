@@ -31,7 +31,7 @@
     right: 0;
     bottom: 0;
     background: #000000;
-    opacity: 0.40;
+    opacity: 0.90;
     transition-delay: .1s;
     transition-timing-function: ease-in-out;
     transition-duration: .7s;
@@ -41,7 +41,7 @@
 .breadcrumb-area .inner-content {
     position: relative;
     display: block;
-    padding: 146px 0 146px;
+    padding: 39px 0 75px;
     z-index: 10;
 }
 
@@ -58,7 +58,7 @@
 
 .breadcrumb-area .title h2 {
     color: #ffffff;
-    font-size: 60px;
+    font-size: 40px;
     line-height: 1.3em;
     font-weight: 700;
     text-transform: capitalize;
