@@ -44,6 +44,8 @@ namespace AnkurUdyogERP.Models
 
         public string FK_DistributerId { get; set; }
 
+        public DataTable dtTable { get; set; }
+
         #region DailyRate
         public string TodayRate { get; set; }
         public string DistributerName { get; set; }
@@ -222,28 +224,54 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDistributer", para);
             return ds;
         }
-        public DataSet RejectOrderRequest()
-        {
-            SqlParameter[] para =
-             {
-                new SqlParameter("@FK_OrderId",OrderId),
-                new SqlParameter("@Status",Status),
-                new SqlParameter("@RejectedBy",AddedBy)
-            };
-            DataSet ds = Connection.ExecuteQuery("RejectOrderRequest", para);
-            return ds;
-        }
+        //public DataSet RejectOrderRequest()
+        //{
+        //    SqlParameter[] para =
+        //     {
+        //        new SqlParameter("@FK_OrderId",OrderId),
+        //        new SqlParameter("@Status",Status),
+        //        new SqlParameter("@RejectedBy",AddedBy)
+        //    };
+        //    DataSet ds = Connection.ExecuteQuery("RejectOrderRequest", para);
+        //    return ds;
+        //}
+        //public DataSet ApproveOrderRequest()
+        //{
+        //    SqlParameter[] para =
+        //     {
+        //        new SqlParameter("@FK_OrderId",OrderId),
+        //        new SqlParameter("@Status",Status),
+        //        new SqlParameter("@ApprovedBy",AddedBy)
+        //    };
+        //    DataSet ds = Connection.ExecuteQuery("ApproveOrderRequest", para);
+        //    return ds;
+        //}
+
         public DataSet ApproveOrderRequest()
         {
             SqlParameter[] para =
              {
-                new SqlParameter("@FK_OrderId",OrderId),
+                 new SqlParameter("@dtPayment",dtTable),
                 new SqlParameter("@Status",Status),
                 new SqlParameter("@ApprovedBy",AddedBy)
             };
             DataSet ds = Connection.ExecuteQuery("ApproveOrderRequest", para);
             return ds;
         }
+
+        public DataSet RejectOrderRequest()
+        {
+            SqlParameter[] para =
+             {
+                new SqlParameter("@dtPayment",dtTable),
+                new SqlParameter("@Status",Status),
+                new SqlParameter("@RejectedBy",AddedBy)
+            };
+            DataSet ds = Connection.ExecuteQuery("RejectOrderRequest", para);
+            return ds;
+        }
+
+
         public DataSet GetDeoDetails()
         {
             SqlParameter[] para =
@@ -291,7 +319,8 @@ namespace AnkurUdyogERP.Models
             {
                 new SqlParameter("@Name",Name),
                 new SqlParameter("@FromDate",FromDate),
-                new SqlParameter("@ToDate",ToDate)
+                new SqlParameter("@ToDate",ToDate),
+                 new SqlParameter("@PancardNo",PanNo)
             };
             DataSet ds = Connection.ExecuteQuery("GetDealerListForAdmin", para);
             return ds;

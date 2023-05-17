@@ -34,9 +34,14 @@
                     </div>
                     <div class="date-picker">
                         <div class="card-body">
-                            @using (Html.BeginForm("OrderRequestList", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("OrderRequestList", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @autocomplete = "off" }))
                             {
                                 <div class="row g-3">
+
+                                    <div class="col-md-2">
+                                        <label>Pan No.<span style="color:red;"></span></label>
+                                        @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "Pan No." })
+                                    </div>
                                     <div class="col-md-2">
                                         <label>From Date <span style="color:red;"></span></label>
                                         <input id="FromDate" name="FromDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">
@@ -58,6 +63,7 @@
                                             <th>S.No.</th>
                                             @*<th>Pending Limit</th>*@
                                             <th>Dealer</th>
+                                            <th>Pan No</th>
                                             @*<th>Section</th>*@
                                             <th>Rate (Per Ton)</th>
                                             <th>Booking Quantity (Per Ton)</th>
@@ -78,6 +84,7 @@
                                                         <td>@i</td>
                                                         @*<td>@Item.PendingLimit</td>*@
                                                         <td>@Item.Dealer</td>
+                                                        <td>@Item.PanNo</td>
                                                         @*<td>@Item.Section</td>*@
                                                         <td>@Item.Rate</td>
                                                         <td>@Item.OrderQuantity</td>

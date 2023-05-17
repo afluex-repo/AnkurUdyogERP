@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_DistributerLayoutForAdmin.cshtml";
 }
 
-@using (Html.BeginForm("DealerList", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("DealerList", "Distributer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data",@autocomplete="off" }))
 {
 <div class="page-body">
     <div class="container-fluid">
@@ -37,13 +37,14 @@
                    
                     <div class="card-body">
                             <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label>Pan No. <span style="color:red;"></span></label>
-                                    @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "Pan No." })
-                                </div>
+                                
                                 <div class="col-md-3">
                                     <label>Firm Name <span style="color:red;"></span></label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Firm Name" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Pan No. <span style="color:red;"></span></label>
+                                    @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "Pan No." })
                                 </div>
                                 <div class="col-md-3">
                                     <label>From Date <span style="color:red;"></span></label>
@@ -66,7 +67,7 @@
                                         <th>Dealer Name</th>
                                         <th>Contact No.</th>
                                         <th>Email</th>
-                                        <th>PanCard No.</th>
+                                        <th>Pan No.</th>
                                         <th>GST No.</th>
                                         @*<th>Limit_MT</th>*@
                                         <th>PinCode</th>

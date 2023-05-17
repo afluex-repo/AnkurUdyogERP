@@ -367,78 +367,79 @@ namespace AnkurUdyogERP.Controllers
             #endregion
             return View(model);
         }
-        public ActionResult ApproveOrderRequest(string OrderId)
-        {
-            string FormName = " ";
-            string Controller = "";
-            try
-            {
-                if (OrderId != null)
-                {
-                    Master model = new Master();
-                    model.OrderId = OrderId;
-                    model.Status = "Approved";
-                    model.AddedBy = Session["Pk_adminId"].ToString();
-                    DataSet ds = model.ApproveOrderRequest();
-                    if (ds != null && ds.Tables.Count > 0)
-                    {
-                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                        {
-                            TempData["Order"] = "Order Request Approved Successfully !!";
-                            FormName = "OrderDetails";
-                            Controller = "Admin";
-                        }
-                        else
-                        {
-                            TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                            FormName = "OrderDetails";
-                            Controller = "Admin";
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return RedirectToAction(FormName, Controller);
-        }
-        public ActionResult RejectOrderRequest(string OrderId)
-        {
-            string FormName = "";
-            string Controller = "";
-            try
-            {
-                if (OrderId != null)
-                {
-                    Master model = new Master();
-                    model.OrderId = OrderId;
-                    model.Status = "Rejected";
-                    model.AddedBy = Session["Pk_adminId"].ToString();
-                    DataSet ds = model.RejectOrderRequest();
-                    if (ds != null && ds.Tables.Count > 0)
-                    {
-                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                        {
-                            TempData["Order"] = "Order Request Rejected Successfully !!";
-                            FormName = "OrderDetails";
-                            Controller = "Admin";
-                        }
-                        else
-                        {
-                            TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                            FormName = "OrderDetails";
-                            Controller = "Admin";
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return RedirectToAction(FormName, Controller);
-        }
+        //public ActionResult ApproveOrderRequest(string OrderId)
+
+        //{
+        //    string FormName = " ";
+        //    string Controller = "";
+        //    try
+        //    {
+        //        if (OrderId != null)
+        //        {
+        //            Master model = new Master();
+        //            model.OrderId = OrderId;
+        //            model.Status = "Approved";
+        //            model.AddedBy = Session["Pk_adminId"].ToString();
+        //            DataSet ds = model.ApproveOrderRequest();
+        //            if (ds != null && ds.Tables.Count > 0)
+        //            {
+        //                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //                {
+        //                    TempData["Order"] = "Order Request Approved Successfully !!";
+        //                    FormName = "OrderDetails";
+        //                    Controller = "Admin";
+        //                }
+        //                else
+        //                {
+        //                    TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //                    FormName = "OrderDetails";
+        //                    Controller = "Admin";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return RedirectToAction(FormName, Controller);
+        //}
+        //public ActionResult RejectOrderRequest(string OrderId)
+        //{
+        //    string FormName = "";
+        //    string Controller = "";
+        //    try
+        //    {
+        //        if (OrderId != null)
+        //        {
+        //            Master model = new Master();
+        //            model.OrderId = OrderId;
+        //            model.Status = "Rejected";
+        //            model.AddedBy = Session["Pk_adminId"].ToString();
+        //            DataSet ds = model.RejectOrderRequest();
+        //            if (ds != null && ds.Tables.Count > 0)
+        //            {
+        //                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //                {
+        //                    TempData["Order"] = "Order Request Rejected Successfully !!";
+        //                    FormName = "OrderDetails";
+        //                    Controller = "Admin";
+        //                }
+        //                else
+        //                {
+        //                    TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //                    FormName = "OrderDetails";
+        //                    Controller = "Admin";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return RedirectToAction(FormName, Controller);
+        //}
         public ActionResult GenerateReceipt(Master model, string OrderId)
         {
             if (OrderId != null)
@@ -731,8 +732,116 @@ namespace AnkurUdyogERP.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
-    
+
         #endregion
+
+
+        [HttpPost]
+        [ActionName("OrderDetails")]
+        [OnAction(ButtonName = "btnapprove")]
+        public ActionResult ApproveOrderRequest(Master model)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                string ctrRowCount = Request["hdRows"].ToString();
+                string chk = "";
+                string PK_OrderID = "";
+                int Id = 0;
+                DataTable dtpayment = new DataTable();
+                dtpayment.Columns.Add("Id");
+                dtpayment.Columns.Add("PK_OrderID");
+                for (int i = 1; i < int.Parse(ctrRowCount); i++)
+                {
+                    chk = Request["chkpayment_" + i];
+                    if (chk == "on")
+                    {
+                        Id = dtpayment.Rows.Count + 1;
+                        PK_OrderID = Request["PK_OrderID_" + i].ToString();
+                        dtpayment.Rows.Add(Id,PK_OrderID);
+                    }
+                }
+                model.dtTable = dtpayment;
+                model.AddedBy = Session["Pk_adminId"].ToString();
+                model.Status = "Approved";
+                DataSet ds = model.ApproveOrderRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Order"] = "Order Request Approved Successfully !!";
+                        FormName = "OrderDetails";
+                        Controller = "Admin";
+                    }
+                    else
+                    {
+                        TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "OrderDetails";
+                        Controller = "Admin";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
+
+        [HttpPost]
+        [ActionName("OrderDetails")]
+        [OnAction(ButtonName = "btnreject")]
+        public ActionResult RejectOrderRequest(Master model)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                string ctrRowCount = Request["hdRows"].ToString();
+                string chk = "";
+                string PK_OrderID = "";
+                int Id = 0;
+                DataTable dtpayment = new DataTable();
+                dtpayment.Columns.Add("Id");
+                dtpayment.Columns.Add("PK_OrderID");
+                for (int i = 1; i < int.Parse(ctrRowCount); i++)
+                {
+                    chk = Request["chkpayment_" + i];
+                    if (chk == "on")
+                    {
+                        Id = dtpayment.Rows.Count + 1;
+                        PK_OrderID = Request["PK_OrderID_" + i].ToString();
+                        dtpayment.Rows.Add(Id, PK_OrderID);
+                    }
+                }
+                model.dtTable = dtpayment;
+                model.AddedBy = Session["Pk_adminId"].ToString();
+                model.Status = "Rejected";
+                DataSet ds = model.RejectOrderRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Order"] = "Order Request Rejected Successfully !!";
+                        FormName = "OrderDetails";
+                        Controller = "Admin";
+                    }
+                    else
+                    {
+                        TempData["Order"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "OrderDetails";
+                        Controller = "Admin";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return RedirectToAction(FormName, Controller);
+        }
     }
 }
 

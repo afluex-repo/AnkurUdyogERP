@@ -36,6 +36,12 @@
                                     <label>Name <span style="color:red;"></span></label>
                                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = " Name" })
                                 </div>
+
+                                <div class="col-md-3">
+                                    <label>Pan No. <span style="color:red;"></span></label>
+                                    @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @placeholder = "Pan No." })
+                                </div>
+
                                 <div class="col-md-3">
                                     <label>From Date <span style="color:red;"></span></label>
                                     <input id="FromDate" name="FromDate" class="datepicker-here form-control" type="text" data-language="en" data-date-format="dd/mm/yy" readonly=true placeholder="dd/mm/yyyy">

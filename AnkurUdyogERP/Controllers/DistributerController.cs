@@ -523,6 +523,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.TotalAmount = dr["TotalAmount"].ToString();
                     obj.Date = dr["Date"].ToString();
                     obj.Status = (dr["Status"].ToString());
+                    obj.PanNo = (dr["PancardNo"].ToString());
                     lst.Add(obj);
                 }
                 model.lstrequest = lst;
@@ -535,6 +536,7 @@ namespace AnkurUdyogERP.Controllers
         public ActionResult OrderRequestList(Distributer model)
         {
             List<Distributer> lst = new List<Distributer>();
+            //model.PanNo = model.PanNo == "" ? null : model.PanNo;
             model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet ds = model.OrderRequestList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -550,6 +552,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.TotalAmount = dr["TotalAmount"].ToString();
                     obj.Date = dr["Date"].ToString();
                     obj.Status = (dr["Status"].ToString());
+                    obj.PanNo = (dr["PancardNo"].ToString());
                     lst.Add(obj);
                 }
                 model.lstrequest = lst;
@@ -771,6 +774,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.DispatchDate = dr["DispatchDate"].ToString();
                     obj.Amount = dr["Amount"].ToString();
                     obj.BookingDate = dr["BookingDate"].ToString();
+                    obj.PanNo = dr["PanNo"].ToString();
                     lst.Add(obj);
                 }
                 model.lstDispatchOrder = lst;
@@ -784,6 +788,8 @@ namespace AnkurUdyogERP.Controllers
         public ActionResult DispatchReportSearch(Distributer model)
         {
             List<Distributer> lst = new List<Distributer>();
+
+            //model.PanNo = model.PanNo == "" ? null : model.PanNo;
             model.DistributerId = Session["PK_DistributerId"].ToString();
             DataSet ds = model.GetDispatchReport();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -798,6 +804,7 @@ namespace AnkurUdyogERP.Controllers
                     obj.DispatchDate = dr["DispatchDate"].ToString();
                     obj.Amount = dr["Amount"].ToString();
                     obj.BookingDate = dr["BookingDate"].ToString();
+                    obj.PanNo = dr["PanNo"].ToString();
                     lst.Add(obj);
                 }
                 model.lstDispatchOrder = lst;

@@ -270,5 +270,5 @@ F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\AnkurUdyogERP\bin\Ankur
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.dll
 F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.pdb
 E:\PraveenProject\repository\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
-F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
+F:\Ashwani Afluex\repository\AnkurUdyogERP\AnkurUdyogERP\AnkurUdyogERP\obj\Debug\AnkurUdyogERP.csprojResolveAssemblyReference.cache
