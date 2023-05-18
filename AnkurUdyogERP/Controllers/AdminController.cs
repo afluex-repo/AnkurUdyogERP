@@ -698,7 +698,7 @@ namespace AnkurUdyogERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Order"] = "Order Request Approved Successfully !!";
+                        TempData["Order"] = "Booking Request Approved Successfully !!";
                         FormName = "OrderDetails";
                         Controller = "Admin";
                     }
@@ -752,7 +752,7 @@ namespace AnkurUdyogERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Order"] = "Order Request Rejected Successfully !!";
+                        TempData["Order"] = "Booking Request Rejected Successfully !!";
                         FormName = "OrderDetails";
                         Controller = "Admin";
                     }

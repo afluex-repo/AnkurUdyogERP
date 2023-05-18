@@ -224,28 +224,7 @@ namespace AnkurUdyogERP.Models
             DataSet ds = Connection.ExecuteQuery("GetDistributer", para);
             return ds;
         }
-        //public DataSet RejectOrderRequest()
-        //{
-        //    SqlParameter[] para =
-        //     {
-        //        new SqlParameter("@FK_OrderId",OrderId),
-        //        new SqlParameter("@Status",Status),
-        //        new SqlParameter("@RejectedBy",AddedBy)
-        //    };
-        //    DataSet ds = Connection.ExecuteQuery("RejectOrderRequest", para);
-        //    return ds;
-        //}
-        //public DataSet ApproveOrderRequest()
-        //{
-        //    SqlParameter[] para =
-        //     {
-        //        new SqlParameter("@FK_OrderId",OrderId),
-        //        new SqlParameter("@Status",Status),
-        //        new SqlParameter("@ApprovedBy",AddedBy)
-        //    };
-        //    DataSet ds = Connection.ExecuteQuery("ApproveOrderRequest", para);
-        //    return ds;
-        //}
+       
 
         public DataSet ApproveOrderRequest()
         {

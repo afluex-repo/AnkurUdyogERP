@@ -57,7 +57,7 @@
                                 </div>
                            
                             <div class="table-responsive mt-4">
-                                    <table class="display" id="export-button" style="width:100%">
+                                    <table class="display" id="table" style="width:100%">
                                             <thead>
                                                 <tr>
                                                    <th hidden></th>
@@ -172,7 +172,6 @@
 <script>
 
     function checkAll(ele) {
-        debugger;
         var checkboxes = document.getElementsByTagName('input');
         if (ele.checked) {
             for (var i = 0; i < checkboxes.length; i++) {
@@ -199,7 +198,9 @@
             return false;
         }
         else {
-            confirm('Are you sure you want to Approve this Order Request ?');
+            if (confirm('Are You Sure You Want To Approve This Booking Request ?')) {
+            }
+            else { return false;}
         }
         $("#divload").css({ 'display': '' });
         return true;
@@ -210,11 +211,13 @@
         $(".errortext").removeClass("errortext");
 
         if ($('input[type=checkbox]:checked').length == 0) {
-            alert("ERROR! Please select at least one checkbox");
+            alert("ERROR! Please select at least one checkbox"); 
             return false;
         }
         else {
-            confirm('Are you sure you want to Reject this Order Request ?');
+            if (confirm('Are You Sure You Want To Reject This Booking Request  ?')) {
+            }
+            else { return false; }
         }
         $("#divload").css({ 'display': '' });
         return true;
@@ -222,6 +225,7 @@
 
 
 </script>
+
 <style>
     .btn-sm{
         margin-left:35%;
