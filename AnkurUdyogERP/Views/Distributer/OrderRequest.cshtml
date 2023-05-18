@@ -192,7 +192,7 @@
                 debugger;
                 if (response != null) {
                     $(response).each(function (index, item) {
-                        cityuse.push(item.DealerName + "(" + item.PK_DealerId + ")");
+                        cityuse.push(item.DealerName + "(" + item.PK_DealerId + ")" + "(" + item.PanNo + ")");
                     });
                     debugger;
                     $('#Dealer').autocomplete({

@@ -622,7 +622,8 @@ namespace AnkurUdyogERP.Controllers
                         objList.LoginId = dr["LoginId"].ToString();
                         objList.DealerName = dr["Name"].ToString();
                         objList.PK_DealerId = dr["PK_DealerId"].ToString();
-                        lst.Add(objList);
+                        objList.PanNo = dr["PancardNo"].ToString();
+                    lst.Add(objList);
                     }
                  }
                 var jsonResult = Json(lst, JsonRequestBehavior.AllowGet);
