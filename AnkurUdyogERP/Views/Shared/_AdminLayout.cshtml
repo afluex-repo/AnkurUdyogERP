@@ -248,7 +248,11 @@
     <script>
 
         $('#table').dataTable({
-        order: [],
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+       
         'columnDefs': [{
             'targets': [1, 3], // column index (start from 0)
             'orderable': false, // set orderable false for selected columns
