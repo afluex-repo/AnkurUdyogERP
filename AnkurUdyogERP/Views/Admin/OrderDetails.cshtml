@@ -137,7 +137,7 @@
                                                             </tr>
                                                             i++;
                                                         }
-                                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                       <lable style="display:none"><input type="text" id="hdRows" name="hdRows" value="@i" /></lable> 
                                                     }
 
                                                 }
@@ -150,8 +150,8 @@
                              </div>
                             <div class="row mt-3">
                                 <div class="col-md-3 d-flex justify-content-evenly offset-4">
-                                    <input type="submit" id="btnapprove"  name="btnapprove" onclick="return Validate();" class="btn btn-success" value="Approve" />
-                                    <input type="submit" id="btnreject" onclick="return Validate();" name="btnreject" class="btn btn-danger" value="Reject" />
+                                    <input type="submit" id="btnapprove"  name="btnapprove" onclick="return ValidateApprove();" class="btn btn-success" value="Approve" />
+                                    <input type="submit" id="btnreject" onclick="return ValidateReject();" name="btnreject" class="btn btn-danger" value="Reject" />
                                 </div>
                             </div>
                         </div>
@@ -189,13 +189,35 @@
         }
     }
 
-    function Validate() {
+    function ValidateApprove() {
         $("#divload").css({ 'display': 'none' });
         $(".errortext").removeClass("errortext");
        
         if ($('input[type=checkbox]:checked').length == 0) {
             alert("ERROR! Please select at least one checkbox");
             return false;
+        }
+        else {
+            if (confirm('Are You Sure You Want To Approve This Booking Request ?')) {
+            }
+            else { return false;}
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+
+    function ValidateReject() {
+        $("#divload").css({ 'display': 'none' });
+        $(".errortext").removeClass("errortext");
+
+        if ($('input[type=checkbox]:checked').length == 0) {
+            alert("ERROR! Please select at least one checkbox"); 
+            return false;
+        }
+        else {
+            if (confirm('Are You Sure You Want To Reject This Booking Request  ?')) {
+            }
+            else { return false; }
         }
         $("#divload").css({ 'display': '' });
         return true;
