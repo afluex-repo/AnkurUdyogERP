@@ -230,7 +230,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
              {
-                 new SqlParameter("@dtPayment",dtTable),
+                 new SqlParameter("@dtstatus",dtTable),
                 new SqlParameter("@Status",Status),
                 new SqlParameter("@ApprovedBy",AddedBy)
             };
@@ -242,7 +242,7 @@ namespace AnkurUdyogERP.Models
         {
             SqlParameter[] para =
              {
-                new SqlParameter("@dtPayment",dtTable),
+                new SqlParameter("@dtstatus",dtTable),
                 new SqlParameter("@Status",Status),
                 new SqlParameter("@RejectedBy",AddedBy)
             };
