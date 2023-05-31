@@ -16,6 +16,7 @@ namespace AnkurUdyogERP.Models
         public List<Admin> lst1DailyRate { get; set; }
         public List<Admin> lstDispatchOrder { get; set; }
         public List<Admin> Delearlist { get; set; }
+      
         public string FirmName { get; set; }
         public string Mobile { get; set; }
         public string UserID { get; set; }
@@ -61,7 +62,12 @@ namespace AnkurUdyogERP.Models
         public string Result { get; set; }
         public string Status { get; set; }
 
-
+        public string PK_ContactId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string PhoneNo { get; set; }
+        public string Message { get; set; }
+        public List<Admin> lstContactDetails { get; set; }
 
 
 
@@ -244,6 +250,12 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
-    
+        public DataSet ContactDetails()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetContactDetails");
+            return ds;
+        }
+
+
     }
 }

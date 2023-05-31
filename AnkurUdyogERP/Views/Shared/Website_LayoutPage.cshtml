@@ -372,6 +372,7 @@
                                         <li><a href="/Website/Career">Career</a></li>
                                         <li><a href="/Website/OurTeam">Our Team</a></li>
                                         <li><a href="/Website/TMXProcess">TMX Process</a></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -436,6 +437,26 @@
     </div>
 
 
+    <!-- floating button -->
+
+    <div class="fixed">
+        <a href="/Home/Login" class="button ">
+            <div class="buttonDiv bg-b-blue">
+                Admin Login
+            </div>
+        </a>
+    </div>
+    <div class="distributor_btn_fixed">
+        <a href="/Home/LoginDistributer" class="mt-4 distributor_btn">
+            <div class="buttonDiv bg-b-orange">
+                Distributor Login
+            </div>
+        </a>
+    </div>
+
+
+    <!-- // floating button -->
+
     <script src="/asset_web/js/jquery.js"></script>
     <script src="/asset_web/js/aos.js"></script>
     <script src="/asset_web/js/appear.js"></script>
@@ -451,7 +472,6 @@
     <script src="/asset_web/js/owl.js"></script>
     <script src="/asset_web/js/parallax.min.js"></script>
     <script src="/asset_web/js/scrollbar.js"></script>
-    <script src="/asset_web/js/validation.js"></script>
     <script src="/asset_web/js/wow.js"></script>
     <script src="/asset_web/js/jquery-sidebar-content.js"></script>
 
@@ -459,5 +479,34 @@
     <script src="/asset_web/js/jquery.nice-select.min.js"></script>
     <!-- thm custom script -->
     <script src="/asset_web/js/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.mobile-valid').on('keypress', function (e) {
+                var $this = $(this);
+                var regex = new RegExp("^[0-9\b]+$");
+                var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+                // for 10 digit number only
+                if ($this.val().length > 9) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (e.charCode < 54 && e.charCode > 47) {
+                    if ($this.val().length == 0) {
+                        e.preventDefault();
+                        return false;
+                    } else {
+                        return true;
+                    }
+
+                }
+                if (regex.test(str)) {
+                    return true;
+                }
+                e.preventDefault();
+                return false;
+            });
+
+        });
+    </script>
 </body>
 </html>

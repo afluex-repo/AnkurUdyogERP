@@ -16,7 +16,7 @@ namespace AnkurUdyogERP
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Website", action = "Default", id = UrlParameter.Optional }
+                defaults: new { controller = "Website", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

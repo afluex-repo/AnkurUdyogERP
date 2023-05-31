@@ -64,8 +64,9 @@
                                                     <th class="d-flex" style="width:100px"><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" />
                                                      &nbsp;&nbsp;Select All
                                                     </th>
-                                                    
+                                                    <th hidden>Distributer Id</th>
                                                     <th>Distributer Name</th>
+                                                    <th hidden>Dealer Id</th>
                                                     <th style="min-width:150px">Dealer Name</th>
                                                     <th>Rate (Per Ton)</th>
                                                     <th>Booking Quantity (Per Ton)</th>
@@ -91,7 +92,9 @@
                                                                 <td class="d-flex"><input type="checkbox" name="chkpayment_@i" />&nbsp;&nbsp; @i</td>
                                                                 @*<td>@i</td>*@
                                                                 @*<td>@Item.PendingLimit</td>*@
+                                                                <td hidden><input type="hidden" id="FK_DistributerID_@i" name="FK_DistributerID_@i" value="@Item.FK_DistributerId" />
                                                                 <td style="min-width:150px">@Item.Distributer</td>
+                                                                <td hidden><input type="hidden" id="FK_DealerID_@i" name="FK_DealerID_@i" value="@Item.PK_DealerId" /></td>
                                                                 <td>@Item.Dealer</td>
                                                                 <td style="min-width:150px">@Item.Rate</td>
                                                                 <td style="min-width:160px">@Item.OrderQuantity</td>

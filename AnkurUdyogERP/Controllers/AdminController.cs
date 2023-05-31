@@ -309,6 +309,8 @@ namespace AnkurUdyogERP.Controllers
                     obj.TotalAmount = dr["TotalAmount"].ToString();
                     obj.Date = dr["Date"].ToString();
                     obj.Status = (dr["Status"].ToString());
+                    obj.PK_DealerId = dr["FK_DealerId"].ToString();
+                    obj.FK_DistributerId = (dr["FK_DistributerId"].ToString());
                     lst.Add(obj);
                 }
                 model.lstrequest = lst;
@@ -676,10 +678,14 @@ namespace AnkurUdyogERP.Controllers
                 string ctrRowCount = Request["hdRows"].ToString();
                 string chk = "";
                 string PK_OrderID = "";
+                string FK_DistributerID = "";
+                string FK_DealerID = "";
                 int Id = 0;
                 DataTable dtpayment = new DataTable();
                 dtpayment.Columns.Add("Id");
                 dtpayment.Columns.Add("PK_OrderID");
+                dtpayment.Columns.Add("FK_DistributerID");
+                dtpayment.Columns.Add("FK_DealerID");
                 for (int i = 1; i < int.Parse(ctrRowCount); i++)
                 {
                     chk = Request["chkpayment_" + i];
@@ -687,7 +693,9 @@ namespace AnkurUdyogERP.Controllers
                     {
                         Id = dtpayment.Rows.Count + 1;
                         PK_OrderID = Request["PK_OrderID_" + i].ToString();
-                        dtpayment.Rows.Add(Id,PK_OrderID);
+                        FK_DistributerID = Request["FK_DistributerID_" + i].ToString();
+                        FK_DealerID = Request["FK_DealerID_" + i].ToString();
+                        dtpayment.Rows.Add(Id,PK_OrderID,FK_DistributerID, FK_DealerID);
                     }
                 }
                 model.dtTable = dtpayment;
@@ -730,10 +738,14 @@ namespace AnkurUdyogERP.Controllers
                 string ctrRowCount = Request["hdRows"].ToString();
                 string chk = "";
                 string PK_OrderID = "";
+                string FK_DistributerID = "";
+                string FK_DealerID = "";
                 int Id = 0;
                 DataTable dtpayment = new DataTable();
                 dtpayment.Columns.Add("Id");
                 dtpayment.Columns.Add("PK_OrderID");
+                dtpayment.Columns.Add("FK_DistributerID");
+                dtpayment.Columns.Add("FK_DealerID");
                 for (int i = 1; i < int.Parse(ctrRowCount); i++)
                 {
                     chk = Request["chkpayment_" + i];
@@ -741,7 +753,9 @@ namespace AnkurUdyogERP.Controllers
                     {
                         Id = dtpayment.Rows.Count + 1;
                         PK_OrderID = Request["PK_OrderID_" + i].ToString();
-                        dtpayment.Rows.Add(Id, PK_OrderID);
+                        FK_DistributerID = Request["FK_DistributerID_" + i].ToString();
+                        FK_DealerID = Request["FK_DealerID_" + i].ToString();
+                        dtpayment.Rows.Add(Id, PK_OrderID, FK_DistributerID, FK_DealerID);
                     }
                 }
                 model.dtTable = dtpayment;
@@ -770,6 +784,31 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+
+        public ActionResult ContactDetails()
+        {
+            Admin model = new Admin();
+            List<Admin> Contactlst = new List<Admin>();
+            DataSet ds = model.ContactDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_ContactId = r["PK_ContactId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.PhoneNo = r["PhoneNo"].ToString();
+                    obj.Message = r["Message"].ToString();
+                    Contactlst.Add(obj);
+                }
+                model.lstContactDetails = Contactlst;
+            }
+
+            return View(model);
+        }
+
     }
 }
 
