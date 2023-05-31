@@ -1029,6 +1029,7 @@
     <Content Include="Views\Admin\ChangePassword.cshtml" />
     <Content Include="Views\Distributer\Profile.cshtml" />
     <Content Include="Views\Distributer\ChangePassword.cshtml" />
+    <Content Include="Views\Admin\ContactDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1065,7 +1066,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64010</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64016/</IISUrl>
+          <IISUrl>http://localhost:64015/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

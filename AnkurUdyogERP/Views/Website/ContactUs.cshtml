@@ -1,4 +1,4 @@
-﻿
+﻿@model AnkurUdyogERP.Models.Home
 @{
     ViewBag.Title = "ContactUs";
     Layout = "~/Views/Shared/Website_LayoutPage.cshtml";
@@ -6,8 +6,7 @@
 
 <!--Start breadcrumb area paroller-->
 <section class="breadcrumb-area">
-    <div class="breadcrumb-area-bg" style="background-image: url(/asset_web/images/breadcrumb/breadcrumb-1.jpg);">
-    </div>
+    <div class="breadcrumb-area-bg"></div>
     <div class="container">
         <div class="row">
             <div class="col-xl-12">
@@ -62,7 +61,7 @@
                             <span>Keeping you always better connected.</span>
                         </div>
                         <p class="text1">
-                             <a href="tel:6390122122"> +91 6390122122</a>
+                            <a href="tel:6390122122"> +91 6390122122</a>
 
                         </p>
                     </div>
@@ -82,7 +81,7 @@
                             <span>Drop us a mail we will answer you asap.</span>
                         </div>
                         <p class="text1">
-                            <a href="mailto:sales@ankurudyog.com">sales@ankurudyog.com</a> 
+                            <a href="mailto:sales@ankurudyog.com">sales@ankurudyog.com</a>
                         </p>
                     </div>
                 </div>
@@ -97,11 +96,10 @@
 <section class="main-contact-form-area">
     <div class="container">
         <div class="row">
-
             <div class="col-xl-6">
                 <div class="contact-page-map-outer">
                     <!--Map Canvas-->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14250.80918380425!2d83.1849748395508!3d26.7538747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39913938f0225e21%3A0x59b1fbe026d037d6!2sAnkur%20Udyog%20Limited%20(Steel%20Division)!5e0!3m2!1sen!2sin!4v1679035510028!5m2!1sen!2sin" width="100%" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14250.80918380425!2d83.1849748395508!3d26.7538747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39913938f0225e21%3A0x59b1fbe026d037d6!2sAnkur%20Udyog%20Limited%20(Steel%20Division)!5e0!3m2!1sen!2sin!4v1679035510028!5m2!1sen!2sin" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
@@ -115,62 +113,64 @@
                         </p>
                     </div>
                     <div class="contact-form">
-                        <form id="contact-form" name="contact_form" class="default-form2" action="assets/inc/sendmail.php" method="post">
+                        @using (Html.BeginForm("SaveContact", "Website", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                        { 
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6">
                                     <div class="input-box">
-                                        <input type="text" name="form_name" value="" placeholder="Full Name :" required="">
+                                         <input type="text" name="Name" placeholder="Full Name :" required="">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6">
                                     <div class="input-box">
-                                        <input type="email" name="form_email" value="" placeholder="Email :" required="">
+                                        <input type="email" name="Email" placeholder="Email :" required="">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12">
                                     <div class="input-box">
-                                        <input type="number" name="form_phone" value="" placeholder="Phone :">
+                                        <input type="text" name="PhoneNo" class="mobile-valid" placeholder="Phone :" required="">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xl-12 text-center">
-                                    <div class="input-box">
-                                        <div class="select-box">
-                                            <select class="wide">
-                                                <option data-display="Service">Service</option>
-                                                <option value="1">Integrated Steel Plant</option>
-                                                <option value="2">Captive Power Plant</option>
-                                                <option value="3">Sponge Iron</option>
-                                                <option value="3">Other</option>
-                                            </select>
+                            @*<div class="row">
+                                    <div class="col-xl-12 text-center">
+                                        <div class="input-box">
+                                            <div class="select-box">
+                                                <select class="wide">
+                                                    <option data-display="Service"></option>
+                                                    <option>Sponge Iron</option>
+                                                    <option value="1">Billets</option>
+                                                    <option value="2">Captive Power Plant</option>
+                                                    <option value="3"></option>
+                                                    <option value="3">Other</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>*@
                             <div class="row">
                                 <div class="col-xl-12 text-center">
                                     <div class="input-box two">
-                                        <textarea name="form_message" placeholder="Enter your message..." required=""></textarea>
+                                        <textarea name="Message" placeholder="Enter your message..." required=""></textarea>
                                     </div>
                                     <div class="button-box">
-                                        <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="">
                                         <button class="btn-one" type="submit" data-loading-text="Please wait...">
                                             <span class="txt">Send Message</span>
                                         </button>
                                     </div>
+                                   
+                                </div>
+                                <div class="col-xl-12">
+                                    <p>@TempData["Msg"]</p>
                                 </div>
                             </div>
-
-                        </form>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
-<!--End Main Contact Form Area-->
-
+    </section>
+    <!--End Main Contact Form Area-->

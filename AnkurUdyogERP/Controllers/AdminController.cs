@@ -784,6 +784,31 @@ namespace AnkurUdyogERP.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+
+        public ActionResult ContactDetails()
+        {
+            Admin model = new Admin();
+            List<Admin> Contactlst = new List<Admin>();
+            DataSet ds = model.ContactDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_ContactId = r["PK_ContactId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.PhoneNo = r["PhoneNo"].ToString();
+                    obj.Message = r["Message"].ToString();
+                    Contactlst.Add(obj);
+                }
+                model.lstContactDetails = Contactlst;
+            }
+
+            return View(model);
+        }
+
     }
 }
 
