@@ -11,6 +11,13 @@ namespace AnkurUdyogERP.Models
     {
         public string LoginId { get; set; }
         public string Password { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string PhoneNo { get; set; }
+        public string Message { get; set; }
+        public string CreatedBy {get;set;}
+
+
         public DataSet Login()
         {
             SqlParameter[] para =
@@ -32,5 +39,18 @@ namespace AnkurUdyogERP.Models
             return ds;
         }
 
+
+        public DataSet SaveContact()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Name", Name),
+                 new SqlParameter("@Email", Email),
+                  new SqlParameter("@PhoneNo", PhoneNo),
+                   new SqlParameter("@Message", Message)
+            };
+            DataSet ds = Connection.ExecuteQuery("SaveContact", para);
+            return ds;
+        }
     }
 }

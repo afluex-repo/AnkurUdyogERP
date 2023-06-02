@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AnkurUdyogERP.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,6 +42,44 @@ namespace AnkurUdyogERP.Controllers
         public ActionResult ContactUs()
         {
             return View();
+        }
+        public ActionResult SaveContact(Home model)
+        {
+            string formname = "";
+            string controller = "";
+            try
+            {
+              
+                DataSet ds = model.SaveContact();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Msg"] = "Thanks for contacting with us !";
+                        formname = "ContactUs";
+                        controller = "Website";
+                    }
+                    else
+                    {
+                        TempData["Msg"] = "Contact details have not been saved successfully";
+                        formname = "ContactUs";
+                        controller = "Website";
+                    }
+                }
+                else
+                {
+                    TempData["Msg"] = "Contact details have not been saved successfully";
+                    formname = "ContactUs";
+                    controller = "Website";
+                }
+            }
+            catch (Exception e)
+            {
+                TempData["Msg"] = e.Message;
+                formname = "ContactUs";
+                controller = "Website";
+            }
+            return RedirectToAction(formname, controller);
         }
     }
 }
