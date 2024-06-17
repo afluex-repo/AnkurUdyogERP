@@ -14,9 +14,12 @@ namespace AnkurUdyogERP.Models
             {
                 try
                 {
-                    connectionString = "data source=103.48.51.111,1232;initial catalog=AnkurUdyogERPDB;user id=ankurudyoguser; password=Ankurgkp123!@#; integrated security=false;";
-                }
-                catch (Exception ex)
+                connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=AnkurUdyogERPDB; User Id=sa; Password=Fx1479LVAPbF; Integrated Security=false;";
+
+
+                //connectionString = "data source=103.48.51.111,1232;initial catalog=AnkurUdyogERPDB;user id=ankurudyoguser; password=Ankurgkp123!@#; integrated security=false;";
+            }
+            catch (Exception ex)
                 {
                     throw ex;
                 }
